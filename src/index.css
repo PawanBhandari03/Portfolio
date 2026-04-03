@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+/* Enable dark mode via .dark class on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* === LIGHT MODE (default) === */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f3f0ff;
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, rgba(167,139,250,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(244,114,182,0.12) 0%, transparent 50%),
+    radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
+}
+
+/* === DARK MODE body === */
+html.dark body {
+  background-color: #0A0F1E;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@layer utilities {
+  /* Light mode glass card */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-slate-200/60 rounded-[32px]
+           shadow-[0_4px_30px_rgba(0,0,0,0.06)] hover:bg-white/90
+           transition-all duration-300;
+  }
+
+  /* Dark mode glass card */
+  .dark .glass-card {
+    @apply bg-white/[0.02] backdrop-blur-md border border-white/[0.05] rounded-[32px]
+           shadow-[0_4px_30px_rgba(0,0,0,0.2)] hover:bg-white/[0.04];
+  }
+}
+
+/* Scrollbar */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.12);
+  border-radius: 20px;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.1);
+}

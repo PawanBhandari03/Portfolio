@@ -1,10 +1,78 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+const MISTRAL_API_KEY = import.meta.env.VITE_MISTRAL_API_KEY;
+const MISTRAL_API_URL = 'https://api.mistral.ai/v1/chat/completions';
 
-const SYSTEM_PROMPT = "You are the AI assistant for Pawan Bhandari's portfolio website. Pawan is a skilled Java Backend Developer. Keep answers short, friendly, and professional (2-3 sentences max). Pawan's skills: Java, Spring Boot, React, SQL, Microservices, REST APIs, Docker, Git. His projects: E-Commerce Backend (microservices architecture) and FinTech Banking Dashboard (real-time data). Contact: pawan@example.com. If asked anything unrelated to Pawan, politely redirect.";
+const SYSTEM_PROMPT = `You are a professional AI portfolio chatbot representing Pawan.
+
+Your job is to answer questions about Pawan in a clear, clean, and professional way.
+
+----------------------------------------
+GENERAL RULES:
+- Do NOT use markdown formatting (no **, *, #, etc.)
+- Keep responses clean, simple, and readable
+- Use natural conversational tone
+- Do NOT make up incorrect personal information
+- If information is not known, respond generally without guessing
+
+----------------------------------------
+CONTACT (STRICT RULE):
+- If user asks about contact, email, or how to reach:
+  ALWAYS respond with:
+  "You can contact Pawan at pawansinghb07@gmail.com or visit his GitHub profile."
+
+- Do NOT generate any other email
+- Do NOT change the email
+
+----------------------------------------
+SKILLS (STRICT CONTEXT):
+Pawan is skilled in:
+- Frontend: React, JavaScript, HTML, CSS
+- Backend: Java, Spring Boot, Spring Framework, REST APIs
+- Databases: MySQL, PostgreSQL
+- DevOps & Tools: Docker, GitHub, CI/CD, Vercel
+- Other: Networking fundamentals, Cloud basics
+
+When user asks about skills:
+- Answer confidently using the above stack
+- Keep it structured and clean
+- Do NOT add random technologies
+
+----------------------------------------
+ABOUT ME (DYNAMIC):
+- Generate a professional summary based on skills
+- Do NOT hardcode a fixed paragraph
+- Keep it natural and slightly varied each time
+- Mention:
+  - Full-stack development
+  - Strong backend with Spring Boot
+  - Frontend with React
+  - Interest in scalable systems / real-world applications
+
+----------------------------------------
+BEHAVIOR:
+- If question is unclear, answer in a helpful general way
+- If personal info is missing, do NOT guess (e.g., age)
+- Keep answers concise but meaningful
+
+----------------------------------------
+GOAL:
+Make responses feel like a real portfolio assistant for a developer.`;
+
+// Strip markdown formatting from AI responses
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '$1')      // **bold**
+    .replace(/\*(.+?)\*/g, '$1')           // *italic*
+    .replace(/\_\_(.+?)\_\_ /g, '$1')     // __bold__
+    .replace(/\_(.+?)\_/g, '$1')           // _italic_
+    .replace(/`{1,3}([^`]*)`{1,3}/g, '$1') // `code` or ```code```
+    .replace(/^#{1,6}\s+/gm, '')           // # headings
+    .replace(/^[-*+]\s+/gm, '• ')         // bullet list markers → •
+    .replace(/\n{3,}/g, '\n\n')           // collapse excess blank lines
+    .trim();
+}
 
 type Message = {
   id: string;
@@ -44,28 +112,36 @@ export default function ChatUI() {
 
     try {
       const allMessages = [...messages.slice(1), userMsg];
-      const contents = [
-        { role: "user", parts: [{ text: SYSTEM_PROMPT }] },
-        { role: "model", parts: [{ text: "Understood! I'm ready to answer questions about Pawan." }] },
+      const mistralMessages = [
+        { role: 'system', content: SYSTEM_PROMPT },
         ...allMessages.map(m => ({
-          role: m.role === 'bot' ? 'model' : 'user',
-          parts: [{ text: m.text }]
+          role: m.role === 'bot' ? 'assistant' : 'user',
+          content: m.text
         }))
       ];
 
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents })
+      const res = await fetch(MISTRAL_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${MISTRAL_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: 'mistral-small-latest',
+          messages: mistralMessages,
+          max_tokens: 300,
+          temperature: 0.7
+        })
       });
 
       if (!res.ok) {
         const errData = await res.json();
-        throw new Error(errData?.error?.message || `API error ${res.status}`);
+        throw new Error(errData?.message || errData?.error?.message || `API error ${res.status}`);
       }
 
       const data = await res.json();
-      const output = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't generate a response.";
+      const raw = data?.choices?.[0]?.message?.content || "I couldn't generate a response.";
+      const output = stripMarkdown(raw);
 
       setMessages(prev => [...prev, { id: Date.now().toString() + 'bot', role: 'bot', text: output }]);
     } catch (error: unknown) {

@@ -92,10 +92,15 @@ export default function ChatUI() {
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => {
@@ -169,7 +174,7 @@ export default function ChatUI() {
       </div>
 
       {/* Messages */}
-      <div className="flex flex-col gap-3 px-5 py-4 max-h-80 overflow-y-auto custom-scrollbar">
+      <div ref={chatContainerRef} className="flex flex-col gap-3 px-5 py-4 max-h-80 overflow-y-auto custom-scrollbar">
         {messages.map(msg => (
           <motion.div
             key={msg.id}
@@ -200,7 +205,6 @@ export default function ChatUI() {
             </div>
           </div>
         )}
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Input bar */}

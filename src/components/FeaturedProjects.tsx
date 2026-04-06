@@ -5,7 +5,7 @@ export default function FeaturedProjects() {
     { id: "01", type: "FULLSTACK APP", title: "EcoBounty", description: "Gamified sustainability platform that rewards eco-friendly actions through real-time tracking and engagement features.", color: "bg-orange-500", tags: ["REACT (TS)", "NODE.JS", "SUPABASE", "APIS"], image: "/project_a.png" },
     { id: "02", type: "FULLSTACK APP", title: "DevBlog Platform", description: "Full-stack blogging platform with authentication, role-based access, and scalable backend.", color: "bg-green-500", tags: ["SPRING BOOT", "REACT", "POSTGRESQL", "DOCKER", "SPRING SECURITY"], image: "/project_b.png" },
     { id: "03", type: "AI SYSTEM", title: "AgriGuard", description: "AI-powered plant disease detection system trained on custom dataset for early diagnosis.", color: "bg-pink-500", tags: ["PYTHON", "ML", "OPENCV", "DATASET TRAINING"], image: "/project_a.png" },
-    { id: "04", type: "WEB APP", title: "PowFlix", description: "Movie discovery web app with dynamic data fetching and responsive UI.", color: "bg-[#0ea5e9]", tags: ["REACT", "API", "TAILWIND", "JAVASCRIPT"], image: "/project_b.png" },
+    { id: "04", type: "WEB APP", title: "PawFlix", description: "Movie discovery web app with dynamic data fetching and responsive UI.", color: "bg-[#0ea5e9]", tags: ["REACT", "API", "TAILWIND", "JAVASCRIPT"], image: "/project_b.png" },
   ];
 
   return (
@@ -50,6 +50,20 @@ export default function FeaturedProjects() {
             </div>
           </motion.div>
         ))}
+      </div>
+
+      <div className="mt-12 flex justify-center w-full">
+        <a 
+          href="https://github.com/PawanBhandari03" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors font-bold text-lg md:text-xl tracking-wide group"
+        >
+          Explore all projects on GitHub
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
       </div>
     </section>
   );

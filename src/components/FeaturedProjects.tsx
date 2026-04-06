@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 
 export default function FeaturedProjects() {
   const PROJECTS = [
-    { id: "01", type: "BACKEND SYSTEM", title: "E-Commerce Architecture", description: "Highly resilient microservices architecture handling thousands of secure product transactions per minute.", color: "bg-orange-500", tags: ["JAVA", "SPRING BOOT", "DOCKER", "KUBERNETES"], image: "/project_a.png" },
-    { id: "02", type: "FULLSTACK APP", title: "FinTech Dashboard", description: "Real-time financial tracking dashboard supporting high-frequency parsing and data analytics.", color: "bg-green-500", tags: ["REACT", "TYPESCRIPT", "TAILWIND", "REDIS"], image: "/project_b.png" },
-    { id: "03", type: "API SERVICE", title: "Social Graph API", description: "High-performance RESTful API generating social connections and recommendation feeds.", color: "bg-pink-500", tags: ["NODE.JS", "GRAPHQL", "POSTGRESQL", "AWS"], image: "/project_a.png" },
-    { id: "04", type: "DESKTOP APP", title: "Data Visualizer", description: "Desktop application visualizing complex JSON datasets using rapid hardware-accelerated rendering.", color: "bg-[#0ea5e9]", tags: ["PYTHON", "ELECTRON", "D3.JS", "OPENGL"], image: "/project_b.png" },
+    { id: "01", type: "FULLSTACK APP", title: "EcoBounty", description: "Gamified sustainability platform that rewards eco-friendly actions through real-time tracking and engagement features.", color: "bg-orange-500", tags: ["REACT (TS)", "NODE.JS", "SUPABASE", "APIS"], image: "/project_a.png" },
+    { id: "02", type: "FULLSTACK APP", title: "DevBlog Platform", description: "Full-stack blogging platform with authentication, role-based access, and scalable backend.", color: "bg-green-500", tags: ["SPRING BOOT", "REACT", "POSTGRESQL", "DOCKER", "SPRING SECURITY"], image: "/project_b.png" },
+    { id: "03", type: "AI SYSTEM", title: "AgriGuard", description: "AI-powered plant disease detection system trained on custom dataset for early diagnosis.", color: "bg-pink-500", tags: ["PYTHON", "ML", "OPENCV", "DATASET TRAINING"], image: "/project_a.png" },
+    { id: "04", type: "WEB APP", title: "PowFlix", description: "Movie discovery web app with dynamic data fetching and responsive UI.", color: "bg-[#0ea5e9]", tags: ["REACT", "API", "TAILWIND", "JAVASCRIPT"], image: "/project_b.png" },
   ];
 
   return (

@@ -36,7 +36,11 @@ const CARDS = [
   }
 ];
 
-export default function ExploreFooter() {
+interface ExploreFooterProps {
+  onNavigate?: (page: 'home' | 'achievements') => void;
+}
+
+export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
   return (
     <>
       <section className="w-full max-w-5xl mx-auto pt-20 pb-24 px-6 relative z-10 flex flex-col gap-14">
@@ -53,6 +57,13 @@ export default function ExploreFooter() {
             <motion.a
               key={card.title}
               href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (card.title === 'Achievements' && onNavigate) {
+                  onNavigate('achievements');
+                  window.scrollTo(0, 0);
+                }
+              }}
               className="flex flex-col items-center text-center gap-5 p-8 bg-white/70 dark:bg-[#0d111a] border border-slate-200/60 dark:border-white/[0.07] rounded-[28px] hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300 group relative overflow-hidden backdrop-blur-sm"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.1 }}

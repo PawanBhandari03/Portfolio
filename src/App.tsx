@@ -4,9 +4,11 @@ import AboutBento from './components/AboutBento';
 import FeaturedProjects from './components/FeaturedProjects';
 import SkillsSphere from './components/SkillsSphere';
 import ExploreFooter from './components/ExploreFooter';
+import AchievementsPage from './components/AchievementsPage';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
+  const [currentPage, setCurrentPage] = useState<'home' | 'achievements'>('home');
 
   // Toggle .dark class on <html> — this is what Tailwind's dark: variant responds to
   useEffect(() => {
@@ -55,11 +57,22 @@ function App() {
         </div>
       </nav>
 
-      <ReplicaHero />
-      <AboutBento />
-      <FeaturedProjects />
-      <SkillsSphere />
-      <ExploreFooter />
+      {currentPage === 'home' && (
+        <>
+          <ReplicaHero />
+          <AboutBento />
+          <FeaturedProjects />
+          <SkillsSphere />
+          <ExploreFooter onNavigate={setCurrentPage} />
+        </>
+      )}
+      
+      {currentPage === 'achievements' && (
+        <AchievementsPage onBack={() => {
+            setCurrentPage('home');
+            window.scrollTo(0, 0);
+        }} />
+      )}
 
     </div>
   );

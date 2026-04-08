@@ -37,7 +37,7 @@ const CARDS = [
 ];
 
 interface ExploreFooterProps {
-  onNavigate?: (page: 'home' | 'achievements') => void;
+  onNavigate?: (page: 'home' | 'achievements' | 'mylinks') => void;
 }
 
 export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
@@ -61,6 +61,10 @@ export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
                 e.preventDefault();
                 if (card.title === 'Achievements' && onNavigate) {
                   onNavigate('achievements');
+                  window.scrollTo(0, 0);
+                }
+                if (card.title === 'My Links' && onNavigate) {
+                  onNavigate('mylinks');
                   window.scrollTo(0, 0);
                 }
               }}

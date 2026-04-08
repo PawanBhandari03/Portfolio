@@ -6,10 +6,11 @@ import SkillsSphere from './components/SkillsSphere';
 import ExploreFooter from './components/ExploreFooter';
 import AchievementsPage from './components/AchievementsPage';
 import MyLinksPage from './components/MyLinksPage';
+import GuestbookPage from './components/GuestbookPage';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
-  const [currentPage, setCurrentPage] = useState<'home' | 'achievements' | 'mylinks'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'achievements' | 'mylinks' | 'guestbook'>('home');
 
   // Toggle .dark class on <html> — this is what Tailwind's dark: variant responds to
   useEffect(() => {
@@ -77,6 +78,13 @@ function App() {
 
       {currentPage === 'mylinks' && (
         <MyLinksPage onBack={() => {
+            setCurrentPage('home');
+            window.scrollTo(0, 0);
+        }} />
+      )}
+
+      {currentPage === 'guestbook' && (
+        <GuestbookPage onBack={() => {
             setCurrentPage('home');
             window.scrollTo(0, 0);
         }} />

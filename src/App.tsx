@@ -7,6 +7,7 @@ import ExploreFooter from './components/ExploreFooter';
 import AchievementsPage from './components/AchievementsPage';
 import MyLinksPage from './components/MyLinksPage';
 import GuestbookPage from './components/GuestbookPage';
+import InteractiveDotGrid from './components/InteractiveDotGrid';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -23,6 +24,9 @@ function App() {
 
   return (
     <div className="bg-transparent min-h-screen text-slate-900 dark:text-white font-sans relative flex flex-col pt-16 transition-colors duration-500">
+
+      {/* Interactive dot grid background */}
+      <InteractiveDotGrid />
 
       {/* Theme Toggle Button (Top Left) */}
       <button

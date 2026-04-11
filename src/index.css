@@ -15,17 +15,13 @@ body {
   background-color: #f3f0ff;
   background-image: 
     radial-gradient(ellipse at 20% 50%, rgba(167,139,250,0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(244,114,182,0.12) 0%, transparent 50%),
-    radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 24px 24px;
+    radial-gradient(ellipse at 80% 20%, rgba(244,114,182,0.12) 0%, transparent 50%);
+  background-size: 100% 100%, 100% 100%;
 }
 
 /* === DARK MODE body === */
 html.dark body {
   background-color: #0A0F1E;
-  background-image:
-    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 24px 24px;
 }
 
 @layer utilities {

@@ -191,6 +191,7 @@ export default function SkillsSphere() {
 
   return (
     <section
+      id="skills"
       style={{ background: '#07091a' }}
       className="relative w-full py-24 flex flex-col items-center overflow-hidden select-none"
     >

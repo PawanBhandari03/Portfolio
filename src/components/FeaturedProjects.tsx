@@ -9,7 +9,7 @@ export default function FeaturedProjects() {
   ];
 
   return (
-    <section className="w-full max-w-5xl mx-auto py-24 px-6 relative z-10 flex flex-col gap-16">
+    <section id="projects" className="w-full max-w-5xl mx-auto py-24 px-6 relative z-10 flex flex-col gap-16">
       <div className="flex flex-col items-center text-center gap-4">
         <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-[0.3em] uppercase">Portfolio</span>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">

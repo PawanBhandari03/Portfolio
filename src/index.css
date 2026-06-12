@@ -21,7 +21,7 @@ body {
 
 /* === DARK MODE body === */
 html.dark body {
-  background-color: #0A0F1E;
+  background-color: #0d0d1a;
 }
 
 @layer utilities {
@@ -48,4 +48,86 @@ html.dark body {
 }
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: rgba(255,255,255,0.1);
+}
+
+/* ─── Glowing animated border for profile photo ─── */
+@keyframes glow-rotate {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.glow-border {
+  position: relative;
+  padding: 4px;
+  border-radius: 24px;
+  background: linear-gradient(
+    270deg,
+    #f472b6,
+    #8B5CF6,
+    #7C3AED,
+    #f472b6,
+    #c084fc,
+    #8B5CF6
+  );
+  background-size: 400% 400%;
+  animation: glow-rotate 4s ease infinite;
+  box-shadow:
+    0 0 20px rgba(139, 92, 246, 0.35),
+    0 0 60px rgba(244, 114, 182, 0.15);
+}
+
+.glow-border > * {
+  border-radius: 20px;
+}
+
+/* ─── Floating animation for stat cards ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-8px); }
+}
+
+.float-card {
+  animation: float 3s ease-in-out infinite;
+}
+
+.float-card-delayed {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* ─── Hero purple radial glow ─── */
+.hero-glow {
+  position: relative;
+}
+
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Navbar glassmorphism ─── */
+.navbar-glass {
+  background: rgba(13, 13, 26, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+html:not(.dark) .navbar-glass {
+  background: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Smooth scroll behavior ─── */
+html {
+  scroll-behavior: smooth;
 }

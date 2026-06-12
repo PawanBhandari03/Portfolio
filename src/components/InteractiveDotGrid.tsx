@@ -1,18 +1,48 @@
 import { useRef, useEffect } from 'react';
 
-// --- Configuration to match pszostak.pl ---
+// --- Configuration ---
 const DOT_SPACING = 36;
 const DOT_RADIUS = 1;
 const HOVER_RADIUS = 280;
 const BASE_OPACITY = 0.07;
 const MAX_OPACITY = 0.45;
-const LERP_SPEED = 0.12; // smooth mouse following
+const LERP_SPEED = 0.12;
+
+// --- Starfield configuration ---
+const STAR_COUNT = 80;         // number of twinkling stars
+const STAR_MIN_RADIUS = 0.5;
+const STAR_MAX_RADIUS = 2;
+const STAR_MIN_OPACITY = 0.05;
+const STAR_MAX_OPACITY = 0.35;
+
+interface Star {
+  x: number;       // fraction 0..1
+  y: number;       // fraction 0..1
+  radius: number;
+  speed: number;   // twinkle speed
+  phase: number;   // random phase offset
+}
+
+function generateStars(count: number): Star[] {
+  const stars: Star[] = [];
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random(),
+      y: Math.random(),
+      radius: STAR_MIN_RADIUS + Math.random() * (STAR_MAX_RADIUS - STAR_MIN_RADIUS),
+      speed: 0.3 + Math.random() * 1.5,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+  return stars;
+}
 
 export default function InteractiveDotGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
   const smoothMouse = useRef({ x: -9999, y: -9999 });
   const animRef = useRef<number>(0);
+  const starsRef = useRef<Star[]>(generateStars(STAR_COUNT));
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -45,8 +75,8 @@ export default function InteractiveDotGrid() {
       mouseRef.current.y = -9999;
     };
 
-    const draw = () => {
-      // Smooth-lerp mouse position for buttery-smooth following
+    const draw = (time: number) => {
+      // Smooth-lerp mouse position
       const sm = smoothMouse.current;
       const tm = mouseRef.current;
       if (tm.x < -999) {
@@ -69,17 +99,14 @@ export default function InteractiveDotGrid() {
       const totalRows = Math.ceil(pageHeight / DOT_SPACING) + 1;
       const offsetX = (w - (cols - 1) * DOT_SPACING) / 2;
 
-      // Only compute rows visible in viewport (+ padding for hover radius)
+      // Only compute rows visible in viewport
       const pad = HOVER_RADIUS + DOT_SPACING;
       const startRow = Math.max(0, Math.floor((scrollY - pad) / DOT_SPACING));
       const endRow = Math.min(totalRows, Math.ceil((scrollY + h + pad) / DOT_SPACING));
 
       const rSq = HOVER_RADIUS * HOVER_RADIUS;
 
-      // Pre-compute batch: draw all base dots at once, then bright dots separately
-      // This avoids per-dot fillStyle changes which are expensive
-
-      // --- Pass 1: base dots (all visible in viewport) ---
+      // --- Pass 1: base dots ---
       ctx.fillStyle = `rgba(255, 255, 255, ${BASE_OPACITY})`;
       ctx.beginPath();
       for (let r = startRow; r < endRow; r++) {
@@ -94,9 +121,8 @@ export default function InteractiveDotGrid() {
       }
       ctx.fill();
 
-      // --- Pass 2: hover-brightened dots (only near cursor) ---
+      // --- Pass 2: hover-brightened dots ---
       if (mx > -999 && my > -999) {
-        // Determine which columns and rows might be in range
         const minCol = Math.max(0, Math.floor((mx - HOVER_RADIUS - offsetX) / DOT_SPACING));
         const maxCol = Math.min(cols - 1, Math.ceil((mx + HOVER_RADIUS - offsetX) / DOT_SPACING));
         const minRow = Math.max(startRow, Math.floor((my + scrollY - HOVER_RADIUS) / DOT_SPACING));
@@ -115,7 +141,6 @@ export default function InteractiveDotGrid() {
 
             const dist = Math.sqrt(dSq);
             const t = 1 - dist / HOVER_RADIUS;
-            // Smooth hermite-like curve: 3t² - 2t³ (smoothstep)
             const eased = t * t * (3 - 2 * t);
             const alpha = MAX_OPACITY * eased;
 
@@ -129,13 +154,30 @@ export default function InteractiveDotGrid() {
         }
       }
 
+      // --- Pass 3: Animated starfield (twinkling stars) ---
+      const timeSec = time / 1000;
+      const stars = starsRef.current;
+      for (let i = 0; i < stars.length; i++) {
+        const star = stars[i];
+        const sx = star.x * w;
+        const sy = star.y * h;
+
+        // Twinkle: oscillate opacity with sin wave
+        const twinkle = Math.sin(timeSec * star.speed + star.phase);
+        const alpha = STAR_MIN_OPACITY + (STAR_MAX_OPACITY - STAR_MIN_OPACITY) * (0.5 + 0.5 * twinkle);
+
+        ctx.beginPath();
+        ctx.arc(sx, sy, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.fill();
+      }
+
       animRef.current = requestAnimationFrame(draw);
     };
 
     resize();
-    // Initialize smooth mouse far away
     smoothMouse.current = { x: -9999, y: -9999 };
-    draw();
+    draw(0);
 
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('resize', resize);

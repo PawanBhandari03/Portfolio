@@ -43,7 +43,7 @@ interface ExploreFooterProps {
 export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
   return (
     <>
-      <section className="w-full max-w-5xl mx-auto pt-20 pb-24 px-6 relative z-10 flex flex-col gap-14">
+      <section id="other" className="w-full max-w-5xl mx-auto pt-20 pb-24 px-6 relative z-10 flex flex-col gap-14">
         <div className="flex flex-col gap-3">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             More to{' '}

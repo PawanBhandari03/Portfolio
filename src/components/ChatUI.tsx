@@ -4,61 +4,35 @@ import { motion } from 'framer-motion';
 const MISTRAL_API_KEY = import.meta.env.VITE_MISTRAL_API_KEY;
 const MISTRAL_API_URL = 'https://api.mistral.ai/v1/chat/completions';
 
-const SYSTEM_PROMPT = `You are a professional AI portfolio chatbot representing Pawan.
+const SYSTEM_PROMPT = `You are Pawan Bhandari's personal AI assistant on his portfolio website.
+Answer questions about Pawan naturally and confidently. Here is all the information about him:
 
-Your job is to answer questions about Pawan in a clear, clean, and professional way.
+Name: Pawan Bhandari
+Age: 20 Years
+Location: Pune, India
+Education: Computer Engineering at BSIOTR, JSPM
+Role: Java Backend Developer
+Skills: Java, Spring Boot, React, Node.js, PostgreSQL, MySQL, Docker, REST APIs, Python, JavaScript
+Projects:
+- EcoBounty: Gamified sustainability platform (React, Node.js, Supabase)
+- DevBlog Platform: Full-stack blog with auth and role-based access
+- AgriGuard: AI plant disease detection (Python, ML, OpenCV)
+- PawFlix: Movie discovery web app (React, Tailwind, API)
+Achievements: 2x Hackathon winner including Winner of Techathon 3.0
+Open to: Freelance work and collaboration
+GitHub: github.com/PawanBhandari03
+LinkedIn: linkedin.com/in/pawan-singh-bhandari-5817ab307
 
-----------------------------------------
-GENERAL RULES:
-- Do NOT use markdown formatting (no **, *, #, etc.)
-- Keep responses clean, simple, and readable
-- Use natural conversational tone
-- Do NOT make up incorrect personal information
-- If information is not known, respond generally without guessing
+IMPORTANT FORMATTING RULES:
+- Never use bullet points (• or -) in responses.
+- Never use markdown links like [text](url).
+- For contact info, write it as plain clean sentences only (e.g., "You can find Pawan on GitHub at github.com/PawanBhandari03 or connect with him on LinkedIn at linkedin.com/in/pawan-singh-bhandari-5817ab307. He's open to freelance work and collaborations!").
+- Keep all responses to 2-3 sentences max unless a detailed answer is needed.
+- Never use symbols like • * # or []().
+- Write like a friendly human assistant, not a list generator.
 
-----------------------------------------
-CONTACT (STRICT RULE):
-- If user asks about contact, email, or how to reach:
-  ALWAYS respond with:
-  "You can contact Pawan at pawansinghb07@gmail.com or visit his GitHub profile."
-
-- Do NOT generate any other email
-- Do NOT change the email
-
-----------------------------------------
-SKILLS (STRICT CONTEXT):
-Pawan is skilled in:
-- Frontend: React, JavaScript, HTML, CSS
-- Backend: Java, Spring Boot, Spring Framework, REST APIs
-- Databases: MySQL, PostgreSQL
-- DevOps & Tools: Docker, GitHub, CI/CD, Vercel
-- Other: Networking fundamentals, Cloud basics
-
-When user asks about skills:
-- Answer confidently using the above stack
-- Keep it structured and clean
-- Do NOT add random technologies
-
-----------------------------------------
-ABOUT ME (DYNAMIC):
-- Generate a professional summary based on skills
-- Do NOT hardcode a fixed paragraph
-- Keep it natural and slightly varied each time
-- Mention:
-  - Full-stack development
-  - Strong backend with Spring Boot
-  - Frontend with React
-  - Interest in scalable systems / real-world applications
-
-----------------------------------------
-BEHAVIOR:
-- If question is unclear, answer in a helpful general way
-- If personal info is missing, do NOT guess (e.g., age)
-- Keep answers concise but meaningful
-
-----------------------------------------
-GOAL:
-Make responses feel like a real portfolio assistant for a developer.`;
+Answer in a friendly, professional tone. Keep answers concise.
+If asked something not listed above, say "Pawan hasn't shared that detail yet, but feel free to reach out directly!"`;
 
 // Strip markdown formatting from AI responses
 function stripMarkdown(text: string): string {
@@ -158,10 +132,14 @@ export default function ChatUI() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto flex flex-col rounded-[28px] overflow-hidden border border-slate-200 dark:border-white/[0.07] bg-white/60 dark:bg-[#0a0f1e]/60 backdrop-blur-md shadow-lg dark:shadow-none">
+    <div className="w-full max-w-2xl mx-auto flex flex-col pt-20">
+      {/* Label */}
+      <p className="text-sm text-slate-400 dark:text-slate-500 mb-3 text-center font-medium tracking-wide">Ask me anything about Pawan...</p>
+
+      <div className="w-full flex flex-col rounded-[28px] overflow-hidden border border-white/10 bg-white/60 dark:bg-[#0a0f1e]/60 backdrop-blur-md shadow-lg dark:shadow-none min-h-[320px] max-h-[420px]">
 
       {/* Quick Reply Pills */}
-      <div className="flex gap-2 px-5 pt-5 flex-wrap">
+      <div className="flex-none flex gap-2 px-5 pt-5 flex-wrap">
         {QUICK_REPLIES.map(q => (
           <button
             key={q}
@@ -174,7 +152,7 @@ export default function ChatUI() {
       </div>
 
       {/* Messages */}
-      <div ref={chatContainerRef} className="flex flex-col gap-3 px-5 py-4 max-h-80 overflow-y-auto custom-scrollbar">
+      <div ref={chatContainerRef} className="flex-1 flex flex-col gap-3 px-5 py-4 overflow-y-auto custom-scrollbar">
         {messages.map(msg => (
           <motion.div
             key={msg.id}
@@ -208,7 +186,7 @@ export default function ChatUI() {
       </div>
 
       {/* Input bar */}
-      <div className="flex items-center gap-3 px-5 py-4 border-t border-slate-200 dark:border-white/[0.05]">
+      <div className="flex-none flex items-center gap-3 px-5 py-4 border-t border-slate-200 dark:border-white/[0.05]">
         <input
           type="text"
           value={input}
@@ -227,6 +205,7 @@ export default function ChatUI() {
           </svg>
         </button>
       </div>
+    </div>
     </div>
   );
 }

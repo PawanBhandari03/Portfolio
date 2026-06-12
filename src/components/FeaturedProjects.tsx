@@ -1,70 +1,530 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+type ProjectCategory = 'Full Stack' | 'Backend' | 'AI/ML' | 'Web App' | 'Java/Spring Boot';
+
+interface Project {
+  id: string;
+  categories: ProjectCategory[];
+  title: string;
+  shortDesc: string;
+  tags: string[];
+  imageSrc: string;
+  
+  // Modal Details
+  problem: string;
+  solution: string;
+  features: string[];
+  outcomes: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  pptUrl?: string;
+}
+
+const PROJECTS: Project[] = [
+  {
+    id: "01",
+    categories: ["Full Stack"],
+    title: "EcoBounty",
+    shortDesc: "Gamified sustainability platform rewarding eco-friendly actions through real-time tracking and engagement features.",
+    tags: ["React (TS)", "Node.js", "Supabase", "REST APIs"],
+    imageSrc: "/project_a.png",
+    problem: "Individuals lack tangible incentives to track and maintain sustainable, eco-friendly daily habits.",
+    solution: "A gamified platform that converts sustainable actions into points, leaderboards, and tangible rewards.",
+    features: [
+      "Real-time ledger and points calculation",
+      "Interactive leaderboards and community challenges",
+      "Secure OAuth2 authentication and user management",
+      "Responsive data visualization dashboard"
+    ],
+    outcomes: [
+      "Built a fully functional MVP within 3 weeks",
+      "Integrated real-time database synchronization",
+      "Achieved seamless cross-device responsiveness"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03",
+    liveUrl: "#"
+  },
+  {
+    id: "02",
+    categories: ["AI/ML"],
+    title: "AgriGuard",
+    shortDesc: "AI-powered plant disease detection system trained on custom dataset for early crop diagnosis.",
+    tags: ["Python", "ML", "OpenCV", "Dataset Training"],
+    imageSrc: "/project_b.png",
+    problem: "Farmers suffer significant crop losses due to late or inaccurate identification of plant diseases.",
+    solution: "A machine learning model integrated into an accessible interface for instant crop disease classification.",
+    features: [
+      "Custom CNN model trained on an extensive dataset",
+      "Robust image preprocessing pipeline using OpenCV",
+      "RESTful API serving model predictions",
+      "Intuitive photo upload and diagnostic interface"
+    ],
+    outcomes: [
+      "Achieved high validation accuracy on test data",
+      "Reduced diagnostic turnaround from days to seconds",
+      "Prototyped successfully for agricultural use cases"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03"
+  },
+  {
+    id: "03",
+    categories: ["Full Stack"],
+    title: "AgriTrace",
+    shortDesc: "Blockchain-based supply chain transparency platform for agricultural produce using QR code traceability.",
+    tags: ["React", "Web3", "Node.js", "Solidity", "GraphQL", "Polygon", "Docker"],
+    imageSrc: "/project_a.png",
+    problem: "Lack of transparency in agricultural supply chains leads to mistrust and unverified produce sourcing.",
+    solution: "An immutable blockchain ledger that tracks produce from farm to table, verifiable via consumer QR codes.",
+    features: [
+      "Smart contracts deployed on Polygon network",
+      "Automated QR code generation for supply batches",
+      "GraphQL API for efficient blockchain querying",
+      "Dockerized microservices architecture"
+    ],
+    outcomes: [
+      "Ensured 100% data immutability for supply records",
+      "Decreased data retrieval latency using GraphQL",
+      "Presented successfully at tech symposiums"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03",
+    pptUrl: "#"
+  },
+  {
+    id: "04",
+    categories: ["Web App"],
+    title: "Movie Discovery App",
+    shortDesc: "Feature-rich movie browsing platform with live API integration, search, filters, and responsive UI.",
+    tags: ["React", "REST API", "Tailwind", "JavaScript"],
+    imageSrc: "/project_b.png",
+    problem: "Users are overwhelmed by disjointed movie catalogs and need a unified, fast discovery tool.",
+    solution: "A dynamic, lightning-fast application pulling live data with robust search and filtering capabilities.",
+    features: [
+      "Live integration with TMDB REST API",
+      "Debounced search and complex multi-filtering",
+      "Infinite scrolling for seamless browsing",
+      "Custom skeleton loaders for optimal UX"
+    ],
+    outcomes: [
+      "Optimized React rendering with memoization",
+      "Perfected a mobile-first Tailwind design system",
+      "Handled complex global state efficiently"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03",
+    liveUrl: "#"
+  },
+  {
+    id: "05",
+    categories: ["Backend", "Java/Spring Boot"],
+    title: "Task Manager App",
+    shortDesc: "Full-stack task management application with user authentication, role-based access and clean REST API design.",
+    tags: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "React"],
+    imageSrc: "/project_a.png",
+    problem: "Generic task managers lack the robust enterprise-level security and role management developers need.",
+    solution: "A highly secure, role-based task management system utilizing enterprise Java frameworks.",
+    features: [
+      "Robust Spring Security JWT implementation",
+      "Role-based access control (Admin, User)",
+      "RESTful endpoint design with strict validation",
+      "Complex relational database mappings in PostgreSQL"
+    ],
+    outcomes: [
+      "Achieved robust security against common vulnerabilities",
+      "Maintained scalable and clean code architecture",
+      "Integrated smoothly with a React frontend"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03"
+  },
+  {
+    id: "06",
+    categories: ["Backend", "Java/Spring Boot"],
+    title: "E-Commerce Application",
+    shortDesc: "Buy and sell platform with product listings, cart, order management and secured endpoints.",
+    tags: ["Java", "Spring Boot", "Spring Security", "MySQL", "React"],
+    imageSrc: "/project_b.png",
+    problem: "Small businesses need a reliable, scalable, and secure platform to manage online transactions and inventory.",
+    solution: "A comprehensive e-commerce backend handling everything from cart sessions to secure order processing.",
+    features: [
+      "Secure user registration and session management",
+      "Stateful cart and complex order workflows",
+      "Optimized MySQL queries for large catalogs",
+      "Comprehensive exception handling and logging"
+    ],
+    outcomes: [
+      "Processed complex transactional workflows accurately",
+      "Ensured high availability and system reliability",
+      "Delivered a complete, deployable enterprise product"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03"
+  },
+  {
+    id: "07",
+    categories: ["Web App"],
+    title: "Car Showcase Website",
+    shortDesc: "Visually rich car showcase with smooth UI interactions and component-based React architecture.",
+    tags: ["React", "Tailwind", "JavaScript"],
+    imageSrc: "/project_a.png",
+    problem: "Automotive websites often suffer from clunky navigation and poor visual performance on mobile devices.",
+    solution: "A highly optimized, visually immersive showcase utilizing modern CSS capabilities and React components.",
+    features: [
+      "Complex CSS grid and flexbox layouts",
+      "Smooth scroll and micro-interactions",
+      "Highly reusable React component architecture",
+      "Image optimization and lazy loading"
+    ],
+    outcomes: [
+      "Achieved near-perfect Lighthouse performance scores",
+      "Created an engaging, premium user experience",
+      "Demonstrated advanced frontend styling techniques"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03",
+    liveUrl: "#"
+  },
+  {
+    id: "08",
+    categories: ["Web App"],
+    title: "News Magazine",
+    shortDesc: "Dynamic news aggregator with categorized articles and clean reading experience.",
+    tags: ["React", "API", "JavaScript"],
+    imageSrc: "/project_b.png",
+    problem: "Readers are easily distracted by cluttered news websites with poor typography and invasive layouts.",
+    solution: "A minimalist, typography-focused news aggregator that prioritizes reading experience and content categorization.",
+    features: [
+      "Dynamic data fetching from public news APIs",
+      "Client-side routing and categorized views",
+      "Clean, distraction-free reading mode",
+      "Responsive typography scales for all devices"
+    ],
+    outcomes: [
+      "Improved readability and user retention metrics",
+      "Handled API rate limits and error states gracefully",
+      "Delivered a polished, production-ready frontend"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03",
+    liveUrl: "#"
+  },
+  {
+    id: "09",
+    categories: ["AI/ML"],
+    title: "AI Prediction Engine",
+    shortDesc: "Experimental machine learning model for predictive analytics and data processing.",
+    tags: ["Python", "TensorFlow", "Pandas", "Scikit-Learn"],
+    imageSrc: "/project_a.png",
+    problem: "Businesses struggle to forecast trends based on large volumes of unstructured data.",
+    solution: "A scalable predictive engine that processes historical data to identify future patterns.",
+    features: [
+      "Automated data preprocessing and cleaning",
+      "Custom neural network architecture",
+      "Real-time inference API via FastAPI",
+      "Interactive data visualization dashboards"
+    ],
+    outcomes: [
+      "Achieved 85% accuracy on forecasting test sets",
+      "Reduced manual data analysis time by 40%",
+      "Deployed successfully using Docker containers"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03"
+  }
+];
+
+const FILTERS = ['All', 'Full Stack', 'Backend', 'AI/ML', 'Web App', 'Java/Spring Boot'];
 
 export default function FeaturedProjects() {
-  const PROJECTS = [
-    { id: "01", type: "FULLSTACK APP", title: "EcoBounty", description: "Gamified sustainability platform that rewards eco-friendly actions through real-time tracking and engagement features.", color: "bg-orange-500", tags: ["REACT (TS)", "NODE.JS", "SUPABASE", "APIS"], image: "/project_a.png" },
-    { id: "02", type: "FULLSTACK APP", title: "DevBlog Platform", description: "Full-stack blogging platform with authentication, role-based access, and scalable backend.", color: "bg-green-500", tags: ["SPRING BOOT", "REACT", "POSTGRESQL", "DOCKER", "SPRING SECURITY"], image: "/project_b.png" },
-    { id: "03", type: "AI SYSTEM", title: "AgriGuard", description: "AI-powered plant disease detection system trained on custom dataset for early diagnosis.", color: "bg-pink-500", tags: ["PYTHON", "ML", "OPENCV", "DATASET TRAINING"], image: "/project_a.png" },
-    { id: "04", type: "WEB APP", title: "PawFlix", description: "Movie discovery web app with dynamic data fetching and responsive UI.", color: "bg-[#0ea5e9]", tags: ["REACT", "API", "TAILWIND", "JAVASCRIPT"], image: "/project_b.png" },
-  ];
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // Prevent background scroll when modal open
+  useEffect(() => {
+    if (selectedProject) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'unset';
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [selectedProject]);
+
+  const filteredProjects = PROJECTS.filter(p => {
+    if (activeFilter === 'All') return true;
+    return p.categories.includes(activeFilter as ProjectCategory);
+  });
+
+  const getProjectCount = (filter: string) => {
+    if (filter === 'All') return PROJECTS.length;
+    return PROJECTS.filter(p => p.categories.includes(filter as ProjectCategory)).length;
+  };
 
   return (
-    <section id="projects" className="w-full max-w-5xl mx-auto py-24 px-6 relative z-10 flex flex-col gap-16">
+    <section id="projects" className="w-full max-w-7xl mx-auto py-24 px-6 relative z-10 flex flex-col gap-12">
+      {/* SECTION HEADER */}
       <div className="flex flex-col items-center text-center gap-4">
-        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-[0.3em] uppercase">Portfolio</span>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <span className="text-xs font-bold text-[#8B5CF6] tracking-[0.3em] uppercase">
+          PORTFOLIO
+        </span>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
           Featured <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#b388ff] to-[#f472b6]">Projects</span>
         </h2>
-        <p className="text-slate-500 dark:text-slate-400 text-lg md:text-xl font-medium mt-2">
-          A curated selection of projects that made me confident in building software.
+        <p className="text-slate-400 text-lg md:text-xl font-medium mt-2 max-w-2xl">
+          A curated selection of projects that define my engineering journey.
         </p>
+        
+        {/* New Stats Bar */}
+        <div className="mt-8 flex items-center justify-center gap-8 md:gap-16">
+          <div className="flex flex-col items-center">
+            <span className="text-4xl md:text-5xl font-black text-white">9</span>
+            <span className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Projects</span>
+          </div>
+          <div className="h-10 w-px bg-white/10"></div>
+          <div className="flex flex-col items-center">
+            <span className="text-4xl md:text-5xl font-black text-white">5</span>
+            <span className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Domains</span>
+          </div>
+          <div className="h-10 w-px bg-white/10"></div>
+          <div className="flex flex-col items-center">
+            <span className="text-4xl md:text-5xl font-black text-white">20+</span>
+            <span className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Technologies</span>
+          </div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-        {PROJECTS.map((proj, idx) => (
-          <motion.div
-            key={proj.id}
-            className="flex flex-col gap-4 group"
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.5, delay: idx * 0.1 }}
-          >
-            <div className="flex items-center gap-4 text-xs font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase">
-              <span>{proj.id}</span>
-              <span className="h-px w-8 bg-slate-300 dark:bg-slate-700"></span>
-              <span>{proj.type}</span>
-            </div>
-            <h3 className="text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">{proj.title}</h3>
-            <div className={`w-full aspect-[4/3] rounded-[32px] p-8 relative overflow-hidden mt-2 ${proj.color} transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl flex flex-col`}>
-              <p className="text-white text-lg md:text-xl font-semibold leading-relaxed relative z-10 max-w-[90%]">{proj.description}</p>
-              <div className="mt-8 mx-auto w-[90%] h-[200px] bg-[#1e2330] rounded-t-xl border-t border-x border-white/20 shadow-2xl relative z-10 overflow-hidden group-hover:scale-105 transition-transform duration-700 origin-bottom">
-                <img src={proj.image} alt={proj.title} className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
+      {/* FILTER TABS */}
+      <div className="flex flex-wrap justify-center gap-3 mt-4">
+        {FILTERS.map(f => {
+          const count = getProjectCount(f);
+          return (
+            <button
+              key={f}
+              onClick={() => setActiveFilter(f)}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all border ${
+                activeFilter === f
+                  ? 'bg-[#8B5CF6] text-white border-[#8B5CF6] shadow-[0_0_20px_rgba(139,92,246,0.4)]'
+                  : 'bg-transparent text-slate-400 border-white/10 hover:border-[#8B5CF6] hover:bg-[#8B5CF6]/10 hover:text-white'
+              }`}
+            >
+              {f}
+              <span className={`text-[10px] px-2 py-0.5 rounded-full ${
+                activeFilter === f ? 'bg-white/20 text-white' : 'bg-white/5 text-slate-500 group-hover:text-slate-300'
+              }`}>
+                {count}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+
+      {/* CARD GRID */}
+      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.map((proj) => (
+            <motion.div
+              layout
+              key={proj.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.4 }}
+              className="group flex flex-col bg-[#12121f] border border-white/[0.08] rounded-[24px] overflow-hidden hover:border-[#8B5CF6]/50 hover:-translate-y-2 transition-all duration-300"
+              style={{ boxShadow: '0 10px 40px -10px rgba(0,0,0,0.5)' }}
+            >
+              {/* Top Half: Image */}
+              <div className="w-full h-56 md:h-64 relative bg-[#0a0f1e] overflow-hidden">
+                {/* Dummy Project Name Image */}
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1e2330] to-[#0a0f1e] opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105">
+                  <span className="text-xl md:text-2xl font-black text-white/20 tracking-widest uppercase px-6 text-center">{proj.title}</span>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12121f] to-transparent pointer-events-none" />
+                
+                {/* Category Tags over image */}
+                <div className="absolute bottom-4 left-6 flex gap-2">
+                  {proj.categories.map(cat => (
+                    <span key={cat} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">
+                      {cat}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/40 to-transparent pointer-events-none z-0"></div>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {proj.tags.map(tag => (
-                <span key={tag} className="px-3 py-1.5 text-[10px] font-bold tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-white/5 rounded-full border border-slate-200 dark:border-white/5 uppercase">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
 
+              {/* Bottom Half: Content */}
+              <div className="p-6 md:p-8 flex flex-col flex-1 relative">
+                <h3 className="text-2xl font-extrabold text-white mb-3 group-hover:text-[#b388ff] transition-colors">{proj.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-2">
+                  {proj.shortDesc}
+                </p>
+
+                <div className="w-full h-px bg-white/[0.06] mb-6"></div>
+
+                <div className="flex items-center justify-between mt-auto">
+                  {/* Tech stack tags bottom left */}
+                  <div className="flex flex-wrap gap-2 pr-12">
+                    {proj.tags.slice(0, 3).map(tag => (
+                      <span key={tag} className="px-2.5 py-1 text-[10px] font-bold tracking-wider text-slate-400 bg-white/5 rounded-md border border-white/5 uppercase">
+                        {tag}
+                      </span>
+                    ))}
+                    {proj.tags.length > 3 && (
+                      <span className="px-2.5 py-1 text-[10px] font-bold tracking-wider text-slate-500 uppercase">
+                        +{proj.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Arrow bottom right */}
+                  <button 
+                    onClick={() => setSelectedProject(proj)}
+                    className="absolute right-6 bottom-6 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-[#8B5CF6] group-hover:border-[#8B5CF6] group-hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all"
+                  >
+                    <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* BOTTOM CTA */}
       <div className="mt-12 flex justify-center w-full">
         <a 
           href="https://github.com/PawanBhandari03" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors font-bold text-lg md:text-xl tracking-wide group"
+          className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors font-bold text-base tracking-wide group"
         >
           Explore all projects on GitHub
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </a>
       </div>
+
+      {/* DETAIL MODAL */}
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="absolute inset-0 bg-black/90 backdrop-blur-md"
+            />
+            
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-5xl max-h-[90vh] bg-[#12121f] border border-white/10 rounded-[32px] shadow-2xl flex flex-col overflow-hidden"
+            >
+              {/* Modal Header / Large Image */}
+              <div className="w-full h-56 md:h-80 relative shrink-0 bg-[#0a0f1e] overflow-hidden">
+                <button 
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-6 right-6 z-20 w-10 h-10 bg-black/40 hover:bg-[#8B5CF6] text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-md border border-white/10"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+
+                {/* Dummy Project Name Image */}
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1e2330] to-[#0a0f1e] opacity-70">
+                  <span className="text-4xl md:text-7xl font-black text-white/10 tracking-widest uppercase px-12 text-center">{selectedProject.title}</span>
+                </div>
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12121f] via-[#12121f]/60 to-transparent pointer-events-none" />
+                <div className="absolute bottom-8 left-8 md:left-12 z-10">
+                  <div className="flex gap-2 mb-3">
+                    {selectedProject.categories.map(cat => (
+                      <span key={cat} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">
+                        {cat}
+                      </span>
+                    ))}
+                  </div>
+                  <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight">{selectedProject.title}</h2>
+                </div>
+              </div>
+
+              {/* Modal Body */}
+              <div className="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar">
+                <div className="flex flex-col gap-12">
+                  
+                  {/* Two Columns: Problem / Solution */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6">
+                      <h4 className="text-sm font-black text-[#f472b6] uppercase tracking-widest mb-4 flex items-center gap-3">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        The Problem
+                      </h4>
+                      <p className="text-slate-300 leading-relaxed text-[15px]">{selectedProject.problem}</p>
+                    </div>
+                    <div className="bg-[#8B5CF6]/5 border border-[#8B5CF6]/20 rounded-2xl p-6">
+                      <h4 className="text-sm font-black text-[#8B5CF6] uppercase tracking-widest mb-4 flex items-center gap-3">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        The Solution
+                      </h4>
+                      <p className="text-slate-300 leading-relaxed text-[15px]">{selectedProject.solution}</p>
+                    </div>
+                  </div>
+
+                  {/* Two Columns: Features / Outcomes */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div>
+                      <h4 className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-5 border-b border-white/5 pb-3">Key Features</h4>
+                      <ul className="space-y-4">
+                        {selectedProject.features.map((feat, i) => (
+                          <li key={i} className="flex gap-4 text-slate-300 text-[15px]">
+                            <span className="text-[#8B5CF6] font-bold text-lg leading-none mt-0.5">•</span> {feat}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-5 border-b border-white/5 pb-3">Outcomes & Results</h4>
+                      <ul className="space-y-4">
+                        {selectedProject.outcomes.map((out, i) => (
+                          <li key={i} className="flex gap-4 text-slate-300 text-[15px]">
+                            <span className="text-emerald-400 font-bold text-lg leading-none mt-0.5">✓</span> {out}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Tech Stack Row */}
+                  <div>
+                    <h4 className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-5 border-b border-white/5 pb-3">Technologies Used</h4>
+                    <div className="flex flex-wrap gap-3">
+                      {selectedProject.tags.map(tag => (
+                        <span key={tag} className="px-4 py-2 text-[11px] font-bold tracking-wider text-white bg-white/5 hover:bg-white/10 transition-colors rounded-lg border border-white/10 uppercase">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Modal Footer / Buttons */}
+              <div className="p-6 md:p-8 border-t border-white/5 bg-[#0d0d1a] flex flex-wrap gap-4 items-center justify-end shrink-0">
+                {selectedProject.githubUrl && (
+                  <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-xl font-bold text-sm bg-transparent border border-white/20 text-white hover:bg-white/5 transition-all flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
+                    View on GitHub
+                  </a>
+                )}
+                {selectedProject.liveUrl && (
+                  <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-xl font-bold text-sm bg-[#8B5CF6] hover:bg-[#7C3AED] text-white transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)]">
+                    Live Demo
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                  </a>
+                )}
+                {selectedProject.pptUrl && (
+                  <a href={selectedProject.pptUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-xl font-bold text-sm bg-blue-600 hover:bg-blue-500 text-white transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(37,99,235,0.3)]">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg>
+                    View PPT
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

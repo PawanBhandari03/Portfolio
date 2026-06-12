@@ -143,15 +143,40 @@ export default function ReplicaHero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            {/* Profile photo with glowing border */}
+            {/* Profile photo placeholder with glowing border */}
             <div className="relative">
               <div className="glow-border">
-                <img
-                  src="/avatar.png"
-                  alt="Pawan Bhandari"
-                  className="w-72 h-72 sm:w-80 sm:h-80 object-cover bg-[#0d0d1a]"
-                  style={{ borderRadius: '20px' }}
-                />
+                <div
+                  className="w-72 h-72 sm:w-80 sm:h-80 flex flex-col items-center justify-center gap-3"
+                  style={{
+                    borderRadius: '20px',
+                    background: 'linear-gradient(160deg, #161b2e 0%, #0d0d1a 100%)',
+                  }}
+                >
+                  {/* PB initials circle */}
+                  <div
+                    className="w-28 h-28 rounded-full flex items-center justify-center"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(244,114,182,0.15) 100%)',
+                      border: '1px solid rgba(139,92,246,0.35)'
+                    }}
+                  >
+                    <span
+                      className="text-5xl font-black tracking-tight"
+                      style={{
+                        background: 'linear-gradient(135deg, #f472b6, #8B5CF6)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent'
+                      }}
+                    >
+                      PB
+                    </span>
+                  </div>
+                  <p className="text-[10px] font-semibold tracking-widest uppercase"
+                    style={{ color: 'rgba(255,255,255,0.2)' }}>
+                    Photo coming soon
+                  </p>
+                </div>
               </div>
 
               {/* Floating card: 2+ Years Coding */}

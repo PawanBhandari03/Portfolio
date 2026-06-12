@@ -33,9 +33,9 @@ function App() {
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
 
           {/* Left: Name */}
-          <a href="#" className="text-lg font-bold text-slate-900 dark:text-white tracking-wide hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6] transition-colors">
+          <span className="text-lg font-bold text-slate-900 dark:text-white tracking-wide select-none">
             Pawan Bhandari
-          </a>
+          </span>
 
           {/* Center: Nav Links */}
           <div className="hidden md:flex items-center gap-8">
@@ -55,13 +55,6 @@ function App() {
 
           {/* Right: Book a Call + Dark Mode Toggle */}
           <div className="flex items-center gap-3">
-            <a
-              href="#"
-              className="hidden sm:flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-semibold text-slate-800 dark:text-white border border-slate-300 dark:border-white/15 hover:bg-[#8B5CF6] hover:text-white hover:border-[#8B5CF6] transition-all duration-300"
-            >
-              📅 Book a Call
-            </a>
-
             {/* Dark mode toggle */}
             <button
               onClick={() => setIsDark(!isDark)}

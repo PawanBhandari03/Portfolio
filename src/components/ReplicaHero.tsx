@@ -26,7 +26,7 @@ export default function ReplicaHero() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
-              <span className="text-sm font-medium text-emerald-400 tracking-wide">Open to Work</span>
+              <span className="text-sm font-medium text-emerald-400 tracking-wide">Available For Engineering Roles</span>
             </motion.div>
 
             {/* Main heading */}

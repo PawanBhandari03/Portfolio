@@ -195,7 +195,7 @@ export default function AboutBento() {
           >
             {/* World Map Background */}
             <div
-              className="absolute inset-0 z-0 opacity-[0.12] dark:opacity-[0.15]"
+              className="absolute inset-0 z-0 opacity-40 dark:opacity-[0.25]"
               style={{
                 backgroundImage: `url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg')`,
                 backgroundSize: '250%',
@@ -210,7 +210,7 @@ export default function AboutBento() {
               transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
             />
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#0a0f1e] via-white/80 dark:via-[#0a0f1e]/80 to-transparent z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#0a0f1e] via-white/40 dark:via-[#0a0f1e]/60 to-transparent z-0" />
             <div className="z-10 relative">
               <h4 className="text-[20px] md:text-[23px] font-black text-slate-900 dark:text-white tracking-widest uppercase leading-none">
                 PUNE, INDIA
@@ -237,11 +237,11 @@ export default function AboutBento() {
           </div>
 
           <p className="text-slate-600 dark:text-slate-300 text-[17px] leading-relaxed tracking-wide">
-            Building scalable <strong className="text-slate-900 dark:text-white">backends, APIs, and microservices.</strong>
+            Building scalable <strong className="text-slate-900 dark:text-white">apps, websites, and automations.</strong>
           </p>
 
           <p className="text-slate-500 dark:text-slate-400 text-[17px] leading-relaxed tracking-wide">
-            I understand what advantages modern tech architectures can provide, helping me advise on robust backend solutions that systems need.
+            I understand what advantages modern tech can provide, helping me advise on the solutions a business actually needs.
           </p>
 
           {/* ── Infinite marquee strip ── */}
@@ -275,7 +275,7 @@ export default function AboutBento() {
 
           <div className="mt-auto pt-2">
             <p className="text-slate-600 dark:text-slate-300 text-[17px] leading-relaxed tracking-wide mb-5">
-              Active learner & backend enthusiast. Feel free to invite me to collaborate.
+              Active Hackathon competitor & Science Club member. Feel free to invite me to collaborate.
             </p>
             <div className="flex items-center gap-3 text-[11px] text-slate-900 dark:text-white font-extrabold tracking-widest uppercase">
               <span className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)]" />

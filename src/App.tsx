@@ -94,21 +94,27 @@ function App() {
         {currentPage === 'achievements' && (
           <AchievementsPage onBack={() => {
               setCurrentPage('home');
-              window.scrollTo(0, 0);
+              setTimeout(() => {
+                document.getElementById('other')?.scrollIntoView({ behavior: 'instant' });
+              }, 0);
           }} />
         )}
 
         {currentPage === 'mylinks' && (
           <MyLinksPage onBack={() => {
               setCurrentPage('home');
-              window.scrollTo(0, 0);
+              setTimeout(() => {
+                document.getElementById('other')?.scrollIntoView({ behavior: 'instant' });
+              }, 0);
           }} />
         )}
 
         {currentPage === 'guestbook' && (
           <GuestbookPage onBack={() => {
               setCurrentPage('home');
-              window.scrollTo(0, 0);
+              setTimeout(() => {
+                document.getElementById('other')?.scrollIntoView({ behavior: 'instant' });
+              }, 0);
           }} />
         )}
       </main>

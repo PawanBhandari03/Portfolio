@@ -1,7 +1,10 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ChatUI from './ChatUI';
 
 export default function ReplicaHero() {
+  const [showEmail, setShowEmail] = useState(false);
+
   return (
     <section className="w-full max-w-6xl mx-auto pt-28 pb-12 px-6 relative z-10 flex flex-col gap-14">
 
@@ -124,15 +127,31 @@ export default function ReplicaHero() {
               </a>
 
               {/* Email */}
-              <a
-                href="mailto:pawansinghb07@gmail.com"
-                className="text-slate-400 dark:text-slate-500 hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6] transition-colors duration-300"
-                aria-label="Email"
-              >
-                <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-                  <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
-                </svg>
-              </a>
+              <div className="relative flex items-center justify-center">
+                <button
+                  onClick={() => setShowEmail(!showEmail)}
+                  className="text-slate-400 dark:text-slate-500 hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6] transition-colors duration-300 cursor-pointer"
+                  aria-label="Email"
+                >
+                  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
+                    <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+                  </svg>
+                </button>
+                <AnimatePresence>
+                  {showEmail && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 bg-[#13131f] border border-white/10 rounded-lg shadow-xl px-4 py-2 z-50 flex items-center gap-2 text-sm font-medium text-white whitespace-nowrap"
+                    >
+                      <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#13131f] border-r border-b border-white/10 rotate-45"></div>
+                      pawansinghb07@gmail.com
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </motion.div>
           </motion.div>
 

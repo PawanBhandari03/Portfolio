@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const CARDS = [
   {
@@ -41,6 +42,8 @@ interface ExploreFooterProps {
 }
 
 export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
+  const [showEmail, setShowEmail] = useState(false);
+
   return (
     <>
       <section id="other" className="w-full max-w-5xl mx-auto pt-20 pb-24 px-6 relative z-10 flex flex-col gap-14">
@@ -92,7 +95,7 @@ export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
           <div className="flex items-center gap-2 font-medium">
             <span className="font-bold text-slate-900 dark:text-white text-base">PB</span>
             <span>•</span>
-            <span>© 2026 Pawan Bhandari</span>
+            <span>© 2026 PB Portfolio</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span>Built with</span><span className="text-red-500">♥</span><span>using React &amp; Tailwind</span>
@@ -104,9 +107,29 @@ export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             </a>
-            <a href="mailto:pawan@example.com" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-              <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/></svg>
-            </a>
+            <div className="relative flex items-center justify-center">
+              <button
+                onClick={() => setShowEmail(!showEmail)}
+                className="hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
+                aria-label="Email"
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/></svg>
+              </button>
+              <AnimatePresence>
+                {showEmail && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 bg-[#13131f] border border-white/10 rounded-lg shadow-xl px-4 py-2 z-50 flex items-center gap-2 text-sm font-medium text-white whitespace-nowrap"
+                  >
+                    <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#13131f] border-r border-b border-white/10 rotate-45"></div>
+                    pawansinghb07@gmail.com
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </footer>

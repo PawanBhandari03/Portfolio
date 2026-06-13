@@ -19,38 +19,37 @@ const MedalIcon = () => (
     </svg>
 );
 
-import googleAiCert from '../assets/google_ai_cert.png';
-import cassiniCert from '../assets/cassini_hackathon_cert.png';
-import marathonCert from '../assets/marathon_cert.png';
-
 interface Props {
   onBack: () => void;
 }
 
 export default function AchievementsPage({ onBack }: Props) {
   return (
-    <main className="w-full max-w-5xl mx-auto px-6 pt-32 pb-24 relative z-10 flex flex-col gap-16 min-h-screen">
-      <div className="flex flex-col items-center text-center gap-6">
-        <button 
-          onClick={onBack}
-          className="self-start text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-2 text-sm font-medium transition-colors group mb-4"
-        >
-          <span className="group-hover:-translate-x-1 transition-transform"><ArrowLeft /></span>
-          Back to home
-        </button>
+    <main className="w-full max-w-5xl mx-auto px-6 pt-8 pb-16 relative z-10 flex flex-col min-h-screen">
+      
+      {/* Back Button */}
+      <button 
+        onClick={onBack}
+        className="self-start text-sm font-medium transition-colors group flex items-center gap-2 z-20 mb-6 hover:text-[#8B5CF6]"
+        style={{ color: 'var(--text-secondary)' }}
+      >
+        <span className="group-hover:-translate-x-1 transition-transform"><ArrowLeft /></span>
+        Back to home
+      </button>
 
+      <div className="flex flex-col items-center text-center gap-6 mt-0 mb-12">
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
         >
-            <p className="text-[#F97316] font-bold tracking-[0.2em] text-xs md:text-sm uppercase mb-4 drop-shadow-[0_0_15px_rgba(249,115,22,0.6)]">
+            <p className="text-[#a78bfa] font-bold tracking-[0.2em] text-xs md:text-sm uppercase mb-4 drop-shadow-[0_0_15px_rgba(167,139,250,0.4)]">
               Milestones & Victories
             </p>
-            <h1 className="text-5xl md:text-8xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-              My <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-500">Achievements</span>
+            <h1 className="text-5xl md:text-8xl font-extrabold tracking-tight leading-tight" style={{ color: 'var(--text-primary)' }}>
+              My <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f472b6] to-[#8B5CF6]">Achievements</span>
             </h1>
-            <p className="text-slate-500 dark:text-slate-400 text-lg md:text-xl mt-6 max-w-2xl mx-auto font-medium">
+            <p className="text-lg md:text-xl mt-6 max-w-2xl mx-auto font-medium" style={{ color: 'var(--text-secondary)' }}>
               From code to peaks, every achievement tells a story of dedication.
             </p>
         </motion.div>
@@ -58,24 +57,25 @@ export default function AchievementsPage({ onBack }: Props) {
 
       <div className="flex flex-col gap-10">
         
-        {/* Google AI Program - Wide Card */}
+        {/* Card 1 - Wide Card */}
         <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col md:flex-row gap-8 bg-white/70 dark:bg-[#111622] rounded-[32px] border border-slate-200/60 dark:border-white/10 overflow-hidden shadow-2xl backdrop-blur-md"
+            className="flex flex-col md:flex-row gap-8 rounded-[32px] overflow-hidden shadow-2xl backdrop-blur-md"
+            style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
         >
-            <div className="md:w-3/5 bg-white p-2 md:p-4 rounded-t-[32px] md:rounded-l-[32px] md:rounded-tr-none flex items-center justify-center">
-                <img src={googleAiCert} alt="Google AI Program Certificate" className="w-full h-auto object-contain max-h-[400px] rounded-2xl shadow-sm border border-slate-100" />
+            <div className="md:w-3/5 p-2 md:p-4 rounded-t-[32px] md:rounded-l-[32px] md:rounded-tr-none flex items-center justify-center min-h-[300px]" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+                <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>Image Placeholder</span>
             </div>
             <div className="md:w-2/5 p-8 md:p-12 flex flex-col justify-center">
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Google AI Program</h2>
-                <p className="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mb-8">
-                    Completed Google's 5-week intensive AI program. Acquired advanced knowledge in machine learning models, prompt engineering, and integrating AI into business development strategies.
+                <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Achievement Title</h2>
+                <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
+                    Achievement description goes here. This section is ready for you to add your details later.
                 </p>
                 <div className="mt-auto">
-                    <span className="inline-block bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 px-5 py-2.5 rounded-full text-sm font-semibold border border-slate-200 dark:border-white/10">
-                        October 2025
+                    <span className="inline-block px-5 py-2.5 rounded-full text-sm font-semibold border" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
+                        Date / Info
                     </span>
                 </div>
             </div>
@@ -83,20 +83,21 @@ export default function AchievementsPage({ onBack }: Props) {
 
         {/* 2 Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {/* Cassini Hackathon */}
+            {/* Card 2 */}
             <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex flex-col rounded-[32px] border border-slate-200/60 dark:border-white/10 overflow-hidden bg-white/70 dark:bg-[#0d111a] backdrop-blur-md shadow-xl"
+                className="flex flex-col rounded-[32px] overflow-hidden backdrop-blur-md shadow-xl"
+                style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
-                <div className="bg-white p-4 md:p-6 h-[400px] md:h-[500px] flex items-center justify-center flex-col">
-                     <img src={cassiniCert} alt="Cassini Hackathon Certificate" className="w-full h-full object-contain rounded-xl shadow-sm" />
+                <div className="p-4 md:p-6 h-[300px] md:h-[400px] flex items-center justify-center flex-col" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+                     <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>Image Placeholder</span>
                 </div>
-                <div className="p-6 md:p-8 flex items-center justify-between border-t border-slate-200/60 dark:border-white/10 bg-white/40 dark:bg-[#111622]/50">
+                <div className="p-6 md:p-8 flex items-center justify-between border-t" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
                     <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-2">Cassini Hackathon</h3>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">3rd Place Winner • November 2025</p>
+                        <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Achievement Title</h3>
+                        <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Subtitle / Date</p>
                     </div>
                     <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0">
                         <TrophyIcon />
@@ -104,20 +105,21 @@ export default function AchievementsPage({ onBack }: Props) {
                 </div>
             </motion.div>
 
-            {/* Half-Marathon */}
+            {/* Card 3 */}
             <motion.div 
                  initial={{ opacity: 0, y: 30 }}
                  animate={{ opacity: 1, y: 0 }}
                  transition={{ duration: 0.6, delay: 0.3 }}
-                 className="flex flex-col rounded-[32px] border border-slate-200/60 dark:border-white/10 overflow-hidden bg-white/70 dark:bg-[#0d111a] backdrop-blur-md shadow-xl"
+                 className="flex flex-col rounded-[32px] overflow-hidden backdrop-blur-md shadow-xl"
+                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
-                <div className="bg-white p-4 md:p-6 h-[400px] md:h-[500px] flex items-center justify-center flex-col">
-                     <img src={marathonCert} alt="Half-Marathon Certificate" className="w-full h-full object-contain rounded-xl shadow-sm" />
+                <div className="p-4 md:p-6 h-[300px] md:h-[400px] flex items-center justify-center flex-col" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+                     <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>Image Placeholder</span>
                 </div>
-                <div className="p-6 md:p-8 flex items-center justify-between border-t border-slate-200/60 dark:border-white/10 bg-white/40 dark:bg-[#111622]/50">
+                <div className="p-6 md:p-8 flex items-center justify-between border-t" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
                     <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-500 mb-2">Half-Marathon Finisher</h3>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Cracovia Royal Half Marathon</p>
+                        <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Achievement Title</h3>
+                        <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Subtitle / Date</p>
                     </div>
                     <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
                         <MedalIcon />

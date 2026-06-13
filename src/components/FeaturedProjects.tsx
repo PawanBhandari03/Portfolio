@@ -410,87 +410,103 @@ export default function FeaturedProjects() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl max-h-[90vh] bg-[#12121f] border border-white/10 rounded-[32px] shadow-2xl flex flex-col overflow-hidden"
+              className="relative w-full max-w-5xl max-h-[90vh] bg-[#0b0e14] border border-white/10 rounded-[24px] shadow-2xl flex flex-col overflow-hidden"
             >
-              {/* Modal Header / Large Image */}
-              <div className="w-full h-56 md:h-80 relative shrink-0 bg-[#0a0f1e] overflow-hidden">
+              {/* Modal Header */}
+              <div className="p-6 md:p-8 pb-4 md:pb-5 border-b border-white/5 relative shrink-0">
                 <button 
                   onClick={() => setSelectedProject(null)}
-                  className="absolute top-6 right-6 z-20 w-10 h-10 bg-black/40 hover:bg-[#8B5CF6] text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-md border border-white/10"
+                  className="absolute top-6 right-6 z-20 w-8 h-8 border border-white/10 hover:bg-white/5 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-md"
                 >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
 
-                {/* Dummy Project Name Image */}
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1e2330] to-[#0a0f1e] opacity-70">
-                  <span className="text-4xl md:text-7xl font-black text-white/10 tracking-widest uppercase px-12 text-center">{selectedProject.title}</span>
+                <div className="flex gap-2 mb-3">
+                  {selectedProject.categories.map(cat => (
+                    <span key={cat} className="flex items-center gap-1.5 px-3 py-1 bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 text-[#8B5CF6] text-[10px] font-bold uppercase tracking-widest rounded-full">
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                      {cat}
+                    </span>
+                  ))}
                 </div>
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-[#12121f] via-[#12121f]/60 to-transparent pointer-events-none" />
-                <div className="absolute bottom-8 left-8 md:left-12 z-10">
-                  <div className="flex gap-2 mb-3">
-                    {selectedProject.categories.map(cat => (
-                      <span key={cat} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">
-                        {cat}
-                      </span>
-                    ))}
-                  </div>
-                  <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight">{selectedProject.title}</h2>
-                </div>
+                <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-2">{selectedProject.title}</h2>
+                <p className="text-slate-400 text-base md:text-lg font-medium max-w-3xl leading-relaxed">
+                  {selectedProject.shortDesc}
+                </p>
               </div>
 
               {/* Modal Body */}
               <div className="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar">
                 <div className="flex flex-col gap-12">
                   
+                  {/* Architecture Diagram / Image */}
+                  <div>
+                    <h4 className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                      ARCHITECTURE DIAGRAM
+                    </h4>
+                    <div className="w-full h-64 md:h-96 relative bg-[#0a0f1e] overflow-hidden rounded-2xl border border-white/10 flex items-center justify-center">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#1e2330] to-[#0a0f1e] opacity-70" />
+                      <span className="text-4xl md:text-7xl font-black text-white/10 tracking-widest uppercase px-12 text-center relative z-10">{selectedProject.title}</span>
+                    </div>
+                  </div>
+
                   {/* Two Columns: Problem / Solution */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6">
-                      <h4 className="text-sm font-black text-[#f472b6] uppercase tracking-widest mb-4 flex items-center gap-3">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                        The Problem
+                    <div>
+                      <h4 className="text-xs font-black text-[#0ea5e9] uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                        THE PROBLEM
                       </h4>
-                      <p className="text-slate-300 leading-relaxed text-[15px]">{selectedProject.problem}</p>
+                      <p className="text-slate-400 leading-relaxed text-[15px]">{selectedProject.problem}</p>
                     </div>
-                    <div className="bg-[#8B5CF6]/5 border border-[#8B5CF6]/20 rounded-2xl p-6">
-                      <h4 className="text-sm font-black text-[#8B5CF6] uppercase tracking-widest mb-4 flex items-center gap-3">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        The Solution
+                    <div>
+                      <h4 className="text-xs font-black text-[#0ea5e9] uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span className="font-mono text-lg leading-none font-bold">{`>_`}</span>
+                        THE SOLUTION
                       </h4>
-                      <p className="text-slate-300 leading-relaxed text-[15px]">{selectedProject.solution}</p>
+                      <p className="text-slate-400 leading-relaxed text-[15px]">{selectedProject.solution}</p>
                     </div>
                   </div>
 
                   {/* Two Columns: Features / Outcomes */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div>
-                      <h4 className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-5 border-b border-white/5 pb-3">Key Features</h4>
-                      <ul className="space-y-4">
+                      <h4 className="text-xs font-black text-white uppercase tracking-[0.2em] mb-5 flex items-center gap-2">
+                        <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        KEY FEATURES
+                      </h4>
+                      <div className="space-y-4">
                         {selectedProject.features.map((feat, i) => (
-                          <li key={i} className="flex gap-4 text-slate-300 text-[15px]">
-                            <span className="text-[#8B5CF6] font-bold text-lg leading-none mt-0.5">•</span> {feat}
-                          </li>
+                          <div key={i} className="flex items-start gap-4 px-6 py-5 rounded-2xl border border-blue-500/20 bg-blue-500/[0.02] hover:bg-blue-500/[0.05] transition-colors shadow-sm">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] mt-2.5 shrink-0 shadow-[0_0_8px_#3b82f6]"></span>
+                            <p className="text-white text-[15px] font-bold leading-relaxed">{feat}</p>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     </div>
                     <div>
-                      <h4 className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-5 border-b border-white/5 pb-3">Outcomes & Results</h4>
-                      <ul className="space-y-4">
+                      <h4 className="text-xs font-black text-[#10b981] uppercase tracking-[0.2em] mb-5 flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        OUTCOMES
+                      </h4>
+                      <div className="space-y-4">
                         {selectedProject.outcomes.map((out, i) => (
-                          <li key={i} className="flex gap-4 text-slate-300 text-[15px]">
-                            <span className="text-emerald-400 font-bold text-lg leading-none mt-0.5">✓</span> {out}
-                          </li>
+                          <div key={i} className="flex items-start gap-4 px-6 py-5 rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.02] hover:bg-emerald-500/[0.05] transition-colors shadow-sm">
+                            <svg className="w-5 h-5 text-[#10b981] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <p className="text-white text-[15px] font-bold leading-relaxed">{out}</p>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     </div>
                   </div>
 
                   {/* Tech Stack Row */}
                   <div>
-                    <h4 className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-5 border-b border-white/5 pb-3">Technologies Used</h4>
+                    <h4 className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em] mb-5">CORE TECHNOLOGY STACK</h4>
                     <div className="flex flex-wrap gap-3">
                       {selectedProject.tags.map(tag => (
-                        <span key={tag} className="px-4 py-2 text-[11px] font-bold tracking-wider text-white bg-white/5 hover:bg-white/10 transition-colors rounded-lg border border-white/10 uppercase">
+                        <span key={tag} className="px-5 py-2 text-xs font-bold tracking-wider text-slate-300 bg-transparent hover:bg-white/5 transition-colors rounded-full border border-white/20 uppercase">
                           {tag}
                         </span>
                       ))}
@@ -501,7 +517,7 @@ export default function FeaturedProjects() {
               </div>
 
               {/* Modal Footer / Buttons */}
-              <div className="p-6 md:p-8 border-t border-white/5 bg-[#0d0d1a] flex flex-wrap gap-4 items-center justify-end shrink-0">
+              <div className="p-6 md:p-8 border-t border-white/5 bg-[#0a0d14] flex flex-wrap gap-4 items-center justify-end shrink-0">
                 {selectedProject.githubUrl && (
                   <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-xl font-bold text-sm bg-transparent border border-white/20 text-white hover:bg-white/5 transition-all flex items-center gap-2">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>

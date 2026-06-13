@@ -257,28 +257,28 @@ export default function FeaturedProjects() {
         <span className="text-xs font-bold text-[#8B5CF6] tracking-[0.3em] uppercase">
           PORTFOLIO
         </span>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight" style={{ color: 'var(--text-primary)' }}>
           Featured <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#b388ff] to-[#f472b6]">Projects</span>
         </h2>
-        <p className="text-slate-400 text-lg md:text-xl font-medium mt-2 max-w-2xl">
+        <p className="text-lg md:text-xl font-medium mt-2 max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
           A curated selection of projects that define my engineering journey.
         </p>
         
         {/* New Stats Bar */}
         <div className="mt-8 flex items-center justify-center gap-8 md:gap-16">
           <div className="flex flex-col items-center">
-            <span className="text-4xl md:text-5xl font-black text-white">9</span>
-            <span className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Projects</span>
+            <span className="text-4xl md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>9</span>
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Projects</span>
           </div>
-          <div className="h-10 w-px bg-white/10"></div>
+          <div className="h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
           <div className="flex flex-col items-center">
-            <span className="text-4xl md:text-5xl font-black text-white">5</span>
-            <span className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Domains</span>
+            <span className="text-4xl md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>5</span>
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Domains</span>
           </div>
-          <div className="h-10 w-px bg-white/10"></div>
+          <div className="h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
           <div className="flex flex-col items-center">
-            <span className="text-4xl md:text-5xl font-black text-white">20+</span>
-            <span className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Technologies</span>
+            <span className="text-4xl md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>20+</span>
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Technologies</span>
           </div>
         </div>
       </div>
@@ -294,12 +294,12 @@ export default function FeaturedProjects() {
               className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all border ${
                 activeFilter === f
                   ? 'bg-[#8B5CF6] text-white border-[#8B5CF6] shadow-[0_0_20px_rgba(139,92,246,0.4)]'
-                  : 'bg-transparent text-slate-400 border-white/10 hover:border-[#8B5CF6] hover:bg-[#8B5CF6]/10 hover:text-white'
+                  : 'bg-transparent border-[color:var(--border-color)] text-[color:var(--text-secondary)] hover:border-[#8B5CF6] hover:bg-[#8B5CF6]/10 hover:text-[#8B5CF6]'
               }`}
             >
               {f}
               <span className={`text-[10px] px-2 py-0.5 rounded-full ${
-                activeFilter === f ? 'bg-white/20 text-white' : 'bg-white/5 text-slate-500 group-hover:text-slate-300'
+                activeFilter === f ? 'bg-white/20 text-white' : 'text-[color:var(--text-secondary)]'
               }`}>
                 {count}
               </span>
@@ -320,16 +320,24 @@ export default function FeaturedProjects() {
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4 }}
               onClick={() => setSelectedProject(proj)}
-              className="group flex flex-col bg-[#12121f] border border-white/[0.08] rounded-[24px] overflow-hidden hover:border-[#8B5CF6]/50 hover:-translate-y-2 transition-all duration-300 cursor-pointer"
-              style={{ boxShadow: '0 10px 40px -10px rgba(0,0,0,0.5)' }}
+              className="group relative rounded-[24px] p-[2px] hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+              style={{
+                background: 'linear-gradient(270deg, #f472b6, #8B5CF6, #7C3AED, #f472b6)',
+                backgroundSize: '400% 400%',
+                animation: 'glow-rotate 4s ease infinite',
+              }}
             >
+              <div
+                className="flex flex-col rounded-[22px] overflow-hidden h-full"
+                style={{ backgroundColor: 'var(--card-bg)', boxShadow: '0 10px 40px -10px rgba(0,0,0,0.1)' }}
+              >
               {/* Top Half: Image */}
-              <div className="w-full h-56 md:h-64 relative bg-[#0a0f1e] overflow-hidden">
+              <div className="w-full h-56 md:h-64 relative overflow-hidden" style={{ backgroundColor: 'var(--image-placeholder)' }}>
                 {/* Dummy Project Name Image */}
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1e2330] to-[#0a0f1e] opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105">
-                  <span className="text-xl md:text-2xl font-black text-white/20 tracking-widest uppercase px-6 text-center">{proj.title}</span>
+                <div className="w-full h-full flex items-center justify-center opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105">
+                  <span className="text-xl md:text-2xl font-black tracking-widest uppercase px-6 text-center" style={{ color: 'var(--text-secondary)', opacity: 0.2 }}>{proj.title}</span>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#12121f] to-transparent pointer-events-none" />
+                <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, var(--card-bg), transparent)' }} />
                 
               </div>
 
@@ -339,29 +347,29 @@ export default function FeaturedProjects() {
                 {/* Categories as plain text */}
                 <div className="flex flex-wrap gap-4 mb-4">
                   {proj.categories.map(cat => (
-                    <span key={cat} className="text-[11px] font-black tracking-widest text-white uppercase">
+                    <span key={cat} className="text-[11px] font-black tracking-widest uppercase" style={{ color: 'var(--text-secondary)' }}>
                       {cat}
                     </span>
                   ))}
                 </div>
 
-                <h3 className="text-2xl font-extrabold text-white mb-3 group-hover:text-[#8B5CF6] transition-colors">{proj.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-2">
+                <h3 className="text-2xl font-extrabold mb-3 group-hover:text-[#8B5CF6] transition-colors" style={{ color: 'var(--text-primary)' }}>{proj.title}</h3>
+                <p className="text-sm leading-relaxed mb-6 line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
                   {proj.shortDesc}
                 </p>
 
-                <div className="w-full h-px bg-white/10 mb-6 mt-auto"></div>
+                <div className="w-full h-px mb-6 mt-auto" style={{ backgroundColor: 'var(--border-color)' }}></div>
 
                 <div className="flex items-center justify-between">
                   {/* Tech Stack Tags (One line, no wrap) */}
                   <div className="flex items-center gap-4 overflow-hidden whitespace-nowrap">
                     {proj.tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="text-[10px] font-black tracking-widest text-white uppercase shrink-0">
+                      <span key={tag} className="text-[10px] font-black tracking-widest uppercase shrink-0" style={{ color: 'var(--text-primary)' }}>
                         {tag}
                       </span>
                     ))}
                     {proj.tags.length > 3 && (
-                      <span className="text-[10px] font-black tracking-widest text-white uppercase shrink-0">
+                      <span className="text-[10px] font-black tracking-widest uppercase shrink-0" style={{ color: 'var(--text-primary)' }}>
                         +{proj.tags.length - 3}
                       </span>
                     )}
@@ -374,6 +382,7 @@ export default function FeaturedProjects() {
                   </div>
                 </div>
               </div>
+              </div>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -385,7 +394,8 @@ export default function FeaturedProjects() {
           href="https://github.com/PawanBhandari03" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors font-bold text-base tracking-wide group"
+          className="flex items-center gap-2 hover:text-[#8B5CF6] transition-colors font-bold text-base tracking-wide group"
+          style={{ color: 'var(--text-primary)' }}
         >
           Explore all projects on GitHub
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

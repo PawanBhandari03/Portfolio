@@ -14,15 +14,31 @@
   --text-secondary: #64748b;
   --domain-card-bg: #f0f4ff;
   --domain-card-text: #0d1117;
+  --card-bg: #ffffff;
+  --border-color: rgba(0,0,0,0.08);
+  --tag-bg: #f1f5f9;
+  --card-gradient-start: #e8ecf4;
+  --card-gradient-end: #ffffff;
+  --marquee-fade: #f3f0ff;
+  --section-bg: #f8f7ff;
+  --image-placeholder: #e2e8f0;
 }
 
 html.dark {
   --bg-primary: #0d0d1a;
   --bg-secondary: #13131f;
   --text-primary: #ffffff;
-  --text-secondary: rgba(180, 190, 255, 0.45);
+  --text-secondary: #94a3b8;
   --domain-card-bg: #0d1117;
   --domain-card-text: #ffffff;
+  --card-bg: #13131f;
+  --border-color: rgba(255,255,255,0.08);
+  --tag-bg: rgba(255,255,255,0.06);
+  --card-gradient-start: #161b2e;
+  --card-gradient-end: #0d0d1a;
+  --marquee-fade: #13131f;
+  --section-bg: #0d0d1a;
+  --image-placeholder: #1e1e2e;
 }
 
 /* === LIGHT MODE (default) === */

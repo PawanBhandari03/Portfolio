@@ -7,6 +7,24 @@
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
+:root {
+  --bg-primary: #f3f0ff;
+  --bg-secondary: rgba(255, 255, 255, 0.7);
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --domain-card-bg: #f0f4ff;
+  --domain-card-text: #0d1117;
+}
+
+html.dark {
+  --bg-primary: #0d0d1a;
+  --bg-secondary: #13131f;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(180, 190, 255, 0.45);
+  --domain-card-bg: #0d1117;
+  --domain-card-text: #ffffff;
+}
+
 /* === LIGHT MODE (default) === */
 body {
   margin: 0;

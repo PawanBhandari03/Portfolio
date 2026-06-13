@@ -1,369 +1,187 @@
-import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
 
-/* ─── Tech stack data ─────────────────────────────────────────────────── */
-const TECHS = [
-  { name: 'Java',         src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg' },
-  { name: 'Spring Boot',  src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg' },
-  { name: 'React',        src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
-  { name: 'Node.js',      src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg' },
-  { name: 'PostgreSQL',   src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg' },
-  { name: 'Docker',       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg' },
-  { name: 'Git',          src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
-  { name: 'Tailwind CSS', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
-  { name: 'JavaScript',   src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg' },
-  { name: 'TypeScript',   src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg' },
-  { name: 'Linux',        src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg' },
-  { name: 'Python',       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg' },
+const DOMAINS = [
+  {
+    category: 'LANGUAGES',
+    title: 'Languages',
+    iconColor: '#3b82f6',
+    iconBg: 'rgba(59,130,246,0.1)',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      </svg>
+    ),
+    skills: ['Java', 'JavaScript', 'Python', 'TypeScript', 'SQL', 'HTML/CSS']
+  },
+  {
+    category: 'FULL-STACK',
+    title: 'Full-Stack',
+    iconColor: '#a855f7',
+    iconBg: 'rgba(168,85,247,0.1)',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+    ),
+    skills: ['Spring Boot', 'React', 'Node.js', 'Express.js', 'REST APIs', 'GraphQL', 'JWT/Auth', 'Tailwind CSS']
+  },
+  {
+    category: 'DATABASE & DEVOPS',
+    title: 'Database & DevOps',
+    iconColor: '#10b981',
+    iconBg: 'rgba(16,185,129,0.1)',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+      </svg>
+    ),
+    skills: ['PostgreSQL', 'MySQL', 'Docker', 'Git', 'CI/CD', 'Linux']
+  },
+  {
+    category: 'AI / ML & TOOLS',
+    title: 'AI / ML & Tools',
+    iconColor: '#f97316',
+    iconBg: 'rgba(249,115,22,0.1)',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+      </svg>
+    ),
+    skills: ['Python ML', 'OpenCV', 'CNN Models', 'Dataset Training', 'Postman', 'VS Code']
+  },
+  {
+    category: 'JAVA / SPRING BOOT',
+    title: 'Java / Spring Boot',
+    iconColor: '#22c55e',
+    iconBg: 'rgba(34,197,94,0.1)',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 19.5c-4.418 0-8-1.79-8-4V8.5m16 7c0 2.21-3.582 4-8 4m8-4V8.5m0 0c0-2.21-3.582-4-8-4s-8 1.79-8 4m16 0c-1 2-4.5 3-8 3s-7-1-8-3" />
+      </svg>
+    ),
+    skills: ['Spring Boot', 'Spring Security', 'Spring MVC', 'Hibernate / JPA', 'Maven', 'REST API Design', 'Microservices']
+  },
+  {
+    category: 'TOOLS & WORKFLOW',
+    title: 'Tools & Workflow',
+    iconColor: '#3b82f6',
+    iconBg: 'rgba(59,130,246,0.1)',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+    skills: ['Git & GitHub', 'Postman', 'VS Code', 'IntelliJ IDEA', 'Docker Desktop', 'Linux Terminal']
+  }
 ];
 
-/* ─── Fibonacci-sphere positions ─────────────────────────────────────── */
-function fibonacciSphere(count: number, radius: number) {
-  const pts: [number, number, number][] = [];
-  const golden = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < count; i++) {
-    const y = 1 - (i / (count - 1)) * 2;
-    const r = Math.sqrt(1 - y * y);
-    const theta = golden * i;
-    pts.push([radius * r * Math.cos(theta), radius * y, radius * r * Math.sin(theta)]);
-  }
-  return pts;
-}
-
-/* ─── Rotate a point around Y then X axis ───────────────────────────── */
-function rotatePoint(
-  px: number, py: number, pz: number,
-  ry: number, rx: number
-): { x: number; y: number; z: number } {
-  const cosY = Math.cos(ry), sinY = Math.sin(ry);
-  const cosX = Math.cos(rx), sinX = Math.sin(rx);
-  const x1 = px * cosY - pz * sinY;
-  const z1 = px * sinY + pz * cosY;
-  const y2 = py * cosX - z1 * sinX;
-  const z2 = py * sinX + z1 * cosX;
-  return { x: x1, y: y2, z: z2 };
-}
+const STATS = [
+  { number: '25+', label: 'Technologies' },
+  { number: '8', label: 'Domains' },
+  { number: '9', label: 'Projects Built' },
+];
 
 export default function SkillsSphere() {
-  const RADIUS_PX = 220;
-  const ICON_SIZE = 46;
-
-  const positions = useMemo(() => fibonacciSphere(TECHS.length, RADIUS_PX), []);
-
-  /* ── Rotation angles live in a ref so RAF loop sees latest values ── */
-  const angleRef = useRef({ y: 0.0, x: 0.25 });
-  /* ── Momentum velocity (radians / second) ─── */
-  const velRef   = useRef({ y: 0.0, x: 0.0 });
-
-  /* ── Drag state ─────────────────────────────────────────────────── */
-  const dragging  = useRef(false);
-  const lastPos   = useRef({ x: 0, y: 0 });
-  const lastTime  = useRef(0);
-  /* Store last delta for momentum on release */
-  const lastDelta = useRef({ x: 0, y: 0 });
-
-  const rafRef = useRef<number>(0);
-  const [coords, setCoords] = useState<{ x: number; y: number; z: number; depth: number }[]>([]);
-
-  /* ── RAF render loop ─────────────────────────────────────────────── */
-  useEffect(() => {
-    let last = performance.now();
-
-    const step = (now: number) => {
-      const dt = Math.min((now - last) / 1000, 0.05);
-      last = now;
-
-      if (!dragging.current) {
-        // Auto-rotate (slow) when not dragging
-        velRef.current.y += (0.25 - velRef.current.y) * 0.02; // target slow auto-spin
-        velRef.current.x *= 0.96; // damp vertical drift back to 0
-
-        angleRef.current.y += velRef.current.y * dt;
-        angleRef.current.x += velRef.current.x * dt;
-
-        // Clamp vertical tilt gently
-        angleRef.current.x = Math.max(-1.2, Math.min(1.2, angleRef.current.x));
-      } else {
-        // While dragging, let momentum keep applying (set each mousemove)
-        // No auto-rotate
-        velRef.current.y *= 0.85;
-        velRef.current.x *= 0.85;
-      }
-
-      const { y: ry, x: rx } = angleRef.current;
-      const next = positions.map(([px, py, pz]) => {
-        const { x, y, z } = rotatePoint(px, py, pz, ry, rx);
-        return { x, y, z, depth: z };
-      });
-
-      setCoords(next);
-      rafRef.current = requestAnimationFrame(step);
-    };
-
-    rafRef.current = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [positions]);
-
-  /* ── Pointer interaction helpers ─────────────────────────────────── */
-  const onDragStart = useCallback((clientX: number, clientY: number) => {
-    dragging.current = true;
-    lastPos.current  = { x: clientX, y: clientY };
-    lastTime.current = performance.now();
-    lastDelta.current = { x: 0, y: 0 };
-    // Kill auto-rotate velocity immediately
-    velRef.current = { y: 0, x: 0 };
-  }, []);
-
-  const onDragMove = useCallback((clientX: number, clientY: number) => {
-    if (!dragging.current) return;
-    const dx = clientX - lastPos.current.x;
-    const dy = clientY - lastPos.current.y;
-    const now = performance.now();
-    const dt  = Math.max((now - lastTime.current) / 1000, 0.001);
-
-    const SENSITIVITY = 0.006;
-    angleRef.current.y += dx * SENSITIVITY;
-    angleRef.current.x += dy * SENSITIVITY;
-    angleRef.current.x  = Math.max(-1.4, Math.min(1.4, angleRef.current.x));
-
-    // Store velocity for momentum
-    velRef.current.y  = (dx * SENSITIVITY) / dt;
-    velRef.current.x  = (dy * SENSITIVITY) / dt;
-    lastDelta.current = { x: dx, y: dy };
-
-    lastPos.current  = { x: clientX, y: clientY };
-    lastTime.current = now;
-  }, []);
-
-  const onDragEnd = useCallback(() => {
-    dragging.current = false;
-    // Apply momentum — clamp max speed so it doesn't fly away
-    const MAX_VEL = 4;
-    velRef.current.y = Math.max(-MAX_VEL, Math.min(MAX_VEL, velRef.current.y));
-    velRef.current.x = Math.max(-MAX_VEL, Math.min(MAX_VEL, velRef.current.x));
-  }, []);
-
-  /* ── Mouse events ────────────────────────────────────────────────── */
-  const onMouseDown = (e: React.MouseEvent) => { e.preventDefault(); onDragStart(e.clientX, e.clientY); };
-  const onMouseMove = useCallback((e: MouseEvent) => onDragMove(e.clientX, e.clientY), [onDragMove]);
-  const onMouseUp   = useCallback(() => onDragEnd(), [onDragEnd]);
-
-  /* ── Touch events ────────────────────────────────────────────────── */
-  const onTouchStart = (e: React.TouchEvent) => {
-    const t = e.touches[0];
-    onDragStart(t.clientX, t.clientY);
-  };
-  const onTouchMove = useCallback((e: TouchEvent) => {
-    e.preventDefault();
-    const t = e.touches[0];
-    onDragMove(t.clientX, t.clientY);
-  }, [onDragMove]);
-  const onTouchEnd = useCallback(() => onDragEnd(), [onDragEnd]);
-
-  /* Attach global mouse/touch listeners so drag works outside the element */
-  useEffect(() => {
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup',   onMouseUp);
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
-    window.addEventListener('touchend',  onTouchEnd);
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup',   onMouseUp);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('touchend',  onTouchEnd);
-    };
-  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
-
-  /* ── Sort back→front for correct z-ordering ─────────────────────── */
-  const sorted = useMemo(() => {
-    if (coords.length === 0) return [];
-    return TECHS.map((t, i) => ({ ...t, ...coords[i] }))
-      .sort((a, b) => (a?.depth ?? 0) - (b?.depth ?? 0));
-  }, [coords]);
-
-  const depthToStyle = (z: number) => {
-    const norm    = (z + RADIUS_PX) / (2 * RADIUS_PX); // 0=back → 1=front
-    const opacity = 0.2 + norm * 0.8;
-    const scale   = 0.5 + norm * 0.7;
-    return { opacity, scale };
-  };
-
-  const SIZE = RADIUS_PX * 2 + ICON_SIZE * 2; // total container px
-
   return (
-    <section
+    <section 
       id="skills"
-      style={{ background: '#07091a' }}
-      className="relative w-full py-24 flex flex-col items-center overflow-hidden select-none"
+      className="relative w-full py-24 md:py-32 flex flex-col items-center overflow-hidden"
     >
-      {/* Ambient glow */}
-      <div style={{
-        position: 'absolute', top: '50%', left: '50%',
-        transform: 'translate(-50%,-50%)',
-        width: '55vmin', height: '55vmin', borderRadius: '50%',
-        background: 'radial-gradient(circle,rgba(60,80,200,0.18) 0%,transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+      <div className="max-w-6xl w-full px-6 flex flex-col items-center">
+        
+        {/* Top Header Row */}
+        <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 mb-16 relative z-10">
+          
+          {/* Left Column: Heading */}
+          <div className="lg:col-span-2 flex flex-col justify-center">
+            <span className="text-[#0ea5e9] tracking-[0.2em] text-[13px] font-black uppercase mb-4">
+              TECH STACK
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6" style={{ color: 'var(--text-primary)' }}>
+              My{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">
+                Skills
+              </span>
+            </h2>
+            <p style={{ color: 'var(--text-secondary)' }} className="text-base md:text-lg font-medium leading-relaxed max-w-2xl">
+              Technologies I use to architect, build and ship real-world software.
+            </p>
+          </div>
 
-      {/* Header */}
-      <div className="flex flex-col items-center text-center gap-3 mb-14 relative z-10 px-4">
-        <span style={{ color: '#6366f1', letterSpacing: '0.28em', fontSize: '0.72rem' }}
-          className="font-semibold uppercase">Tech Stack</span>
-        <h2 style={{ fontFamily: "'Inter',sans-serif" }}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
-          My <span style={{
-            backgroundImage: 'linear-gradient(90deg,#818cf8,#c084fc)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          }}>Skills</span>
-        </h2>
-        <p style={{ color: 'rgba(180,190,255,0.45)', fontSize: '0.8rem', marginTop: 4 }}>
-          Drag to explore · hover for details
-        </p>
-      </div>
+          {/* Right Column: Animated Counter Stats */}
+          <div className="lg:col-span-1 flex items-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="w-full flex items-start justify-center gap-8 lg:gap-10 p-6 md:p-8 rounded-2xl border border-black/5 dark:border-white/5"
+              style={{ backgroundColor: 'var(--bg-secondary)' }}
+            >
+              {STATS.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="flex flex-col items-center gap-1.5"
+                >
+                  <span className="text-2xl md:text-3xl font-black" style={{ color: 'var(--text-primary)' }}>
+                    {stat.number}
+                  </span>
+                  <span className="text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
 
-      {/* Globe wrapper — drag starts here */}
-      <div
-        onMouseDown={onMouseDown}
-        onTouchStart={onTouchStart}
-        style={{
-          position: 'relative',
-          width: SIZE, height: SIZE,
-          maxWidth: '100vw',
-          cursor: dragging.current ? 'grabbing' : 'grab',
-          touchAction: 'none',
-        }}
-      >
-        {/* SVG Globe */}
-        <svg
-          style={{
-            position: 'absolute', top: '50%', left: '50%',
-            transform: 'translate(-50%,-50%)', pointerEvents: 'none',
-          }}
-          width={RADIUS_PX * 2 + 4}
-          height={RADIUS_PX * 2 + 4}
-          viewBox={`0 0 ${RADIUS_PX * 2 + 4} ${RADIUS_PX * 2 + 4}`}
-        >
-          <defs>
-            <clipPath id="globe-clip">
-              <circle cx={RADIUS_PX + 2} cy={RADIUS_PX + 2} r={RADIUS_PX} />
-            </clipPath>
-            <radialGradient id="globe-grad" cx="42%" cy="38%" r="65%">
-              <stop offset="0%"   stopColor="#1e246c" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#060818" stopOpacity="0.97" />
-            </radialGradient>
-            <filter id="rim-glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-            </filter>
-          </defs>
+        {/* 2-Column Grid for Domain Cards */}
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
+          {DOMAINS.map((domain, i) => (
+            <motion.div
+              key={domain.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="relative p-8 md:p-10 rounded-2xl border-t-2 border-[#0ea5e9] border-x border-b border-x-transparent border-b-transparent shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)] transition-colors duration-300"
+              style={{ backgroundColor: 'var(--domain-card-bg)' }}
+            >
+              {/* Card Header */}
+              <div className="flex items-center gap-5 mb-8">
+                <div 
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: domain.iconBg, color: domain.iconColor }}
+                >
+                  {domain.icon}
+                </div>
+                <div>
+                  <h4 className="text-[11px] font-bold tracking-[0.2em] uppercase mb-1" style={{ color: 'var(--text-secondary)' }}>
+                    DOMAIN
+                  </h4>
+                  <h3 className="text-[18px] font-bold" style={{ color: 'var(--domain-card-text)' }}>
+                    {domain.title}
+                  </h3>
+                </div>
+              </div>
 
-          {/* Base sphere */}
-          <circle cx={RADIUS_PX + 2} cy={RADIUS_PX + 2} r={RADIUS_PX} fill="url(#globe-grad)" />
+              {/* Skills 2-Column List */}
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                {domain.skills.map(skill => (
+                  <li key={skill} className="flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0ea5e9] shrink-0"></span>
+                    <span className="text-[14px] font-medium" style={{ color: 'var(--domain-card-text)' }}>
+                      {skill}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
 
-          {/* Dot grid */}
-          <g clipPath="url(#globe-clip)">
-            {Array.from({ length: 24 }, (_, row) =>
-              Array.from({ length: 24 }, (_, col) => (
-                <circle
-                  key={`${row}-${col}`}
-                  cx={(col + 0.5) * (RADIUS_PX * 2 / 24) + 2}
-                  cy={(row + 0.5) * (RADIUS_PX * 2 / 24) + 2}
-                  r={1.1} fill="#4f5fd8" fillOpacity={0.22}
-                />
-              ))
-            )}
-          </g>
-
-          {/* Rim highlight */}
-          <circle
-            cx={RADIUS_PX + 2} cy={RADIUS_PX + 2} r={RADIUS_PX - 1}
-            fill="none" stroke="rgba(130,140,255,0.18)" strokeWidth={2}
-            filter="url(#rim-glow)"
-          />
-        </svg>
-
-        {/* Icons */}
-        {sorted.map((tech) => {
-          if (!tech.x && tech.x !== 0) return null;
-          const { opacity, scale } = depthToStyle(tech.depth);
-          const cx = (RADIUS_PX + ICON_SIZE) + tech.x;
-          const cy = (RADIUS_PX + ICON_SIZE) + tech.y;
-          const isFront = tech.depth > -RADIUS_PX * 0.2;
-
-          return (
-            <TechIcon
-              key={tech.name}
-              name={tech.name}
-              src={tech.src}
-              cx={cx} cy={cy}
-              size={ICON_SIZE}
-              opacity={opacity}
-              scale={scale}
-              isFront={isFront}
-            />
-          );
-        })}
       </div>
     </section>
-  );
-}
-
-/* ─── Single icon node ────────────────────────────────────────────────── */
-interface TechIconProps {
-  name: string; src: string;
-  cx: number; cy: number;
-  size: number; opacity: number; scale: number;
-  isFront: boolean;
-}
-
-function TechIcon({ name, src, cx, cy, size, opacity, scale, isFront }: TechIconProps) {
-  const [hovered, setHovered] = useState(false);
-
-  const finalScale   = hovered ? scale * 1.25 : scale;
-  const finalOpacity = hovered ? 1 : opacity;
-
-  return (
-    <div
-      onMouseEnter={() => isFront && setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: 'absolute',
-        left: cx, top: cy,
-        transform: `translate(-50%,-50%) scale(${finalScale})`,
-        opacity: finalOpacity,
-        transition: 'transform 0.2s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s ease',
-        zIndex: Math.round(opacity * 100),
-        pointerEvents: isFront ? 'auto' : 'none',
-        cursor: isFront ? 'default' : 'none',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
-        userSelect: 'none',
-      }}
-    >
-      {/* Icon image */}
-      <div style={{
-        width: size, height: size,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        filter: hovered
-          ? 'drop-shadow(0 0 14px rgba(200,210,255,0.8))'
-          : 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))',
-        transition: 'filter 0.25s ease',
-      }}>
-        <img
-          src={src} alt={name} draggable={false}
-          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-        />
-      </div>
-
-      {/* Label */}
-      <span style={{
-        fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em',
-        textTransform: 'uppercase',
-        color: hovered ? '#e0e7ff' : 'rgba(200,210,255,0.5)',
-        transition: 'color 0.25s ease',
-        whiteSpace: 'nowrap',
-        fontFamily: "'Inter',sans-serif",
-      }}>
-        {name}
-      </span>
-    </div>
   );
 }

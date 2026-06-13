@@ -79,7 +79,7 @@ const DOMAINS = [
 const STATS = [
   { number: '25+', label: 'Technologies' },
   { number: '8', label: 'Domains' },
-  { number: '9', label: 'Projects Built' },
+  { number: '10+', label: 'Projects Built' },
 ];
 
 export default function SkillsSphere() {
@@ -116,22 +116,30 @@ export default function SkillsSphere() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="w-full flex items-start justify-center gap-8 lg:gap-10 p-6 md:p-8 rounded-2xl border border-black/5 dark:border-white/5"
-              style={{ backgroundColor: 'var(--bg-secondary)' }}
+              className="w-full flex items-start justify-center gap-0 rounded-2xl overflow-hidden"
+              style={{
+                background: 'linear-gradient(270deg, #f472b6, #8B5CF6, #7C3AED, #f472b6)',
+                backgroundSize: '400% 400%',
+                animation: 'glow-rotate 4s ease infinite',
+                padding: '1.5px',
+              }}
             >
-              {STATS.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex flex-col items-center gap-1.5"
-                >
-                  <span className="text-2xl md:text-3xl font-black" style={{ color: 'var(--text-primary)' }}>
-                    {stat.number}
-                  </span>
-                  <span className="text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
+              <div className="w-full flex items-start justify-center rounded-[14px] overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+                {STATS.map((stat, i) => (
+                  <div
+                    key={stat.label}
+                    className="flex-1 flex flex-col items-center gap-1.5 py-6 md:py-7"
+                    style={{ borderRight: i < STATS.length - 1 ? '1px solid var(--border-color)' : 'none' }}
+                  >
+                    <span className="text-3xl md:text-4xl font-black" style={{ color: 'var(--text-primary)' }}>
+                      {stat.number}
+                    </span>
+                    <span className="text-[9px] font-bold tracking-[0.18em] uppercase whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import ReplicaHero from './components/ReplicaHero';
 import AboutBento from './components/AboutBento';
 import FeaturedProjects from './components/FeaturedProjects';
-import SkillsSphere from './components/SkillsSphere';
 import ExploreFooter from './components/ExploreFooter';
 import AchievementsPage from './components/AchievementsPage';
 import MyLinksPage from './components/MyLinksPage';
@@ -86,7 +85,6 @@ function App() {
             <ReplicaHero />
             <AboutBento />
             <FeaturedProjects />
-            <SkillsSphere />
             <ExploreFooter onNavigate={setCurrentPage} />
           </>
         )}

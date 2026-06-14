@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChatUI from './ChatUI';
-
+import heroImg from '../assets/pawan1stpage.jpeg';
 export default function ReplicaHero() {
   const [showEmail, setShowEmail] = useState(false);
 
@@ -81,7 +81,7 @@ export default function ReplicaHero() {
                 View My Work
               </a>
               <a
-                href="/resume.pdf"
+                href="/Resume_FullStack_Pawan.pdf"
                 download
                 className="px-7 py-3 rounded-xl border border-slate-300 dark:border-white/15 text-slate-700 dark:text-slate-200 font-semibold text-sm tracking-wide hover:bg-slate-100 dark:hover:bg-white/10 transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5"
               >
@@ -166,35 +166,17 @@ export default function ReplicaHero() {
             <div className="relative">
               <div className="glow-border">
                 <div
-                  className="w-72 h-72 sm:w-80 sm:h-80 flex flex-col items-center justify-center gap-3"
+                  className="w-72 h-72 sm:w-80 sm:h-80 flex flex-col items-center justify-center overflow-hidden"
                   style={{
                     borderRadius: '20px',
                     background: 'linear-gradient(160deg, #161b2e 0%, #0d0d1a 100%)',
                   }}
                 >
-                  {/* PB initials circle */}
-                  <div
-                    className="w-28 h-28 rounded-full flex items-center justify-center"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(244,114,182,0.15) 100%)',
-                      border: '1px solid rgba(139,92,246,0.35)'
-                    }}
-                  >
-                    <span
-                      className="text-5xl font-black tracking-tight"
-                      style={{
-                        background: 'linear-gradient(135deg, #f472b6, #8B5CF6)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent'
-                      }}
-                    >
-                      PB
-                    </span>
-                  </div>
-                  <p className="text-[10px] font-semibold tracking-widest uppercase"
-                    style={{ color: 'rgba(255,255,255,0.2)' }}>
-                    Photo coming soon
-                  </p>
+                  <img
+                    src={heroImg}
+                    alt="Pawan Bhandari"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
 

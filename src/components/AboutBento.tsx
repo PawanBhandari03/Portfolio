@@ -1,5 +1,29 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import pawanImg from '../assets/pawan.jpeg';
+import craftImg from '../assets/craft.jpeg';
+import puneImg from '../assets/pune.jpeg';
+import mindsetImg from '../assets/Mindset.jpeg';
+import universityImg from '../assets/university.jpeg';
+
+type HoveredSection = 'default' | 'name' | 'craft' | 'location' | 'mindset' | 'university';
+
+const galleryImages = [
+  { src: '/run.jpeg', caption: 'RUNNING' },
+  { src: '/Gaming.jpeg', caption: 'GAMING' },
+  { src: '/food.jpeg', caption: 'COOKING' },
+  { src: '/Hike.jpeg', caption: 'HIKING' },
+  { src: '/gym.jpeg', caption: 'GYM' },
+];
+
+const sectionImageMap: Record<HoveredSection, string> = {
+  default: pawanImg,
+  name: pawanImg,
+  craft: craftImg,
+  location: puneImg,
+  mindset: mindsetImg,
+  university: universityImg,
+};
 
 const techStackItems = [
   { name: 'Java',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg' },
@@ -35,6 +59,22 @@ const HOVER_CARDS = [
 
 export default function AboutBento() {
   const [hoveredCard, setHoveredCard] = useState<number>(1);
+  const [hoveredSection, setHoveredSection] = useState<HoveredSection>('default');
+  const [galleryIndex, setGalleryIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const goNext = useCallback(() => {
+    setGalleryIndex((prev) => (prev + 1) % galleryImages.length);
+  }, []);
+
+  // Auto-rotate every 3 seconds, pause on hover
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      goNext();
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [goNext, isPaused]);
 
   return (
     <section className="w-full max-w-6xl mx-auto py-16 px-6 relative z-10">
@@ -45,6 +85,8 @@ export default function AboutBento() {
           className="glass-card flex flex-col items-center justify-center p-8 text-center h-[200px]"
           initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }} transition={{ duration: 0.5 }}
+          onMouseEnter={() => setHoveredSection('name')}
+          onMouseLeave={() => setHoveredSection('default')}
         >
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-widest uppercase leading-tight" style={{ color: 'var(--text-primary)' }}>
             Pawan<br />Bhandari
@@ -57,6 +99,8 @@ export default function AboutBento() {
           className="glass-card p-4 md:p-6 md:col-span-2 flex flex-col justify-center min-h-[220px] md:min-h-[260px] overflow-visible relative group"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+          onMouseEnter={() => setHoveredSection('university')}
+          onMouseLeave={() => setHoveredSection('default')}
         >
           <div
             className="flex justify-center items-center w-full h-full mt-4 md:mt-0"
@@ -101,9 +145,11 @@ export default function AboutBento() {
 
         {/* ── Mindset ── */}
         <motion.div
-          className="glass-card md:col-span-1 md:row-span-2 p-8 flex flex-col gap-6 min-h-[480px]"
+          className="glass-card md:col-span-1 md:row-span-2 p-8 flex flex-col gap-6 min-h-[480px] overflow-hidden"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+          onMouseEnter={() => setHoveredSection('mindset')}
+          onMouseLeave={() => setHoveredSection('default')}
         >
           <div>
             <h3 className="text-3xl font-black tracking-tight" style={{ color: 'var(--text-primary)' }}>Mindset</h3>
@@ -115,21 +161,99 @@ export default function AboutBento() {
             <strong style={{ color: 'var(--text-primary)' }}>discipline and focus</strong> I need to grow.
           </p>
 
-          {/* Hobby Photo Placeholder */}
-          <div className="relative w-full flex-1 min-h-[200px] rounded-2xl overflow-hidden flex items-center justify-center"
-            style={{
-              background: 'linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(244,114,182,0.08) 50%, rgba(13,13,26,0.15) 100%)',
-              border: '1px solid var(--border-color)'
-            }}
+          {/* Stacked Card Carousel */}
+          <div
+            className="relative flex-1 min-h-[280px] flex flex-col items-center justify-center"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="flex flex-col items-center gap-2 text-center">
-              {/* Camera icon */}
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-10 h-10" style={{ color: 'var(--text-secondary)' }}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
-              </svg>
-              <p className="text-xs font-medium tracking-widest uppercase" style={{ color: 'var(--text-secondary)' }}>Photo coming soon</p>
+            {/* Card stack container */}
+            <div className="relative" style={{ width: '200px', height: '260px' }}>
+              {galleryImages.map((img, i) => {
+                const total = galleryImages.length;
+                // Calculate position relative to active card (circular)
+                let offset = i - galleryIndex;
+                if (offset > Math.floor(total / 2)) offset -= total;
+                if (offset < -Math.floor(total / 2)) offset += total;
+
+                const isActive = offset === 0;
+                const absOffset = Math.abs(offset);
+
+                // Coverflow style: cards are shifted left/right
+                const xShift = `${offset * 65}%`;
+                const yShift = 0;
+                const rotation = 0;
+                const cardScale = isActive ? 1 : 0.75;
+
+                return (
+                  <motion.div
+                    key={i}
+                    className="absolute inset-0 cursor-pointer"
+                    style={{
+                      width: '200px',
+                      height: '260px',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                    }}
+                    animate={{
+                      x: xShift,
+                      y: yShift,
+                      rotate: rotation,
+                      scale: cardScale,
+                      zIndex: isActive ? 20 : 10 - absOffset,
+                      opacity: absOffset > 1 ? 0 : 1, // Only show front and immediate left/right
+                      filter: isActive ? 'blur(0px) brightness(1)' : `blur(1.5px) brightness(0.6)`,
+                    }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                    onClick={() => {
+                      if (offset > 0) goNext();
+                      else if (offset < 0) {
+                        // We need a goPrev if we want them to click left to go left
+                        // For now we just goNext on any click, but ideally we add goPrev back
+                        // Actually the previous goNext logic didn't care about direction, let's fix it
+                        setGalleryIndex((prev) => (prev + offset + total) % total);
+                      } else {
+                        setGalleryIndex((prev) => (prev + 1) % total);
+                      }
+                    }}
+                  >
+                    {/* Image */}
+                    <img
+                      src={img.src}
+                      alt={img.caption}
+                      className="w-full h-full object-cover"
+                      style={{ borderRadius: '16px' }}
+                    />
+
+                    {/* Gradient + caption overlay */}
+                    <div
+                      className="absolute inset-0 flex items-end justify-center"
+                      style={{ borderRadius: '16px' }}
+                    >
+                      <div className="w-full bg-gradient-to-t from-black/80 via-black/30 to-transparent pt-10 pb-4 px-3">
+                        <p className="text-white text-sm font-extrabold tracking-[0.2em] uppercase text-center">
+                          {img.caption}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Glowing purple border for active card */}
+                    {isActive && (
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                          borderRadius: '16px',
+                          border: '2px solid rgba(139, 92, 246, 0.7)',
+                          boxShadow: '0 0 20px rgba(139, 92, 246, 0.4), inset 0 0 20px rgba(139, 92, 246, 0.05)',
+                        }}
+                      />
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
+
+
           </div>
 
           <p className="text-sm tracking-wide" style={{ color: 'var(--text-secondary)' }}>
@@ -151,7 +275,7 @@ export default function AboutBento() {
           >
             {/* Animated glow border */}
             <div
-              className="absolute inset-0 rounded-[32px] pointer-events-none"
+              className="absolute inset-0 rounded-[32px] pointer-events-none z-10"
               style={{
                 background: 'linear-gradient(270deg, #f472b6, #8B5CF6, #7C3AED, #f472b6)',
                 backgroundSize: '400% 400%',
@@ -163,28 +287,19 @@ export default function AboutBento() {
               }}
             />
 
-            {/* PB initials placeholder */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <div
-                className="w-24 h-24 rounded-full flex items-center justify-center"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(244,114,182,0.15) 100%)',
-                  border: '1px solid rgba(139,92,246,0.3)'
-                }}
-              >
-                <span
-                  className="text-4xl font-black tracking-tight"
-                  style={{
-                    background: 'linear-gradient(135deg, #f472b6, #8B5CF6)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}
-                >
-                  PB
-                </span>
-              </div>
-              <p className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: 'var(--text-secondary)' }}>Photo coming soon</p>
-            </div>
+            {/* Dynamic hover image */}
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={hoveredSection}
+                src={sectionImageMap[hoveredSection]}
+                alt="Pawan Bhandari"
+                className="absolute inset-0 w-full h-full object-cover rounded-[32px]"
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35, ease: 'easeInOut' }}
+              />
+            </AnimatePresence>
           </motion.div>
 
           {/* Location Card */}
@@ -193,6 +308,8 @@ export default function AboutBento() {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }}
             style={{ backgroundColor: 'var(--card-bg)' }}
+            onMouseEnter={() => setHoveredSection('location')}
+            onMouseLeave={() => setHoveredSection('default')}
           >
             {/* World Map Background */}
             <div
@@ -231,6 +348,8 @@ export default function AboutBento() {
           className="glass-card md:col-span-1 md:row-span-2 p-8 flex flex-col gap-6 min-h-[480px] overflow-hidden"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.5 }}
+          onMouseEnter={() => setHoveredSection('craft')}
+          onMouseLeave={() => setHoveredSection('default')}
         >
           <div>
             <h3 className="text-3xl font-black tracking-tight" style={{ color: 'var(--text-primary)' }}>Craft</h3>

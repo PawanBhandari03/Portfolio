@@ -53,7 +53,7 @@ export default function ReplicaHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
             >
-              Java Backend Developer
+              Full Stack Developer
             </motion.p>
 
             {/* Bio */}
@@ -63,8 +63,7 @@ export default function ReplicaHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              I build scalable backends, REST APIs, and full-stack apps.
-              Focused on clean architecture and real-world impact.
+              Computer Engineering student with a builder's mindset. I build scalable backends, ship full-stack apps, and train ML models — competing in hackathons and never stopping.
             </motion.p>
 
             {/* CTA Buttons */}

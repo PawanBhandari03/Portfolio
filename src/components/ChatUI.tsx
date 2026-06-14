@@ -11,7 +11,7 @@ Name: Pawan Bhandari
 Age: 20 Years
 Location: Pune, India
 Education: Computer Engineering at BSIOTR, JSPM
-Role: Java Backend Developer
+Role: Full Stack Developer
 Skills: Java, Spring Boot, React, Node.js, PostgreSQL, MySQL, Docker, REST APIs, Python, JavaScript
 Projects:
 - EcoBounty: Gamified sustainability platform (React, Node.js, Supabase)

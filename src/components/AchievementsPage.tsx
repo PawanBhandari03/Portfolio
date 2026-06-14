@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-
+import pandoraImg from '../assets/Pandora.png';
 // Icons
 const ArrowLeft = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
@@ -62,72 +62,73 @@ export default function AchievementsPage({ onBack }: Props) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col md:flex-row gap-8 rounded-[32px] overflow-hidden shadow-2xl backdrop-blur-md"
-            style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
+            className="flex flex-col md:flex-row items-stretch gap-6 md:gap-10 rounded-[32px] p-6 md:p-8 shadow-2xl backdrop-blur-md relative"
+            style={{ backgroundColor: 'var(--card-bg)', border: '1px solid rgba(255,215,0,0.3)', boxShadow: '0 0 20px rgba(255,215,0,0.3)' }}
         >
-            <div className="md:w-3/5 p-2 md:p-4 rounded-t-[32px] md:rounded-l-[32px] md:rounded-tr-none flex items-center justify-center min-h-[300px]" style={{ backgroundColor: 'var(--image-placeholder)' }}>
-                <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>Image Placeholder</span>
+            <div className="md:w-1/2 flex items-center justify-center rounded-[24px] overflow-hidden shadow-inner" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+                <img src="/Techathon.jpeg" alt="Trophy" className="w-full h-[300px] md:h-[450px] object-cover hover:scale-105 transition-transform duration-700 ease-in-out" />
             </div>
-            <div className="md:w-2/5 p-8 md:p-12 flex flex-col justify-center">
-                <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Achievement Title</h2>
-                <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
-                    Achievement description goes here. This section is ready for you to add your details later.
+            <div className="md:w-1/2 py-4 md:py-8 flex flex-col justify-center">
+                <h2 className="text-3xl md:text-4xl font-extrabold mb-5 leading-tight flex flex-wrap items-center gap-3" style={{ color: 'var(--text-primary)' }}>Best Solution Award — Techathon 3.0</h2>
+                <p className="text-base md:text-lg leading-relaxed mb-8 opacity-90" style={{ color: 'var(--text-secondary)' }}>
+                    Awarded Best Solution for Given Problem Statement at Techathon 3.0 (2026), organized by Innovation Foundation. Built a scalable tech solution under competition pressure with team Parastec. Received trophy and ₹10,000 cash prize for delivering the most innovative solution.
                 </p>
-                <div className="mt-auto">
-                    <span className="inline-block px-5 py-2.5 rounded-full text-sm font-semibold border" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
-                        Date / Info
+                <div className="mt-auto flex">
+                    <span className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-sm font-bold border shadow-sm tracking-wide" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
+                        Techathon 3.0 · 2026 · ₹10,000 Prize
                     </span>
                 </div>
             </div>
         </motion.div>
 
-        {/* 2 Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {/* Card 2 */}
+
+        {/* Grid for Vertical Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
+            {/* Card 2 - Vertical Card (Pandora) */}
             <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex flex-col rounded-[32px] overflow-hidden backdrop-blur-md shadow-xl"
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-col rounded-[32px] shadow-2xl backdrop-blur-md overflow-hidden relative w-full"
                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
-                <div className="p-4 md:p-6 h-[300px] md:h-[400px] flex items-center justify-center flex-col" style={{ backgroundColor: 'var(--image-placeholder)' }}>
-                     <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>Image Placeholder</span>
+                <div className="flex items-center justify-center w-full min-h-[300px] md:min-h-[500px]" style={{ backgroundColor: '#1a1a2e' }}>
+                    <img 
+                        src={pandoraImg} 
+                        alt="Pandora Hackathon" 
+                        className="hover:scale-105 transition-transform duration-700 ease-in-out"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain'
+                        }}
+                    />
                 </div>
-                <div className="p-6 md:p-8 flex items-center justify-between border-t" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
-                    <div>
-                        <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Achievement Title</h3>
-                        <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Subtitle / Date</p>
-                    </div>
-                    <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center shrink-0">
-                        <TrophyIcon />
-                    </div>
+                <div style={{ padding: '20px' }} className="flex flex-col justify-center items-center">
+                    <h2 className="text-2xl font-bold text-white mb-3 text-center">Pandora Hackathon — Best Solution</h2>
+                    <p className="text-sm leading-relaxed opacity-90 text-center" style={{ color: 'var(--text-secondary)' }}>
+                        Awarded Certificate of Appreciation for Best Solution in AI For Smart Cities theme at Pandora Hackathon, BSIOTR JSPM <br /> · Team Cyberpunks · Feb 2026
+                    </p>
                 </div>
             </motion.div>
 
-            {/* Card 3 */}
+            {/* Card 3 - Default Placeholder Card */}
             <motion.div 
-                 initial={{ opacity: 0, y: 30 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.6, delay: 0.3 }}
-                 className="flex flex-col rounded-[32px] overflow-hidden backdrop-blur-md shadow-xl"
-                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex flex-col rounded-[32px] shadow-2xl backdrop-blur-md overflow-hidden relative w-full"
+                style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
-                <div className="p-4 md:p-6 h-[300px] md:h-[400px] flex items-center justify-center flex-col" style={{ backgroundColor: 'var(--image-placeholder)' }}>
-                     <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>Image Placeholder</span>
+                <div className="flex items-center justify-center w-full min-h-[300px] md:min-h-[500px]" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+                    <span className="text-sm font-bold uppercase tracking-widest opacity-60" style={{ color: 'var(--text-secondary)' }}>Image Placeholder</span>
                 </div>
-                <div className="p-6 md:p-8 flex items-center justify-between border-t" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
-                    <div>
-                        <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Achievement Title</h3>
-                        <p className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Subtitle / Date</p>
-                    </div>
-                    <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
-                        <MedalIcon />
-                    </div>
+                <div style={{ padding: '20px' }} className="flex justify-center items-center">
+                    <h2 className="text-2xl md:text-3xl font-bold m-0 text-center" style={{ color: 'var(--text-primary)' }}>Achievement Title</h2>
                 </div>
             </motion.div>
-
         </div>
+
       </div>
     </main>
   );

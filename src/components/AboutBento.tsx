@@ -43,17 +43,17 @@ const HOVER_CARDS = [
   {
     title: 'UNIVERSITY',
     align: 'text-left',
-    desc: 'Pursuing Computer Engineering (3rd Year) at BSIOTR, JSPM. Focused on Data Structures, Software Development, and problem-solving. Continuously building real-world projects using Java, Spring Boot, and modern web technologies.'
+    desc: 'Pursuing Computer Engineering (4th Year) at BSIOTR, JSPM. Passionate about Data Structures, System Design, and Software Development. Constantly shipping real-world projects using Java, Spring Boot, React, and modern web technologies.'
   },
   {
     title: 'COMPETITIONS',
     align: 'text-center',
-    desc: 'Winner of Techathon 3.0, showcasing innovative problem-solving and teamwork. Actively participate in hackathons and coding competitions, building practical and scalable tech solutions.'
+    desc: '2x Hackathon Winner — Techathon 3.0 & Smart India Hackathon. Known for rapid prototyping, innovative problem-solving, and building scalable solutions under pressure. Competitive coder with a team-first mindset.'
   },
   {
     title: 'VISION',
     align: 'text-right',
-    desc: 'My goal is to secure an SDE role at a top product-based company. Currently deepening expertise in system design, DSA, and open source contributions to get there.'
+    desc: 'Targeting SDE roles at top product-based companies. Sharpening skills in System Design, DSA, and full-stack development — with real projects, open source contributions, and zero shortcuts.'
   }
 ];
 
@@ -91,7 +91,7 @@ export default function AboutBento() {
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-widest uppercase leading-tight" style={{ color: 'var(--text-primary)' }}>
             Pawan<br />Bhandari
           </h2>
-          <p className="text-xs tracking-[0.2em] mt-4 uppercase font-semibold" style={{ color: 'var(--text-secondary)' }}>Java Backend Developer</p>
+          <p className="text-xs tracking-[0.2em] mt-4 uppercase font-semibold" style={{ color: 'var(--text-secondary)' }}>Full Stack Developer</p>
         </motion.div>
 
         {/* ── Hover Cards ── */}

@@ -70,7 +70,7 @@ export default function MyLinksPage({ onBack }: Props) {
   useEffect(() => {
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
     if (publicKey) {
-      emailjs.init(publicKey);
+      emailjs.init({ publicKey: publicKey });
     }
   }, []);
 
@@ -102,15 +102,15 @@ export default function MyLinksPage({ onBack }: Props) {
   
     try {
       const result = await emailjs.send(
-        'service_hlldera',
-        'w65tmbj',
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           name: name,
           email: email,
           subject: subject,
           message: message
         },
-        'V1Ss68m4epdW401oY'
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
       )
       console.log('Success:', result)
       setSuccess(true)
@@ -118,9 +118,9 @@ export default function MyLinksPage({ onBack }: Props) {
       setEmail('')
       setSubject('')
       setMessage('')
-    } catch (error) {
+    } catch (error: any) {
       console.error('EmailJS Error:', error)
-      setError('Failed to send. Please try again.')
+      setError(error?.text || error?.message || 'Failed to send. Please try again.')
     } finally {
       setIsLoading(false)
     }

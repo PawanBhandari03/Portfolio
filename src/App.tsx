@@ -85,8 +85,8 @@ function App() {
           <>
             <ReplicaHero />
             <AboutBento />
-            <Skills />
             <FeaturedProjects />
+            <Skills />
             <ExploreFooter onNavigate={setCurrentPage} />
           </>
         )}

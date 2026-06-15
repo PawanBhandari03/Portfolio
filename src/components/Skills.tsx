@@ -38,42 +38,102 @@ const WrenchIcon = () => (
   </svg>
 );
 
+const deviconBase = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/";
+
 const DOMAINS = [
   {
     category: 'Languages',
     iconBg: 'bg-blue-500/10 text-blue-500',
+    pillHover: 'hover:border-blue-500/50 hover:bg-black/5 dark:hover:bg-white/10',
     icon: <CodeIcon />,
-    skills: ['Java', 'JavaScript', 'TypeScript', 'Python', 'SQL', 'HTML/CSS']
+    skills: [
+      { name: 'Java', icon: 'java/java-original.svg' },
+      { name: 'JavaScript', icon: 'javascript/javascript-original.svg' },
+      { name: 'TypeScript', icon: 'typescript/typescript-original.svg' },
+      { name: 'Python', icon: 'python/python-original.svg' },
+      { name: 'SQL', icon: 'mysql/mysql-original.svg' },
+      { name: 'HTML/CSS', icon: 'html5/html5-original.svg' }
+    ]
   },
   {
     category: 'Full-Stack',
     iconBg: 'bg-purple-500/10 text-purple-500',
+    pillHover: 'hover:border-purple-500/50 hover:bg-black/5 dark:hover:bg-white/10',
     icon: <FullStackIcon />,
-    skills: ['Spring Boot', 'React', 'Node.js', 'Express.js', 'REST APIs', 'JWT/Auth', 'Tailwind CSS', 'Next.js']
+    skills: [
+      { name: 'Spring Boot', icon: 'spring/spring-original.svg' },
+      { name: 'React', icon: 'react/react-original.svg' },
+      { name: 'Node.js', icon: 'nodejs/nodejs-original.svg' },
+      { name: 'Express.js', icon: 'express/express-original.svg' },
+      { name: 'REST APIs' },
+      { name: 'GraphQL', icon: 'graphql/graphql-plain.svg' },
+      { name: 'JWT/Auth' },
+      { name: 'Tailwind CSS', icon: 'tailwindcss/tailwindcss-original.svg' },
+      { name: 'Next.js', icon: 'nextjs/nextjs-original.svg' }
+    ]
   },
   {
     category: 'Database & DevOps',
     iconBg: 'bg-green-500/10 text-green-500',
+    pillHover: 'hover:border-green-500/50 hover:bg-black/5 dark:hover:bg-white/10',
     icon: <DatabaseIcon />,
-    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Docker', 'Git', 'Linux', 'CI/CD', 'Supabase']
+    skills: [
+      { name: 'PostgreSQL', icon: 'postgresql/postgresql-original.svg' },
+      { name: 'MySQL', icon: 'mysql/mysql-original.svg' },
+      { name: 'MongoDB', icon: 'mongodb/mongodb-original.svg' },
+      { name: 'Docker', icon: 'docker/docker-original.svg' },
+      { name: 'Git', icon: 'git/git-original.svg' },
+      { name: 'Linux', icon: 'linux/linux-original.svg' },
+      { name: 'CI/CD' },
+      { name: 'Supabase', icon: 'supabase/supabase-original.svg' }
+    ]
   },
   {
     category: 'AI/ML & Tools',
     iconBg: 'bg-orange-500/10 text-orange-500',
+    pillHover: 'hover:border-orange-500/50 hover:bg-black/5 dark:hover:bg-white/10',
     icon: <AIIcon />,
-    skills: ['Python ML', 'OpenCV', 'CNN', 'Scikit-learn', 'Dataset Training', 'NumPy', 'Pandas', 'Matplotlib']
+    skills: [
+      { name: 'Python ML', icon: 'python/python-original.svg' },
+      { name: 'OpenCV', icon: 'opencv/opencv-original.svg' },
+      { name: 'CNN Models' },
+      { name: 'Scikit-learn', icon: 'scikitlearn/scikitlearn-original.svg' },
+      { name: 'Dataset Training' },
+      { name: 'NumPy', icon: 'numpy/numpy-original.svg' },
+      { name: 'Pandas', icon: 'pandas/pandas-original.svg' }
+    ]
   },
   {
     category: 'Java/Spring Boot',
     iconBg: 'bg-green-500/10 text-green-500',
+    pillHover: 'hover:border-green-500/50 hover:bg-black/5 dark:hover:bg-white/10',
     icon: <LeafIcon />,
-    skills: ['Spring Boot', 'Spring Security', 'Spring MVC', 'Hibernate/JPA', 'Maven', 'REST API Design', 'Microservices', 'Spring Data JPA']
+    skills: [
+      { name: 'Spring Boot', icon: 'spring/spring-original.svg' },
+      { name: 'Spring Security', icon: 'spring/spring-original.svg' },
+      { name: 'Spring MVC', icon: 'spring/spring-original.svg' },
+      { name: 'Hibernate/JPA' },
+      { name: 'Maven', icon: 'maven/maven-original.svg' },
+      { name: 'REST API Design' },
+      { name: 'Microservices' },
+      { name: 'Spring Data JPA' }
+    ]
   },
   {
     category: 'Tools & Workflow',
     iconBg: 'bg-blue-500/10 text-blue-500',
+    pillHover: 'hover:border-blue-500/50 hover:bg-black/5 dark:hover:bg-white/10',
     icon: <WrenchIcon />,
-    skills: ['Git & GitHub', 'Postman', 'VS Code', 'Redis', 'Docker Desktop', 'Linux Terminal', 'Figma', 'Swagger']
+    skills: [
+      { name: 'Git & GitHub', icon: 'github/github-original.svg' },
+      { name: 'Postman', icon: 'postman/postman-original.svg' },
+      { name: 'VS Code', icon: 'vscode/vscode-original.svg' },
+      { name: 'Redis', icon: 'redis/redis-original.svg' },
+      { name: 'Docker Desktop', icon: 'docker/docker-original.svg' },
+      { name: 'Linux Terminal', icon: 'linux/linux-original.svg' },
+      { name: 'Figma', icon: 'figma/figma-original.svg' },
+      { name: 'Swagger', icon: 'swagger/swagger-original.svg' }
+    ]
   }
 ];
 
@@ -136,13 +196,12 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="relative p-8 md:p-10 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+              className="relative p-8 md:p-10 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-[#f0f4ff] dark:bg-[#0d1117] hover:bg-white dark:hover:bg-[#1a1f2e]"
               style={{ 
-                backgroundColor: 'var(--domain-card-bg)',
                 borderTop: '2px solid #0ea5e9',
-                borderLeft: '1px solid transparent',
-                borderRight: '1px solid transparent',
-                borderBottom: '1px solid transparent',
+                borderLeft: '1px solid var(--border-color)',
+                borderRight: '1px solid var(--border-color)',
+                borderBottom: '1px solid var(--border-color)',
                 borderRadius: '16px',
                 boxShadow: '0 4px 30px rgba(0,0,0,0.05)'
               }}
@@ -162,17 +221,26 @@ export default function Skills() {
                 </div>
               </div>
 
-              {/* Skills List (2 column bullet layout with cyan dots) */}
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 mt-2">
+              {/* Skills List (Pill badges with Devicons) */}
+              <div className="flex flex-wrap gap-2 mt-2">
                 {domain.skills.map((skill) => (
-                  <li key={skill} className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
-                    <span className="text-[14px] md:text-[15px] font-medium leading-tight" style={{ color: 'var(--domain-card-text)' }}>
-                      {skill}
+                  <div 
+                    key={skill.name}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100/50 dark:bg-white/[0.06] transition-colors cursor-default ${domain.pillHover}`}
+                  >
+                    {skill.icon && (
+                      <img 
+                        src={`${deviconBase}${skill.icon}`} 
+                        alt={skill.name} 
+                        className="w-4 h-4 object-contain"
+                      />
+                    )}
+                    <span className="text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>
+                      {skill.name}
                     </span>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </motion.div>
           ))}
         </div>

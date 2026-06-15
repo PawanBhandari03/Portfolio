@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { db } from '../firebase';
-import { collection, addDoc, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
+import { collection, addDoc, onSnapshot, query, orderBy, limit, doc, deleteDoc } from 'firebase/firestore';
 
 // --- Icons ---
 const ArrowLeft = () => (
@@ -16,12 +16,19 @@ const SendIcon = () => (
   </svg>
 );
 
+const TrashIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+  </svg>
+);
+
 // --- Types ---
 interface Message {
   id: string;
   name: string;
   message: string;
   created_at: string;
+  isOwner?: boolean;
 }
 
 const AVATAR_COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f97316', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#14b8a6', '#a855f7'];
@@ -63,6 +70,7 @@ export default function GuestbookPage({ onBack }: Props) {
   const [posting, setPosting] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // Fetch initial messages + subscribe to real-time
   useEffect(() => {
@@ -81,6 +89,17 @@ export default function GuestbookPage({ onBack }: Props) {
         id: doc.id,
         ...doc.data()
       })) as Message[];
+
+      // Pin owner comments to top, then sort the rest by newest
+      newMessages.sort((a, b) => {
+        const aIsOwner = a.isOwner || a.name.toLowerCase() === 'pawan bhandari' || a.name.toLowerCase() === 'pb';
+        const bIsOwner = b.isOwner || b.name.toLowerCase() === 'pawan bhandari' || b.name.toLowerCase() === 'pb';
+        
+        if (aIsOwner && !bIsOwner) return -1;
+        if (!aIsOwner && bIsOwner) return 1;
+        
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      });
 
       setMessages(newMessages);
       setLoading(false);
@@ -110,7 +129,8 @@ export default function GuestbookPage({ onBack }: Props) {
       await addDoc(collection(db, 'guestbook'), {
         name: name.trim(),
         message: text.trim(),
-        created_at: new Date().toISOString()
+        created_at: new Date().toISOString(),
+        ...(isAdmin ? { isOwner: true } : {})
       });
 
       setName('');
@@ -126,14 +146,51 @@ export default function GuestbookPage({ onBack }: Props) {
     }
   }
 
+  async function handleDelete(id: string) {
+    if (!window.confirm("Are you sure you want to delete this message?")) return;
+    try {
+      await deleteDoc(doc(db, 'guestbook', id));
+    } catch (err) {
+      console.error("Failed to delete", err);
+      alert("Failed to delete message.");
+    }
+  }
+
+  function handleAdminLogin() {
+    if (isAdmin) {
+      setIsAdmin(false);
+      return;
+    }
+    const pwd = window.prompt('Enter Admin Password to enable deletion:');
+    if (pwd === import.meta.env.VITE_ADMIN_PASSWORD) {
+      setIsAdmin(true);
+    } else if (pwd !== null) {
+      alert('Incorrect password');
+    }
+  }
+
   return (
     <main className="w-full max-w-3xl mx-auto px-6 pt-8 pb-24 relative z-10 flex flex-col gap-10 min-h-screen">
 
-      {/* Back */}
-      <button onClick={onBack} className="self-start text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-2 text-sm font-medium transition-colors group">
-        <span className="group-hover:-translate-x-1 transition-transform"><ArrowLeft /></span>
-        Back to home
-      </button>
+      {/* Top Bar */}
+      <div className="flex justify-between items-center w-full mb-2">
+        <button onClick={onBack} className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-2 text-sm font-medium transition-colors group">
+          <span className="group-hover:-translate-x-1 transition-transform"><ArrowLeft /></span>
+          Back to home
+        </button>
+
+        <button
+          onClick={handleAdminLogin}
+          className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold transition-all shadow-sm ${
+            isAdmin 
+              ? 'bg-red-500 text-white shadow-red-500/20 ring-2 ring-red-500/50' 
+              : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-white/20'
+          }`}
+          title={isAdmin ? "Exit Owner Mode" : "Owner Login"}
+        >
+          {isAdmin ? '🔒' : 'PB'}
+        </button>
+      </div>
 
       {/* Hero */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="flex flex-col items-center text-center gap-4">
@@ -296,11 +353,25 @@ export default function GuestbookPage({ onBack }: Props) {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-2 flex-wrap">
-                  <span className="text-slate-900 dark:text-white font-bold text-sm">{msg.name}</span>
+                  <span className="text-slate-900 dark:text-white font-bold text-sm flex items-center gap-1.5">
+                    {msg.name}
+                    {(msg.isOwner || msg.name.toLowerCase() === 'pawan bhandari' || msg.name.toLowerCase() === 'pb') && (
+                      <span className="text-[10px] bg-violet-500/20 text-violet-400 px-1.5 py-0.5 rounded-md uppercase tracking-wider">Owner</span>
+                    )}
+                  </span>
                   <span className="text-slate-400 dark:text-slate-600 text-xs">{timeAgo(msg.created_at)}</span>
                 </div>
                 <p className="text-slate-600 dark:text-slate-300 text-sm mt-1 leading-relaxed break-words">{msg.message}</p>
               </div>
+              {isAdmin && (
+                <button 
+                  onClick={() => handleDelete(msg.id)}
+                  className="text-slate-400 hover:text-red-500 transition-colors ml-2 p-1"
+                  title="Delete message"
+                >
+                  <TrashIcon />
+                </button>
+              )}
             </motion.div>
           ))}
         </AnimatePresence>

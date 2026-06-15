@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ReplicaHero from './components/ReplicaHero';
 import AboutBento from './components/AboutBento';
+import Skills from './components/Skills';
 import FeaturedProjects from './components/FeaturedProjects';
 import ExploreFooter from './components/ExploreFooter';
 import AchievementsPage from './components/AchievementsPage';
@@ -52,7 +53,7 @@ function App() {
                   Skills
                 </a>
                 <a href="#other" className="text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors">
-                  Other
+                  Explore
                 </a>
               </div>
 
@@ -84,6 +85,7 @@ function App() {
           <>
             <ReplicaHero />
             <AboutBento />
+            <Skills />
             <FeaturedProjects />
             <ExploreFooter onNavigate={setCurrentPage} />
           </>

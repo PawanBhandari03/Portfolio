@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { supabase } from '../lib/supabase';
+import { db } from '../firebase';
+import { collection, addDoc, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
 
 // --- Icons ---
 const ArrowLeft = () => (
@@ -62,44 +63,37 @@ export default function GuestbookPage({ onBack }: Props) {
   const [posting, setPosting] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
-  const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null);
 
   // Fetch initial messages + subscribe to real-time
   useEffect(() => {
     let isMounted = true;
 
-    async function fetchMessages() {
-      const { data, error } = await supabase
-        .from('guestbook')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(100);
+    const q = query(
+      collection(db, 'guestbook'),
+      orderBy('created_at', 'desc'),
+      limit(100)
+    );
 
+    const unsubscribe = onSnapshot(q, (snapshot) => {
       if (!isMounted) return;
-      if (error) {
-        setError('Could not load messages. Please check your Supabase setup.');
-      } else {
-        setMessages(data ?? []);
-      }
+      
+      const newMessages = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Message[];
+
+      setMessages(newMessages);
       setLoading(false);
-    }
-
-    fetchMessages();
-
-    // Real-time subscription
-    const channel = supabase
-      .channel('guestbook-realtime')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'guestbook' }, payload => {
-        if (!isMounted) return;
-        setMessages(prev => [payload.new as Message, ...prev]);
-      })
-      .subscribe();
-
-    channelRef.current = channel;
+    }, (err) => {
+      if (!isMounted) return;
+      console.error('Firebase Error:', err);
+      setError('Could not load messages. Please check your Firebase setup and database rules.');
+      setLoading(false);
+    });
 
     return () => {
       isMounted = false;
-      if (channelRef.current) supabase.removeChannel(channelRef.current);
+      unsubscribe();
     };
   }, []);
 
@@ -111,23 +105,25 @@ export default function GuestbookPage({ onBack }: Props) {
     if (!valid) return;
 
     setPosting(true);
-    const { error } = await supabase.from('guestbook').insert({
-      name: name.trim(),
-      message: text.trim(),
-    });
+    
+    try {
+      await addDoc(collection(db, 'guestbook'), {
+        name: name.trim(),
+        message: text.trim(),
+        created_at: new Date().toISOString()
+      });
 
-    setPosting(false);
-
-    if (error) {
+      setName('');
+      setText('');
+      setShowForm(false);
+      setSuccessMsg('Your message has been pinned! 📌');
+      setTimeout(() => setSuccessMsg(''), 4000);
+    } catch (err) {
+      console.error('Firebase Insert Error:', err);
       setTextError('Failed to post. Please try again.');
-      return;
+    } finally {
+      setPosting(false);
     }
-
-    setName('');
-    setText('');
-    setShowForm(false);
-    setSuccessMsg('Your message has been pinned! 📌');
-    setTimeout(() => setSuccessMsg(''), 4000);
   }
 
   return (

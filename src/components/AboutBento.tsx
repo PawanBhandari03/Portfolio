@@ -106,14 +106,14 @@ export default function AboutBento() {
 
         {/* ── Hover Cards ── */}
         <motion.div
-          className="glass-card py-6 md:p-6 md:col-span-2 flex flex-col justify-center min-h-[220px] md:min-h-[260px] overflow-hidden md:overflow-visible relative group reveal w-full"
+          className="glass-card max-md:!bg-transparent max-md:!backdrop-blur-none max-md:!border-none max-md:!shadow-none max-md:p-0 md:p-6 md:col-span-2 flex flex-col justify-center min-h-[220px] md:min-h-[260px] relative group reveal w-full"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: 0.1 }}
           onMouseEnter={() => setHoveredSection('university')}
           onMouseLeave={() => setHoveredSection('default')}
         >
           <div
-            className="flex justify-center items-center w-full h-full mt-2 md:mt-0 relative"
+            className="flex justify-center items-center w-full h-full mt-0 relative"
             onMouseEnter={() => setIsCardsPaused(true)}
             onMouseLeave={() => { setIsCardsPaused(false); setHoveredCard(1); }}
           >
@@ -132,10 +132,10 @@ export default function AboutBento() {
                   }}
                   transition={{ duration: 0.4, ease: 'easeInOut' }}
                   className={`
-                    w-[260px] md:w-[280px] h-[160px] md:h-[180px]
-                    rounded-2xl p-5 md:p-6
-                    cursor-pointer relative flex-shrink-0 flex flex-col justify-center
-                    ${idx > 0 ? '-ml-24 md:-ml-28' : ''}
+                    w-full md:w-[280px] h-full md:h-[180px]
+                    rounded-[32px] md:rounded-2xl p-6 md:p-6
+                    cursor-pointer absolute md:relative flex-shrink-0 flex flex-col justify-center
+                    ${idx > 0 ? 'md:-ml-28' : ''}
                   `}
                   style={{
                     backgroundColor: 'var(--card-bg)',
@@ -154,22 +154,7 @@ export default function AboutBento() {
             })}
           </div>
 
-          {/* Dots & Label */}
-          <div className="flex flex-col items-center gap-4 mt-6">
-            <span className="md:hidden text-[10px] font-bold tracking-widest text-[#8B5CF6]">TAP TO EXPLORE</span>
-            <div className="flex gap-2">
-              {HOVER_CARDS.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setHoveredCard(idx)}
-                  className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
-                    hoveredCard === idx ? 'bg-[#8B5CF6]' : 'border border-[#8B5CF6]/50 bg-transparent'
-                  }`}
-                  aria-label={`Go to card ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
+
         </motion.div>
 
         {/* ── Mindset ── */}

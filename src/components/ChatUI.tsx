@@ -139,12 +139,12 @@ export default function ChatUI() {
       <div className="w-full flex flex-col rounded-[28px] overflow-hidden border border-white/10 bg-white/60 dark:bg-[#0a0f1e]/60 backdrop-blur-md shadow-lg dark:shadow-none h-[320px] md:h-auto md:min-h-[320px] md:max-h-[420px]">
 
       {/* Quick Reply Pills */}
-      <div className="flex-none flex gap-2 px-5 pt-5 flex-wrap">
+      <div className="flex-none flex justify-center gap-1.5 md:justify-start md:gap-2 px-2 md:px-5 pt-5 w-full">
         {QUICK_REPLIES.map(q => (
           <button
             key={q}
             onClick={() => handleSend(q)}
-            className="px-4 py-1.5 text-sm font-medium rounded-full border border-slate-300 dark:border-white/10 text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-white/5 hover:bg-[#8B5CF6] hover:text-white hover:border-transparent transition-all"
+            className="px-2.5 py-1.5 md:px-4 md:py-1.5 text-[11px] sm:text-xs md:text-sm font-medium rounded-full border border-slate-300 dark:border-white/10 text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-white/5 hover:bg-[#8B5CF6] hover:text-white hover:border-transparent transition-all whitespace-nowrap"
           >
             {q}
           </button>
@@ -160,7 +160,7 @@ export default function ChatUI() {
             animate={{ opacity: 1, y: 0 }}
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
-            <div className={`max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
+            <div className={`max-w-[92%] md:max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
               msg.role === 'user'
                 ? 'bg-[#8B5CF6] text-white'
                 : 'bg-slate-100 dark:bg-white/[0.06] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/[0.06]'

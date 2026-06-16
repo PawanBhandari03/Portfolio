@@ -16,7 +16,7 @@ export default function ReplicaHero() {
       <div className="hero-glow">
 
         {/* ── Two-column layout ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center relative z-10">
 
           {/* ════════ LEFT COLUMN ════════ */}
           <motion.div
@@ -171,7 +171,7 @@ export default function ReplicaHero() {
 
           {/* ════════ RIGHT COLUMN ════════ */}
           <motion.div
-            className="relative flex justify-center lg:justify-end"
+            className="relative flex justify-center md:justify-end"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}

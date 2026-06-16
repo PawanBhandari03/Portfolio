@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const MISTRAL_API_KEY = import.meta.env.VITE_MISTRAL_API_KEY;
@@ -51,7 +51,7 @@ function stripMarkdown(text: string): string {
 type Message = {
   id: string;
   role: 'bot' | 'user';
-  text: string | JSX.Element;
+  text: string | React.ReactNode;
 };
 
 const INITIAL_MESSAGE: Message = {
@@ -62,7 +62,7 @@ const INITIAL_MESSAGE: Message = {
 
 const QUICK_REPLIES = ['Work', 'About me', 'Skills', 'Contact'];
 
-const HARDCODED_RESPONSES: Record<string, string | JSX.Element> = {
+const HARDCODED_RESPONSES: Record<string, string | React.ReactNode> = {
   'Work': "I'm a Full Stack Developer experienced in building scalable applications. I've worked on projects like EcoBounty, a DevBlog Platform, and AgriGuard (an AI plant disease detection tool).",
   'About me': "I'm a 20-year-old Computer Engineering student at BSIOTR, JSPM in Pune, India. I'm passionate about problem-solving, Hackathons, and building real-world solutions!",
   'Skills': "My main stack includes Java, Spring Boot, React, Node.js, PostgreSQL, MySQL, and Docker. I'm also comfortable with Python, REST APIs, and modern frontend tools.",

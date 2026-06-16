@@ -213,7 +213,7 @@ export default function Skills() {
         </div>
 
         {/* DOMAIN CARDS GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {DOMAINS.map((domain, idx) => (
             <motion.div
               key={domain.category}

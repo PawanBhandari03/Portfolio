@@ -51,7 +51,7 @@ function stripMarkdown(text: string): string {
 type Message = {
   id: string;
   role: 'bot' | 'user';
-  text: string;
+  text: string | JSX.Element;
 };
 
 const INITIAL_MESSAGE: Message = {
@@ -62,11 +62,18 @@ const INITIAL_MESSAGE: Message = {
 
 const QUICK_REPLIES = ['Work', 'About me', 'Skills', 'Contact'];
 
-const HARDCODED_RESPONSES: Record<string, string> = {
+const HARDCODED_RESPONSES: Record<string, string | JSX.Element> = {
   'Work': "I'm a Full Stack Developer experienced in building scalable applications. I've worked on projects like EcoBounty, a DevBlog Platform, and AgriGuard (an AI plant disease detection tool).",
   'About me': "I'm a 20-year-old Computer Engineering student at BSIOTR, JSPM in Pune, India. I'm passionate about problem-solving, Hackathons, and building real-world solutions!",
   'Skills': "My main stack includes Java, Spring Boot, React, Node.js, PostgreSQL, MySQL, and Docker. I'm also comfortable with Python, REST APIs, and modern frontend tools.",
-  'Contact': "You can reach me at pawansinghb07@gmail.com, find my projects on GitHub (PawanBhandari03), or connect with me on LinkedIn. I'm currently open to freelance work and collaborations!"
+  'Contact': (
+    <span>
+      You can reach me at <a href="mailto:pawansinghb07@gmail.com" className="text-[#8B5CF6] hover:underline font-bold">pawansinghb07@gmail.com</a>, 
+      find my projects on <a href="https://github.com/PawanBhandari03" target="_blank" rel="noreferrer" className="text-[#8B5CF6] hover:underline font-bold">GitHub</a>, 
+      or connect with me on <a href="https://www.linkedin.com/in/pawan-singh-bhandari-5817ab307" target="_blank" rel="noreferrer" className="text-[#8B5CF6] hover:underline font-bold">LinkedIn</a>. 
+      I'm currently open to freelance work and collaborations!
+    </span>
+  )
 };
 
 export default function ChatUI() {
@@ -110,7 +117,7 @@ export default function ChatUI() {
         { role: 'system', content: SYSTEM_PROMPT },
         ...allMessages.map(m => ({
           role: m.role === 'bot' ? 'assistant' : 'user',
-          content: m.text
+          content: typeof m.text === 'string' ? m.text : 'Contact Info Provided.'
         }))
       ];
 

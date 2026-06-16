@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReplicaHero from './components/ReplicaHero';
 import AboutBento from './components/AboutBento';

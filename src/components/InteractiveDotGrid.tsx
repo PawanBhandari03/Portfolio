@@ -108,10 +108,10 @@ export default function InteractiveDotGrid() {
 
       // Determine color based on dark mode class
       const isDark = document.documentElement.classList.contains('dark');
-      const rgbColor = isDark ? '255, 255, 255' : '139, 92, 246';
+      const rgbColor = isDark ? '255, 255, 255' : '91, 33, 182'; // Darker purple in light mode
       
-      const currentBaseOpacity = isDark ? BASE_OPACITY : 0.15;
-      const currentMaxOpacity = isDark ? MAX_OPACITY : 0.65;
+      const currentBaseOpacity = isDark ? BASE_OPACITY + 0.03 : 0.25;
+      const currentMaxOpacity = isDark ? MAX_OPACITY + 0.1 : 0.8;
 
       // --- Pass 1: base dots ---
       ctx.fillStyle = `rgba(${rgbColor}, ${currentBaseOpacity})`;

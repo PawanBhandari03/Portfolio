@@ -192,22 +192,22 @@ export default function Skills() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex items-center gap-6 px-6 py-4 rounded-2xl shadow-lg border"
+            className="flex items-center gap-3 md:gap-6 px-4 md:px-6 py-4 rounded-2xl shadow-lg border w-full md:w-auto justify-between md:justify-start shrink-0 overflow-x-auto scrollbar-hide"
             style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)' }}
           >
             <div className="flex flex-col text-center">
-              <span className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={25} suffix="+" /></span>
-              <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: 'var(--text-secondary)' }}>Technologies</span>
+              <span className="text-[16px] md:text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={25} suffix="+" /></span>
+              <span className="text-[9px] md:text-[10px] uppercase tracking-wider font-bold whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>Technologies</span>
             </div>
-            <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/10" />
+            <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/10 shrink-0" />
             <div className="flex flex-col text-center">
-              <span className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={8} /></span>
-              <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: 'var(--text-secondary)' }}>Domains</span>
+              <span className="text-[16px] md:text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={8} /></span>
+              <span className="text-[9px] md:text-[10px] uppercase tracking-wider font-bold whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>Domains</span>
             </div>
-            <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/10" />
+            <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/10 shrink-0" />
             <div className="flex flex-col text-center">
-              <span className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={10} suffix="+" /></span>
-              <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: 'var(--text-secondary)' }}>Projects Built</span>
+              <span className="text-[16px] md:text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={10} suffix="+" /></span>
+              <span className="text-[9px] md:text-[10px] uppercase tracking-wider font-bold whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>Projects Built</span>
             </div>
           </motion.div>
         </div>
@@ -221,7 +221,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="relative p-8 md:p-10 flex flex-col gap-6 transition-all duration-300 card-hover bg-[#f0f4ff] dark:bg-[#0d1117] hover:bg-white dark:hover:bg-[#1a1f2e] group"
+              className="relative p-5 md:p-10 flex flex-col gap-6 transition-all duration-300 card-hover bg-[#f0f4ff] dark:bg-[#0d1117] hover:bg-white dark:hover:bg-[#1a1f2e] group"
               style={{
                 borderLeft: '1px solid var(--border-color)',
                 borderRight: '1px solid var(--border-color)',

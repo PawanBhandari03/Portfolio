@@ -165,7 +165,7 @@ export default function MyLinksPage({ onBack }: Props) {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="lg:col-span-7 p-8 rounded-[24px] shadow-2xl backdrop-blur-md"
+          className="w-full lg:col-span-7 p-6 md:p-8 rounded-[24px] shadow-2xl backdrop-blur-md"
           style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
         >
           <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">Send a Message</h2>
@@ -276,7 +276,7 @@ export default function MyLinksPage({ onBack }: Props) {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="lg:col-span-5 flex flex-col gap-6"
+          className="w-full lg:col-span-5 flex flex-col gap-6"
         >
           {/* Availability Card */}
           <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-5 py-3 rounded-xl flex items-center gap-3 w-fit shadow-sm">
@@ -297,7 +297,7 @@ export default function MyLinksPage({ onBack }: Props) {
               href="https://github.com/PawanBhandari03"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group card-hover hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
+              className="w-full bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group card-hover hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -322,7 +322,7 @@ export default function MyLinksPage({ onBack }: Props) {
               href="https://www.linkedin.com/in/pawan-singh-bhandari-5817ab307"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group card-hover hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
+              className="w-full bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group card-hover hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -344,7 +344,7 @@ export default function MyLinksPage({ onBack }: Props) {
 
             {/* Email Card */}
             <motion.div
-              className="bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group card-hover hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
+              className="w-full bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group card-hover hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}

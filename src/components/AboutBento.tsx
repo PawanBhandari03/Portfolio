@@ -62,6 +62,16 @@ export default function AboutBento() {
   const [hoveredSection, setHoveredSection] = useState<HoveredSection>('default');
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isCardsPaused, setIsCardsPaused] = useState(false);
+
+  // Auto-rotate hover cards
+  useEffect(() => {
+    if (isCardsPaused) return;
+    const timer = setInterval(() => {
+      setHoveredCard((prev) => (prev + 1) % HOVER_CARDS.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [isCardsPaused]);
 
   const goNext = useCallback(() => {
     setGalleryIndex((prev) => (prev + 1) % galleryImages.length);
@@ -82,13 +92,13 @@ export default function AboutBento() {
 
         {/* ── Name & Title ── */}
         <motion.div
-          className="glass-card flex flex-col items-center justify-center p-8 text-center h-[200px]"
+          className="glass-card flex flex-col items-center justify-center p-6 md:p-8 text-center h-[200px]"
           initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }} transition={{ duration: 0.5 }}
           onMouseEnter={() => setHoveredSection('name')}
           onMouseLeave={() => setHoveredSection('default')}
         >
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-widest uppercase leading-tight" style={{ color: 'var(--text-primary)' }}>
+          <h2 className="text-[28px] md:text-4xl font-extrabold tracking-widest uppercase leading-tight" style={{ color: 'var(--text-primary)' }}>
             Pawan<br />Bhandari
           </h2>
           <p className="text-xs tracking-[0.2em] mt-4 uppercase font-semibold" style={{ color: 'var(--text-secondary)' }}>Full Stack Developer</p>
@@ -96,15 +106,16 @@ export default function AboutBento() {
 
         {/* ── Hover Cards ── */}
         <motion.div
-          className="glass-card p-4 md:p-6 md:col-span-2 flex flex-col justify-center min-h-[220px] md:min-h-[260px] overflow-visible relative group reveal"
+          className="glass-card py-6 md:p-6 md:col-span-2 flex flex-col justify-center min-h-[220px] md:min-h-[260px] overflow-hidden md:overflow-visible relative group reveal w-full"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: 0.1 }}
           onMouseEnter={() => setHoveredSection('university')}
           onMouseLeave={() => setHoveredSection('default')}
         >
           <div
-            className="flex justify-center items-center w-full h-full mt-4 md:mt-0"
-            onMouseLeave={() => setHoveredCard(1)}
+            className="flex justify-center items-center w-full h-full mt-2 md:mt-0 relative"
+            onMouseEnter={() => setIsCardsPaused(true)}
+            onMouseLeave={() => { setIsCardsPaused(false); setHoveredCard(1); }}
           >
             {HOVER_CARDS.map((card, idx) => {
               const isActive = hoveredCard === idx;
@@ -112,23 +123,24 @@ export default function AboutBento() {
                 <motion.div
                   key={card.title}
                   onMouseEnter={() => setHoveredCard(idx)}
+                  onClick={() => setHoveredCard((prev) => (prev + 1) % HOVER_CARDS.length)}
                   animate={{
                     scale: isActive ? 1.05 : 0.95,
                     zIndex: isActive ? 40 : 10 - Math.abs(hoveredCard - idx),
                     opacity: isActive ? 1 : 0.6,
                     y: isActive ? -10 : 0
                   }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
                   className={`
-                    w-[210px] sm:w-[250px] md:w-[280px] h-[160px] md:h-[180px]
+                    w-[260px] md:w-[280px] h-[160px] md:h-[180px]
                     rounded-2xl p-5 md:p-6
-                    cursor-default relative flex-shrink-0 flex flex-col justify-center
-                    ${idx > 0 ? '-ml-20 md:-ml-28' : ''}
+                    cursor-pointer relative flex-shrink-0 flex flex-col justify-center
+                    ${idx > 0 ? '-ml-24 md:-ml-28' : ''}
                   `}
                   style={{
                     backgroundColor: 'var(--card-bg)',
                     boxShadow: isActive ? '0 0 40px rgba(139, 92, 246, 0.4)' : '0 10px 20px -5px rgba(0,0,0,0.15)',
-                    border: isActive ? '1px solid rgba(139, 92, 246, 0.5)' : '1px solid var(--border-color)'
+                    border: isActive ? '1px solid var(--active-border-color)' : '1px solid var(--border-color)'
                   }}
                 >
                   <h4 className={`text-xs md:text-sm font-extrabold uppercase tracking-wider mb-3 ${card.align}`} style={{ color: 'var(--text-primary)' }}>
@@ -140,6 +152,23 @@ export default function AboutBento() {
                 </motion.div>
               );
             })}
+          </div>
+
+          {/* Dots & Label */}
+          <div className="flex flex-col items-center gap-4 mt-6">
+            <span className="md:hidden text-[10px] font-bold tracking-widest text-[#8B5CF6]">TAP TO EXPLORE</span>
+            <div className="flex gap-2">
+              {HOVER_CARDS.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setHoveredCard(idx)}
+                  className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                    hoveredCard === idx ? 'bg-[#8B5CF6]' : 'border border-[#8B5CF6]/50 bg-transparent'
+                  }`}
+                  aria-label={`Go to card ${idx + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -263,9 +292,9 @@ export default function AboutBento() {
         </motion.div>
 
         {/* ── Center Portrait ── */}
-        <div className="md:col-span-1 md:row-span-2 flex flex-col gap-5">
+        <div className="md:col-span-1 md:row-span-2 flex flex-col gap-5 w-full">
           <motion.div
-            className="glass-card flex-1 min-h-[330px] overflow-hidden relative p-0"
+            className="glass-card w-full min-h-[280px] md:min-h-[330px] flex-1 overflow-hidden relative p-0"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
             style={{
@@ -304,7 +333,7 @@ export default function AboutBento() {
 
           {/* Location Card */}
           <motion.div
-            className="glass-card card-hover h-[140px] p-6 flex flex-col justify-end relative overflow-hidden reveal"
+            className="glass-card card-hover h-[140px] p-6 flex flex-col justify-end relative overflow-hidden reveal w-full"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: 0.4 }}
             style={{ backgroundColor: 'var(--card-bg)' }}

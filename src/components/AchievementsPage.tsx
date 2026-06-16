@@ -55,10 +55,10 @@ export default function AchievementsPage({ onBack }: Props) {
             className="flex flex-col md:flex-row items-stretch gap-6 md:gap-10 rounded-[32px] p-6 md:p-8 shadow-2xl backdrop-blur-md relative"
             style={{ backgroundColor: 'var(--card-bg)', border: '1px solid rgba(255,215,0,0.3)', boxShadow: '0 0 20px rgba(255,215,0,0.3)' }}
         >
-            <div className="md:w-1/2 flex items-center justify-center rounded-[24px] overflow-hidden shadow-inner trophy-float" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+            <div className="w-full md:w-1/2 flex items-center justify-center rounded-[24px] overflow-hidden shadow-inner trophy-float" style={{ backgroundColor: 'var(--image-placeholder)' }}>
                 <img src="/Techathon.jpeg" alt="Trophy" className="w-full h-[300px] md:h-[450px] object-cover hover:scale-105 transition-transform duration-700 ease-in-out" />
             </div>
-            <div className="md:w-1/2 py-4 md:py-8 flex flex-col justify-center">
+            <div className="w-full md:w-1/2 py-4 md:py-8 flex flex-col justify-center">
                 <h2 className="text-3xl md:text-4xl font-extrabold mb-5 leading-tight flex flex-wrap items-center gap-3" style={{ color: 'var(--text-primary)' }}>Best Solution Award — Techathon 3.0</h2>
                 <p className="text-base md:text-lg leading-relaxed mb-8 opacity-90" style={{ color: 'var(--text-secondary)' }}>
                     Awarded Best Solution for Given Problem Statement at Techathon 3.0 (2026), organized by Innovation Foundation. Built a scalable tech solution under competition pressure with team Parastec. Received trophy and ₹10,000 cash prize for delivering the most innovative solution.

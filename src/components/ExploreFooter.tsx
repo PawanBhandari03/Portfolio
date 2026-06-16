@@ -75,11 +75,11 @@ export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
                   window.scrollTo(0, 0);
                 }
               }}
-              className="flex flex-col items-center text-center gap-5 p-8 bg-white/70 dark:bg-[#0d111a] border border-slate-200/60 dark:border-white/[0.07] rounded-[28px] hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300 group relative overflow-hidden backdrop-blur-sm card-hover reveal"
+              className="flex flex-col items-center text-center gap-5 p-6 md:p-8 bg-white/70 dark:bg-[#0d111a] border border-slate-200/60 dark:border-white/[0.07] rounded-[28px] hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300 group relative overflow-hidden backdrop-blur-sm card-hover reveal w-full"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
-              <div className={`w-14 h-14 rounded-2xl ${card.iconBg} flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:rotate-6`}>
+              <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${card.iconBg} flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:rotate-6`}>
                 {card.icon}
               </div>
               <h3 className={`text-2xl font-bold ${card.linkColor}`}>{card.title}</h3>
@@ -94,7 +94,7 @@ export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
       </section>
 
       <footer className="w-full border-t border-slate-200 dark:border-white/[0.06] bg-white/80 dark:bg-[#080c14]">
-        <div className="max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-500">
+        <div className="max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-500 text-center">
           <div className="flex items-center gap-2 font-medium">
             <span className="font-bold text-slate-900 dark:text-white text-base">PB</span>
             <span>•</span>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ReplicaHero from './components/ReplicaHero';
 import AboutBento from './components/AboutBento';
 import Skills from './components/Skills';
@@ -14,10 +15,9 @@ function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'achievements' | 'mylinks' | 'guestbook'>('home');
   const [navScrolled, setNavScrolled] = useState(false);
   const [themeToggleRotated, setThemeToggleRotated] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Cursor refs
-  const cursorDotRef = useRef<HTMLDivElement>(null);
-  const cursorRingRef = useRef<HTMLDivElement>(null);
+
 
   // Toggle .dark class on <html> — this is what Tailwind's dark: variant responds to
   useEffect(() => {
@@ -37,55 +37,7 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Custom cursor tracking with smooth lag
-  useEffect(() => {
-    const dot = cursorDotRef.current;
-    const ring = cursorRingRef.current;
-    if (!dot || !ring) return;
 
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
-    let raf: number;
-
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      // Dot follows immediately
-      dot.style.left = `${mouseX}px`;
-      dot.style.top = `${mouseY}px`;
-    };
-
-    const animateRing = () => {
-      // Ring follows with lag (lerp)
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      ring.style.left = `${ringX}px`;
-      ring.style.top = `${ringY}px`;
-      raf = requestAnimationFrame(animateRing);
-    };
-
-    const onMouseEnterClickable = () => document.body.classList.add('cursor-hover');
-    const onMouseLeaveClickable = () => document.body.classList.remove('cursor-hover');
-
-    document.addEventListener('mousemove', onMouseMove);
-    raf = requestAnimationFrame(animateRing);
-
-    // Add hover-grow on all interactive elements
-    const clickables = document.querySelectorAll('a, button, [role="button"], input, textarea, select, label');
-    clickables.forEach(el => {
-      el.addEventListener('mouseenter', onMouseEnterClickable);
-      el.addEventListener('mouseleave', onMouseLeaveClickable);
-    });
-
-    return () => {
-      document.removeEventListener('mousemove', onMouseMove);
-      cancelAnimationFrame(raf);
-      clickables.forEach(el => {
-        el.removeEventListener('mouseenter', onMouseEnterClickable);
-        el.removeEventListener('mouseleave', onMouseLeaveClickable);
-      });
-    };
-  }, [currentPage]); // re-bind when page changes
 
   const handleThemeToggle = () => {
     setIsDark(!isDark);
@@ -95,9 +47,7 @@ function App() {
   return (
     <div className="bg-transparent min-h-screen text-slate-900 dark:text-white font-sans relative flex flex-col transition-colors duration-500">
 
-      {/* ─── Custom Cursor ─── */}
-      <div id="custom-cursor" ref={cursorDotRef} />
-      <div id="cursor-ring" ref={cursorRingRef} />
+
 
       {/* Interactive dot grid background */}
       <InteractiveDotGrid />
@@ -131,10 +81,21 @@ function App() {
                 </a>
               </div>
 
+              {/* Hamburger Icon (Mobile) */}
+              <button
+                className="md:hidden flex items-center justify-center p-2 text-slate-900 dark:text-white"
+                onClick={() => setIsMobileMenuOpen(true)}
+                aria-label="Open Mobile Menu"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-7 h-7">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+              </button>
+
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleThemeToggle}
-                  className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 transition-all"
+                  className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 transition-all cursor-pointer"
                   aria-label="Toggle Theme"
                 >
                   <span className={`theme-toggle-icon${themeToggleRotated ? ' rotating' : ''}`}>
@@ -154,6 +115,37 @@ function App() {
           )}
         </div>
       </nav>
+
+      {/* ═══════ MOBILE MENU OVERLAY ═══════ */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed inset-0 z-[100] bg-white dark:bg-[#0d1117] flex flex-col items-center justify-center"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-6 right-6 p-2 text-slate-900 dark:text-white"
+              aria-label="Close Menu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            <div className="flex flex-col items-center gap-10">
+              <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Home</a>
+              <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Projects</a>
+              <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Skills</a>
+              <a href="#other" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Other</a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ═══════ PAGE CONTENT ═══════ */}
       <main className="pt-16">

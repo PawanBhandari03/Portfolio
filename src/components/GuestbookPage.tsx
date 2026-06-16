@@ -181,7 +181,7 @@ export default function GuestbookPage({ onBack }: Props) {
 
         <button
           onClick={handleAdminLogin}
-          className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold transition-all shadow-sm ${
+          className={`w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold transition-all shadow-sm cursor-pointer ${
             isAdmin 
               ? 'bg-red-500 text-white shadow-red-500/20 ring-2 ring-red-500/50' 
               : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-white/20'
@@ -211,7 +211,7 @@ export default function GuestbookPage({ onBack }: Props) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="bg-white/60 dark:bg-[#0d111a]/80 border border-slate-200/60 dark:border-white/10 rounded-[24px] p-7 backdrop-blur-md shadow-xl"
+        className="bg-white/60 dark:bg-[#0d111a]/80 border border-slate-200/60 dark:border-white/10 rounded-[24px] p-4 md:p-7 backdrop-blur-md shadow-xl"
       >
         {/* Success toast */}
         <AnimatePresence>

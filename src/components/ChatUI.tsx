@@ -132,11 +132,11 @@ export default function ChatUI() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto flex flex-col pt-20">
+    <div className="w-full max-w-2xl mx-auto flex flex-col pt-8 md:pt-20 px-4 md:px-0">
       {/* Label */}
       <p className="text-sm text-slate-400 dark:text-slate-500 mb-3 text-center font-medium tracking-wide">Ask me anything about Pawan...</p>
 
-      <div className="w-full flex flex-col rounded-[28px] overflow-hidden border border-white/10 bg-white/60 dark:bg-[#0a0f1e]/60 backdrop-blur-md shadow-lg dark:shadow-none min-h-[320px] max-h-[420px]">
+      <div className="w-full flex flex-col rounded-[28px] overflow-hidden border border-white/10 bg-white/60 dark:bg-[#0a0f1e]/60 backdrop-blur-md shadow-lg dark:shadow-none h-[320px] md:h-auto md:min-h-[320px] md:max-h-[420px]">
 
       {/* Quick Reply Pills */}
       <div className="flex-none flex gap-2 px-5 pt-5 flex-wrap">
@@ -198,7 +198,7 @@ export default function ChatUI() {
         <button
           onClick={() => handleSend(input)}
           disabled={isTyping || !input.trim()}
-          className="w-10 h-10 flex-shrink-0 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] disabled:opacity-40 flex items-center justify-center text-white transition-all"
+          className="w-11 h-11 flex-shrink-0 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] disabled:opacity-40 flex items-center justify-center text-white transition-all cursor-pointer"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
             <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405z" />

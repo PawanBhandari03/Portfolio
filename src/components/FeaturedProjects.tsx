@@ -265,33 +265,33 @@ export default function FeaturedProjects() {
         </p>
         
         {/* New Stats Bar */}
-        <div className="mt-8 flex items-center justify-center gap-8 md:gap-16">
+        <div className="mt-8 flex flex-row items-center justify-center gap-4 md:gap-16">
           <div className="flex flex-col items-center">
-            <span className="text-4xl md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>9</span>
-            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Projects</span>
+            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>9</span>
+            <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Projects</span>
           </div>
-          <div className="h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
+          <div className="h-8 md:h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
           <div className="flex flex-col items-center">
-            <span className="text-4xl md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>5</span>
-            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Domains</span>
+            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>5</span>
+            <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Domains</span>
           </div>
-          <div className="h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
+          <div className="h-8 md:h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
           <div className="flex flex-col items-center">
-            <span className="text-4xl md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>20+</span>
-            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Technologies</span>
+            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>20+</span>
+            <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Technologies</span>
           </div>
         </div>
       </div>
 
       {/* FILTER TABS */}
-      <div className="flex flex-wrap justify-center gap-3 mt-4">
+      <div className="flex flex-wrap md:flex-nowrap md:overflow-x-auto md:whitespace-nowrap scrollbar-hide justify-center gap-2 mt-4 pb-2 md:pb-0">
         {FILTERS.map(f => {
           const count = getProjectCount(f);
           return (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all border ${
+              className={`flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-[13px] md:text-sm font-bold tracking-wide transition-all border shrink-0 ${
                 activeFilter === f
                   ? 'bg-[#8B5CF6] text-white border-[#8B5CF6] shadow-[0_0_20px_rgba(139,92,246,0.4)]'
                   : 'bg-transparent border-[color:var(--border-color)] text-[color:var(--text-secondary)] hover:border-[#8B5CF6] hover:bg-[#8B5CF6]/10 hover:text-[#8B5CF6]'
@@ -333,7 +333,7 @@ export default function FeaturedProjects() {
                 style={{ backgroundColor: 'var(--card-bg)' }}
               >
               {/* Top Half: Image */}
-              <div className="w-full h-56 md:h-64 relative overflow-hidden" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+              <div className="w-full h-[200px] md:h-64 relative overflow-hidden" style={{ backgroundColor: 'var(--image-placeholder)' }}>
                 {/* Dummy Project Name Image */}
                 <div className="w-full h-full flex items-center justify-center opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105">
                   <span className="text-xl md:text-2xl font-black tracking-widest uppercase px-6 text-center" style={{ color: 'var(--text-secondary)', opacity: 0.2 }}>{proj.title}</span>
@@ -343,7 +343,7 @@ export default function FeaturedProjects() {
               </div>
 
               {/* Bottom Half: Content */}
-              <div className="p-6 md:p-8 flex flex-col flex-1 relative">
+              <div className="p-5 md:p-8 flex flex-col flex-1 relative">
                 
                 {/* Categories as plain text */}
                 <div className="flex items-center gap-4 mb-4">

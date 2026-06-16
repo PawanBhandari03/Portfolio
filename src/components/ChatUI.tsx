@@ -62,6 +62,13 @@ const INITIAL_MESSAGE: Message = {
 
 const QUICK_REPLIES = ['Work', 'About me', 'Skills', 'Contact'];
 
+const HARDCODED_RESPONSES: Record<string, string> = {
+  'Work': "I'm a Full Stack Developer experienced in building scalable applications. I've worked on projects like EcoBounty, a DevBlog Platform, and AgriGuard (an AI plant disease detection tool).",
+  'About me': "I'm a 20-year-old Computer Engineering student at BSIOTR, JSPM in Pune, India. I'm passionate about problem-solving, Hackathons, and building real-world solutions!",
+  'Skills': "My main stack includes Java, Spring Boot, React, Node.js, PostgreSQL, MySQL, and Docker. I'm also comfortable with Python, REST APIs, and modern frontend tools.",
+  'Contact': "You can reach me at pawansinghb07@gmail.com, find my projects on GitHub (PawanBhandari03), or connect with me on LinkedIn. I'm currently open to freelance work and collaborations!"
+};
+
 export default function ChatUI() {
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState('');
@@ -90,6 +97,14 @@ export default function ChatUI() {
     setIsTyping(true);
 
     try {
+      // Use hardcoded response if it matches a quick reply exactly
+      if (HARDCODED_RESPONSES[text]) {
+        await new Promise(resolve => setTimeout(resolve, 600)); // Simulate typing delay
+        setMessages(prev => [...prev, { id: Date.now().toString() + 'bot', role: 'bot', text: HARDCODED_RESPONSES[text] }]);
+        setIsTyping(false);
+        return;
+      }
+
       const allMessages = [...messages.slice(1), userMsg];
       const mistralMessages = [
         { role: 'system', content: SYSTEM_PROMPT },
@@ -109,7 +124,7 @@ export default function ChatUI() {
           model: 'mistral-small-latest',
           messages: mistralMessages,
           max_tokens: 300,
-          temperature: 0.7
+          temperature: 0.2
         })
       });
 

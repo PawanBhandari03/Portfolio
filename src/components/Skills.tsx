@@ -1,4 +1,30 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
+
+// --- Animated Count Up Component ---
+const CountUpStat = ({ end, duration = 2, prefix = '', suffix = '' }: { end: number, duration?: number, prefix?: string, suffix?: string }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" as any });
+
+  useEffect(() => {
+    if (isInView) {
+      let startTimestamp: number;
+      const step = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        setCount(Math.floor(easeOutQuart * end));
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+  }, [isInView, end, duration]);
+
+  return <span ref={ref} className="count-up-stat">{prefix}{count}{suffix}</span>;
+};
 
 // --- Icons ---
 const CodeIcon = () => (
@@ -170,17 +196,17 @@ export default function Skills() {
             style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)' }}
           >
             <div className="flex flex-col text-center">
-              <span className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>25+</span>
+              <span className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={25} suffix="+" /></span>
               <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: 'var(--text-secondary)' }}>Technologies</span>
             </div>
             <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/10" />
             <div className="flex flex-col text-center">
-              <span className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>8</span>
+              <span className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={8} /></span>
               <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: 'var(--text-secondary)' }}>Domains</span>
             </div>
             <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/10" />
             <div className="flex flex-col text-center">
-              <span className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>10+</span>
+              <span className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={10} suffix="+" /></span>
               <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: 'var(--text-secondary)' }}>Projects Built</span>
             </div>
           </motion.div>
@@ -193,11 +219,10 @@ export default function Skills() {
               key={domain.category}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="relative p-8 md:p-10 flex flex-col gap-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-[#f0f4ff] dark:bg-[#0d1117] hover:bg-white dark:hover:bg-[#1a1f2e]"
-              style={{ 
-                borderTop: '2px solid #0ea5e9',
+              className="relative p-8 md:p-10 flex flex-col gap-6 transition-all duration-300 card-hover bg-[#f0f4ff] dark:bg-[#0d1117] hover:bg-white dark:hover:bg-[#1a1f2e] group"
+              style={{
                 borderLeft: '1px solid var(--border-color)',
                 borderRight: '1px solid var(--border-color)',
                 borderBottom: '1px solid var(--border-color)',
@@ -205,6 +230,8 @@ export default function Skills() {
                 boxShadow: '0 4px 30px rgba(0,0,0,0.05)'
               }}
             >
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#0ea5e9] opacity-50 group-hover:opacity-100 group-hover:shadow-[0_0_15px_#0ea5e9] transition-all duration-300" style={{ borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }} />
+
               {/* Header */}
               <div className="flex items-center gap-5">
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 ${domain.iconBg}`}>
@@ -225,7 +252,7 @@ export default function Skills() {
                 {domain.skills.map((skill) => (
                   <div 
                     key={skill.name}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100/50 dark:bg-white/[0.06] transition-colors cursor-default ${domain.pillHover}`}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100/50 dark:bg-white/[0.06] transition-all duration-300 cursor-default hover:scale-105 hover:shadow-md hover:border-white/20 ${domain.pillHover}`}
                   >
                     {skill.icon && (
                       <img 

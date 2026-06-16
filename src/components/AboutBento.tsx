@@ -96,9 +96,9 @@ export default function AboutBento() {
 
         {/* ── Hover Cards ── */}
         <motion.div
-          className="glass-card p-4 md:p-6 md:col-span-2 flex flex-col justify-center min-h-[220px] md:min-h-[260px] overflow-visible relative group"
+          className="glass-card p-4 md:p-6 md:col-span-2 flex flex-col justify-center min-h-[220px] md:min-h-[260px] overflow-visible relative group reveal"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: 0.1 }}
           onMouseEnter={() => setHoveredSection('university')}
           onMouseLeave={() => setHoveredSection('default')}
         >
@@ -145,9 +145,9 @@ export default function AboutBento() {
 
         {/* ── Mindset ── */}
         <motion.div
-          className="glass-card md:col-span-1 md:row-span-2 p-8 flex flex-col gap-6 min-h-[480px] overflow-hidden"
+          className="glass-card card-hover md:col-span-1 md:row-span-2 p-8 flex flex-col gap-6 min-h-[480px] overflow-hidden reveal"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: 0.2 }}
           onMouseEnter={() => setHoveredSection('mindset')}
           onMouseLeave={() => setHoveredSection('default')}
         >
@@ -304,16 +304,19 @@ export default function AboutBento() {
 
           {/* Location Card */}
           <motion.div
-            className="glass-card h-[140px] p-6 flex flex-col justify-end relative overflow-hidden"
+            className="glass-card card-hover h-[140px] p-6 flex flex-col justify-end relative overflow-hidden reveal"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: 0.4 }}
             style={{ backgroundColor: 'var(--card-bg)' }}
             onMouseEnter={() => setHoveredSection('location')}
             onMouseLeave={() => setHoveredSection('default')}
           >
-            {/* World Map Background */}
-            <div
+            {/* World Map Background with pan/zoom animation */}
+            <motion.div
               className="absolute inset-0 z-0 opacity-20 dark:opacity-[0.15]"
+              initial={{ scale: 1.1, x: -10, y: -10 }}
+              animate={{ scale: 1, x: 0, y: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
               style={{
                 backgroundImage: `url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg')`,
                 backgroundSize: '250%',
@@ -345,9 +348,9 @@ export default function AboutBento() {
 
         {/* ── Craft ── */}
         <motion.div
-          className="glass-card md:col-span-1 md:row-span-2 p-8 flex flex-col gap-6 min-h-[480px] overflow-hidden"
+          className="glass-card card-hover md:col-span-1 md:row-span-2 p-8 flex flex-col gap-6 min-h-[480px] overflow-hidden reveal"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.5 }}
+          viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: 0.5 }}
           onMouseEnter={() => setHoveredSection('craft')}
           onMouseLeave={() => setHoveredSection('default')}
         >

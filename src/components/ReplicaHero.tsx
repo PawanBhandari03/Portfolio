@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChatUI from './ChatUI';
 import heroImg from '../assets/pawan1stpage.jpeg';
+
+// Split "Pawan Bhandari" into individual words for staggered reveal
+const nameWords = ['Pawan', 'Bhandari'];
+
 export default function ReplicaHero() {
   const [showEmail, setShowEmail] = useState(false);
 
@@ -21,37 +25,47 @@ export default function ReplicaHero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
-            {/* Open to Work pill */}
+            {/* Open to Work pill — green dot pulses */}
             <motion.div
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 w-fit"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+              <span className="pulse-dot w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
               <span className="text-sm font-medium text-emerald-400 tracking-wide">Available For Engineering Roles</span>
             </motion.div>
 
-            {/* Main heading */}
-            <motion.h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-            >
-              <span className="text-slate-900 dark:text-white">Hi, I'm</span>
-              <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#f472b6] to-[#8B5CF6]">
-                Pawan Bhandari
+            {/* Main heading — "Hi, I'm" fades in, then name words stagger */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+              <motion.span
+                className="text-slate-900 dark:text-white block"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+              >
+                Hi, I'm
+              </motion.span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#f472b6] to-[#8B5CF6] flex flex-wrap gap-x-3">
+                {nameWords.map((word, i) => (
+                  <motion.span
+                    key={word}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.25 + i * 0.15 }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
               </span>
-            </motion.h1>
+            </h1>
 
             {/* Subtitle */}
             <motion.p
               className="text-sm sm:text-base font-semibold tracking-[0.25em] uppercase text-[#a78bfa]"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
             >
               Full Stack Developer
             </motion.p>
@@ -61,7 +75,7 @@ export default function ReplicaHero() {
               className="text-base sm:text-lg text-slate-500 dark:text-slate-400 leading-relaxed max-w-md"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.65 }}
             >
               Computer Engineering student with a builder's mindset. I build scalable backends, ship full-stack apps, and train ML models — competing in hackathons and never stopping.
             </motion.p>
@@ -71,18 +85,19 @@ export default function ReplicaHero() {
               className="flex flex-wrap gap-4 mt-2"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
+              transition={{ duration: 0.5, delay: 0.75 }}
             >
+              {/* "View My Work" — shimmer + scale hover */}
               <a
                 href="#projects"
-                className="px-7 py-3 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-semibold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5"
+                className="shimmer-btn px-7 py-3 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-semibold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-[1.03] hover:-translate-y-0.5"
               >
                 View My Work
               </a>
               <a
                 href="/Resume_FullStack_Pawan.pdf"
                 download
-                className="px-7 py-3 rounded-xl border border-slate-300 dark:border-white/15 text-slate-700 dark:text-slate-200 font-semibold text-sm tracking-wide hover:bg-slate-100 dark:hover:bg-white/10 transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5"
+                className="px-7 py-3 rounded-xl border border-slate-300 dark:border-white/15 text-slate-700 dark:text-slate-200 font-semibold text-sm tracking-wide hover:bg-slate-100 dark:hover:bg-white/10 transition-all duration-300 flex items-center gap-2 hover:scale-[1.03] hover:-translate-y-0.5"
               >
                 {/* Download icon */}
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
@@ -92,19 +107,19 @@ export default function ReplicaHero() {
               </a>
             </motion.div>
 
-            {/* Social Icons */}
+            {/* Social Icons — bounce on hover */}
             <motion.div
               className="flex items-center gap-5 mt-3"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
+              transition={{ duration: 0.5, delay: 0.85 }}
             >
               {/* GitHub */}
               <a
                 href="https://github.com/PawanBhandari03"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 dark:text-slate-500 hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6] transition-colors duration-300"
+                className="social-icon text-slate-400 dark:text-slate-500 hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6]"
                 aria-label="GitHub"
               >
                 <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
@@ -117,7 +132,7 @@ export default function ReplicaHero() {
                 href="https://www.linkedin.com/in/pawan-singh-bhandari-5817ab307"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 dark:text-slate-500 hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6] transition-colors duration-300"
+                className="social-icon text-slate-400 dark:text-slate-500 hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6]"
                 aria-label="LinkedIn"
               >
                 <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
@@ -129,7 +144,7 @@ export default function ReplicaHero() {
               <div className="relative flex items-center justify-center">
                 <button
                   onClick={() => setShowEmail(!showEmail)}
-                  className="text-slate-400 dark:text-slate-500 hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6] transition-colors duration-300 cursor-pointer"
+                  className="social-icon text-slate-400 dark:text-slate-500 hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6] cursor-pointer"
                   aria-label="Email"
                 >
                   <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
@@ -179,7 +194,7 @@ export default function ReplicaHero() {
                 </div>
               </div>
 
-              {/* Floating card: 2+ Years Coding */}
+              {/* Floating card: 3+ Years Coding */}
               <motion.div
                 className="float-card absolute -bottom-4 -left-6 sm:-left-10 bg-white/90 dark:bg-[#161b2e]/90 backdrop-blur-sm border border-slate-200 dark:border-white/10 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -187,7 +202,6 @@ export default function ReplicaHero() {
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#6D28D9] flex items-center justify-center">
-                  {/* Code icon */}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
                   </svg>
@@ -198,7 +212,7 @@ export default function ReplicaHero() {
                 </div>
               </motion.div>
 
-              {/* Floating card: 4 Projects Built */}
+              {/* Floating card: 10+ Projects Built */}
               <motion.div
                 className="float-card-delayed absolute -top-4 -right-4 sm:-right-8 bg-white/90 dark:bg-[#161b2e]/90 backdrop-blur-sm border border-slate-200 dark:border-white/10 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -206,7 +220,6 @@ export default function ReplicaHero() {
                 transition={{ duration: 0.5, delay: 0.75 }}
               >
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#f472b6] to-[#ec4899] flex items-center justify-center">
-                  {/* Rocket icon */}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                   </svg>

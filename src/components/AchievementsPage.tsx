@@ -48,13 +48,14 @@ export default function AchievementsPage({ onBack }: Props) {
         
         {/* Card 1 - Wide Card */}
         <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col md:flex-row items-stretch gap-6 md:gap-10 rounded-[32px] p-6 md:p-8 shadow-2xl backdrop-blur-md relative"
             style={{ backgroundColor: 'var(--card-bg)', border: '1px solid rgba(255,215,0,0.3)', boxShadow: '0 0 20px rgba(255,215,0,0.3)' }}
         >
-            <div className="md:w-1/2 flex items-center justify-center rounded-[24px] overflow-hidden shadow-inner" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+            <div className="md:w-1/2 flex items-center justify-center rounded-[24px] overflow-hidden shadow-inner trophy-float" style={{ backgroundColor: 'var(--image-placeholder)' }}>
                 <img src="/Techathon.jpeg" alt="Trophy" className="w-full h-[300px] md:h-[450px] object-cover hover:scale-105 transition-transform duration-700 ease-in-out" />
             </div>
             <div className="md:w-1/2 py-4 md:py-8 flex flex-col justify-center">
@@ -63,7 +64,7 @@ export default function AchievementsPage({ onBack }: Props) {
                     Awarded Best Solution for Given Problem Statement at Techathon 3.0 (2026), organized by Innovation Foundation. Built a scalable tech solution under competition pressure with team Parastec. Received trophy and ₹10,000 cash prize for delivering the most innovative solution.
                 </p>
                 <div className="mt-auto flex">
-                    <span className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-sm font-bold border shadow-sm tracking-wide" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
+                    <span className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-sm font-bold border shadow-sm tracking-wide badge-shimmer" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
                         Techathon 3.0 · 2026 · ₹10,000 Prize
                     </span>
                 </div>
@@ -75,9 +76,10 @@ export default function AchievementsPage({ onBack }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
             {/* Card 2 - Vertical Card (Pandora) */}
             <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: 0.2 }}
                 className="flex flex-col rounded-[32px] shadow-2xl backdrop-blur-md overflow-hidden relative w-full"
                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
@@ -103,9 +105,10 @@ export default function AchievementsPage({ onBack }: Props) {
 
             {/* Card 3 - Default Placeholder Card */}
             <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: 0.3 }}
                 className="flex flex-col rounded-[32px] shadow-2xl backdrop-blur-md overflow-hidden relative w-full"
                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >

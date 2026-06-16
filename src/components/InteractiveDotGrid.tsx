@@ -106,8 +106,15 @@ export default function InteractiveDotGrid() {
 
       const rSq = HOVER_RADIUS * HOVER_RADIUS;
 
+      // Determine color based on dark mode class
+      const isDark = document.documentElement.classList.contains('dark');
+      const rgbColor = isDark ? '255, 255, 255' : '139, 92, 246';
+      
+      const currentBaseOpacity = isDark ? BASE_OPACITY : 0.15;
+      const currentMaxOpacity = isDark ? MAX_OPACITY : 0.65;
+
       // --- Pass 1: base dots ---
-      ctx.fillStyle = `rgba(255, 255, 255, ${BASE_OPACITY})`;
+      ctx.fillStyle = `rgba(${rgbColor}, ${currentBaseOpacity})`;
       ctx.beginPath();
       for (let r = startRow; r < endRow; r++) {
         const dotPageY = r * DOT_SPACING;
@@ -142,13 +149,13 @@ export default function InteractiveDotGrid() {
             const dist = Math.sqrt(dSq);
             const t = 1 - dist / HOVER_RADIUS;
             const eased = t * t * (3 - 2 * t);
-            const alpha = MAX_OPACITY * eased;
+            const alpha = currentMaxOpacity * eased;
 
             if (alpha < 0.01) continue;
 
             ctx.beginPath();
             ctx.arc(sx, sy, DOT_RADIUS, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+            ctx.fillStyle = `rgba(${rgbColor}, ${alpha})`;
             ctx.fill();
           }
         }
@@ -168,7 +175,7 @@ export default function InteractiveDotGrid() {
 
         ctx.beginPath();
         ctx.arc(sx, sy, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.fillStyle = `rgba(${rgbColor}, ${alpha})`;
         ctx.fill();
       }
 

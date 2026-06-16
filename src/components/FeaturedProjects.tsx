@@ -315,12 +315,13 @@ export default function FeaturedProjects() {
             <motion.div
               layout
               key={proj.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.4, delay: 0.1 * (Number(proj.id) % 3) }}
               onClick={() => setSelectedProject(proj)}
-              className="group relative rounded-[24px] p-[2px] hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+              className="group relative rounded-[24px] p-[2px] transition-all duration-300 cursor-pointer card-hover"
               style={{
                 background: 'linear-gradient(270deg, #f472b6, #8B5CF6, #7C3AED, #f472b6)',
                 backgroundSize: '400% 400%',
@@ -328,8 +329,8 @@ export default function FeaturedProjects() {
               }}
             >
               <div
-                className="flex flex-col rounded-[22px] overflow-hidden h-full"
-                style={{ backgroundColor: 'var(--card-bg)', boxShadow: '0 10px 40px -10px rgba(0,0,0,0.1)' }}
+                className="flex flex-col rounded-[22px] overflow-hidden h-full transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]"
+                style={{ backgroundColor: 'var(--card-bg)' }}
               >
               {/* Top Half: Image */}
               <div className="w-full h-56 md:h-64 relative overflow-hidden" style={{ backgroundColor: 'var(--image-placeholder)' }}>
@@ -345,12 +346,17 @@ export default function FeaturedProjects() {
               <div className="p-6 md:p-8 flex flex-col flex-1 relative">
                 
                 {/* Categories as plain text */}
-                <div className="flex flex-wrap gap-4 mb-4">
-                  {proj.categories.map(cat => (
-                    <span key={cat} className="text-[11px] font-black tracking-widest uppercase" style={{ color: 'var(--text-secondary)' }}>
-                      {cat}
-                    </span>
-                  ))}
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="text-xl font-black text-slate-300 dark:text-slate-700 group-hover:text-[#8B5CF6] transition-colors duration-300">
+                    {proj.id}
+                  </span>
+                  <div className="flex flex-wrap gap-4">
+                    {proj.categories.map(cat => (
+                      <span key={cat} className="text-[11px] font-black tracking-widest uppercase" style={{ color: 'var(--text-secondary)' }}>
+                        {cat}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
                 <h3 className="text-2xl font-extrabold mb-3 group-hover:text-[#8B5CF6] transition-colors" style={{ color: 'var(--text-primary)' }}>{proj.title}</h3>
@@ -376,7 +382,7 @@ export default function FeaturedProjects() {
                   </div>
                   {/* Arrow Icon */}
                   <div className="ml-4 shrink-0">
-                    <svg className="w-5 h-5 text-[#8B5CF6] group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <svg className="w-5 h-5 text-[#8B5CF6] transition-transform duration-300 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </div>

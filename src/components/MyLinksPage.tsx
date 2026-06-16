@@ -237,8 +237,9 @@ export default function MyLinksPage({ onBack }: Props) {
                 {success ? (
                   <motion.div
                     key="success"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     className="bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 rounded-xl px-4 py-3.5 text-sm font-semibold flex items-center justify-center gap-2"
                   >
                     Message sent! I'll get back to you soon ✓
@@ -248,7 +249,7 @@ export default function MyLinksPage({ onBack }: Props) {
                     key="submit-btn"
                     type="submit"
                     disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#f472b6] hover:brightness-110 active:scale-[0.98] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/35 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                    className={`w-full bg-gradient-to-r from-[#8B5CF6] to-[#f472b6] hover:brightness-110 active:scale-[0.98] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/35 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed ${isLoading ? 'animate-pulse' : ''}`}
                   >
                     {isLoading ? (
                       <>
@@ -292,11 +293,15 @@ export default function MyLinksPage({ onBack }: Props) {
           <div className="flex flex-col gap-4">
             
             {/* GitHub Card */}
-            <a
+            <motion.a
               href="https://github.com/PawanBhandari03"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.15)] hover:-translate-y-1"
+              className="bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group card-hover hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center shrink-0">
@@ -310,14 +315,18 @@ export default function MyLinksPage({ onBack }: Props) {
               <span className="text-slate-500 group-hover:text-[#8B5CF6] transition-colors shrink-0">
                 <ExternalLinkIcon />
               </span>
-            </a>
+            </motion.a>
 
             {/* LinkedIn Card */}
-            <a
+            <motion.a
               href="https://www.linkedin.com/in/pawan-singh-bhandari-5817ab307"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.15)] hover:-translate-y-1"
+              className="bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group card-hover hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.4 }}
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#0077b5] flex items-center justify-center shrink-0">
@@ -331,11 +340,15 @@ export default function MyLinksPage({ onBack }: Props) {
               <span className="text-slate-500 group-hover:text-[#8B5CF6] transition-colors shrink-0">
                 <ExternalLinkIcon />
               </span>
-            </a>
+            </motion.a>
 
             {/* Email Card */}
-            <div
-              className="bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between"
+            <motion.div
+              className="bg-[#13131f] border border-white/[0.08] rounded-xl p-5 flex items-center justify-between transition-all duration-300 group card-hover hover:border-[#8B5CF6]/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.5 }}
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#8B5CF6] flex items-center justify-center shrink-0">
@@ -346,7 +359,7 @@ export default function MyLinksPage({ onBack }: Props) {
                   <p className="text-slate-400 text-sm mt-0.5">pawansinghb07@gmail.com</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
           </div>
 

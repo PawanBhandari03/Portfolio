@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import newsImg1 from '../assets/News/Screenshot 2026-06-17 114210.png';
+import newsImg2 from '../assets/News/Screenshot 2026-06-17 114222.png';
+import newsImg3 from '../assets/News/Screenshot 2026-06-17 114235.png';
+import newsImg4 from '../assets/News/Screenshot 2026-06-17 123323.png';
+import newsImg5 from '../assets/News/Screenshot 2026-06-17 123434.png';
+
 type ProjectCategory = 'Full Stack' | 'Backend' | 'AI/ML' | 'Web App' | 'Java/Spring Boot';
 
 interface Project {
@@ -19,6 +25,8 @@ interface Project {
   githubUrl?: string;
   liveUrl?: string;
   pptUrl?: string;
+  snapshots?: string[];
+  architectureImg?: string;
 }
 
 const PROJECTS: Project[] = [
@@ -160,22 +168,22 @@ const PROJECTS: Project[] = [
   {
     id: "07",
     categories: ["Web App"],
-    title: "Car Showcase Website",
-    shortDesc: "Visually rich car showcase with smooth UI interactions and component-based React architecture.",
-    tags: ["React", "Tailwind", "JavaScript"],
+    title: "EV-olution",
+    shortDesc: "Premium electric vehicle showcase with cinematic hero slider, model listings and specs comparison.",
+    tags: ["React", "JavaScript", "CSS", "Vite"],
     imageSrc: "/project_a.png",
-    problem: "Automotive websites often suffer from clunky navigation and poor visual performance on mobile devices.",
-    solution: "A highly optimized, visually immersive showcase utilizing modern CSS capabilities and React components.",
+    problem: "Electric vehicle buyers struggle to find a single visually engaging platform to explore and compare premium EV models with detailed specifications.",
+    solution: "Built a cinematic EV showcase website with a full-screen image and video slider, featured model cards with specs, and a clean contact section — designed to feel like a premium automotive brand website.",
     features: [
-      "Complex CSS grid and flexbox layouts",
-      "Smooth scroll and micro-interactions",
-      "Highly reusable React component architecture",
-      "Image optimization and lazy loading"
+      "Full-screen cinematic image and video hero slider with dot navigation",
+      "Featured EV model cards with range, acceleration and pricing specs",
+      "Smooth scroll navigation with animated section transitions",
+      "Clean contact form for inquiries"
     ],
     outcomes: [
-      "Achieved near-perfect Lighthouse performance scores",
-      "Created an engaging, premium user experience",
-      "Demonstrated advanced frontend styling techniques"
+      "Delivered a premium automotive brand experience using pure frontend tech",
+      "Mastered full-screen video and image slider implementation",
+      "Built a production-ready UI with cinematic design principles"
     ],
     githubUrl: "https://github.com/PawanBhandari03",
     liveUrl: "#"
@@ -184,24 +192,26 @@ const PROJECTS: Project[] = [
     id: "08",
     categories: ["Web App"],
     title: "News Magazine",
-    shortDesc: "Dynamic news aggregator with categorized articles and clean reading experience.",
-    tags: ["React", "API", "JavaScript"],
-    imageSrc: "/project_b.png",
-    problem: "Readers are easily distracted by cluttered news websites with poor typography and invasive layouts.",
-    solution: "A minimalist, typography-focused news aggregator that prioritizes reading experience and content categorization.",
+    shortDesc: "Real-time news aggregator with category filtering and live article previews.",
+    tags: ["React", "JavaScript", "News API", "Vite", "CSS"],
+    imageSrc: newsImg1,
+    problem: "People waste time switching between multiple news websites to stay updated across different topics. There was no single clean interface to browse categorized real-time news efficiently.",
+    solution: "Built a React-based news magazine that integrates with a live News API to fetch and display real-time articles. Users can filter by category and click through to read full articles from original sources.",
     features: [
-      "Dynamic data fetching from public news APIs",
-      "Client-side routing and categorized views",
-      "Clean, distraction-free reading mode",
-      "Responsive typography scales for all devices"
+      "Category-based filtering — Technology, Business, Health, Science, Sports, Entertainment",
+      "Real-time article fetching using News API",
+      "Clean magazine-style card grid layout with images, headlines and descriptions",
+      "Direct Read More links opening original articles from real news sources"
     ],
     outcomes: [
-      "Improved readability and user retention metrics",
-      "Handled API rate limits and error states gracefully",
-      "Delivered a polished, production-ready frontend"
+      "Fully functional live news feed with zero backend required",
+      "Smooth category switching with instant content updates",
+      "Clean responsive grid layout for distraction-free reading experience"
     ],
-    githubUrl: "https://github.com/PawanBhandari03",
-    liveUrl: "#"
+    githubUrl: "https://github.com/PawanBhandari03/news-mag",
+    liveUrl: "#",
+    snapshots: [newsImg2, newsImg5, newsImg3, newsImg4],
+    architectureImg: newsImg1
   },
   {
     id: "09",
@@ -335,12 +345,14 @@ export default function FeaturedProjects() {
               >
               {/* Top Half: Image */}
               <div className="w-full h-[200px] md:h-64 relative overflow-hidden" style={{ backgroundColor: 'var(--image-placeholder)' }}>
-                {/* Dummy Project Name Image */}
-                <div className="w-full h-full flex items-center justify-center opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105">
-                  <span className="text-xl md:text-2xl font-black tracking-widest uppercase px-6 text-center" style={{ color: 'var(--text-secondary)', opacity: 0.2 }}>{proj.title}</span>
-                </div>
+                {proj.imageSrc && !proj.imageSrc.startsWith('/project_') ? (
+                  <img src={proj.imageSrc} alt={proj.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105">
+                    <span className="text-xl md:text-2xl font-black tracking-widest uppercase px-6 text-center" style={{ color: 'var(--text-secondary)', opacity: 0.2 }}>{proj.title}</span>
+                  </div>
+                )}
                 <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, var(--card-bg), transparent)' }} />
-                
               </div>
 
               {/* Bottom Half: Content */}
@@ -478,11 +490,17 @@ export default function FeaturedProjects() {
                   <div>
                     <h4 className="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-                      ARCHITECTURE DIAGRAM
+                      {selectedProject.architectureImg ? 'PROJECT SHOWCASE' : 'ARCHITECTURE DIAGRAM'}
                     </h4>
                     <div className="w-full h-64 md:h-96 relative bg-slate-100 dark:bg-[#0a0f1e] overflow-hidden rounded-[8px] border border-slate-200 dark:border-white/10 flex items-center justify-center">
-                      <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-100 dark:from-[#1e2330] dark:to-[#0a0f1e] opacity-70" />
-                      <span className="text-lg font-black text-slate-900/5 dark:text-white/5 tracking-widest uppercase px-6 text-center relative z-10">{selectedProject.title} Architecture</span>
+                      {selectedProject.architectureImg ? (
+                        <img src={selectedProject.architectureImg} alt={`${selectedProject.title} Architecture/Showcase`} className="w-full h-full object-contain" />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-100 dark:from-[#1e2330] dark:to-[#0a0f1e] opacity-70" />
+                          <span className="text-lg font-black text-slate-900/5 dark:text-white/5 tracking-widest uppercase px-6 text-center relative z-10">{selectedProject.title} Architecture</span>
+                        </>
+                      )}
                     </div>
                   </div>
 
@@ -544,40 +562,51 @@ export default function FeaturedProjects() {
                       REAL-WORLD SNAPSHOTS
                     </h4>
                     <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="w-64 md:w-80 h-[160px] shrink-0 bg-slate-100 dark:bg-[#0e121e] rounded-lg border border-slate-200 dark:border-white/5 flex items-center justify-center overflow-hidden">
-                          <span className="text-xs font-medium text-slate-500 dark:text-slate-600 uppercase tracking-widest">Snapshot Placeholder</span>
-                        </div>
-                      ))}
+                      {selectedProject.snapshots ? (
+                        selectedProject.snapshots.map((snap, i) => (
+                          <div key={i} className="w-64 md:w-80 h-[160px] shrink-0 bg-slate-100 dark:bg-[#0e121e] rounded-lg border border-slate-200 dark:border-white/5 flex items-center justify-center overflow-hidden">
+                            <img src={snap} alt={`Snapshot ${i + 1}`} className="w-full h-full object-cover" />
+                          </div>
+                        ))
+                      ) : (
+                        [1, 2, 3, 4].map((i) => (
+                          <div key={i} className="w-64 md:w-80 h-[160px] shrink-0 bg-slate-100 dark:bg-[#0e121e] rounded-lg border border-slate-200 dark:border-white/5 flex items-center justify-center overflow-hidden">
+                            <span className="text-xs font-medium text-slate-500 dark:text-slate-600 uppercase tracking-widest">Snapshot Placeholder</span>
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
 
 
 
-                </div>
-              </div>
+                  </div>
 
-              {/* Modal Footer / Buttons */}
-              <div className="p-6 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0b0e14] flex flex-wrap gap-4 items-center justify-end shrink-0">
-                {selectedProject.githubUrl && (
-                  <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-transparent border border-slate-300 dark:border-white/20 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
-                    View on GitHub
-                  </a>
-                )}
-                {selectedProject.liveUrl && (
-                  <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-[#8B5CF6] hover:bg-[#7C3AED] text-white transition-all flex items-center gap-2">
-                    Live Demo
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                  </a>
-                )}
-                {selectedProject.pptUrl && (
-                  <a href={selectedProject.pptUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-orange-500 hover:bg-orange-400 text-white transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(249,115,22,0.3)]">
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg>
-                    View PPT
-                  </a>
-                )}
-              </div>
+
+
+                  {/* Modal Footer / Buttons */}
+                  <div className="pt-8 mt-12 border-t border-slate-200 dark:border-white/10 flex flex-wrap gap-4 items-center justify-end">
+                    {selectedProject.githubUrl && (
+                      <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-transparent border border-slate-300 dark:border-white/20 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
+                        View on GitHub
+                      </a>
+                    )}
+                    {selectedProject.liveUrl && (
+                      <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-[#8B5CF6] hover:bg-[#7C3AED] text-white transition-all flex items-center gap-2">
+                        Live Demo
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                      </a>
+                    )}
+                    {selectedProject.pptUrl && (
+                      <a href={selectedProject.pptUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-orange-500 hover:bg-orange-400 text-white transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(249,115,22,0.3)]">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg>
+                        View PPT
+                      </a>
+                    )}
+                  </div>
+
+                </div>
             </motion.div>
           </div>
         )}

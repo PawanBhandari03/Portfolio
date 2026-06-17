@@ -314,7 +314,67 @@ html:not(.dark) .navbar-glass.scrolled {
   display: inline-block;
 }
 
+/* ─── Smooth Infinite Marquee ─── */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
 
+/* ─── Map Pan/Zoom Animation ─── */
+@keyframes map-pan {
+  0% { transform: scale(1.1) translate(0, 0); }
+  25% { transform: scale(1.15) translate(-2%, 2%); }
+  50% { transform: scale(1.1) translate(-3%, -2%); }
+  75% { transform: scale(1.15) translate(2%, -3%); }
+  100% { transform: scale(1.1) translate(0, 0); }
+}
+.animate-map-pan {
+  animation: map-pan 20s ease-in-out infinite;
+}
+
+/* ─── Custom Cursor ─── */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: #8B5CF6;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, background-color 0.3s ease;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(139, 92, 246, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease-out, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hide default cursor on desktop */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, [role="button"], input, textarea, select {
+    cursor: none;
+  }
+}
 
 /* ─── Smooth scroll behavior ─── */
 html {
@@ -350,8 +410,19 @@ html {
   .float-card-delayed,
   .heartbeat,
   .trophy-float,
-  .badge-shimmer {
+  .badge-shimmer,
+  .animate-marquee,
+  .animate-map-pan {
     animation: none !important;
+  }
+
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+  
+  body, a, button, [role="button"], input, textarea, select {
+    cursor: auto !important;
   }
 
   .shimmer-btn::after {

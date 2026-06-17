@@ -9,6 +9,7 @@ import AchievementsPage from './components/AchievementsPage';
 import MyLinksPage from './components/MyLinksPage';
 import GuestbookPage from './components/GuestbookPage';
 import InteractiveDotGrid from './components/InteractiveDotGrid';
+import Cursor from './components/Cursor';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -51,6 +52,9 @@ function App() {
 
       {/* Interactive dot grid background */}
       <InteractiveDotGrid />
+
+      {/* Custom Cursor */}
+      <Cursor />
 
       {/* ═══════ STICKY NAVBAR ═══════ */}
       <nav className={`navbar-glass fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-6 lg:px-10${navScrolled ? ' scrolled' : ''}`}>

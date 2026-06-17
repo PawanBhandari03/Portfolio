@@ -10,7 +10,7 @@ export default function ReplicaHero() {
   const [showEmail, setShowEmail] = useState(false);
 
   return (
-    <section className="w-full max-w-6xl mx-auto pt-28 pb-12 px-6 relative z-10 flex flex-col gap-14">
+    <section className="w-full max-w-6xl mx-auto pt-16 md:pt-28 pb-12 px-6 relative z-10 flex flex-col gap-14">
 
       {/* ── Purple radial glow behind hero ── */}
       <div className="hero-glow">
@@ -196,37 +196,37 @@ export default function ReplicaHero() {
 
               {/* Floating card: 3+ Years Coding */}
               <motion.div
-                className="float-card absolute -bottom-4 -left-6 sm:-left-10 bg-white/90 dark:bg-[#161b2e]/90 backdrop-blur-sm border border-slate-200 dark:border-white/10 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl"
+                className="float-card absolute -bottom-2 -left-2 md:-bottom-4 md:-left-10 bg-white/90 dark:bg-[#161b2e]/90 backdrop-blur-sm border border-slate-200 dark:border-white/10 rounded-xl md:rounded-2xl px-3 py-2 md:px-4 md:py-3 flex items-center gap-2 md:gap-3 shadow-xl"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#6D28D9] flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#6D28D9] flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-4 h-4 md:w-5 md:h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-base font-bold text-slate-900 dark:text-white leading-none">3+ Years</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Coding</p>
+                  <p className="text-sm md:text-base font-bold text-slate-900 dark:text-white leading-none">3+ Years</p>
+                  <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 mt-0.5 md:mt-1">Coding</p>
                 </div>
               </motion.div>
 
               {/* Floating card: 10+ Projects Built */}
               <motion.div
-                className="float-card-delayed absolute -top-4 -right-4 sm:-right-8 bg-white/90 dark:bg-[#161b2e]/90 backdrop-blur-sm border border-slate-200 dark:border-white/10 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl"
+                className="float-card-delayed absolute -top-2 -right-2 md:-top-4 md:-right-8 bg-white/90 dark:bg-[#161b2e]/90 backdrop-blur-sm border border-slate-200 dark:border-white/10 rounded-xl md:rounded-2xl px-3 py-2 md:px-4 md:py-3 flex items-center gap-2 md:gap-3 shadow-xl"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.75 }}
               >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#f472b6] to-[#ec4899] flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-gradient-to-br from-[#f472b6] to-[#ec4899] flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-4 h-4 md:w-5 md:h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-base font-bold text-slate-900 dark:text-white leading-none">10+ Projects</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Built</p>
+                  <p className="text-sm md:text-base font-bold text-slate-900 dark:text-white leading-none">10+ Projects</p>
+                  <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 mt-0.5 md:mt-1">Built</p>
                 </div>
               </motion.div>
             </div>

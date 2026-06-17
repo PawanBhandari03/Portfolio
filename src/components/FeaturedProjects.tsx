@@ -7,6 +7,19 @@ import newsImg3 from '../assets/News/Screenshot 2026-06-17 114235.png';
 import newsImg4 from '../assets/News/Screenshot 2026-06-17 123323.png';
 import newsImg5 from '../assets/News/Screenshot 2026-06-17 123434.png';
 
+import carImg1 from '../assets/Car/Screenshot 2026-06-17 133132.png';
+import carImg2 from '../assets/Car/Screenshot 2026-06-17 133154.png';
+import carImg3 from '../assets/Car/Screenshot 2026-06-17 140514.png';
+import carImg4 from '../assets/Car/Screenshot 2026-06-17 140520.png';
+
+import movieImg1 from '../assets/movie/Screenshot 2026-06-17 163629.png';
+import movieImg2 from '../assets/movie/Screenshot 2026-06-17 163634.png';
+import movieImg3 from '../assets/movie/Screenshot 2026-06-17 163652.png';
+import movieImg4 from '../assets/movie/Screenshot 2026-06-17 163657.png';
+import movieImg5 from '../assets/movie/Screenshot 2026-06-17 163708.png';
+import movieImg6 from '../assets/movie/Screenshot 2026-06-17 163713.png';
+import movieImg7 from '../assets/movie/Screenshot 2026-06-17 164137.png';
+
 type ProjectCategory = 'Full Stack' | 'Backend' | 'AI/ML' | 'Web App' | 'Java/Spring Boot';
 
 interface Project {
@@ -101,25 +114,27 @@ const PROJECTS: Project[] = [
   {
     id: "04",
     categories: ["Web App"],
-    title: "Movie Discovery App",
-    shortDesc: "Feature-rich movie browsing platform with live API integration, search, filters, and responsive UI.",
-    tags: ["React", "REST API", "Tailwind", "JavaScript"],
-    imageSrc: "/project_b.png",
-    problem: "Users are overwhelmed by disjointed movie catalogs and need a unified, fast discovery tool.",
-    solution: "A dynamic, lightning-fast application pulling live data with robust search and filtering capabilities.",
+    title: "PawFlix",
+    shortDesc: "Movie discovery web app with dynamic data fetching, search and fully responsive UI.",
+    tags: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Vite"],
+    imageSrc: movieImg1,
+    problem: "Movie lovers have no simple and fast way to discover, search and explore films across genres without dealing with bloated and slow streaming platforms. A lightweight movie discovery tool was missing.",
+    solution: "Built a React-based movie discovery platform that integrates with the TMDB API to fetch real-time movie data. Users can browse trending films, search by title, and explore detailed information about any movie instantly.",
     features: [
-      "Live integration with TMDB REST API",
-      "Debounced search and complex multi-filtering",
-      "Infinite scrolling for seamless browsing",
-      "Custom skeleton loaders for optimal UX"
+      "Real-time movie data fetching using TMDB API with dynamic search",
+      "Browse trending, popular and top-rated movies by category",
+      "Movie detail view with ratings, overview, release date and genre",
+      "Fully responsive UI built with Tailwind CSS for all screen sizes"
     ],
     outcomes: [
-      "Optimized React rendering with memoization",
-      "Perfected a mobile-first Tailwind design system",
-      "Handled complex global state efficiently"
+      "Successfully integrated a third-party REST API with real-time search and filtering capabilities",
+      "Delivered a fast, lightweight alternative to bloated streaming platform UIs",
+      "Deployed and live on Vercel with zero backend infrastructure"
     ],
-    githubUrl: "https://github.com/PawanBhandari03",
-    liveUrl: "#"
+    githubUrl: "https://github.com/PawanBhandari03/PawFlix",
+    liveUrl: "https://movie-website-paw-wszk.vercel.app",
+    snapshots: [movieImg3, movieImg7, movieImg4, movieImg5, movieImg6],
+    architectureImg: movieImg2
   },
   {
     id: "05",
@@ -171,7 +186,7 @@ const PROJECTS: Project[] = [
     title: "EV-olution",
     shortDesc: "Premium electric vehicle showcase with cinematic hero slider, model listings and specs comparison.",
     tags: ["React", "JavaScript", "CSS", "Vite"],
-    imageSrc: "/project_a.png",
+    imageSrc: carImg1,
     problem: "Electric vehicle buyers struggle to find a single visually engaging platform to explore and compare premium EV models with detailed specifications.",
     solution: "Built a cinematic EV showcase website with a full-screen image and video slider, featured model cards with specs, and a clean contact section — designed to feel like a premium automotive brand website.",
     features: [
@@ -185,8 +200,10 @@ const PROJECTS: Project[] = [
       "Mastered full-screen video and image slider implementation",
       "Built a production-ready UI with cinematic design principles"
     ],
-    githubUrl: "https://github.com/PawanBhandari03",
-    liveUrl: "#"
+    githubUrl: "https://github.com/PawanBhandari03/EV-DashBoard",
+    liveUrl: "https://ev-dash-board-v3nw.vercel.app",
+    snapshots: [carImg2, carImg3, carImg4],
+    architectureImg: carImg1
   },
   {
     id: "08",
@@ -209,7 +226,7 @@ const PROJECTS: Project[] = [
       "Clean responsive grid layout for distraction-free reading experience"
     ],
     githubUrl: "https://github.com/PawanBhandari03/news-mag",
-    liveUrl: "#",
+    liveUrl: "https://news-mag-rust.vercel.app",
     snapshots: [newsImg2, newsImg5, newsImg3, newsImg4],
     architectureImg: newsImg1
   },

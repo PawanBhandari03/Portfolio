@@ -25,9 +25,12 @@ type ProjectCategory = 'Full Stack' | 'Backend' | 'AI/ML' | 'Web App' | 'Java/Sp
 interface Project {
   id: string;
   categories: ProjectCategory[];
+  displayCategory?: string;
   title: string;
   shortDesc: string;
+  modalSubtitle?: string;
   tags: string[];
+  modalTags?: string[];
   imageSrc: string;
   
   // Modal Details
@@ -36,6 +39,8 @@ interface Project {
   features: string[];
   outcomes: string[];
   githubUrl?: string;
+  githubFrontendUrl?: string;
+  githubBackendUrl?: string;
   liveUrl?: string;
   pptUrl?: string;
   snapshots?: string[];
@@ -139,46 +144,52 @@ const PROJECTS: Project[] = [
   {
     id: "05",
     categories: ["Backend", "Java/Spring Boot"],
+    displayCategory: "JAVA · BACKEND",
     title: "Task Manager App",
-    shortDesc: "Full-stack task management application with user authentication, role-based access and clean REST API design.",
-    tags: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "React"],
+    shortDesc: "Full-stack task management application with Spring Boot REST API, React TypeScript frontend, role-based task organization and Docker deployment.",
+    modalSubtitle: "Full-stack task management with Spring Boot REST API, TypeScript frontend and Docker deployment.",
+    tags: ["Java", "Spring Boot", "React", "TypeScript", "Docker", "Tailwind CSS"],
+    modalTags: ["Java", "Spring Boot", "Spring MVC", "React", "TypeScript", "Tailwind CSS", "Docker", "Maven"],
     imageSrc: "/project_a.png",
-    problem: "Generic task managers lack the robust enterprise-level security and role management developers need.",
-    solution: "A highly secure, role-based task management system utilizing enterprise Java frameworks.",
+    problem: "Managing multiple tasks across different projects becomes chaotic without a structured system. Most basic to-do apps lack proper task organization, priority management, and a scalable backend architecture.",
+    solution: "Built a full-stack task management application with a Spring Boot REST API backend and React TypeScript frontend. Tasks are organized into Task Lists with priority and status tracking, all containerized using Docker for easy deployment.",
     features: [
-      "Robust Spring Security JWT implementation",
-      "Role-based access control (Admin, User)",
-      "RESTful endpoint design with strict validation",
-      "Complex relational database mappings in PostgreSQL"
+      "Spring Boot REST API with clean layered architecture — Controllers, Services, Repositories and DTOs",
+      "Task Lists with nested Tasks — each task has Priority (High/Medium/Low) and Status (Todo/InProgress/Done) tracking",
+      "React TypeScript frontend with dedicated screens for creating, updating and managing task lists and tasks",
+      "Dockerized with docker-compose for one-command local setup and deployment"
     ],
     outcomes: [
-      "Achieved robust security against common vulnerabilities",
-      "Maintained scalable and clean code architecture",
-      "Integrated smoothly with a React frontend"
+      "Implemented clean REST API design with proper DTO pattern, entity mapping and global exception handling",
+      "Learned full-stack integration between Spring Boot backend and React TypeScript frontend with proper domain modeling",
+      "Containerized entire application using Docker and docker-compose for production-ready deployment"
     ],
-    githubUrl: "https://github.com/PawanBhandari03"
+    githubUrl: "https://github.com/PawanBhandari03/Task-Manger-App"
   },
   {
     id: "06",
     categories: ["Backend", "Java/Spring Boot"],
+    displayCategory: "JAVA · BACKEND",
     title: "E-Commerce Application",
-    shortDesc: "Buy and sell platform with product listings, cart, order management and secured endpoints.",
-    tags: ["Java", "Spring Boot", "Spring Security", "MySQL", "React"],
+    shortDesc: "Full-stack e-commerce platform with Spring Boot REST API, product management, image upload, cart support and search filtering.",
+    modalSubtitle: "Full-stack e-commerce platform with Spring Boot REST API, product management, cart support and search filtering.",
+    tags: ["Java", "Spring Boot", "Spring Data JPA", "React", "H2 Database", "REST APIs", "Maven"],
     imageSrc: "/project_b.png",
-    problem: "Small businesses need a reliable, scalable, and secure platform to manage online transactions and inventory.",
-    solution: "A comprehensive e-commerce backend handling everything from cart sessions to secure order processing.",
+    problem: "Building a scalable e-commerce backend requires handling complex operations like product inventory, image management, cart functionality and search filtering — all through clean, well-structured REST APIs that a frontend can consume reliably.",
+    solution: "Built a full-stack e-commerce application with a Spring Boot backend providing complete REST APIs for product management, image upload, stock tracking and cart operations. The React frontend consumes these APIs to deliver a complete shopping experience.",
     features: [
-      "Secure user registration and session management",
-      "Stateful cart and complex order workflows",
-      "Optimized MySQL queries for large catalogs",
-      "Comprehensive exception handling and logging"
+      "Complete Product CRUD — create, read, update and delete products with image upload support",
+      "Search and filter APIs — find products by name, category or availability with dynamic queries",
+      "Cart support — add products to cart, manage quantities and handle stock availability checks",
+      "Spring Data JPA with H2 database — clean repository pattern with entity relationships"
     ],
     outcomes: [
-      "Processed complex transactional workflows accurately",
-      "Ensured high availability and system reliability",
-      "Delivered a complete, deployable enterprise product"
+      "Built a production-ready REST API architecture following Spring Boot best practices with layered design",
+      "Implemented file handling for product image upload and retrieval within a Spring Boot application",
+      "Delivered a complete full-stack e-commerce solution integrating React frontend with Spring Boot backend"
     ],
-    githubUrl: "https://github.com/PawanBhandari03"
+    githubBackendUrl: "https://github.com/PawanBhandari03/E-Commerce-website-Backend",
+    githubFrontendUrl: "https://github.com/PawanBhandari03/E-Commerce-website-Frontend"
   },
   {
     id: "07",
@@ -229,28 +240,6 @@ const PROJECTS: Project[] = [
     liveUrl: "https://news-mag-rust.vercel.app",
     snapshots: [newsImg2, newsImg5, newsImg3, newsImg4],
     architectureImg: newsImg1
-  },
-  {
-    id: "09",
-    categories: ["AI/ML"],
-    title: "AI Prediction Engine",
-    shortDesc: "Experimental machine learning model for predictive analytics and data processing.",
-    tags: ["Python", "TensorFlow", "Pandas", "Scikit-Learn"],
-    imageSrc: "/project_a.png",
-    problem: "Businesses struggle to forecast trends based on large volumes of unstructured data.",
-    solution: "A scalable predictive engine that processes historical data to identify future patterns.",
-    features: [
-      "Automated data preprocessing and cleaning",
-      "Custom neural network architecture",
-      "Real-time inference API via FastAPI",
-      "Interactive data visualization dashboards"
-    ],
-    outcomes: [
-      "Achieved 85% accuracy on forecasting test sets",
-      "Reduced manual data analysis time by 40%",
-      "Deployed successfully using Docker containers"
-    ],
-    githubUrl: "https://github.com/PawanBhandari03"
   }
 ];
 
@@ -295,7 +284,7 @@ export default function FeaturedProjects() {
         {/* New Stats Bar */}
         <div className="mt-8 flex flex-row items-center justify-center gap-4 md:gap-16">
           <div className="flex flex-col items-center">
-            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>9</span>
+            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>8</span>
             <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Projects</span>
           </div>
           <div className="h-8 md:h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
@@ -381,11 +370,17 @@ export default function FeaturedProjects() {
                     {proj.id}
                   </span>
                   <div className="flex flex-wrap gap-4">
-                    {proj.categories.map(cat => (
-                      <span key={cat} className="text-[11px] font-black tracking-widest uppercase" style={{ color: 'var(--text-secondary)' }}>
-                        {cat}
+                    {proj.displayCategory ? (
+                      <span className="text-[11px] font-black tracking-widest uppercase" style={{ color: 'var(--text-secondary)' }}>
+                        {proj.displayCategory}
                       </span>
-                    ))}
+                    ) : (
+                      proj.categories.map(cat => (
+                        <span key={cat} className="text-[11px] font-black tracking-widest uppercase" style={{ color: 'var(--text-secondary)' }}>
+                          {cat}
+                        </span>
+                      ))
+                    )}
                   </div>
                 </div>
 
@@ -469,23 +464,30 @@ export default function FeaturedProjects() {
                 </button>
 
                 <div className="flex gap-2 mb-4 mt-2">
-                  {selectedProject.categories.map(cat => {
-                    let colorStyles = "text-emerald-700 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-900/30";
-                    if (cat.includes("AI")) colorStyles = "text-purple-700 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/30";
-                    if (cat.includes("Full Stack")) colorStyles = "text-blue-700 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30";
-                    if (cat.includes("Backend") || cat.includes("Java")) colorStyles = "text-orange-700 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/30";
-                    
-                    return (
-                      <span key={cat} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-full ${colorStyles}`}>
-                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                        {cat}
-                      </span>
-                    );
-                  })}
+                  {selectedProject.displayCategory ? (
+                    <span className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-full text-orange-700 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/30">
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                      {selectedProject.displayCategory}
+                    </span>
+                  ) : (
+                    selectedProject.categories.map(cat => {
+                      let colorStyles = "text-emerald-700 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-900/30";
+                      if (cat.includes("AI")) colorStyles = "text-purple-700 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/30";
+                      if (cat.includes("Full Stack")) colorStyles = "text-blue-700 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30";
+                      if (cat.includes("Backend") || cat.includes("Java")) colorStyles = "text-orange-700 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/30";
+                      
+                      return (
+                        <span key={cat} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest rounded-full ${colorStyles}`}>
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                          {cat}
+                        </span>
+                      );
+                    })
+                  )}
                 </div>
                 <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3 leading-tight">{selectedProject.title}</h2>
                 <p className="text-slate-600 dark:text-[#94a3b8] text-[15px] md:text-base font-medium max-w-3xl leading-relaxed">
-                  {selectedProject.shortDesc}
+                  {selectedProject.modalSubtitle || selectedProject.shortDesc}
                 </p>
               </div>
 
@@ -494,7 +496,7 @@ export default function FeaturedProjects() {
                 
                 {/* Top Tags Row */}
                 <div className="flex flex-wrap gap-2.5 mb-8">
-                  {selectedProject.tags.map(tag => (
+                  {(selectedProject.modalTags || selectedProject.tags).map(tag => (
                     <span key={tag} className="px-4 py-1.5 bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 text-[11px] font-extrabold uppercase tracking-widest rounded-full">
                       {tag}
                     </span>
@@ -603,7 +605,19 @@ export default function FeaturedProjects() {
 
                   {/* Modal Footer / Buttons */}
                   <div className="pt-8 mt-12 border-t border-slate-200 dark:border-white/10 flex flex-wrap gap-4 items-center justify-end">
-                    {selectedProject.githubUrl && (
+                    {selectedProject.githubBackendUrl && (
+                      <a href={selectedProject.githubBackendUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-transparent border border-slate-300 dark:border-white/20 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
+                        View Backend on GitHub
+                      </a>
+                    )}
+                    {selectedProject.githubFrontendUrl && (
+                      <a href={selectedProject.githubFrontendUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-transparent border border-slate-300 dark:border-white/20 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
+                        View Frontend on GitHub
+                      </a>
+                    )}
+                    {selectedProject.githubUrl && !selectedProject.githubBackendUrl && !selectedProject.githubFrontendUrl && (
                       <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-transparent border border-slate-300 dark:border-white/20 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all flex items-center gap-2">
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
                         View on GitHub

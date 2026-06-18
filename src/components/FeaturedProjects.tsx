@@ -20,6 +20,18 @@ import movieImg5 from '../assets/movie/Screenshot 2026-06-17 163708.png';
 import movieImg6 from '../assets/movie/Screenshot 2026-06-17 163713.png';
 import movieImg7 from '../assets/movie/Screenshot 2026-06-17 164137.png';
 
+import taskImg1 from '../assets/Task/Screenshot 2026-06-18 162500.png';
+import taskImg2 from '../assets/Task/Screenshot 2026-06-18 162509.png';
+import taskImg3 from '../assets/Task/Screenshot 2026-06-18 162530.png';
+import taskImg4 from '../assets/Task/Screenshot 2026-06-18 162536.png';
+import taskImg5 from '../assets/Task/Screenshot 2026-06-18 162542.png';
+
+import ecomImg1 from '../assets/Ecom/Screenshot 2026-06-18 172256.png';
+import ecomImg2 from '../assets/Ecom/Screenshot 2026-06-18 172303.png';
+import ecomImg3 from '../assets/Ecom/Screenshot 2026-06-18 172312.png';
+import ecomImg4 from '../assets/Ecom/Screenshot 2026-06-18 172316.png';
+import ecomImg5 from '../assets/Ecom/Screenshot 2026-06-18 172336.png';
+
 type ProjectCategory = 'Full Stack' | 'Backend' | 'AI/ML' | 'Web App' | 'Java/Spring Boot';
 
 interface Project {
@@ -150,7 +162,6 @@ const PROJECTS: Project[] = [
     modalSubtitle: "Full-stack task management with Spring Boot REST API, TypeScript frontend and Docker deployment.",
     tags: ["Java", "Spring Boot", "React", "TypeScript", "Docker", "Tailwind CSS"],
     modalTags: ["Java", "Spring Boot", "Spring MVC", "React", "TypeScript", "Tailwind CSS", "Docker", "Maven"],
-    imageSrc: "/project_a.png",
     problem: "Managing multiple tasks across different projects becomes chaotic without a structured system. Most basic to-do apps lack proper task organization, priority management, and a scalable backend architecture.",
     solution: "Built a full-stack task management application with a Spring Boot REST API backend and React TypeScript frontend. Tasks are organized into Task Lists with priority and status tracking, all containerized using Docker for easy deployment.",
     features: [
@@ -164,7 +175,10 @@ const PROJECTS: Project[] = [
       "Learned full-stack integration between Spring Boot backend and React TypeScript frontend with proper domain modeling",
       "Containerized entire application using Docker and docker-compose for production-ready deployment"
     ],
-    githubUrl: "https://github.com/PawanBhandari03/Task-Manger-App"
+    githubUrl: "https://github.com/PawanBhandari03/Task-Manger-App",
+    imageSrc: taskImg1,
+    snapshots: [taskImg2, taskImg3, taskImg4, taskImg5],
+    architectureImg: taskImg1
   },
   {
     id: "06",
@@ -174,7 +188,7 @@ const PROJECTS: Project[] = [
     shortDesc: "Full-stack e-commerce platform with Spring Boot REST API, product management, image upload, cart support and search filtering.",
     modalSubtitle: "Full-stack e-commerce platform with Spring Boot REST API, product management, cart support and search filtering.",
     tags: ["Java", "Spring Boot", "Spring Data JPA", "React", "H2 Database", "REST APIs", "Maven"],
-    imageSrc: "/project_b.png",
+    imageSrc: ecomImg1,
     problem: "Building a scalable e-commerce backend requires handling complex operations like product inventory, image management, cart functionality and search filtering — all through clean, well-structured REST APIs that a frontend can consume reliably.",
     solution: "Built a full-stack e-commerce application with a Spring Boot backend providing complete REST APIs for product management, image upload, stock tracking and cart operations. The React frontend consumes these APIs to deliver a complete shopping experience.",
     features: [
@@ -188,8 +202,9 @@ const PROJECTS: Project[] = [
       "Implemented file handling for product image upload and retrieval within a Spring Boot application",
       "Delivered a complete full-stack e-commerce solution integrating React frontend with Spring Boot backend"
     ],
-    githubBackendUrl: "https://github.com/PawanBhandari03/E-Commerce-website-Backend",
-    githubFrontendUrl: "https://github.com/PawanBhandari03/E-Commerce-website-Frontend"
+    githubUrl: "https://github.com/PawanBhandari03/E-Commerce-Website",
+    snapshots: [ecomImg2, ecomImg3, ecomImg4, ecomImg5],
+    architectureImg: ecomImg1
   },
   {
     id: "07",
@@ -352,9 +367,9 @@ export default function FeaturedProjects() {
               {/* Top Half: Image */}
               <div className="w-full h-[200px] md:h-64 relative overflow-hidden" style={{ backgroundColor: 'var(--image-placeholder)' }}>
                 {proj.imageSrc && !proj.imageSrc.startsWith('/project_') ? (
-                  <img src={proj.imageSrc} alt={proj.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105" />
+                  <img src={proj.imageSrc} alt={proj.title} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105">
+                  <div className="w-full h-full flex items-center justify-center transition-all duration-500 group-hover:scale-105">
                     <span className="text-xl md:text-2xl font-black tracking-widest uppercase px-6 text-center" style={{ color: 'var(--text-secondary)', opacity: 0.2 }}>{proj.title}</span>
                   </div>
                 )}

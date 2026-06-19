@@ -36,7 +36,7 @@ export default function AchievementsPage({ onBack }: Props) {
               Milestones & Victories
             </p>
             <h1 className="text-5xl md:text-8xl font-extrabold tracking-tight leading-tight" style={{ color: 'var(--text-primary)' }}>
-              My <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f472b6] to-[#8B5CF6]">Achievements</span>
+              My <span style={{ color: '#a855f7' }}>Achievements</span>
             </h1>
             <p className="text-lg md:text-xl mt-6 max-w-2xl mx-auto font-medium" style={{ color: 'var(--text-secondary)' }}>
               From code to peaks, every achievement tells a story of dedication.

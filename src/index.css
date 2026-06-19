@@ -37,8 +37,6 @@ body {
   --border-color: rgba(124,58,237,0.15);
   --active-border-color: rgba(124,58,237,0.5);
   --tag-bg: #f1f5f9;
-  --card-gradient-start: #e8ecf4;
-  --card-gradient-end: #ffffff;
   --marquee-fade: #f3f0ff;
   --section-bg: #f8f7ff;
   --image-placeholder: #e2e8f0;
@@ -55,8 +53,6 @@ html.dark {
   --border-color: rgba(255,255,255,0.08);
   --active-border-color: rgba(168,85,247,0.5);
   --tag-bg: rgba(255,255,255,0.06);
-  --card-gradient-start: #161b2e;
-  --card-gradient-end: #0d0d1a;
   --marquee-fade: #13131f;
   --section-bg: #0d0d1a;
   --image-placeholder: #1e1e2e;
@@ -67,11 +63,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f3f0ff;
-  background-image: 
-    radial-gradient(ellipse at 20% 50%, rgba(167,139,250,0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(244,114,182,0.12) 0%, transparent 50%);
-  background-size: 100% 100%, 100% 100%;
+  background-color: #f8f7ff;
 }
 
 /* === DARK MODE body === */
@@ -105,31 +97,13 @@ html.dark body {
   background-color: rgba(255,255,255,0.1);
 }
 
-/* ─── Glowing animated border for profile photo ─── */
-@keyframes glow-rotate {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
+/* ─── Solid border for profile photo ─── */
 .glow-border {
   position: relative;
   padding: 4px;
   border-radius: 24px;
-  background: linear-gradient(
-    270deg,
-    #f472b6,
-    #8B5CF6,
-    #7C3AED,
-    #f472b6,
-    #c084fc,
-    #8B5CF6
-  );
-  background-size: 400% 400%;
-  animation: glow-rotate 4s ease infinite;
-  box-shadow:
-    0 0 20px rgba(139, 92, 246, 0.35),
-    0 0 60px rgba(244, 114, 182, 0.15);
+  background: #7c3aed;
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
 }
 
 .glow-border > * {
@@ -151,22 +125,9 @@ html.dark body {
   animation-delay: 1.5s;
 }
 
-/* ─── Hero purple radial glow ─── */
+/* ─── Hero section wrapper ─── */
 .hero-glow {
   position: relative;
-}
-
-.hero-glow::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 30%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 0;
 }
 
 /* ─── Navbar glassmorphism ─── */
@@ -239,7 +200,7 @@ html:not(.dark) .navbar-glass.scrolled {
   top: 0; left: 0;
   width: 40%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: transparent;
   transform: translateX(-100%) skewX(-20deg);
   transition: none;
 }
@@ -294,19 +255,9 @@ html:not(.dark) .navbar-glass.scrolled {
   animation: trophy-float 3s ease-in-out infinite;
 }
 
-/* ─── Badge shimmer ─── */
-@keyframes badge-shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
+/* ─── Badge ─── */
 .badge-shimmer {
-  background: linear-gradient(90deg, 
-    rgba(139,92,246,0.2) 25%,
-    rgba(139,92,246,0.5) 50%,
-    rgba(139,92,246,0.2) 75%
-  );
-  background-size: 200% auto;
-  animation: badge-shimmer 2.5s linear infinite;
+  background: rgba(139,92,246,0.15);
 }
 
 /* ─── Count-up target element ─── */

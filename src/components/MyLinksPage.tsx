@@ -150,7 +150,7 @@ export default function MyLinksPage({ onBack }: Props) {
           GET IN TOUCH
         </p>
         <h1 className="text-5xl md:text-8xl font-extrabold tracking-tight leading-tight text-slate-900 dark:text-white">
-          Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f472b6] to-[#8B5CF6]">Connect</span>
+          Let's <span style={{ color: '#a855f7' }}>Connect</span>
         </h1>
         <p className="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-xl font-medium mt-2">
           Have a project in mind or just want to say hi? I'd love to hear from you.
@@ -249,7 +249,7 @@ export default function MyLinksPage({ onBack }: Props) {
                     key="submit-btn"
                     type="submit"
                     disabled={isLoading}
-                    className={`w-full bg-gradient-to-r from-[#8B5CF6] to-[#f472b6] hover:brightness-110 active:scale-[0.98] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/35 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed ${isLoading ? 'animate-pulse' : ''}`}
+                    className={`w-full bg-[#7c3aed] hover:bg-[#6d28d9] active:scale-[0.98] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/35 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed ${isLoading ? 'animate-pulse' : ''}`}
                   >
                     {isLoading ? (
                       <>

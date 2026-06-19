@@ -337,7 +337,7 @@ export default function FeaturedProjects() {
           PORTFOLIO
         </span>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight" style={{ color: 'var(--text-primary)' }}>
-          Featured <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#b388ff] to-[#f472b6]">Projects</span>
+          Featured <span style={{ color: '#a855f7' }}>Projects</span>
         </h2>
         <p className="text-lg md:text-xl font-medium mt-2 max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
           A curated selection of projects that define my engineering journey.
@@ -400,11 +400,9 @@ export default function FeaturedProjects() {
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4, delay: 0.1 * (Number(proj.id) % 3) }}
               onClick={() => setSelectedProject(proj)}
-              className="group relative rounded-[24px] p-[2px] transition-all duration-300 cursor-pointer card-hover"
+              className="group relative rounded-[24px] p-[2px] transition-all duration-300 cursor-pointer card-hover hover:shadow-[0_0_20px_rgba(124,58,237,0.5)]"
               style={{
-                background: 'linear-gradient(270deg, #f472b6, #8B5CF6, #7C3AED, #f472b6)',
-                backgroundSize: '400% 400%',
-                animation: 'glow-rotate 4s ease infinite',
+                background: '#7c3aed',
               }}
             >
               <div
@@ -420,7 +418,7 @@ export default function FeaturedProjects() {
                     <span className="text-xl md:text-2xl font-black tracking-widest uppercase px-6 text-center" style={{ color: 'var(--text-secondary)', opacity: 0.2 }}>{proj.title}</span>
                   </div>
                 )}
-                <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, var(--card-bg), transparent)' }} />
+
               </div>
 
               {/* Bottom Half: Content */}
@@ -578,7 +576,7 @@ export default function FeaturedProjects() {
                         <img src={selectedProject.architectureImg} alt={`${selectedProject.title} Architecture/Showcase`} className="w-full h-full object-contain" />
                       ) : (
                         <>
-                          <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-100 dark:from-[#1e2330] dark:to-[#0a0f1e] opacity-70" />
+                          <div className="absolute inset-0 bg-[#1e2330] dark:bg-[#1e2330] opacity-70" />
                           <span className="text-lg font-black text-slate-900/5 dark:text-white/5 tracking-widest uppercase px-6 text-center relative z-10">{selectedProject.title} Architecture</span>
                         </>
                       )}

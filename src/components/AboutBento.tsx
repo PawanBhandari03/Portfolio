@@ -239,12 +239,12 @@ export default function AboutBento() {
                       style={{ borderRadius: '16px' }}
                     />
 
-                    {/* Gradient + caption overlay */}
+                    {/* Solid overlay + caption */}
                     <div
                       className="absolute inset-0 flex items-end justify-center"
                       style={{ borderRadius: '16px' }}
                     >
-                      <div className="w-full bg-gradient-to-t from-black/80 via-black/30 to-transparent pt-10 pb-4 px-3">
+                      <div className="w-full bg-black/60 pt-10 pb-4 px-3">
                         <p className="text-white text-sm font-extrabold tracking-[0.2em] uppercase text-center">
                           {img.caption}
                         </p>
@@ -283,21 +283,16 @@ export default function AboutBento() {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
             style={{
-              background: `linear-gradient(160deg, var(--card-gradient-start) 0%, var(--card-gradient-end) 100%)`,
+              background: 'var(--card-bg)',
               boxShadow: '0 0 0 1px rgba(139,92,246,0.2), 0 0 40px rgba(139,92,246,0.12)'
             }}
           >
-            {/* Animated glow border */}
+            {/* Solid purple border overlay */}
             <div
               className="absolute inset-0 rounded-[32px] pointer-events-none z-10"
               style={{
-                background: 'linear-gradient(270deg, #f472b6, #8B5CF6, #7C3AED, #f472b6)',
-                backgroundSize: '400% 400%',
-                animation: 'glow-rotate 4s ease infinite',
-                padding: '1.5px',
-                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                WebkitMaskComposite: 'xor',
-                maskComposite: 'exclude'
+                border: '2px solid #7c3aed',
+                boxShadow: '0 0 20px rgba(124, 58, 237, 0.3)'
               }}
             />
 
@@ -344,8 +339,8 @@ export default function AboutBento() {
               animate={{ left: ['-10%', '110%', '-10%'] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
             />
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 z-0" style={{ background: `linear-gradient(to top, var(--card-bg) 20%, transparent 100%)` }} />
+            {/* Solid overlay to blend into card */}
+            <div className="absolute inset-0 z-0" style={{ background: 'var(--card-bg)', opacity: 0.5 }} />
             <div className="z-10 relative">
               <h4 className="text-[20px] md:text-[23px] font-black tracking-widest uppercase leading-none" style={{ color: 'var(--text-primary)' }}>
                 PUNE, INDIA
@@ -414,8 +409,8 @@ export default function AboutBento() {
               ))}
             </motion.div>
             {/* Fade edges */}
-            <div className="absolute left-0 top-0 w-12 h-full z-10 pointer-events-none" style={{ background: `linear-gradient(to right, var(--marquee-fade), transparent)` }} />
-            <div className="absolute right-0 top-0 w-12 h-full z-10 pointer-events-none" style={{ background: `linear-gradient(to left, var(--marquee-fade), transparent)` }} />
+            <div className="absolute left-0 top-0 w-12 h-full z-10 pointer-events-none" style={{ background: 'var(--marquee-fade)' }} />
+            <div className="absolute right-0 top-0 w-12 h-full z-10 pointer-events-none" style={{ background: 'var(--marquee-fade)' }} />
           </div>
 
           <div className="mt-auto pt-2">

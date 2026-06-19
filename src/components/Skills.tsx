@@ -180,7 +180,7 @@ export default function Skills() {
               TECH STACK
             </p>
             <h2 className="text-4xl md:text-6xl font-black tracking-tight" style={{ color: 'var(--text-primary)' }}>
-              My <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Skills</span>
+              My <span style={{ color: '#a855f7' }}>Skills</span>
             </h2>
             <p className="text-base md:text-lg font-medium mt-2" style={{ color: 'var(--text-secondary)' }}>
               Technologies I use to architect, build and ship real-world software.

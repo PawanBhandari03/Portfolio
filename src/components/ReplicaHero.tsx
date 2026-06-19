@@ -183,7 +183,7 @@ export default function ReplicaHero() {
                   className="w-[200px] h-[200px] md:w-80 md:h-80 mx-auto flex flex-col items-center justify-center overflow-hidden"
                   style={{
                     borderRadius: '20px',
-                    background: 'linear-gradient(160deg, #161b2e 0%, #0d0d1a 100%)',
+                    background: '#0d0d1a',
                   }}
                 >
                   <img
@@ -201,7 +201,7 @@ export default function ReplicaHero() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <div className="w-6 h-6 md:w-10 md:h-10 rounded-md md:rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#6D28D9] flex items-center justify-center">
+                <div className="w-6 h-6 md:w-10 md:h-10 rounded-md md:rounded-xl bg-[#7c3aed] flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-3 h-3 md:w-5 md:h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
                   </svg>
@@ -219,7 +219,7 @@ export default function ReplicaHero() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.75 }}
               >
-                <div className="w-6 h-6 md:w-10 md:h-10 rounded-md md:rounded-xl bg-gradient-to-br from-[#f472b6] to-[#ec4899] flex items-center justify-center">
+                <div className="w-6 h-6 md:w-10 md:h-10 rounded-md md:rounded-xl bg-[#ec4899] flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-3 h-3 md:w-5 md:h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                   </svg>

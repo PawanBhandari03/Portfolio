@@ -199,7 +199,7 @@ export default function GuestbookPage({ onBack }: Props) {
         </p>
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
           Leave Your{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-500">Mark</span>
+          <span style={{ color: '#a855f7' }}>Mark</span>
         </h1>
         <p className="text-slate-500 dark:text-slate-400 text-lg md:text-xl max-w-xl font-medium">
           Share your thoughts, feedback, or just say hi!
@@ -238,7 +238,7 @@ export default function GuestbookPage({ onBack }: Props) {
               </p>
               <button
                 onClick={() => setShowForm(true)}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-bold px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-2 bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-violet-500/25 hover:-translate-y-0.5 active:translate-y-0"
               >
                 <SendIcon />
                 Leave a Message
@@ -289,7 +289,7 @@ export default function GuestbookPage({ onBack }: Props) {
               <button
                 onClick={handlePost}
                 disabled={posting}
-                className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2"
+                className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-violet-500/20 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2"
               >
                 {posting ? (
                   <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">

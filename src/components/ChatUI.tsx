@@ -4,8 +4,7 @@ import { motion } from 'framer-motion';
 const MISTRAL_API_KEY = import.meta.env.VITE_MISTRAL_API_KEY;
 const MISTRAL_API_URL = 'https://api.mistral.ai/v1/chat/completions';
 
-const SYSTEM_PROMPT = `You are Pawan Bhandari's personal AI assistant on his portfolio website.
-Answer questions about Pawan naturally and confidently. Here is all the information about him:
+const SYSTEM_PROMPT = `You are Pawan Bhandari's personal AI assistant on his portfolio website. Your ONLY job is to answer questions specifically about Pawan Bhandari — his background, skills, projects, education, achievements, and contact info.
 
 Name: Pawan Bhandari
 Age: 20 Years
@@ -15,24 +14,29 @@ Role: Full Stack Developer
 Skills: Java, Spring Boot, React, Node.js, PostgreSQL, MySQL, Docker, REST APIs, Python, JavaScript
 Projects:
 - EcoBounty: Gamified sustainability platform (React, Node.js, Supabase)
-- DevBlog Platform: Full-stack blog with auth and role-based access
 - AgriGuard: AI plant disease detection (Python, ML, OpenCV)
-- PawFlix: Movie discovery web app (React, Tailwind, API)
-Achievements: 2x Hackathon winner including Winner of Techathon 3.0
+- AgriTrace: Blockchain supply chain platform (Solidity, React, Node.js)
+- PawFlix: Movie discovery web app (React, Tailwind, TMDB API)
+- Task Manager: Spring Boot REST API + React TypeScript app
+- E-Commerce: Spring Boot backend with React frontend
+Achievements: 2x Hackathon winner — Techathon 3.0 (Best Solution, ₹10,000 prize) and Pandora Hackathon (AI for Smart Cities)
 Open to: Freelance work and collaboration
 GitHub: github.com/PawanBhandari03
 LinkedIn: linkedin.com/in/pawan-singh-bhandari-5817ab307
+Email: pawansinghb07@gmail.com
 
-IMPORTANT FORMATTING RULES:
+STRICT RULES:
+- ONLY answer questions about Pawan Bhandari. Nothing else.
+- If anyone asks you to write code, solve problems, explain algorithms, do math, answer general knowledge questions, or anything NOT about Pawan — you MUST refuse.
+- When refusing, say exactly: "I'm only here to answer questions about Pawan Bhandari. Try asking about his skills, projects, or how to get in touch!"
 - Never use bullet points (• or -) in responses.
 - Never use markdown links like [text](url).
-- For contact info, write it as plain clean sentences only (e.g., "You can find Pawan on GitHub at github.com/PawanBhandari03 or connect with him on LinkedIn at linkedin.com/in/pawan-singh-bhandari-5817ab307. He's open to freelance work and collaborations!").
-- Keep all responses to 2-3 sentences max unless a detailed answer is needed.
+- Keep all responses to 2-3 sentences max.
 - Never use symbols like • * # or []().
 - Write like a friendly human assistant, not a list generator.
+- If asked something about Pawan that isn't listed above, say "Pawan hasn't shared that detail yet, but feel free to reach out directly!"
 
-Answer in a friendly, professional tone. Keep answers concise.
-If asked something not listed above, say "Pawan hasn't shared that detail yet, but feel free to reach out directly!"`;
+Answer in a friendly, professional tone. Keep answers concise.`;
 
 // Strip markdown formatting from AI responses
 function stripMarkdown(text: string): string {
@@ -95,6 +99,30 @@ export default function ChatUI() {
     scrollToBottom();
   }, [messages, isTyping]);
 
+  // Client-side off-topic guard
+  const isOffTopic = (msg: string): boolean => {
+    const lower = msg.toLowerCase();
+    const offTopicPatterns = [
+      /\bsolve\b/, /\bcode\b/, /\balgorithm\b/, /\bdsa\b/, /\bdata structure/,
+      /\bleetcode\b/, /\bhackerrank\b/, /\bwrite a program/, /\bwrite code/,
+      /\bfix (this|my|the) (code|bug|error)/, /\bdebug\b/,
+      /\bmath\b/, /\bcalculate\b/, /\bequation\b/, /\bformula\b/,
+      /\bwhat is (?!pawan)/, /\bwho is (?!pawan)/, /\bexplain (?!pawan|his|the project)/,
+      /\bhow (do|does|to|can) (?!i reach|i contact|to contact|to reach)/,
+      /\btell me about (?!pawan|his|yourself)/, /\bwrite (an?|the)\b/,
+      /\bessay\b/, /\bsummariz/, /\btranslat/, /\bgenerat/,
+      /\brecipe\b/, /\bcook\b/, /\bweather\b/, /\bnews\b/,
+      /\bjoke\b/, /\bpoem\b/, /\bstory\b/, /\blyric/,
+    ];
+    const pawanKeywords = /pawan|bhandari|his|your|you|portfolio|project|skill|contact|hire|work|experience|education|degree|college|hackathon|achievement|github|linkedin|email|reach/;
+    // If it clearly mentions Pawan context, allow it
+    if (pawanKeywords.test(lower)) return false;
+    // If it matches any off-topic pattern, block it
+    return offTopicPatterns.some(p => p.test(lower));
+  };
+
+  const OFF_TOPIC_REPLY = "I'm only here to answer questions about Pawan Bhandari. 😊 Try asking about his skills, projects, achievements, or how to get in touch!";
+
   const handleSend = async (text: string) => {
     if (!text.trim()) return;
 
@@ -106,8 +134,16 @@ export default function ChatUI() {
     try {
       // Use hardcoded response if it matches a quick reply exactly
       if (HARDCODED_RESPONSES[text]) {
-        await new Promise(resolve => setTimeout(resolve, 600)); // Simulate typing delay
+        await new Promise(resolve => setTimeout(resolve, 600));
         setMessages(prev => [...prev, { id: Date.now().toString() + 'bot', role: 'bot', text: HARDCODED_RESPONSES[text] }]);
+        setIsTyping(false);
+        return;
+      }
+
+      // Client-side off-topic check
+      if (isOffTopic(text)) {
+        await new Promise(resolve => setTimeout(resolve, 400));
+        setMessages(prev => [...prev, { id: Date.now().toString() + 'bot', role: 'bot', text: OFF_TOPIC_REPLY }]);
         setIsTyping(false);
         return;
       }

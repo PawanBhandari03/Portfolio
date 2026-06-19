@@ -409,8 +409,8 @@ export default function AboutBento() {
               ))}
             </motion.div>
             {/* Fade edges */}
-            <div className="absolute left-0 top-0 w-12 h-full z-10 pointer-events-none" style={{ background: 'var(--marquee-fade)' }} />
-            <div className="absolute right-0 top-0 w-12 h-full z-10 pointer-events-none" style={{ background: 'var(--marquee-fade)' }} />
+            <div className="absolute left-0 top-0 w-12 h-full z-10 pointer-events-none" style={{ background: `linear-gradient(to right, var(--marquee-fade), transparent)` }} />
+            <div className="absolute right-0 top-0 w-12 h-full z-10 pointer-events-none" style={{ background: `linear-gradient(to left, var(--marquee-fade), transparent)` }} />
           </div>
 
           <div className="mt-auto pt-2">

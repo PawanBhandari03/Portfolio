@@ -201,7 +201,7 @@ export default function Skills() {
             </div>
             <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/10 shrink-0" />
             <div className="flex flex-col text-center">
-              <span className="text-[16px] md:text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={8} /></span>
+              <span className="text-[16px] md:text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={5} /></span>
               <span className="text-[9px] md:text-[10px] uppercase tracking-wider font-bold whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>Domains</span>
             </div>
             <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/10 shrink-0" />

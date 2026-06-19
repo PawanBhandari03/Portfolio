@@ -356,7 +356,7 @@ export default function FeaturedProjects() {
           </div>
           <div className="h-8 md:h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
           <div className="flex flex-col items-center">
-            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>20+</span>
+            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>25+</span>
             <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Technologies</span>
           </div>
         </div>

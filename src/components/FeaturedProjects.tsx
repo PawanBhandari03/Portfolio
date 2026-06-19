@@ -13,7 +13,6 @@ import carImg3 from '../assets/Car/Screenshot 2026-06-17 140514.png';
 import carImg4 from '../assets/Car/Screenshot 2026-06-17 140520.png';
 
 import movieImg1 from '../assets/movie/Screenshot 2026-06-17 163629.png';
-import movieImg2 from '../assets/movie/Screenshot 2026-06-17 163634.png';
 import movieImg3 from '../assets/movie/Screenshot 2026-06-17 163652.png';
 import movieImg4 from '../assets/movie/Screenshot 2026-06-17 163657.png';
 import movieImg5 from '../assets/movie/Screenshot 2026-06-17 163708.png';

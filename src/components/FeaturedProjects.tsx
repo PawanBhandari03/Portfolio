@@ -181,7 +181,7 @@ const PROJECTS: Project[] = [
     title: "PawFlix",
     shortDesc: "Movie discovery web app with dynamic data fetching, search and fully responsive UI.",
     tags: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Vite"],
-    imageSrc: "",
+    imageSrc: movieImg1,
     problem: "Movie lovers have no simple and fast way to discover, search and explore films across genres without dealing with bloated and slow streaming platforms. A lightweight movie discovery tool was missing.",
     solution: "Built a React-based movie discovery platform that integrates with the TMDB API to fetch real-time movie data. Users can browse trending films, search by title, and explore detailed information about any movie instantly.",
     features: [
@@ -198,7 +198,7 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/PawanBhandari03/PawFlix",
     liveUrl: "https://movie-website-paw-wszk.vercel.app",
     snapshots: [movieImg1, movieImg3, movieImg7, movieImg4, movieImg5, movieImg6],
-    architectureImg: ""
+    architectureImg: movieImg1
   },
   {
     id: "05",
@@ -259,7 +259,7 @@ const PROJECTS: Project[] = [
     title: "EV-olution",
     shortDesc: "Premium electric vehicle showcase with cinematic hero slider, model listings and specs comparison.",
     tags: ["React", "JavaScript", "CSS", "Vite"],
-    imageSrc: "",
+    imageSrc: carImg1,
     problem: "Electric vehicle buyers struggle to find a single visually engaging platform to explore and compare premium EV models with detailed specifications.",
     solution: "Built a cinematic EV showcase website with a full-screen image and video slider, featured model cards with specs, and a clean contact section — designed to feel like a premium automotive brand website.",
     features: [
@@ -276,7 +276,7 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/PawanBhandari03/EV-DashBoard",
     liveUrl: "https://ev-dash-board-v3nw.vercel.app",
     snapshots: [carImg1, carImg2, carImg3, carImg4],
-    architectureImg: ""
+    architectureImg: carImg1
   },
   {
     id: "08",
@@ -284,7 +284,7 @@ const PROJECTS: Project[] = [
     title: "News Magazine",
     shortDesc: "Real-time news aggregator with category filtering and live article previews.",
     tags: ["React", "JavaScript", "News API", "Vite", "CSS"],
-    imageSrc: "",
+    imageSrc: newsImg1,
     problem: "People waste time switching between multiple news websites to stay updated across different topics. There was no single clean interface to browse categorized real-time news efficiently.",
     solution: "Built a React-based news magazine that integrates with a live News API to fetch and display real-time articles. Users can filter by category and click through to read full articles from original sources.",
     features: [
@@ -301,7 +301,7 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/PawanBhandari03/news-mag",
     liveUrl: "https://news-mag-rust.vercel.app",
     snapshots: [newsImg1, newsImg2, newsImg5, newsImg3, newsImg4],
-    architectureImg: ""
+    architectureImg: newsImg1
   }
 ];
 

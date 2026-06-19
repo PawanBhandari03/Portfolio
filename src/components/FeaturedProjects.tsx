@@ -31,6 +31,30 @@ import ecomImg2 from '../assets/Ecom/Screenshot 2026-06-18 172303.png';
 import ecomImg3 from '../assets/Ecom/Screenshot 2026-06-18 172312.png';
 import ecomImg4 from '../assets/Ecom/Screenshot 2026-06-18 172316.png';
 import ecomImg5 from '../assets/Ecom/Screenshot 2026-06-18 172336.png';
+import agriTracePdf from '../assets/Agritrace/AgriTrace.pdf';
+
+// EcoBounty Images
+import ecoImg1 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM.jpeg';
+import ecoImg2 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (1).jpeg';
+import ecoImg3 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (2).jpeg';
+import ecoImg4 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (3).jpeg';
+import ecoImg5 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (4).jpeg';
+import ecoImg6 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (5).jpeg';
+import ecoImg7 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (6).jpeg';
+import ecoImg8 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (7).jpeg';
+
+// AgriGuard Images
+import agriImg1 from '../assets/Agriguard/3729c54a-e5f6-4c5e-87d4-00f3162d8902.jfif';
+import agriImg2 from '../assets/Agriguard/c15c2509-766c-49b3-bd6b-266e86fd62db.jfif';
+import agriImg3 from '../assets/Agriguard/c7a9b1dd-1a2b-4aa8-bea4-875452913298.jfif';
+import agriImg4 from '../assets/Agriguard/c7d6e042-ccb4-49bd-81dd-248a5107d8a5.jfif';
+import agriImg5 from '../assets/Agriguard/e76665bf-a6bf-4998-bc91-fdad0581ab44.jfif';
+
+// AgriTrace Images
+import traceImg1 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 PM.jpeg';
+import traceImg2 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 PM (1).jpeg';
+import traceImg3 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 PM (2).jpeg';
+import traceImg4 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 PM (3).jpeg';
 
 type ProjectCategory = 'Full Stack' | 'Backend' | 'AI/ML' | 'Web App' | 'Java/Spring Boot';
 
@@ -54,6 +78,7 @@ interface Project {
   githubFrontendUrl?: string;
   githubBackendUrl?: string;
   liveUrl?: string;
+  liveUrlText?: string;
   pptUrl?: string;
   snapshots?: string[];
   architectureImg?: string;
@@ -63,70 +88,85 @@ const PROJECTS: Project[] = [
   {
     id: "01",
     categories: ["Full Stack"],
+    displayCategory: "FULL STACK",
     title: "EcoBounty",
-    shortDesc: "Gamified sustainability platform rewarding eco-friendly actions through real-time tracking and engagement features.",
-    tags: ["React (TS)", "Node.js", "Supabase", "REST APIs"],
-    imageSrc: "/project_a.png",
-    problem: "Individuals lack tangible incentives to track and maintain sustainable, eco-friendly daily habits.",
-    solution: "A gamified platform that converts sustainable actions into points, leaderboards, and tangible rewards.",
+    shortDesc: "Gamified environmental cleanup platform with bounties, real-time mapping, XP rewards and blockchain EcoCoin tokens.",
+    modalSubtitle: "Community-powered environmental cleanup platform using bounties, gamification, real-time mapping and blockchain rewards.",
+    tags: ["Next.js", "TypeScript", "Supabase", "Solidity", "Web3", "Leaflet Maps", "Tailwind"],
+    modalTags: ["Next.js 15", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Solidity", "Ethereum", "Web3.js", "MetaMask", "Leaflet Maps", "OpenStreetMap", "ShadCN UI", "IPFS", "PWA"],
+    imageSrc: "",
+    problem: "Environmental reporting systems suffer from slow government response, lack of accountability, poor visibility and zero incentive for citizens to act. Issues get reported but never resolved due to low community participation and no reward mechanism.",
+    solution: "Built a gamified civic-tech platform where users create geo-tagged environmental bounties with photos and GPS. Community hunters accept, clean and verify locations. Verified completions earn XP points and EcoCoin (EOC) — an ERC-20 token on Ethereum Sepolia testnet — turning environmental action into a rewarding community experience.",
     features: [
-      "Real-time ledger and points calculation",
-      "Interactive leaderboards and community challenges",
-      "Secure OAuth2 authentication and user management",
-      "Responsive data visualization dashboard"
+      "Bounty system — users report issues with before photos and GPS coordinates, hunters accept and submit after photos for validation",
+      "Real-time interactive map using Leaflet and OpenStreetMap showing Open, In Progress and Completed bounties with filters and search",
+      "Web3 integration — EcoCoin (EOC) ERC-20 token on Ethereum Sepolia testnet, MetaMask wallet connection and XP-to-token redemption",
+      "Smart SOS AI system — one-tap emergency reporting using camera, voice-to-text, AI issue classification and auto complaint routing to government departments"
     ],
     outcomes: [
-      "Built a fully functional MVP within 3 weeks",
-      "Integrated real-time database synchronization",
-      "Achieved seamless cross-device responsiveness"
+      "Built a complete full-stack civic-tech platform combining geolocation, real-time database, PWA, gamification and blockchain in one system",
+      "Implemented ERC-20 smart contract on Ethereum Sepolia with MetaMask wallet integration and XP-to-token conversion flow",
+      "Designed mobile-first PWA with real-time Supabase updates, bottom navigation and native-app-like experience without Play Store"
     ],
-    githubUrl: "https://github.com/PawanBhandari03",
-    liveUrl: "#"
+    githubUrl: "https://github.com/Anicantcode/EcoBountyy",
+    liveUrl: "https://ecobountyapp.netlify.app/",
+    snapshots: [ecoImg1, ecoImg2, ecoImg3, ecoImg4, ecoImg5, ecoImg6, ecoImg7, ecoImg8],
+    architectureImg: ""
   },
   {
     id: "02",
     categories: ["AI/ML"],
+    displayCategory: "AI SYSTEM",
     title: "AgriGuard",
-    shortDesc: "AI-powered plant disease detection system trained on custom dataset for early crop diagnosis.",
-    tags: ["Python", "ML", "OpenCV", "Dataset Training"],
-    imageSrc: "/project_b.png",
-    problem: "Farmers suffer significant crop losses due to late or inaccurate identification of plant diseases.",
-    solution: "A machine learning model integrated into an accessible interface for instant crop disease classification.",
+    shortDesc: "AI-powered plant disease detection with Explainable AI, Grad-CAM heatmaps, severity scoring and treatment recommendations.",
+    modalSubtitle: "AI-powered plant disease detection with Explainable AI, severity assessment and treatment recommendations.",
+    tags: ["Python", "FastAPI", "PyTorch", "React", "OpenCV", "EfficientNetV2"],
+    modalTags: ["Python", "PyTorch", "FastAPI", "EfficientNetV2-S", "OpenCV", "Grad-CAM", "React", "Vite", "PlantVillage Dataset", "REST API"],
+    imageSrc: "",
+    problem: "Globally 20-40% of agricultural production is lost due to plant diseases. Farmers struggle to identify diseases early, lack expert consultation, and cannot understand or trust AI predictions. Delayed diagnosis leads to massive crop damage and financial loss.",
+    solution: "Built an AI-powered plant disease triage platform using EfficientNetV2-S trained on 54,000+ PlantVillage images. The system detects disease from leaf photos, generates Grad-CAM heatmaps showing exactly which leaf regions are infected, scores severity, and provides treatment recommendations — all in real time.",
     features: [
-      "Custom CNN model trained on an extensive dataset",
-      "Robust image preprocessing pipeline using OpenCV",
-      "RESTful API serving model predictions",
-      "Intuitive photo upload and diagnostic interface"
+      "EfficientNetV2-S model trained on 54,000+ images across 38 plant disease categories with high validation accuracy",
+      "Explainable AI using Grad-CAM — visually highlights exactly which regions of the leaf influenced the prediction",
+      "Severity scoring system — calculates infection spread percentage: Low (0-20%), Moderate (20-50%), Severe (50-100%)",
+      "Treatment recommendation engine — provides disease-specific fungicide, pesticide and agricultural guidance after diagnosis"
     ],
     outcomes: [
-      "Achieved high validation accuracy on test data",
-      "Reduced diagnostic turnaround from days to seconds",
-      "Prototyped successfully for agricultural use cases"
+      "Achieved high validation accuracy on PlantVillage dataset across 38 disease and healthy plant categories",
+      "Implemented Explainable AI with Grad-CAM — first plant disease system to show visual evidence of prediction reasoning",
+      "Built edge-ready architecture using EfficientNetV2-S suitable for future deployment on smartphones and IoT devices"
     ],
-    githubUrl: "https://github.com/PawanBhandari03"
+    githubUrl: "https://github.com/Anicantcode/Cyberpunks-Agriguard",
+    liveUrl: "https://cyberpunks-agriguard.vercel.app/",
+    snapshots: [agriImg1, agriImg2, agriImg3, agriImg4, agriImg5],
+    architectureImg: ""
   },
   {
     id: "03",
     categories: ["Full Stack"],
+    displayCategory: "FULL STACK · BLOCKCHAIN",
     title: "AgriTrace",
-    shortDesc: "Blockchain-based supply chain transparency platform for agricultural produce using QR code traceability.",
-    tags: ["React", "Web3", "Node.js", "Solidity", "GraphQL", "Polygon", "Docker"],
-    imageSrc: "/project_a.png",
-    problem: "Lack of transparency in agricultural supply chains leads to mistrust and unverified produce sourcing.",
-    solution: "An immutable blockchain ledger that tracks produce from farm to table, verifiable via consumer QR codes.",
+    shortDesc: "Blockchain-powered agricultural supply chain transparency platform with QR traceability, smart contracts and farm-to-fork tracking. Built for Smart India Hackathon 2025.",
+    modalSubtitle: "Blockchain-powered farm-to-fork supply chain transparency with QR traceability, smart contracts and decentralized storage.",
+    tags: ["React", "Solidity", "Node.js", "GraphQL", "Polygon", "Ethereum", "IPFS", "Docker"],
+    modalTags: ["React.js", "Web3.js", "Tailwind CSS", "Node.js", "Express.js", "GraphQL", "Solidity", "Hardhat", "Ethereum", "Polygon", "Hyperledger Fabric", "IPFS", "MongoDB", "Firebase", "Docker", "AWS"],
+    imageSrc: "",
+    problem: "The agricultural supply chain suffers from lack of transparency, product fraud, farmer exploitation by middlemen who capture 70-80% of product value, and consumer inability to verify food origin. Food fraud alone causes $40 billion in annual losses worldwide.",
+    solution: "Built a decentralized supply chain platform where every agricultural product batch receives a unique QR code linked to an immutable blockchain record. The system tracks the complete journey from farmer to consumer through Ethereum/Polygon smart contracts, automates payments, and allows consumers to verify product authenticity by scanning the QR code.",
     features: [
-      "Smart contracts deployed on Polygon network",
-      "Automated QR code generation for supply batches",
-      "GraphQL API for efficient blockchain querying",
-      "Dockerized microservices architecture"
+      "Blockchain traceability — every supply chain transaction permanently recorded on Ethereum and Polygon, tamper-proof and transparent",
+      "QR code verification — consumers scan product QR to instantly view farm origin, transport history, certifications and authenticity",
+      "Smart contract automation — automatically transfers ownership, releases farmer payments on delivery and validates certifications",
+      "IPFS decentralized storage — farm images, organic certificates and quality reports stored on IPFS to reduce blockchain costs"
     ],
     outcomes: [
-      "Ensured 100% data immutability for supply records",
-      "Decreased data retrieval latency using GraphQL",
-      "Presented successfully at tech symposiums"
+      "Selected for Smart India Hackathon 2025 college round — Problem Statement ID 25045, Theme: Agriculture FoodTech & Rural Development",
+      "Designed a scalable architecture combining Ethereum, Polygon and Hyperledger Fabric for enterprise-grade supply chain operations",
+      "Demonstrated potential to increase farmer income by 20-30% and reduce food fraud by 40-50% through blockchain transparency"
     ],
-    githubUrl: "https://github.com/PawanBhandari03",
-    pptUrl: "#"
+    pptUrl: agriTracePdf,
+    snapshots: [traceImg1, traceImg2, traceImg3, traceImg4],
+    architectureImg: ""
   },
   {
     id: "04",
@@ -134,7 +174,7 @@ const PROJECTS: Project[] = [
     title: "PawFlix",
     shortDesc: "Movie discovery web app with dynamic data fetching, search and fully responsive UI.",
     tags: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Vite"],
-    imageSrc: movieImg1,
+    imageSrc: "",
     problem: "Movie lovers have no simple and fast way to discover, search and explore films across genres without dealing with bloated and slow streaming platforms. A lightweight movie discovery tool was missing.",
     solution: "Built a React-based movie discovery platform that integrates with the TMDB API to fetch real-time movie data. Users can browse trending films, search by title, and explore detailed information about any movie instantly.",
     features: [
@@ -150,8 +190,8 @@ const PROJECTS: Project[] = [
     ],
     githubUrl: "https://github.com/PawanBhandari03/PawFlix",
     liveUrl: "https://movie-website-paw-wszk.vercel.app",
-    snapshots: [movieImg3, movieImg7, movieImg4, movieImg5, movieImg6],
-    architectureImg: movieImg2
+    snapshots: [movieImg1, movieImg3, movieImg7, movieImg4, movieImg5, movieImg6],
+    architectureImg: ""
   },
   {
     id: "05",
@@ -176,9 +216,9 @@ const PROJECTS: Project[] = [
       "Containerized entire application using Docker and docker-compose for production-ready deployment"
     ],
     githubUrl: "https://github.com/PawanBhandari03/Task-Manger-App",
-    imageSrc: taskImg1,
-    snapshots: [taskImg2, taskImg3, taskImg4, taskImg5],
-    architectureImg: taskImg1
+    imageSrc: "",
+    snapshots: [taskImg1, taskImg2, taskImg3, taskImg4, taskImg5],
+    architectureImg: ""
   },
   {
     id: "06",
@@ -188,7 +228,7 @@ const PROJECTS: Project[] = [
     shortDesc: "Full-stack e-commerce platform with Spring Boot REST API, product management, image upload, cart support and search filtering.",
     modalSubtitle: "Full-stack e-commerce platform with Spring Boot REST API, product management, cart support and search filtering.",
     tags: ["Java", "Spring Boot", "Spring Data JPA", "React", "H2 Database", "REST APIs", "Maven"],
-    imageSrc: ecomImg1,
+    imageSrc: "",
     problem: "Building a scalable e-commerce backend requires handling complex operations like product inventory, image management, cart functionality and search filtering — all through clean, well-structured REST APIs that a frontend can consume reliably.",
     solution: "Built a full-stack e-commerce application with a Spring Boot backend providing complete REST APIs for product management, image upload, stock tracking and cart operations. The React frontend consumes these APIs to deliver a complete shopping experience.",
     features: [
@@ -203,8 +243,8 @@ const PROJECTS: Project[] = [
       "Delivered a complete full-stack e-commerce solution integrating React frontend with Spring Boot backend"
     ],
     githubUrl: "https://github.com/PawanBhandari03/E-Commerce-Website",
-    snapshots: [ecomImg2, ecomImg3, ecomImg4, ecomImg5],
-    architectureImg: ecomImg1
+    snapshots: [ecomImg1, ecomImg2, ecomImg3, ecomImg4, ecomImg5],
+    architectureImg: ""
   },
   {
     id: "07",
@@ -212,7 +252,7 @@ const PROJECTS: Project[] = [
     title: "EV-olution",
     shortDesc: "Premium electric vehicle showcase with cinematic hero slider, model listings and specs comparison.",
     tags: ["React", "JavaScript", "CSS", "Vite"],
-    imageSrc: carImg1,
+    imageSrc: "",
     problem: "Electric vehicle buyers struggle to find a single visually engaging platform to explore and compare premium EV models with detailed specifications.",
     solution: "Built a cinematic EV showcase website with a full-screen image and video slider, featured model cards with specs, and a clean contact section — designed to feel like a premium automotive brand website.",
     features: [
@@ -228,8 +268,8 @@ const PROJECTS: Project[] = [
     ],
     githubUrl: "https://github.com/PawanBhandari03/EV-DashBoard",
     liveUrl: "https://ev-dash-board-v3nw.vercel.app",
-    snapshots: [carImg2, carImg3, carImg4],
-    architectureImg: carImg1
+    snapshots: [carImg1, carImg2, carImg3, carImg4],
+    architectureImg: ""
   },
   {
     id: "08",
@@ -237,7 +277,7 @@ const PROJECTS: Project[] = [
     title: "News Magazine",
     shortDesc: "Real-time news aggregator with category filtering and live article previews.",
     tags: ["React", "JavaScript", "News API", "Vite", "CSS"],
-    imageSrc: newsImg1,
+    imageSrc: "",
     problem: "People waste time switching between multiple news websites to stay updated across different topics. There was no single clean interface to browse categorized real-time news efficiently.",
     solution: "Built a React-based news magazine that integrates with a live News API to fetch and display real-time articles. Users can filter by category and click through to read full articles from original sources.",
     features: [
@@ -253,8 +293,8 @@ const PROJECTS: Project[] = [
     ],
     githubUrl: "https://github.com/PawanBhandari03/news-mag",
     liveUrl: "https://news-mag-rust.vercel.app",
-    snapshots: [newsImg2, newsImg5, newsImg3, newsImg4],
-    architectureImg: newsImg1
+    snapshots: [newsImg1, newsImg2, newsImg5, newsImg3, newsImg4],
+    architectureImg: ""
   }
 ];
 
@@ -640,7 +680,7 @@ export default function FeaturedProjects() {
                     )}
                     {selectedProject.liveUrl && (
                       <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 rounded-lg font-bold text-[14px] bg-[#8B5CF6] hover:bg-[#7C3AED] text-white transition-all flex items-center gap-2">
-                        Live Demo
+                        {selectedProject.liveUrlText || "Live Demo"}
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                       </a>
                     )}

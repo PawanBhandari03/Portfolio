@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChatUI from './ChatUI';
 import heroImg from '../assets/pawan1stpage.jpeg';
+import resumePdf from '../assets/Resume_FullStack_Pawan.pdf';
 
 // Split "Pawan Bhandari" into individual words for staggered reveal
 const nameWords = ['Pawan', 'Bhandari'];
@@ -94,9 +95,14 @@ export default function ReplicaHero() {
               >
                 View My Work
               </a>
-              <a
-                href="/Resume_FullStack_Pawan.pdf"
-                download
+              <button
+                onClick={() => {
+                  window.open(resumePdf, '_blank');
+                  const link = document.createElement('a');
+                  link.href = resumePdf;
+                  link.download = 'Resume_FullStack_Pawan.pdf';
+                  link.click();
+                }}
                 className="w-full md:w-auto justify-center px-7 py-3 rounded-xl border border-slate-300 dark:border-white/15 text-slate-700 dark:text-slate-200 font-semibold text-sm tracking-wide hover:bg-slate-100 dark:hover:bg-white/10 transition-all duration-300 flex items-center gap-2 hover:scale-[1.03] hover:-translate-y-0.5"
               >
                 {/* Download icon */}
@@ -104,7 +110,7 @@ export default function ReplicaHero() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                 </svg>
                 Download Resume
-              </a>
+              </button>
             </motion.div>
 
             {/* Social Icons — bounce on hover */}

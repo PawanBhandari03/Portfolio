@@ -83,23 +83,24 @@ export default function AchievementsPage({ onBack }: Props) {
                 className="flex flex-col rounded-[32px] shadow-2xl backdrop-blur-md overflow-hidden relative w-full"
                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
-                <div className="flex items-center justify-center w-full min-h-[300px] md:min-h-[500px]" style={{ backgroundColor: '#1a1a2e' }}>
+                <div className="flex items-center justify-center w-full" style={{ backgroundColor: '#1a1a2e' }}>
                     <img 
                         src={pandoraImg} 
                         alt="Pandora Hackathon" 
-                        className="hover:scale-105 transition-transform duration-700 ease-in-out"
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'contain'
-                        }}
+                        className="w-full h-[250px] md:h-[350px] hover:scale-105 transition-transform duration-700 ease-in-out"
+                        style={{ objectFit: 'contain' }}
                     />
                 </div>
-                <div style={{ padding: '20px' }} className="flex flex-col justify-center items-center">
-                    <h2 className="text-2xl font-bold text-white mb-3 text-center">Pandora Hackathon — Best Solution</h2>
-                    <p className="text-sm leading-relaxed opacity-90 text-center" style={{ color: 'var(--text-secondary)' }}>
-                        Awarded Certificate of Appreciation for Best Solution in AI For Smart Cities theme at Pandora Hackathon, BSIOTR JSPM <br /> · Team Cyberpunks · Feb 2026
+                <div style={{ padding: '30px' }} className="flex flex-col justify-center items-center h-full">
+                    <h2 className="text-2xl font-bold text-white mb-4 text-center">Pandora Hackathon — Best Solution</h2>
+                    <p className="text-sm md:text-base leading-relaxed opacity-90 text-center mb-6" style={{ color: 'var(--text-secondary)' }}>
+                        Awarded Certificate of Appreciation for Best Solution in AI For Smart Cities theme at Pandora Hackathon, BSIOTR JSPM.
                     </p>
+                    <div className="mt-auto flex justify-center">
+                        <span className="inline-flex items-center justify-center px-5 py-2 rounded-full text-sm font-bold border shadow-sm tracking-wide badge-shimmer" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
+                            Team Cyberpunks · Feb 2026
+                        </span>
+                    </div>
                 </div>
             </motion.div>
 
@@ -112,11 +113,14 @@ export default function AchievementsPage({ onBack }: Props) {
                 className="flex flex-col rounded-[32px] shadow-2xl backdrop-blur-md overflow-hidden relative w-full"
                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
-                <div className="flex items-center justify-center w-full min-h-[300px] md:min-h-[500px]" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+                <div className="flex items-center justify-center w-full h-[250px] md:h-[350px]" style={{ backgroundColor: 'var(--image-placeholder)' }}>
                     <span className="text-sm font-bold uppercase tracking-widest opacity-60" style={{ color: 'var(--text-secondary)' }}>Image Placeholder</span>
                 </div>
-                <div style={{ padding: '20px' }} className="flex justify-center items-center">
-                    <h2 className="text-2xl md:text-3xl font-bold m-0 text-center" style={{ color: 'var(--text-primary)' }}>Achievement Title</h2>
+                <div style={{ padding: '30px' }} className="flex flex-col justify-center items-center h-full">
+                    <h2 className="text-2xl font-bold m-0 text-center mb-4" style={{ color: 'var(--text-primary)' }}>Coming Soon</h2>
+                    <p className="text-sm md:text-base leading-relaxed opacity-90 text-center mb-6" style={{ color: 'var(--text-secondary)' }}>
+                        More achievements will be added here soon.
+                    </p>
                 </div>
             </motion.div>
         </div>

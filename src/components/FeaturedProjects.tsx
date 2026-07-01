@@ -7,10 +7,6 @@ import newsImg3 from '../assets/News/Screenshot 2026-06-17 114235.png';
 import newsImg4 from '../assets/News/Screenshot 2026-06-17 123323.png';
 import newsImg5 from '../assets/News/Screenshot 2026-06-17 123434.png';
 
-import carImg1 from '../assets/Car/Screenshot 2026-06-17 133132.png';
-import carImg2 from '../assets/Car/Screenshot 2026-06-17 133154.png';
-import carImg3 from '../assets/Car/Screenshot 2026-06-17 140514.png';
-import carImg4 from '../assets/Car/Screenshot 2026-06-17 140520.png';
 
 import movieImg1 from '../assets/movie/Screenshot 2026-06-17 163629.png';
 import movieImg3 from '../assets/movie/Screenshot 2026-06-17 163652.png';

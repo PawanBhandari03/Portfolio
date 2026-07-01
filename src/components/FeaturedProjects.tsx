@@ -93,6 +93,7 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
+
     id: "01",
     categories: ["Full Stack"],
     displayCategory: "FULL STACK",
@@ -299,6 +300,35 @@ const PROJECTS: Project[] = [
     liveUrl: "https://news-mag-rust.vercel.app",
     snapshots: [newsImg1, newsImg2, newsImg5, newsImg3, newsImg4],
     architectureImg: newsImg1
+  },
+  {
+    id: "09",
+    categories: ["AI/ML", "Full Stack"],
+    displayCategory: "AI WELFARE PLATFORM",
+    title: "BharatSahayak",
+    shortDesc: "AI-powered government scheme discovery platform delivering personalized welfare recommendations through WhatsApp and voice calls.",
+    modalSubtitle: "AI-powered welfare companion identifying and delivering personalized scheme recommendations via WhatsApp and voice calls.",
+    tags: ["React", "Node.js", "Express", "Supabase", "Mistral AI", "Twilio", "Tailwind CSS"],
+    modalTags: ["React", "Node.js", "Express.js", "Supabase", "Mistral AI", "Twilio WhatsApp API", "Twilio Voice API", "Tailwind CSS", "REST APIs", "Vercel", "Render"],
+    imageSrc: "",
+    problem: "₹2.6 lakh crore in government welfare benefits go unclaimed every year in India. Not because the money isn't there — but because millions of eligible citizens such as farmers, widows, students, and low-income families simply do not know these schemes exist. Existing government portals are complex, English-first, and often require smartphones, internet access, and digital literacy that many rural citizens lack.",
+    solution: "BharatSahayak is an AI-powered welfare companion that identifies every government scheme a citizen qualifies for and proactively delivers personalized recommendations through WhatsApp or voice calls on any phone.\n\nNo app download. No internet dependency. No technical knowledge required.\n\nUsers can simply send a WhatsApp message or make a phone call in Hindi, Marathi, or English. The AI understands their profile, analyzes eligibility criteria, recommends relevant schemes, and provides information about benefits, required documents, and application deadlines automatically.",
+    features: [
+      "Multilingual WhatsApp Assistant: Provides personalized scheme recommendations, eligibility checks, document guidance, and application support through WhatsApp in Hindi, Marathi, and English.",
+      "Zero Internet Call Bot: AI-powered voice assistant that communicates with users in Hindi and Marathi through regular phone calls, enabling access for users with basic phones.",
+      "Life Timeline AI: Predicts future government schemes a user may become eligible for based on age, occupation, income, and changing life events.",
+      "Smart Deadline Alerts & Lost Benefit Detector: Tracks application deadlines, sends reminders before expiry, and identifies welfare benefits that users may have missed during previous years.",
+      "Benefit Wallet: Calculates the total value of eligible schemes and presents the user's complete welfare entitlement in a single dashboard."
+    ],
+    outcomes: [
+      "BharatSahayak addresses the welfare awareness gap affecting millions of Indian citizens by making government schemes accessible through familiar communication channels.",
+      "The platform targets over 800 million people covered under various welfare programs, helping improve accessibility, awareness, and benefit utilization among rural and underserved communities.",
+      "Improved accessibility for users with low digital literacy.",
+      "Enabled welfare access through voice and regional languages."
+    ],
+    githubUrl: "",
+    snapshots: [],
+    architectureImg: ""
   }
 ];
 
@@ -587,14 +617,14 @@ export default function FeaturedProjects() {
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                         THE PROBLEM
                       </h4>
-                      <p className="text-slate-700 dark:text-white/85 leading-[1.7] text-[15px]">{selectedProject.problem}</p>
+                      <p className="text-slate-700 dark:text-white/85 leading-[1.7] text-[15px] whitespace-pre-line">{selectedProject.problem}</p>
                     </div>
                     <div>
                       <h4 className="text-[13px] font-black text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                         <span className="font-mono text-xl leading-none font-bold">{`>_`}</span>
                         THE SOLUTION
                       </h4>
-                      <p className="text-slate-700 dark:text-white/85 leading-[1.7] text-[15px]">{selectedProject.solution}</p>
+                      <p className="text-slate-700 dark:text-white/85 leading-[1.7] text-[15px] whitespace-pre-line">{selectedProject.solution}</p>
                     </div>
                   </div>
 
@@ -618,7 +648,7 @@ export default function FeaturedProjects() {
                     <div>
                       <h4 className="text-[13px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-5 flex items-center gap-2">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        OUTCOMES
+                        OUTCOMES & IMPACT
                       </h4>
                       <div className="space-y-4">
                         {selectedProject.outcomes.map((out, i) => (

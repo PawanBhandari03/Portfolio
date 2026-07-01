@@ -1,10 +1,24 @@
 import { motion } from 'framer-motion';
 import pandoraImg from '../assets/Pandora.png';
+import mongoCert from '../assets/Course certificate/mongo.png';
+import ibmCert from '../assets/Course certificate/IBM.png';
+import azureCert from '../assets/Course certificate/AZURE.png';
+
 // Icons
 const ArrowLeft = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
     <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
   </svg>
+);
+
+const CertificatePlaceholder = () => (
+  <div className="w-full h-full flex flex-col items-center justify-center bg-slate-800/10 dark:bg-slate-900/40 rounded-lg p-6 text-center border border-dashed border-slate-700/20">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-neutral-400 mb-2 opacity-60">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    </svg>
+    <p className="text-xs font-semibold text-neutral-400/80">Certificate Pending</p>
+    <p className="text-[10px] text-neutral-500 mt-1">Available upon completion</p>
+  </div>
 );
 
 
@@ -124,6 +138,178 @@ export default function AchievementsPage({ onBack }: Props) {
                 </div>
             </motion.div>
         </div>
+
+        {/* Divider line between achievement cards and certifications */}
+        <div 
+          className="w-full h-[1px]" 
+          style={{ 
+            backgroundColor: 'rgba(255, 255, 255, 0.06)', 
+            margin: '48px 0' 
+          }} 
+        />
+
+        {/* Certifications Section */}
+        <section className="w-full flex flex-col gap-8">
+          
+          {/* Section Header */}
+          <div className="flex flex-col gap-2">
+            <span className="text-[#a855f7] text-xs font-bold tracking-[0.2em] uppercase">
+              CONTINUOUS LEARNING
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
+              Courses & <span style={{ color: '#a855f7' }}>Certifications</span>
+            </h2>
+            <p className="text-sm md:text-base font-medium" style={{ color: 'var(--text-secondary)' }}>
+              Always learning, always building.
+            </p>
+          </div>
+
+          {/* Certification Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+            
+            {/* Card 1: Spring Boot (In Progress, leave empty) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex flex-col rounded-[12px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[#7c3aed] hover:shadow-lg"
+              style={{ 
+                backgroundColor: 'var(--card-bg)', 
+                border: '1px solid var(--border-color)',
+              }}
+            >
+              {/* Image Area (Empty Placeholder) */}
+              <div className="w-full h-[200px] md:h-[260px] bg-slate-900/15 dark:bg-slate-950/30 flex items-center justify-center select-none overflow-hidden">
+                <CertificatePlaceholder />
+              </div>
+              {/* Card Details */}
+              <div className="flex flex-col gap-1.5 p-5">
+                <h4 className="text-[15px] font-bold leading-snug" style={{ color: 'var(--text-primary)' }}>
+                  Spring Boot 3, Spring 6 & Hibernate for Beginners
+                </h4>
+                <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
+                  Udemy
+                </p>
+                <div className="mt-1">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#f97316] uppercase tracking-wider">
+                    In Progress
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 2: MongoDB (Completed, mongo.png) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-col rounded-[12px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[#7c3aed] hover:shadow-lg"
+              style={{ 
+                backgroundColor: 'var(--card-bg)', 
+                border: '1px solid var(--border-color)',
+              }}
+            >
+              {/* Image Area */}
+              <div className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden">
+                <img 
+                  src={mongoCert} 
+                  alt="MongoDB for Developers" 
+                  className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              {/* Card Details */}
+              <div className="flex flex-col gap-1.5 p-5">
+                <h4 className="text-[15px] font-bold leading-snug" style={{ color: 'var(--text-primary)' }}>
+                  MongoDB for Developers
+                </h4>
+                <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
+                  MongoDB University
+                </p>
+                <div className="mt-1">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#22c55e] uppercase tracking-wider">
+                    Completed
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 3: IBM (Completed, IBM.png) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-col rounded-[12px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[#7c3aed] hover:shadow-lg"
+              style={{ 
+                backgroundColor: 'var(--card-bg)', 
+                border: '1px solid var(--border-color)',
+              }}
+            >
+              {/* Image Area */}
+              <div className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden">
+                <img 
+                  src={ibmCert} 
+                  alt="IBM SkillsBuild Certification" 
+                  className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              {/* Card Details */}
+              <div className="flex flex-col gap-1.5 p-5">
+                <h4 className="text-[15px] font-bold leading-snug" style={{ color: 'var(--text-primary)' }}>
+                  IBM SkillsBuild Certification
+                </h4>
+                <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
+                  IBM SkillsBuild
+                </p>
+                <div className="mt-1">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#22c55e] uppercase tracking-wider">
+                    Completed
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 4: Azure (Completed, AZURE.png) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-col rounded-[12px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[#7c3aed] hover:shadow-lg"
+              style={{ 
+                backgroundColor: 'var(--card-bg)', 
+                border: '1px solid var(--border-color)',
+              }}
+            >
+              {/* Image Area */}
+              <div className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden">
+                <img 
+                  src={azureCert} 
+                  alt="Microsoft Azure Certification" 
+                  className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              {/* Card Details */}
+              <div className="flex flex-col gap-1.5 p-5">
+                <h4 className="text-[15px] font-bold leading-snug" style={{ color: 'var(--text-primary)' }}>
+                  Microsoft Azure Certification
+                </h4>
+                <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
+                  Microsoft
+                </p>
+                <div className="mt-1">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#22c55e] uppercase tracking-wider">
+                    Completed
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
+
+        </section>
 
       </div>
     </main>

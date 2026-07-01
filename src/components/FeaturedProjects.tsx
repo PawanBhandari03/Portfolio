@@ -93,7 +93,6 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
-
     id: "01",
     categories: ["Full Stack"],
     displayCategory: "FULL STACK",
@@ -122,6 +121,35 @@ const PROJECTS: Project[] = [
   },
   {
     id: "02",
+    categories: ["AI/ML", "Full Stack"],
+    displayCategory: "AI WELFARE PLATFORM",
+    title: "BharatSahayak",
+    shortDesc: "AI-powered government scheme discovery platform delivering personalized welfare recommendations through WhatsApp and voice calls.",
+    modalSubtitle: "AI-powered welfare companion identifying and delivering personalized scheme recommendations via WhatsApp and voice calls.",
+    tags: ["React", "Node.js", "Express", "Supabase", "Mistral AI", "Twilio", "Tailwind CSS"],
+    modalTags: ["React", "Node.js", "Express.js", "Supabase", "Mistral AI", "Twilio WhatsApp API", "Twilio Voice API", "Tailwind CSS", "REST APIs", "Vercel", "Render"],
+    imageSrc: "",
+    problem: "₹2.6 lakh crore in government welfare benefits go unclaimed every year in India. Not because the money isn't there — but because millions of eligible citizens such as farmers, widows, students, and low-income families simply do not know these schemes exist. Existing government portals are complex, English-first, and often require smartphones, internet access, and digital literacy that many rural citizens lack.",
+    solution: "BharatSahayak is an AI-powered welfare companion that identifies every government scheme a citizen qualifies for and proactively delivers personalized recommendations through WhatsApp or voice calls on any phone.\n\nNo app download. No internet dependency. No technical knowledge required.\n\nUsers can simply send a WhatsApp message or make a phone call in Hindi, Marathi, or English. The AI understands their profile, analyzes eligibility criteria, recommends relevant schemes, and provides information about benefits, required documents, and application deadlines automatically.",
+    features: [
+      "Multilingual WhatsApp Assistant: Provides personalized scheme recommendations, eligibility checks, document guidance, and application support through WhatsApp in Hindi, Marathi, and English.",
+      "Zero Internet Call Bot: AI-powered voice assistant that communicates with users in Hindi and Marathi through regular phone calls, enabling access for users with basic phones.",
+      "Life Timeline AI: Predicts future government schemes a user may become eligible for based on age, occupation, income, and changing life events.",
+      "Smart Deadline Alerts & Lost Benefit Detector: Tracks application deadlines, sends reminders before expiry, and identifies welfare benefits that users may have missed during previous years.",
+      "Benefit Wallet: Calculates the total value of eligible schemes and presents the user's complete welfare entitlement in a single dashboard."
+    ],
+    outcomes: [
+      "BharatSahayak addresses the welfare awareness gap affecting millions of Indian citizens by making government schemes accessible through familiar communication channels.",
+      "The platform targets over 800 million people covered under various welfare programs, helping improve accessibility, awareness, and benefit utilization among rural and underserved communities.",
+      "Improved accessibility for users with low digital literacy.",
+      "Enabled welfare access through voice and regional languages."
+    ],
+    githubUrl: "",
+    snapshots: [],
+    architectureImg: ""
+  },
+  {
+    id: "03",
     categories: ["AI/ML"],
     displayCategory: "AI SYSTEM",
     title: "AgriGuard",
@@ -148,7 +176,7 @@ const PROJECTS: Project[] = [
     architectureImg: agriArch
   },
   {
-    id: "03",
+    id: "04",
     categories: ["Full Stack"],
     displayCategory: "FULL STACK · BLOCKCHAIN",
     title: "AgriTrace",
@@ -174,56 +202,32 @@ const PROJECTS: Project[] = [
     architectureImg: traceMain
   },
   {
-    id: "04",
-    categories: ["Web App"],
-    title: "PawFlix",
-    shortDesc: "Movie discovery web app with dynamic data fetching, search and fully responsive UI.",
-    tags: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Vite"],
-    imageSrc: movieImg1,
-    problem: "Movie lovers have no simple and fast way to discover, search and explore films across genres without dealing with bloated and slow streaming platforms. A lightweight movie discovery tool was missing.",
-    solution: "Built a React-based movie discovery platform that integrates with the TMDB API to fetch real-time movie data. Users can browse trending films, search by title, and explore detailed information about any movie instantly.",
-    features: [
-      "Real-time movie data fetching using TMDB API with dynamic search",
-      "Browse trending, popular and top-rated movies by category",
-      "Movie detail view with ratings, overview, release date and genre",
-      "Fully responsive UI built with Tailwind CSS for all screen sizes"
-    ],
-    outcomes: [
-      "Successfully integrated a third-party REST API with real-time search and filtering capabilities",
-      "Delivered a fast, lightweight alternative to bloated streaming platform UIs",
-      "Deployed and live on Vercel with zero backend infrastructure"
-    ],
-    githubUrl: "https://github.com/PawanBhandari03/PawFlix",
-    liveUrl: "https://movie-website-paw-wszk.vercel.app",
-    snapshots: [movieImg1, movieImg3, movieImg7, movieImg4, movieImg5, movieImg6],
-    architectureImg: movieImg1
-  },
-  {
     id: "05",
-    categories: ["Backend", "Java/Spring Boot"],
-    displayCategory: "JAVA · BACKEND",
-    title: "Task Manager App",
-    shortDesc: "Full-stack task management application with Spring Boot REST API, React TypeScript frontend, role-based task organization and Docker deployment.",
-    modalSubtitle: "Full-stack task management with Spring Boot REST API, TypeScript frontend and Docker deployment.",
-    tags: ["Java", "Spring Boot", "React", "TypeScript", "Docker", "Tailwind CSS"],
-    modalTags: ["Java", "Spring Boot", "Spring MVC", "React", "TypeScript", "Tailwind CSS", "Docker", "Maven"],
-    problem: "Managing multiple tasks across different projects becomes chaotic without a structured system. Most basic to-do apps lack proper task organization, priority management, and a scalable backend architecture.",
-    solution: "Built a full-stack task management application with a Spring Boot REST API backend and React TypeScript frontend. Tasks are organized into Task Lists with priority and status tracking, all containerized using Docker for easy deployment.",
+    categories: ["Full Stack", "Backend", "Java/Spring Boot"],
+    displayCategory: "FULL STACK · CONTENT PLATFORM",
+    title: "BlogNest",
+    shortDesc: "Full-stack content publishing platform with secure authentication, draft management, and content organization.",
+    modalSubtitle: "Modern full-stack blogging platform enabling secure content creation, draft workflows, and category management.",
+    tags: ["Java", "Spring Boot", "Spring Security", "React", "Hibernate", "JWT", "PostgreSQL"],
+    modalTags: ["Java", "Spring Boot", "Spring Security", "React", "Hibernate", "JWT Authentication", "Docker(PostgreSQL)", "REST APIs"],
+    imageSrc: "",
+    problem: "Many blogging platforms are either overly complex for content creators or lack essential publishing workflows such as draft management, content organization, and secure user authentication. Managing articles, categories, and content efficiently often requires multiple tools, making the publishing process difficult for writers and creators.",
+    solution: "BlogNest is a full-stack content publishing platform that enables users to create, manage, draft, and publish blogs through a secure and intuitive workflow. The platform provides a seamless writing experience while allowing users to organize content using categories and tags.\n\nUsers can securely authenticate themselves, create articles, save drafts, update existing posts, and publish content through a responsive interface powered by React and Spring Boot.",
     features: [
-      "Spring Boot REST API with clean layered architecture — Controllers, Services, Repositories and DTOs",
-      "Task Lists with nested Tasks — each task has Priority (High/Medium/Low) and Status (Todo/InProgress/Done) tracking",
-      "React TypeScript frontend with dedicated screens for creating, updating and managing task lists and tasks",
-      "Dockerized with docker-compose for one-command local setup and deployment"
+      "Secure Authentication System: Implements JWT-based authentication and Spring Security to provide secure user registration, login, and role-based access control.",
+      "Draft & Publishing Workflow: Allows users to save articles as drafts, edit existing content, and publish blogs when ready.",
+      "Categories & Tags Management: Organizes content through categories and tags, making articles easier to manage and discover.",
+      "Content Management Dashboard: Provides users with a dedicated dashboard to create, update, delete, and manage their blog posts.",
+      "Responsive User Experience: Built with React to deliver a modern, responsive interface for seamless content creation and reading across devices."
     ],
     outcomes: [
-      "Implemented clean REST API design with proper DTO pattern, entity mapping and global exception handling",
-      "Learned full-stack integration between Spring Boot backend and React TypeScript frontend with proper domain modeling",
-      "Containerized entire application using Docker and docker-compose for production-ready deployment"
+      "BlogNest simplifies the content publishing process by combining secure authentication, structured content management, and an intuitive user experience into a single platform.",
+      "The project demonstrates modern full-stack development practices, including REST API design, authentication, database management, and responsive frontend development.",
+      "Designed a scalable full-stack architecture that supports future enhancements such as comments, user profiles, content recommendations, and role-based publishing workflows."
     ],
-    githubUrl: "https://github.com/PawanBhandari03/Task-Manger-App",
-    imageSrc: taskArch,
-    snapshots: [taskImg1, taskImg2, taskImg3, taskImg4, taskImg5],
-    architectureImg: taskArch
+    githubUrl: "",
+    snapshots: [],
+    architectureImg: ""
   },
   {
     id: "06",
@@ -253,31 +257,58 @@ const PROJECTS: Project[] = [
   },
   {
     id: "07",
-    categories: ["Web App"],
-    title: "EV-olution",
-    shortDesc: "Premium electric vehicle showcase with cinematic hero slider, model listings and specs comparison.",
-    tags: ["React", "JavaScript", "CSS", "Vite"],
-    imageSrc: carImg1,
-    problem: "Electric vehicle buyers struggle to find a single visually engaging platform to explore and compare premium EV models with detailed specifications.",
-    solution: "Built a cinematic EV showcase website with a full-screen image and video slider, featured model cards with specs, and a clean contact section — designed to feel like a premium automotive brand website.",
+    categories: ["Backend", "Java/Spring Boot"],
+    displayCategory: "JAVA · BACKEND",
+    title: "Task Manager App",
+    shortDesc: "Full-stack task management application with Spring Boot REST API, React TypeScript frontend, role-based task organization and Docker deployment.",
+    modalSubtitle: "Full-stack task management with Spring Boot REST API, TypeScript frontend and Docker deployment.",
+    tags: ["Java", "Spring Boot", "React", "TypeScript", "Docker", "Tailwind CSS"],
+    modalTags: ["Java", "Spring Boot", "Spring MVC", "React", "TypeScript", "Tailwind CSS", "Docker", "Maven"],
+    problem: "Managing multiple tasks across different projects becomes chaotic without a structured system. Most basic to-do apps lack proper task organization, priority management, and a scalable backend architecture.",
+    solution: "Built a full-stack task management application with a Spring Boot REST API backend and React TypeScript frontend. Tasks are organized into Task Lists with priority and status tracking, all containerized using Docker for easy deployment.",
     features: [
-      "Full-screen cinematic image and video hero slider with dot navigation",
-      "Featured EV model cards with range, acceleration and pricing specs",
-      "Smooth scroll navigation with animated section transitions",
-      "Clean contact form for inquiries"
+      "Spring Boot REST API with clean layered architecture — Controllers, Services, Repositories and DTOs",
+      "Task Lists with nested Tasks — each task has Priority (High/Medium/Low) and Status (Todo/InProgress/Done) tracking",
+      "React TypeScript frontend with dedicated screens for creating, updating and managing task lists and tasks",
+      "Dockerized with docker-compose for one-command local setup and deployment"
     ],
     outcomes: [
-      "Delivered a premium automotive brand experience using pure frontend tech",
-      "Mastered full-screen video and image slider implementation",
-      "Built a production-ready UI with cinematic design principles"
+      "Implemented clean REST API design with proper DTO pattern, entity mapping and global exception handling",
+      "Learned full-stack integration between Spring Boot backend and React TypeScript frontend with proper domain modeling",
+      "Containerized entire application using Docker and docker-compose for production-ready deployment"
     ],
-    githubUrl: "https://github.com/PawanBhandari03/EV-DashBoard",
-    liveUrl: "https://ev-dash-board-v3nw.vercel.app",
-    snapshots: [carImg1, carImg2, carImg3, carImg4],
-    architectureImg: carImg1
+    githubUrl: "https://github.com/PawanBhandari03/Task-Manger-App",
+    imageSrc: taskArch,
+    snapshots: [taskImg1, taskImg2, taskImg3, taskImg4, taskImg5],
+    architectureImg: taskArch
   },
   {
     id: "08",
+    categories: ["Web App"],
+    title: "PawFlix",
+    shortDesc: "Movie discovery web app with dynamic data fetching, search and fully responsive UI.",
+    tags: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Vite"],
+    imageSrc: movieImg1,
+    problem: "Movie lovers have no simple and fast way to discover, search and explore films across genres without dealing with bloated and slow streaming platforms. A lightweight movie discovery tool was missing.",
+    solution: "Built a React-based movie discovery platform that integrates with the TMDB API to fetch real-time movie data. Users can browse trending films, search by title, and explore detailed information about any movie instantly.",
+    features: [
+      "Real-time movie data fetching using TMDB API with dynamic search",
+      "Browse trending, popular and top-rated movies by category",
+      "Movie detail view with ratings, overview, release date and genre",
+      "Fully responsive UI built with Tailwind CSS for all screen sizes"
+    ],
+    outcomes: [
+      "Successfully integrated a third-party REST API with real-time search and filtering capabilities",
+      "Delivered a fast, lightweight alternative to bloated streaming platform UIs",
+      "Deployed and live on Vercel with zero backend infrastructure"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03/PawFlix",
+    liveUrl: "https://movie-website-paw-wszk.vercel.app",
+    snapshots: [movieImg1, movieImg3, movieImg7, movieImg4, movieImg5, movieImg6],
+    architectureImg: movieImg1
+  },
+  {
+    id: "09",
     categories: ["Web App"],
     title: "News Magazine",
     shortDesc: "Real-time news aggregator with category filtering and live article previews.",
@@ -300,35 +331,6 @@ const PROJECTS: Project[] = [
     liveUrl: "https://news-mag-rust.vercel.app",
     snapshots: [newsImg1, newsImg2, newsImg5, newsImg3, newsImg4],
     architectureImg: newsImg1
-  },
-  {
-    id: "09",
-    categories: ["AI/ML", "Full Stack"],
-    displayCategory: "AI WELFARE PLATFORM",
-    title: "BharatSahayak",
-    shortDesc: "AI-powered government scheme discovery platform delivering personalized welfare recommendations through WhatsApp and voice calls.",
-    modalSubtitle: "AI-powered welfare companion identifying and delivering personalized scheme recommendations via WhatsApp and voice calls.",
-    tags: ["React", "Node.js", "Express", "Supabase", "Mistral AI", "Twilio", "Tailwind CSS"],
-    modalTags: ["React", "Node.js", "Express.js", "Supabase", "Mistral AI", "Twilio WhatsApp API", "Twilio Voice API", "Tailwind CSS", "REST APIs", "Vercel", "Render"],
-    imageSrc: "",
-    problem: "₹2.6 lakh crore in government welfare benefits go unclaimed every year in India. Not because the money isn't there — but because millions of eligible citizens such as farmers, widows, students, and low-income families simply do not know these schemes exist. Existing government portals are complex, English-first, and often require smartphones, internet access, and digital literacy that many rural citizens lack.",
-    solution: "BharatSahayak is an AI-powered welfare companion that identifies every government scheme a citizen qualifies for and proactively delivers personalized recommendations through WhatsApp or voice calls on any phone.\n\nNo app download. No internet dependency. No technical knowledge required.\n\nUsers can simply send a WhatsApp message or make a phone call in Hindi, Marathi, or English. The AI understands their profile, analyzes eligibility criteria, recommends relevant schemes, and provides information about benefits, required documents, and application deadlines automatically.",
-    features: [
-      "Multilingual WhatsApp Assistant: Provides personalized scheme recommendations, eligibility checks, document guidance, and application support through WhatsApp in Hindi, Marathi, and English.",
-      "Zero Internet Call Bot: AI-powered voice assistant that communicates with users in Hindi and Marathi through regular phone calls, enabling access for users with basic phones.",
-      "Life Timeline AI: Predicts future government schemes a user may become eligible for based on age, occupation, income, and changing life events.",
-      "Smart Deadline Alerts & Lost Benefit Detector: Tracks application deadlines, sends reminders before expiry, and identifies welfare benefits that users may have missed during previous years.",
-      "Benefit Wallet: Calculates the total value of eligible schemes and presents the user's complete welfare entitlement in a single dashboard."
-    ],
-    outcomes: [
-      "BharatSahayak addresses the welfare awareness gap affecting millions of Indian citizens by making government schemes accessible through familiar communication channels.",
-      "The platform targets over 800 million people covered under various welfare programs, helping improve accessibility, awareness, and benefit utilization among rural and underserved communities.",
-      "Improved accessibility for users with low digital literacy.",
-      "Enabled welfare access through voice and regional languages."
-    ],
-    githubUrl: "",
-    snapshots: [],
-    architectureImg: ""
   }
 ];
 
@@ -373,7 +375,7 @@ export default function FeaturedProjects() {
         {/* New Stats Bar */}
         <div className="mt-8 flex flex-row items-center justify-center gap-4 md:gap-16">
           <div className="flex flex-col items-center">
-            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>8</span>
+            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>9</span>
             <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Projects</span>
           </div>
           <div className="h-8 md:h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>

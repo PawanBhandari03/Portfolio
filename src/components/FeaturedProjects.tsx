@@ -352,6 +352,26 @@ const FILTERS = ['All', 'Full Stack', 'Backend', 'AI/ML', 'Web App', 'Java/Sprin
 export default function FeaturedProjects() {
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const openLightbox = (index: number) => setLightboxIndex(index);
+  const closeLightbox = () => setLightboxIndex(null);
+  const lightboxImages = selectedProject?.snapshots ?? [];
+  const goNext = () => setLightboxIndex(prev => prev !== null ? (prev + 1) % lightboxImages.length : null);
+  const goPrev = () => setLightboxIndex(prev => prev !== null ? (prev - 1 + lightboxImages.length) % lightboxImages.length : null);
+
+  // Close lightbox & modal on Escape, navigate with arrow keys
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (lightboxIndex !== null) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') goNext();
+        if (e.key === 'ArrowLeft') goPrev();
+      } else if (e.key === 'Escape') setSelectedProject(null);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightboxIndex, lightboxImages.length]);
 
   // Prevent background scroll when modal open
   useEffect(() => {
@@ -683,10 +703,19 @@ export default function FeaturedProjects() {
                       REAL-WORLD SNAPSHOTS
                     </h4>
                     <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
-                      {selectedProject.snapshots ? (
+                      {selectedProject.snapshots && selectedProject.snapshots.length > 0 ? (
                         selectedProject.snapshots.map((snap, i) => (
-                          <div key={i} className="w-64 md:w-80 h-[160px] shrink-0 bg-slate-100 dark:bg-[#0e121e] rounded-lg border border-slate-200 dark:border-white/5 flex items-center justify-center overflow-hidden">
-                            <img src={snap} alt={`Snapshot ${i + 1}`} className="w-full h-full object-cover" />
+                          <div
+                            key={i}
+                            onClick={() => openLightbox(i)}
+                            className="group/snap w-64 md:w-80 h-[160px] shrink-0 bg-slate-100 dark:bg-[#0e121e] rounded-lg border border-slate-200 dark:border-white/5 flex items-center justify-center overflow-hidden cursor-zoom-in relative"
+                          >
+                            <img src={snap} alt={`Snapshot ${i + 1}`} className="w-full h-full object-cover transition-transform duration-300 group-hover/snap:scale-105" />
+                            <div className="absolute inset-0 bg-black/0 group-hover/snap:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                              <svg className="w-8 h-8 text-white opacity-0 group-hover/snap:opacity-100 transition-opacity duration-300 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                              </svg>
+                            </div>
                           </div>
                         ))
                       ) : (
@@ -742,6 +771,80 @@ export default function FeaturedProjects() {
                 </div>
             </motion.div>
           </div>
+        )}
+      </AnimatePresence>
+
+      {/* LIGHTBOX */}
+      <AnimatePresence>
+        {lightboxIndex !== null && lightboxImages.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center"
+            onClick={closeLightbox}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
+
+            {/* Close Button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors"
+            >
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+
+            {/* Counter */}
+            <div className="absolute top-5 left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-sm font-bold tracking-widest">
+              {lightboxIndex + 1} / {lightboxImages.length}
+            </div>
+
+            {/* Prev Button */}
+            <button
+              onClick={(e) => { e.stopPropagation(); goPrev(); }}
+              className="absolute left-4 md:left-8 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-all hover:scale-110"
+            >
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+
+            {/* Image */}
+            <motion.div
+              key={lightboxIndex}
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.92 }}
+              transition={{ duration: 0.25 }}
+              className="relative z-10 max-w-[90vw] max-h-[80vh] flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={lightboxImages[lightboxIndex]}
+                alt={`Snapshot ${lightboxIndex + 1}`}
+                className="max-w-[90vw] max-h-[80vh] object-contain rounded-xl shadow-2xl border border-white/10"
+              />
+            </motion.div>
+
+            {/* Next Button */}
+            <button
+              onClick={(e) => { e.stopPropagation(); goNext(); }}
+              className="absolute right-4 md:right-8 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-all hover:scale-110"
+            >
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
+
+            {/* Dot Indicators */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+              {lightboxImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => { e.stopPropagation(); setLightboxIndex(i); }}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${i === lightboxIndex ? 'bg-white w-6' : 'bg-white/40 hover:bg-white/70'}`}
+                />
+              ))}
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

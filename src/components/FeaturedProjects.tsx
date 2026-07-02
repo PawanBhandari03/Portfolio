@@ -37,7 +37,6 @@ import ecoImg5 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM
 import ecoImg6 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (5).jpeg';
 import ecoImg7 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (6).jpeg';
 import ecoImg8 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (7).jpeg';
-import ecoNewImg from '../assets/ECObounty/generated_eco_ui.png';
 
 // AgriGuard Images
 import agriImg1 from '../assets/Agriguard/3729c54a-e5f6-4c5e-87d4-00f3162d8902.jfif';
@@ -53,12 +52,7 @@ import traceImg3 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 
 import traceImg4 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 PM (3).jpeg';
 
 // New Project Board & Architecture Images
-import ecoArch from '../assets/ECObounty/arch.jpeg';
-import agriArch from '../assets/Agriguard/arch.jpeg';
-import traceMain from '../assets/Agritrace/main (1).jpeg';
 import traceArch from '../assets/Agritrace/arch.jpeg';
-import ecomArch from '../assets/Ecom/arch.jpeg';
-import taskArch from '../assets/Task/arch.jpeg';
 
 // BharatSahayak Images
 import bharatImg1 from '../assets/BharatSahayak/Screenshot 2026-07-02 211257.png';

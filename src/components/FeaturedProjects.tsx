@@ -37,6 +37,7 @@ import ecoImg5 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM
 import ecoImg6 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (5).jpeg';
 import ecoImg7 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (6).jpeg';
 import ecoImg8 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (7).jpeg';
+import ecoNewImg from '../assets/ECObounty/generated_eco_ui.png';
 
 // AgriGuard Images
 import agriImg1 from '../assets/Agriguard/3729c54a-e5f6-4c5e-87d4-00f3162d8902.jfif';
@@ -113,7 +114,7 @@ const PROJECTS: Project[] = [
     shortDesc: "Gamified environmental cleanup platform with bounties, real-time mapping, XP rewards and blockchain EcoCoin tokens.",
     modalSubtitle: "Community-powered environmental cleanup platform using bounties, gamification, real-time mapping and blockchain rewards.",
     tags: ["Next.js", "TypeScript", "Supabase", "Solidity", "Web3.js", "Leaflet Maps", "Tailwind CSS", "PWA"],
-    imageSrc: ecoArch,
+    imageSrc: ecoImg7,
     problem: "Environmental reporting systems suffer from slow government response, lack of accountability, poor visibility and zero incentive for citizens to act. Issues get reported but never resolved due to low community participation and no reward mechanism.",
     solution: "Built a gamified civic-tech platform where users create geo-tagged environmental bounties with photos and GPS. Community hunters accept, clean and verify locations. Verified completions earn XP points and EcoCoin (EOC) — an ERC-20 token on Ethereum Sepolia testnet — turning environmental action into a rewarding community experience.",
     features: [
@@ -130,7 +131,7 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/Anicantcode/EcoBountyy",
     liveUrl: "https://ecobountyapp.netlify.app/",
     snapshots: [ecoImg1, ecoImg2, ecoImg3, ecoImg4, ecoImg5, ecoImg6, ecoImg7, ecoImg8],
-    architectureImg: ecoArch
+    architectureImg: ecoImg7
   },
   {
     id: "02",
@@ -157,7 +158,8 @@ const PROJECTS: Project[] = [
       "Improved accessibility for users with low digital literacy.",
       "Enabled welfare access through voice and regional languages."
     ],
-    githubUrl: "",
+    githubUrl: "https://github.com/PawanBhandari03/BharatSahayak",
+    liveUrl: "https://bharat-sahayak-one.vercel.app",
     snapshots: [bharatImg2, bharatImg3, bharatImg4, bharatImg5, bharatImg6, bharatImg7],
     architectureImg: bharatImg1
   },
@@ -169,7 +171,7 @@ const PROJECTS: Project[] = [
     shortDesc: "AI-powered plant disease detection with Explainable AI, Grad-CAM heatmaps, severity scoring and treatment recommendations.",
     modalSubtitle: "AI-powered plant disease detection with Explainable AI, severity assessment and treatment recommendations.",
     tags: ["Python", "PyTorch", "FastAPI", "OpenCV", "Grad-CAM", "React", "REST API"],
-    imageSrc: agriArch,
+    imageSrc: agriImg3,
     problem: "Globally 20-40% of agricultural production is lost due to plant diseases. Farmers struggle to identify diseases early, lack expert consultation, and cannot understand or trust AI predictions. Delayed diagnosis leads to massive crop damage and financial loss.",
     solution: "Built an AI-powered plant disease triage platform using EfficientNetV2-S trained on 54,000+ PlantVillage images. The system detects disease from leaf photos, generates Grad-CAM heatmaps showing exactly which leaf regions are infected, scores severity, and provides treatment recommendations — all in real time.",
     features: [
@@ -186,7 +188,7 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/Anicantcode/Cyberpunks-Agriguard",
     liveUrl: "https://cyberpunks-agriguard.vercel.app/",
     snapshots: [agriImg1, agriImg2, agriImg3, agriImg4, agriImg5],
-    architectureImg: agriArch
+    architectureImg: agriImg3
   },
   {
     id: "04",
@@ -196,7 +198,7 @@ const PROJECTS: Project[] = [
     shortDesc: "Blockchain-powered agricultural supply chain transparency platform with QR traceability, smart contracts and farm-to-fork tracking. Built for Smart India Hackathon 2025.",
     modalSubtitle: "Blockchain-powered farm-to-fork supply chain transparency with QR traceability, smart contracts and decentralized storage.",
     tags: ["React", "Solidity", "Node.js", "GraphQL", "Ethereum", "Polygon", "IPFS", "Docker"],
-    imageSrc: traceMain,
+    imageSrc: traceImg3,
     problem: "The agricultural supply chain suffers from lack of transparency, product fraud, farmer exploitation by middlemen who capture 70-80% of product value, and consumer inability to verify food origin. Food fraud alone causes $40 billion in annual losses worldwide.",
     solution: "Built a decentralized supply chain platform where every agricultural product batch receives a unique QR code linked to an immutable blockchain record. The system tracks the complete journey from farmer to consumer through Ethereum/Polygon smart contracts, automates payments, and allows consumers to verify product authenticity by scanning the QR code.",
     features: [
@@ -212,7 +214,7 @@ const PROJECTS: Project[] = [
     ],
     pptUrl: agriTracePdf,
     snapshots: [traceArch, traceImg1, traceImg2, traceImg3, traceImg4],
-    architectureImg: traceMain
+    architectureImg: traceImg3
   },
   {
     id: "05",
@@ -223,7 +225,7 @@ const PROJECTS: Project[] = [
     modalSubtitle: "Modern full-stack blogging platform enabling secure content creation, draft workflows, and category management.",
     tags: ["Java", "Spring Boot", "Spring Security", "React", "Hibernate", "JWT", "PostgreSQL"],
     modalTags: ["Java", "Spring Boot", "Spring Security", "React", "Hibernate", "JWT Authentication", "Docker(PostgreSQL)", "REST APIs"],
-    imageSrc: "",
+    imageSrc: blogImg1,
     problem: "Many blogging platforms are either overly complex for content creators or lack essential publishing workflows such as draft management, content organization, and secure user authentication. Managing articles, categories, and content efficiently often requires multiple tools, making the publishing process difficult for writers and creators.",
     solution: "BlogNest is a full-stack content publishing platform that enables users to create, manage, draft, and publish blogs through a secure and intuitive workflow. The platform provides a seamless writing experience while allowing users to organize content using categories and tags.\n\nUsers can securely authenticate themselves, create articles, save drafts, update existing posts, and publish content through a responsive interface powered by React and Spring Boot.",
     features: [
@@ -238,7 +240,7 @@ const PROJECTS: Project[] = [
       "The project demonstrates modern full-stack development practices, including REST API design, authentication, database management, and responsive frontend development.",
       "Designed a scalable full-stack architecture that supports future enhancements such as comments, user profiles, content recommendations, and role-based publishing workflows."
     ],
-    githubUrl: "",
+    githubUrl: "https://github.com/PawanBhandari03/Blog_Platform",
     snapshots: [blogImg2, blogImg3, blogImg4, blogImg5, blogImg6],
     architectureImg: blogImg1
   },
@@ -250,7 +252,7 @@ const PROJECTS: Project[] = [
     shortDesc: "Full-stack e-commerce platform with Spring Boot REST API, product management, image upload, cart support and search filtering.",
     modalSubtitle: "Full-stack e-commerce platform with Spring Boot REST API, product management, cart support and search filtering.",
     tags: ["Java", "Spring Boot", "Spring Data JPA", "React", "H2 Database", "REST APIs", "Maven"],
-    imageSrc: ecomArch,
+    imageSrc: ecomImg1,
     problem: "Building a scalable e-commerce backend requires handling complex operations like product inventory, image management, cart functionality and search filtering — all through clean, well-structured REST APIs that a frontend can consume reliably.",
     solution: "Built a full-stack e-commerce application with a Spring Boot backend providing complete REST APIs for product management, image upload, stock tracking and cart operations. The React frontend consumes these APIs to deliver a complete shopping experience.",
     features: [
@@ -266,7 +268,7 @@ const PROJECTS: Project[] = [
     ],
     githubUrl: "https://github.com/PawanBhandari03/E-Commerce-Website",
     snapshots: [ecomImg1, ecomImg2, ecomImg3, ecomImg4, ecomImg5],
-    architectureImg: ecomArch
+    architectureImg: ecomImg1
   },
   {
     id: "07",
@@ -291,9 +293,9 @@ const PROJECTS: Project[] = [
       "Containerized entire application using Docker and docker-compose for production-ready deployment"
     ],
     githubUrl: "https://github.com/PawanBhandari03/Task-Manger-App",
-    imageSrc: taskArch,
+    imageSrc: taskImg1,
     snapshots: [taskImg1, taskImg2, taskImg3, taskImg4, taskImg5],
-    architectureImg: taskArch
+    architectureImg: taskImg1
   },
   {
     id: "08",

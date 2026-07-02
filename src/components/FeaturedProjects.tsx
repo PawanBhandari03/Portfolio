@@ -107,7 +107,7 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     id: "01",
-    categories: ["Full Stack"],
+    categories: ["Full Stack", "AI/ML", "Backend"],
     displayCategory: "FULL STACK",
     title: "EcoBounty",
     shortDesc: "Gamified environmental cleanup platform with bounties, real-time mapping, XP rewards and blockchain EcoCoin tokens.",
@@ -134,7 +134,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "02",
-    categories: ["AI/ML", "Full Stack"],
+    categories: ["AI/ML", "Full Stack", "Backend"],
     displayCategory: "AI WELFARE PLATFORM",
     title: "BharatSahayak",
     shortDesc: "AI-powered government scheme discovery platform delivering personalized welfare recommendations through WhatsApp and voice calls.",
@@ -163,7 +163,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "03",
-    categories: ["AI/ML"],
+    categories: ["AI/ML", "Full Stack", "Backend"],
     displayCategory: "AI SYSTEM",
     title: "AgriGuard",
     shortDesc: "AI-powered plant disease detection with Explainable AI, Grad-CAM heatmaps, severity scoring and treatment recommendations.",
@@ -190,7 +190,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "04",
-    categories: ["Full Stack"],
+    categories: [],
     displayCategory: "FULL STACK · BLOCKCHAIN",
     title: "AgriTrace",
     shortDesc: "Blockchain-powered agricultural supply chain transparency platform with QR traceability, smart contracts and farm-to-fork tracking. Built for Smart India Hackathon 2025.",
@@ -216,7 +216,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "05",
-    categories: ["Full Stack", "Backend", "Java/Spring Boot"],
+    categories: ["Backend", "Java/Spring Boot"],
     displayCategory: "FULL STACK · CONTENT PLATFORM",
     title: "BlogNest",
     shortDesc: "Full-stack content publishing platform with secure authentication, draft management, and content organization.",
@@ -297,7 +297,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "08",
-    categories: ["Web App"],
+    categories: ["Web App", "Full Stack"],
     title: "PawFlix",
     shortDesc: "Movie discovery web app with dynamic data fetching, search and fully responsive UI.",
     tags: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Vite"],

@@ -16,8 +16,8 @@ const CertificatePlaceholder = () => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-neutral-400 mb-2 opacity-60">
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
     </svg>
-    <p className="text-xs font-semibold text-neutral-400/80">Certificate Pending</p>
-    <p className="text-[10px] text-neutral-500 mt-1">Available upon completion</p>
+    <p className="text-xs font-semibold text-neutral-400/80">Currently Pursuing</p>
+    <p className="text-[10px] text-neutral-500 mt-1">Certificate available upon completion</p>
   </div>
 );
 
@@ -186,10 +186,10 @@ export default function AchievementsPage({ onBack }: Props) {
               {/* Card Details */}
               <div className="flex flex-col gap-1.5 p-5">
                 <h4 className="text-[15px] font-bold leading-snug" style={{ color: 'var(--text-primary)' }}>
-                  Spring Boot 3, Spring 6 & Hibernate for Beginners
+                  Spring Boot & Hibernate Fundamentals
                 </h4>
                 <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
-                  Udemy
+                  Udemy • Chad Darby
                 </p>
                 <div className="mt-1">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#f97316] uppercase tracking-wider">
@@ -287,17 +287,17 @@ export default function AchievementsPage({ onBack }: Props) {
               <div className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden">
                 <img 
                   src={azureCert} 
-                  alt="Microsoft Azure Certification" 
+                  alt="Azure Fundamentals – SkillUp" 
                   className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
                 />
               </div>
               {/* Card Details */}
               <div className="flex flex-col gap-1.5 p-5">
                 <h4 className="text-[15px] font-bold leading-snug" style={{ color: 'var(--text-primary)' }}>
-                  Microsoft Azure Certification
+                  Azure Fundamentals – SkillUp
                 </h4>
                 <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
-                  Microsoft
+                  Microsoft × Simplilearn SkillUp
                 </p>
                 <div className="mt-1">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#22c55e] uppercase tracking-wider">

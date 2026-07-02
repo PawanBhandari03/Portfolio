@@ -59,6 +59,23 @@ import traceArch from '../assets/Agritrace/arch.jpeg';
 import ecomArch from '../assets/Ecom/arch.jpeg';
 import taskArch from '../assets/Task/arch.jpeg';
 
+// BharatSahayak Images
+import bharatImg1 from '../assets/BharatSahayak/Screenshot 2026-07-02 211257.png';
+import bharatImg2 from '../assets/BharatSahayak/Screenshot 2026-07-02 211313.png';
+import bharatImg3 from '../assets/BharatSahayak/Screenshot 2026-07-02 211324.png';
+import bharatImg4 from '../assets/BharatSahayak/Screenshot 2026-07-02 211423.png';
+import bharatImg5 from '../assets/BharatSahayak/Screenshot 2026-07-02 211718.png';
+import bharatImg6 from '../assets/BharatSahayak/Screenshot 2026-07-02 211735.png';
+import bharatImg7 from '../assets/BharatSahayak/Screenshot 2026-07-02 211900.png';
+
+// BlogNest Images
+import blogImg1 from '../assets/Blog/Screenshot 2026-06-28 160440.png';
+import blogImg2 from '../assets/Blog/Screenshot 2026-06-28 160448.png';
+import blogImg3 from '../assets/Blog/Screenshot 2026-06-28 160453.png';
+import blogImg4 from '../assets/Blog/Screenshot 2026-06-28 161342.png';
+import blogImg5 from '../assets/Blog/Screenshot 2026-06-28 161401.png';
+import blogImg6 from '../assets/Blog/Screenshot 2026-06-28 161518.png';
+
 type ProjectCategory = 'Full Stack' | 'Backend' | 'AI/ML' | 'Web App' | 'Java/Spring Boot';
 
 interface Project {
@@ -124,7 +141,7 @@ const PROJECTS: Project[] = [
     modalSubtitle: "AI-powered welfare companion identifying and delivering personalized scheme recommendations via WhatsApp and voice calls.",
     tags: ["React", "Node.js", "Express", "Supabase", "Mistral AI", "Twilio", "Tailwind CSS"],
     modalTags: ["React", "Node.js", "Express.js", "Supabase", "Mistral AI", "Twilio WhatsApp API", "Twilio Voice API", "Tailwind CSS", "REST APIs", "Vercel", "Render"],
-    imageSrc: "",
+    imageSrc: bharatImg1,
     problem: "₹2.6 lakh crore in government welfare benefits go unclaimed every year in India. Not because the money isn't there — but because millions of eligible citizens such as farmers, widows, students, and low-income families simply do not know these schemes exist. Existing government portals are complex, English-first, and often require smartphones, internet access, and digital literacy that many rural citizens lack.",
     solution: "BharatSahayak is an AI-powered welfare companion that identifies every government scheme a citizen qualifies for and proactively delivers personalized recommendations through WhatsApp or voice calls on any phone.\n\nNo app download. No internet dependency. No technical knowledge required.\n\nUsers can simply send a WhatsApp message or make a phone call in Hindi, Marathi, or English. The AI understands their profile, analyzes eligibility criteria, recommends relevant schemes, and provides information about benefits, required documents, and application deadlines automatically.",
     features: [
@@ -141,8 +158,8 @@ const PROJECTS: Project[] = [
       "Enabled welfare access through voice and regional languages."
     ],
     githubUrl: "",
-    snapshots: [],
-    architectureImg: ""
+    snapshots: [bharatImg2, bharatImg3, bharatImg4, bharatImg5, bharatImg6, bharatImg7],
+    architectureImg: bharatImg1
   },
   {
     id: "03",
@@ -222,8 +239,8 @@ const PROJECTS: Project[] = [
       "Designed a scalable full-stack architecture that supports future enhancements such as comments, user profiles, content recommendations, and role-based publishing workflows."
     ],
     githubUrl: "",
-    snapshots: [],
-    architectureImg: ""
+    snapshots: [blogImg2, blogImg3, blogImg4, blogImg5, blogImg6],
+    architectureImg: blogImg1
   },
   {
     id: "06",

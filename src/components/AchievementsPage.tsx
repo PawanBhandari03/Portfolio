@@ -3,6 +3,7 @@ import pandoraImg from '../assets/Pandora.png';
 import mongoCert from '../assets/Course certificate/mongo.png';
 import ibmCert from '../assets/Course certificate/IBM.png';
 import azureCert from '../assets/Course certificate/AZURE.png';
+import riftImg from '../assets/rift_Hackathon.jpeg';
 
 // Icons
 const ArrowLeft = () => (
@@ -118,7 +119,7 @@ export default function AchievementsPage({ onBack }: Props) {
                 </div>
             </motion.div>
 
-            {/* Card 3 - Default Placeholder Card */}
+            {/* Card 3 - RIFT Hackathon */}
             <motion.div 
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -127,14 +128,24 @@ export default function AchievementsPage({ onBack }: Props) {
                 className="flex flex-col rounded-[32px] shadow-2xl backdrop-blur-md overflow-hidden relative w-full"
                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
-                <div className="flex items-center justify-center w-full h-[250px] md:h-[350px]" style={{ backgroundColor: 'var(--image-placeholder)' }}>
-                    <span className="text-sm font-bold uppercase tracking-widest opacity-60" style={{ color: 'var(--text-secondary)' }}>Image Placeholder</span>
+                <div className="flex items-center justify-center w-full" style={{ backgroundColor: '#1a1a2e' }}>
+                    <img 
+                        src={riftImg} 
+                        alt="RIFT Hackathon Certificate" 
+                        className="w-full h-[250px] md:h-[350px] hover:scale-105 transition-transform duration-700 ease-in-out"
+                        style={{ objectFit: 'contain' }}
+                    />
                 </div>
                 <div style={{ padding: '30px' }} className="flex flex-col justify-center items-center h-full">
-                    <h2 className="text-2xl font-bold m-0 text-center mb-4" style={{ color: 'var(--text-primary)' }}>Coming Soon</h2>
+                    <h2 className="text-2xl font-bold m-0 text-center mb-4" style={{ color: 'var(--text-primary)' }}>RIFT Hackathon 2026 — Top 11</h2>
                     <p className="text-sm md:text-base leading-relaxed opacity-90 text-center mb-6" style={{ color: 'var(--text-secondary)' }}>
-                        More achievements will be added here soon.
+                        Ranked in the Top 11 teams at RIFT Hackathon 2026, organized by Vesdiam Technologies in collaboration with FalconSphere.
                     </p>
+                    <div className="mt-auto flex flex-col items-center gap-3 w-full">
+                        <span className="inline-flex items-center justify-center px-5 py-2 rounded-full text-sm font-bold border shadow-sm tracking-wide badge-shimmer text-center" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
+                            RIFT 2026 · Vesdiam Technologies · July 2026
+                        </span>
+                    </div>
                 </div>
             </motion.div>
         </div>

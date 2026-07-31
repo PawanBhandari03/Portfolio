@@ -61,7 +61,14 @@ function App() {
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
 
           {/* Left: Logo/Name */}
-          <div className="flex items-center select-none">
+          <div 
+            className="flex items-center select-none"
+            role="button"
+            onClick={() => {
+              if (currentPage !== 'home') setCurrentPage('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
             <span className="text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tight">PB</span>
             <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#0ea5e9] mx-1 md:mx-1.5 self-end mb-1.5 md:mb-2"></span>
             <span className="text-xs md:text-sm font-bold tracking-widest text-slate-500 uppercase ml-0.5 md:ml-1 mt-0.5 md:mt-1">Portfolio</span>

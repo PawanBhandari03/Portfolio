@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 import pandoraImg from '../assets/Pandora.png';
 import mongoCert from '../assets/Course certificate/mongo.png';
 import ibmCert from '../assets/Course certificate/IBM.png';
@@ -29,6 +30,8 @@ interface Props {
 }
 
 export default function AchievementsPage({ onBack }: Props) {
+  const [selectedCert, setSelectedCert] = useState<string | null>(null);
+
   return (
     <main className="w-full max-w-5xl mx-auto px-6 pt-8 pb-16 relative z-10 flex flex-col min-h-screen">
       
@@ -71,7 +74,12 @@ export default function AchievementsPage({ onBack }: Props) {
             className="flex flex-col md:flex-row items-stretch gap-6 md:gap-10 rounded-[32px] p-6 md:p-8 shadow-2xl backdrop-blur-md relative"
             style={{ backgroundColor: 'var(--card-bg)', border: '1px solid rgba(255,215,0,0.3)', boxShadow: '0 0 20px rgba(255,215,0,0.3)' }}
         >
-            <div className="w-full md:w-1/2 flex items-center justify-center rounded-[24px] overflow-hidden shadow-inner trophy-float" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+            <div 
+              className="w-full md:w-1/2 flex items-center justify-center rounded-[24px] overflow-hidden shadow-inner trophy-float" 
+              role="button"
+              style={{ backgroundColor: 'var(--image-placeholder)' }}
+              onClick={() => setSelectedCert("/Techathon.jpeg")}
+            >
                 <img src="/Techathon.jpeg" alt="Trophy" className="w-full h-[300px] md:h-[450px] object-cover hover:scale-105 transition-transform duration-700 ease-in-out" />
             </div>
             <div className="w-full md:w-1/2 py-4 md:py-8 flex flex-col justify-center">
@@ -99,7 +107,12 @@ export default function AchievementsPage({ onBack }: Props) {
                 className="flex flex-col rounded-[32px] shadow-2xl backdrop-blur-md overflow-hidden relative w-full"
                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
-                <div className="flex items-center justify-center w-full" style={{ backgroundColor: '#1a1a2e' }}>
+                <div 
+                  className="flex items-center justify-center w-full" 
+                  role="button"
+                  style={{ backgroundColor: '#1a1a2e' }}
+                  onClick={() => setSelectedCert(pandoraImg)}
+                >
                     <img 
                         src={pandoraImg} 
                         alt="Pandora Hackathon" 
@@ -129,7 +142,12 @@ export default function AchievementsPage({ onBack }: Props) {
                 className="flex flex-col rounded-[32px] shadow-2xl backdrop-blur-md overflow-hidden relative w-full"
                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
             >
-                <div className="flex items-center justify-center w-full" style={{ backgroundColor: '#1a1a2e' }}>
+                <div 
+                  className="flex items-center justify-center w-full" 
+                  role="button"
+                  style={{ backgroundColor: '#1a1a2e' }}
+                  onClick={() => setSelectedCert(riftImg)}
+                >
                     <img 
                         src={riftImg} 
                         alt="RIFT Hackathon Certificate" 
@@ -192,7 +210,11 @@ export default function AchievementsPage({ onBack }: Props) {
               }}
             >
               {/* Image Area */}
-              <div className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden">
+              <div 
+                className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden"
+                role="button"
+                onClick={() => setSelectedCert(udemyCert)}
+              >
                 <img 
                   src={udemyCert} 
                   alt="Spring Boot & Hibernate Fundamentals" 
@@ -228,7 +250,11 @@ export default function AchievementsPage({ onBack }: Props) {
               }}
             >
               {/* Image Area */}
-              <div className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden">
+              <div 
+                className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden"
+                role="button"
+                onClick={() => setSelectedCert(mongoCert)}
+              >
                 <img 
                   src={mongoCert} 
                   alt="MongoDB for Developers" 
@@ -264,7 +290,11 @@ export default function AchievementsPage({ onBack }: Props) {
               }}
             >
               {/* Image Area */}
-              <div className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden">
+              <div 
+                className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden"
+                role="button"
+                onClick={() => setSelectedCert(ibmCert)}
+              >
                 <img 
                   src={ibmCert} 
                   alt="IBM SkillsBuild Certification" 
@@ -300,7 +330,11 @@ export default function AchievementsPage({ onBack }: Props) {
               }}
             >
               {/* Image Area */}
-              <div className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden">
+              <div 
+                className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden"
+                role="button"
+                onClick={() => setSelectedCert(azureCert)}
+              >
                 <img 
                   src={azureCert} 
                   alt="Azure Fundamentals – SkillUp" 
@@ -328,6 +362,43 @@ export default function AchievementsPage({ onBack }: Props) {
         </section>
 
       </div>
+
+      {/* Fullscreen Certificate Modal */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedCert(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedCert}
+                alt="Certificate Full View"
+                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              />
+              <button
+                onClick={() => setSelectedCert(null)}
+                className="absolute -top-12 right-0 sm:-right-10 text-white hover:text-gray-300 bg-black/50 hover:bg-black/80 rounded-full p-2 transition-colors cursor-pointer"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

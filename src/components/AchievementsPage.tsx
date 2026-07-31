@@ -3,6 +3,7 @@ import pandoraImg from '../assets/Pandora.png';
 import mongoCert from '../assets/Course certificate/mongo.png';
 import ibmCert from '../assets/Course certificate/IBM.png';
 import azureCert from '../assets/Course certificate/AZURE.png';
+import udemyCert from '../assets/Course certificate/udemy.png';
 import riftImg from '../assets/rift_Hackathon.jpeg';
 
 // Icons
@@ -190,9 +191,13 @@ export default function AchievementsPage({ onBack }: Props) {
                 border: '1px solid var(--border-color)',
               }}
             >
-              {/* Image Area (Empty Placeholder) */}
-              <div className="w-full h-[200px] md:h-[260px] bg-slate-900/15 dark:bg-slate-950/30 flex items-center justify-center select-none overflow-hidden">
-                <CertificatePlaceholder />
+              {/* Image Area */}
+              <div className="w-full h-[200px] md:h-[260px] bg-[#16162a] flex items-center justify-center select-none overflow-hidden">
+                <img 
+                  src={udemyCert} 
+                  alt="Spring Boot & Hibernate Fundamentals" 
+                  className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+                />
               </div>
               {/* Card Details */}
               <div className="flex flex-col gap-1.5 p-5">
@@ -203,8 +208,8 @@ export default function AchievementsPage({ onBack }: Props) {
                   Udemy • Chad Darby
                 </p>
                 <div className="mt-1">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#f97316] uppercase tracking-wider">
-                    In Progress
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#22c55e] uppercase tracking-wider">
+                    Completed
                   </span>
                 </div>
               </div>

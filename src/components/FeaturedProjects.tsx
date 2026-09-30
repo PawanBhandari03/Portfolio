@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import newsImg1 from '../assets/News/Screenshot 2026-06-17 114210.png';
-import newsImg2 from '../assets/News/Screenshot 2026-06-17 114222.png';
-import newsImg3 from '../assets/News/Screenshot 2026-06-17 114235.png';
-import newsImg4 from '../assets/News/Screenshot 2026-06-17 123323.png';
-import newsImg5 from '../assets/News/Screenshot 2026-06-17 123434.png';
 
 
 import movieImg1 from '../assets/movie/Screenshot 2026-06-17 163629.png';
@@ -15,18 +10,12 @@ import movieImg5 from '../assets/movie/Screenshot 2026-06-17 163708.png';
 import movieImg6 from '../assets/movie/Screenshot 2026-06-17 163713.png';
 import movieImg7 from '../assets/movie/Screenshot 2026-06-17 164137.png';
 
-import taskImg1 from '../assets/Task/Screenshot 2026-06-18 162500.png';
-import taskImg2 from '../assets/Task/Screenshot 2026-06-18 162509.png';
-import taskImg3 from '../assets/Task/Screenshot 2026-06-18 162530.png';
-import taskImg4 from '../assets/Task/Screenshot 2026-06-18 162536.png';
-import taskImg5 from '../assets/Task/Screenshot 2026-06-18 162542.png';
 
 import ecomImg1 from '../assets/Ecom/Screenshot 2026-06-18 172256.png';
 import ecomImg2 from '../assets/Ecom/Screenshot 2026-06-18 172303.png';
 import ecomImg3 from '../assets/Ecom/Screenshot 2026-06-18 172312.png';
 import ecomImg4 from '../assets/Ecom/Screenshot 2026-06-18 172316.png';
 import ecomImg5 from '../assets/Ecom/Screenshot 2026-06-18 172336.png';
-import agriTracePdf from '../assets/Agritrace/AgriTrace.pdf';
 
 // EcoBounty Images
 import ecoImg1 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM.jpeg';
@@ -45,14 +34,7 @@ import agriImg3 from '../assets/Agriguard/c7a9b1dd-1a2b-4aa8-bea4-875452913298.j
 import agriImg4 from '../assets/Agriguard/c7d6e042-ccb4-49bd-81dd-248a5107d8a5.jfif';
 import agriImg5 from '../assets/Agriguard/e76665bf-a6bf-4998-bc91-fdad0581ab44.jfif';
 
-// AgriTrace Images
-import traceImg1 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 PM.jpeg';
-import traceImg2 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 PM (1).jpeg';
-import traceImg3 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 PM (2).jpeg';
-import traceImg4 from '../assets/Agritrace/WhatsApp Image 2026-06-19 at 1.32.02 PM (3).jpeg';
 
-// New Project Board & Architecture Images
-import traceArch from '../assets/Agritrace/arch.jpeg';
 
 // BharatSahayak Images
 import bharatImg1 from '../assets/BharatSahayak/Screenshot 2026-07-02 211257.png';
@@ -187,28 +169,15 @@ const PROJECTS: Project[] = [
   {
     id: "04",
     categories: [],
-    displayCategory: "FULL STACK · BLOCKCHAIN",
-    title: "AgriTrace",
-    shortDesc: "Blockchain-powered agricultural supply chain transparency platform with QR traceability, smart contracts and farm-to-fork tracking. Built for Smart India Hackathon 2025.",
-    modalSubtitle: "Blockchain-powered farm-to-fork supply chain transparency with QR traceability, smart contracts and decentralized storage.",
-    tags: ["React", "Solidity", "Node.js", "GraphQL", "Ethereum", "Polygon", "IPFS", "Docker"],
-    imageSrc: traceImg3,
-    problem: "The agricultural supply chain suffers from lack of transparency, product fraud, farmer exploitation by middlemen who capture 70-80% of product value, and consumer inability to verify food origin. Food fraud alone causes $40 billion in annual losses worldwide.",
-    solution: "Built a decentralized supply chain platform where every agricultural product batch receives a unique QR code linked to an immutable blockchain record. The system tracks the complete journey from farmer to consumer through Ethereum/Polygon smart contracts, automates payments, and allows consumers to verify product authenticity by scanning the QR code.",
-    features: [
-      "Blockchain traceability — every supply chain transaction permanently recorded on Ethereum and Polygon, tamper-proof and transparent",
-      "QR code verification — consumers scan product QR to instantly view farm origin, transport history, certifications and authenticity",
-      "Smart contract automation — automatically transfers ownership, releases farmer payments on delivery and validates certifications",
-      "IPFS decentralized storage — farm images, organic certificates and quality reports stored on IPFS to reduce blockchain costs"
-    ],
-    outcomes: [
-      "Selected for Smart India Hackathon 2025 college round — Problem Statement ID 25045, Theme: Agriculture FoodTech & Rural Development",
-      "Designed a scalable architecture combining Ethereum, Polygon and Hyperledger Fabric for enterprise-grade supply chain operations",
-      "Demonstrated potential to increase farmer income by 20-30% and reduce food fraud by 40-50% through blockchain transparency"
-    ],
-    pptUrl: agriTracePdf,
-    snapshots: [traceArch, traceImg1, traceImg2, traceImg3, traceImg4],
-    architectureImg: traceImg3
+    displayCategory: "DETAILS COMING SOON",
+    title: "PawEvents",
+    shortDesc: "Project details coming soon.",
+    tags: [],
+    imageSrc: "",
+    problem: "Details coming soon.",
+    solution: "Details coming soon.",
+    features: ["Details coming soon."],
+    outcomes: ["Details coming soon."]
   },
   {
     id: "05",
@@ -266,30 +235,16 @@ const PROJECTS: Project[] = [
   },
   {
     id: "07",
-    categories: ["Backend", "Java/Spring Boot"],
-    displayCategory: "JAVA · BACKEND",
-    title: "Task Manager App",
-    shortDesc: "Full-stack task management application with Spring Boot REST API, React TypeScript frontend, role-based task organization and Docker deployment.",
-    modalSubtitle: "Full-stack task management with Spring Boot REST API, TypeScript frontend and Docker deployment.",
-    tags: ["Java", "Spring Boot", "React", "TypeScript", "Docker", "Tailwind CSS"],
-    modalTags: ["Java", "Spring Boot", "Spring MVC", "React", "TypeScript", "Tailwind CSS", "Docker", "Maven"],
-    problem: "Managing multiple tasks across different projects becomes chaotic without a structured system. Most basic to-do apps lack proper task organization, priority management, and a scalable backend architecture.",
-    solution: "Built a full-stack task management application with a Spring Boot REST API backend and React TypeScript frontend. Tasks are organized into Task Lists with priority and status tracking, all containerized using Docker for easy deployment.",
-    features: [
-      "Spring Boot REST API with clean layered architecture — Controllers, Services, Repositories and DTOs",
-      "Task Lists with nested Tasks — each task has Priority (High/Medium/Low) and Status (Todo/InProgress/Done) tracking",
-      "React TypeScript frontend with dedicated screens for creating, updating and managing task lists and tasks",
-      "Dockerized with docker-compose for one-command local setup and deployment"
-    ],
-    outcomes: [
-      "Implemented clean REST API design with proper DTO pattern, entity mapping and global exception handling",
-      "Learned full-stack integration between Spring Boot backend and React TypeScript frontend with proper domain modeling",
-      "Containerized entire application using Docker and docker-compose for production-ready deployment"
-    ],
-    githubUrl: "https://github.com/PawanBhandari03/Task-Manger-App",
-    imageSrc: taskImg1,
-    snapshots: [taskImg1, taskImg2, taskImg3, taskImg4, taskImg5],
-    architectureImg: taskImg1
+    categories: [],
+    displayCategory: "DETAILS COMING SOON",
+    title: "Cyber Security",
+    shortDesc: "Project details coming soon.",
+    tags: [],
+    imageSrc: "",
+    problem: "Details coming soon.",
+    solution: "Details coming soon.",
+    features: ["Details coming soon."],
+    outcomes: ["Details coming soon."]
   },
   {
     id: "08",
@@ -318,28 +273,29 @@ const PROJECTS: Project[] = [
   },
   {
     id: "09",
-    categories: ["Web App"],
-    title: "News Magazine",
-    shortDesc: "Real-time news aggregator with category filtering and live article previews.",
-    tags: ["React", "JavaScript", "News API", "Vite", "CSS"],
-    imageSrc: newsImg1,
-    problem: "People waste time switching between multiple news websites to stay updated across different topics. There was no single clean interface to browse categorized real-time news efficiently.",
-    solution: "Built a React-based news magazine that integrates with a live News API to fetch and display real-time articles. Users can filter by category and click through to read full articles from original sources.",
-    features: [
-      "Category-based filtering — Technology, Business, Health, Science, Sports, Entertainment",
-      "Real-time article fetching using News API",
-      "Clean magazine-style card grid layout with images, headlines and descriptions",
-      "Direct Read More links opening original articles from real news sources"
-    ],
-    outcomes: [
-      "Fully functional live news feed with zero backend required",
-      "Smooth category switching with instant content updates",
-      "Clean responsive grid layout for distraction-free reading experience"
-    ],
-    githubUrl: "https://github.com/PawanBhandari03/news-mag",
-    liveUrl: "https://news-mag-rust.vercel.app",
-    snapshots: [newsImg1, newsImg2, newsImg5, newsImg3, newsImg4],
-    architectureImg: newsImg1
+    categories: [],
+    displayCategory: "DETAILS COMING SOON",
+    title: "LingoMaster",
+    shortDesc: "Project details coming soon.",
+    tags: [],
+    imageSrc: "",
+    problem: "Details coming soon.",
+    solution: "Details coming soon.",
+    features: ["Details coming soon."],
+    outcomes: ["Details coming soon."]
+  },
+  {
+    id: "10",
+    categories: [],
+    displayCategory: "DETAILS COMING SOON",
+    title: "Hackathon Website",
+    shortDesc: "Project details coming soon.",
+    tags: [],
+    imageSrc: "",
+    problem: "Details coming soon.",
+    solution: "Details coming soon.",
+    features: ["Details coming soon."],
+    outcomes: ["Details coming soon."]
   }
 ];
 
@@ -404,7 +360,7 @@ export default function FeaturedProjects() {
         {/* New Stats Bar */}
         <div className="mt-8 flex flex-row items-center justify-center gap-4 md:gap-16">
           <div className="flex flex-col items-center">
-            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>9</span>
+            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>10</span>
             <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Projects</span>
           </div>
           <div className="h-8 md:h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
@@ -414,7 +370,7 @@ export default function FeaturedProjects() {
           </div>
           <div className="h-8 md:h-10 w-px" style={{ backgroundColor: 'var(--border-color)' }}></div>
           <div className="flex flex-col items-center">
-            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>25+</span>
+            <span className="text-[28px] md:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>40+</span>
             <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest mt-1" style={{ color: 'var(--text-secondary)' }}>Technologies</span>
           </div>
         </div>

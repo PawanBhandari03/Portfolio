@@ -90,11 +90,6 @@ const INTENTS: Intent[] = [
     reply: "AgriGuard is an AI plant disease detection tool with Explainable AI (Grad-CAM), severity assessment and treatment recommendations. It's built with Python, PyTorch, OpenCV, FastAPI and a React frontend."
   },
   {
-    name: 'agritrace',
-    keywords: [/\b(agritrace|agri trace|supply chain|blockchain|farm|solidity|ethereum|ipfs)/],
-    reply: "AgriTrace is a blockchain-powered farm-to-fork supply chain platform with QR traceability, smart contracts and decentralized storage. It uses React, Solidity, Node.js, GraphQL, Ethereum, Polygon, IPFS and Docker."
-  },
-  {
     name: 'blognest',
     keywords: [/\b(blognest|blog nest|blog|blogging)/],
     reply: "BlogNest is a full-stack blogging platform with secure content creation, draft workflows and category management. It uses Java, Spring Boot, Spring Security, JWT, Hibernate, PostgreSQL and React."
@@ -105,24 +100,14 @@ const INTENTS: Intent[] = [
     reply: "My E-Commerce application is a Spring Boot REST API with product management, cart support and search filtering, paired with a React frontend."
   },
   {
-    name: 'taskmanager',
-    keywords: [/\b(task manager|task manger|task app|todo|to-do)/],
-    reply: "Task Manager is a full-stack task management app with a Spring Boot REST API, a TypeScript React frontend, Tailwind CSS and Docker deployment."
-  },
-  {
     name: 'pawflix',
     keywords: [/\b(pawflix|movie|movies|tmdb|film)/],
     reply: "PawFlix is a movie discovery web app built with React, Tailwind CSS, Vite and the TMDB API."
   },
   {
-    name: 'news',
-    keywords: [/\b(news magazine|news mag|newsmag|news app)/],
-    reply: "News Magazine is a news reading site built with React, Vite and a News API."
-  },
-  {
     name: 'projects',
     keywords: [/\b(project|projects|built|build|made|portfolio|work|works|showcase|apps?|applications?)\b/],
-    reply: "I've built more than 10 projects. Highlights are EcoBounty (Techathon 3.0 winner), TripNest (travel booking), EventHub (event ticketing), BharatSahayak (AI scheme discovery), AgriGuard (plant disease detection), AgriTrace (blockchain supply chain), BlogNest, an E-Commerce app, Task Manager, PawFlix and News Magazine. Ask me about any of them, or scroll to the Projects section."
+    reply: "I've built more than 10 projects. Highlights are EcoBounty (Techathon 3.0 winner), TripNest (travel booking), EventHub (event ticketing), BharatSahayak (AI scheme discovery), AgriGuard (plant disease detection), BlogNest, an E-Commerce app, PawFlix, and new ones like PawEvents, LingoMaster, Cyber Security and a hackathon website. Ask me about any of them, or scroll to the Projects section."
   },
   {
     name: 'achievements',
@@ -167,7 +152,7 @@ const INTENTS: Intent[] = [
   {
     name: 'blockchain',
     keywords: [/\b(web3|metamask|smart contract|crypto|polygon)/],
-    reply: "I've worked with Solidity, Web3.js and MetaMask for blockchain features, like the bounty rewards in EcoBounty and the smart contracts in AgriTrace."
+    reply: "I've worked with Solidity, Web3.js and MetaMask for blockchain features, like the bounty rewards and EcoCoin token in EcoBounty."
   },
   {
     name: 'resume',

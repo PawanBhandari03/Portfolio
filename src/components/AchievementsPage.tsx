@@ -113,7 +113,7 @@ export default function AchievementsPage({ onBack }: Props) {
                     />
                 </div>
                 <div style={{ padding: '30px' }} className="flex flex-col justify-center items-center h-full">
-                    <h2 className="text-2xl font-bold text-white mb-4 text-center">Pandora Hackathon — Best Solution</h2>
+                    <h2 className="text-2xl font-bold mb-4 text-center" style={{ color: 'var(--text-primary)' }}>Pandora Hackathon — Best Solution</h2>
                     <p className="text-sm md:text-base leading-relaxed opacity-90 text-center mb-6" style={{ color: 'var(--text-secondary)' }}>
                         Awarded Certificate of Appreciation for Best Solution in AI For Smart Cities theme at Pandora Hackathon, BSIOTR JSPM.
                     </p>
@@ -221,11 +221,6 @@ export default function AchievementsPage({ onBack }: Props) {
                 <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
                   Udemy • Chad Darby
                 </p>
-                <div className="mt-1">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#22c55e] uppercase tracking-wider">
-                    Completed
-                  </span>
-                </div>
               </div>
             </motion.div>
 
@@ -261,11 +256,6 @@ export default function AchievementsPage({ onBack }: Props) {
                 <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
                   MongoDB University
                 </p>
-                <div className="mt-1">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#22c55e] uppercase tracking-wider">
-                    Completed
-                  </span>
-                </div>
               </div>
             </motion.div>
 
@@ -301,11 +291,6 @@ export default function AchievementsPage({ onBack }: Props) {
                 <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
                   IBM SkillsBuild
                 </p>
-                <div className="mt-1">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#22c55e] uppercase tracking-wider">
-                    Completed
-                  </span>
-                </div>
               </div>
             </motion.div>
 
@@ -341,11 +326,6 @@ export default function AchievementsPage({ onBack }: Props) {
                 <p className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>
                   Microsoft × Simplilearn SkillUp
                 </p>
-                <div className="mt-1">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-[#22c55e] uppercase tracking-wider">
-                    Completed
-                  </span>
-                </div>
               </div>
             </motion.div>
 

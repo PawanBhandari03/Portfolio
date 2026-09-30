@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <polygon points="3,3 14,11 12,16 6,14 4,9" fill="#E2761B" stroke="#E2761B" stroke-linejoin="round"/>
+  <polygon points="29,3 18,11 20,16 26,14 28,9" fill="#E2761B" stroke="#E2761B" stroke-linejoin="round"/>
+  <polygon points="6,14 12,16 13,22 8,24 5,19" fill="#E4761B" stroke="#E4761B" stroke-linejoin="round"/>
+  <polygon points="26,14 20,16 19,22 24,24 27,19" fill="#E4761B" stroke="#E4761B" stroke-linejoin="round"/>
+  <polygon points="12,16 20,16 19,22 16,25 13,22" fill="#F6851B" stroke="#F6851B" stroke-linejoin="round"/>
+  <polygon points="13,22 16,25 19,22 18,28 16,29 14,28" fill="#D7C1B3" stroke="#D7C1B3" stroke-linejoin="round"/>
+  <polygon points="13,22 8,24 10,28 14,28" fill="#CD6116" stroke="#CD6116" stroke-linejoin="round"/>
+  <polygon points="19,22 24,24 22,28 18,28" fill="#CD6116" stroke="#CD6116" stroke-linejoin="round"/>
+  <circle cx="13.5" cy="18" r="1.1" fill="#233447"/>
+  <circle cx="18.5" cy="18" r="1.1" fill="#233447"/>
+</svg>

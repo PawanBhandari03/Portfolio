@@ -94,7 +94,10 @@ const DOMAINS = [
       { name: 'GraphQL', icon: 'graphql/graphql-plain.svg' },
       { name: 'JWT/Auth' },
       { name: 'Tailwind CSS', icon: 'tailwindcss/tailwindcss-original.svg' },
-      { name: 'Next.js', icon: 'nextjs/nextjs-original.svg' }
+      { name: 'Next.js', icon: 'nextjs/nextjs-original.svg' },
+      { name: 'Redux', icon: 'redux/redux-original.svg' },
+      { name: 'Bootstrap', icon: 'bootstrap/bootstrap-original.svg' },
+      { name: 'Twilio', icon: 'twilio/twilio-original.svg' }
     ]
   },
   {
@@ -109,8 +112,12 @@ const DOMAINS = [
       { name: 'Docker', icon: 'docker/docker-original.svg' },
       { name: 'Git', icon: 'git/git-original.svg' },
       { name: 'Linux', icon: 'linux/linux-original.svg' },
-      { name: 'CI/CD' },
-      { name: 'Supabase', icon: 'supabase/supabase-original.svg' }
+      { name: 'CI/CD', icon: 'githubactions/githubactions-original.svg' },
+      { name: 'Supabase', icon: 'supabase/supabase-original.svg' },
+      { name: 'Kafka', icon: 'apachekafka/apachekafka-original.svg' },
+      { name: 'Jenkins', icon: 'jenkins/jenkins-original.svg' },
+      { name: 'Tomcat', icon: 'tomcat/tomcat-original.svg' },
+      { name: 'Redis Cache', icon: 'redis/redis-original.svg' }
     ]
   },
   {
@@ -123,9 +130,11 @@ const DOMAINS = [
       { name: 'OpenCV', icon: 'opencv/opencv-original.svg' },
       { name: 'CNN Models' },
       { name: 'Scikit-learn', icon: 'scikitlearn/scikitlearn-original.svg' },
-      { name: 'Dataset Training' },
       { name: 'NumPy', icon: 'numpy/numpy-original.svg' },
-      { name: 'Pandas', icon: 'pandas/pandas-original.svg' }
+      { name: 'Pandas', icon: 'pandas/pandas-original.svg' },
+      { name: 'PyTorch', icon: 'pytorch/pytorch-original.svg' },
+      { name: 'Kaggle', icon: 'kaggle/kaggle-original.svg' },
+      { name: 'APIs', icon: '/icons/api.svg' }
     ]
   },
   {
@@ -137,11 +146,14 @@ const DOMAINS = [
       { name: 'Spring Boot', icon: 'spring/spring-original.svg' },
       { name: 'Spring Security', icon: 'spring/spring-original.svg' },
       { name: 'Spring MVC', icon: 'spring/spring-original.svg' },
-      { name: 'Hibernate/JPA' },
+      { name: 'Hibernate/JPA', icon: 'spring/spring-original.svg' },
       { name: 'Maven', icon: 'maven/maven-original.svg' },
-      { name: 'REST API Design' },
+      { name: 'REST API Design', icon: 'spring/spring-original.svg' },
       { name: 'Microservices' },
-      { name: 'Spring Data JPA' }
+      { name: 'Spring Data JPA', icon: 'spring/spring-original.svg' },
+      { name: 'JUnit', icon: 'junit/junit-original.svg' },
+      { name: 'Gradle', icon: 'gradle/gradle-original.svg' },
+      { name: 'JWT Authentication', icon: 'spring/spring-original.svg' }
     ]
   },
   {
@@ -157,7 +169,10 @@ const DOMAINS = [
       { name: 'Docker Desktop', icon: 'docker/docker-original.svg' },
       { name: 'Linux Terminal', icon: 'linux/linux-original.svg' },
       { name: 'Figma', icon: 'figma/figma-original.svg' },
-      { name: 'Swagger', icon: 'swagger/swagger-original.svg' }
+      { name: 'Swagger', icon: 'swagger/swagger-original.svg' },
+      { name: 'Web3.js', icon: 'web3js/web3js-original.svg' },
+      { name: 'MetaMask', icon: '/icons/metamask.svg' },
+      { name: 'Keycloak', icon: 'https://cdn.simpleicons.org/keycloak/9ca3af' }
     ]
   }
 ];
@@ -196,7 +211,7 @@ export default function Skills() {
             style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)' }}
           >
             <div className="flex flex-col text-center">
-              <span className="text-[16px] md:text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={25} suffix="+" /></span>
+              <span className="text-[16px] md:text-xl font-bold" style={{ color: 'var(--text-primary)' }}><CountUpStat end={40} suffix="+" /></span>
               <span className="text-[9px] md:text-[10px] uppercase tracking-wider font-bold whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>Technologies</span>
             </div>
             <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/10 shrink-0" />
@@ -256,7 +271,7 @@ export default function Skills() {
                   >
                     {skill.icon && (
                       <img 
-                        src={`${deviconBase}${skill.icon}`} 
+                        src={skill.icon.startsWith('/') || skill.icon.startsWith('http') ? skill.icon : `${deviconBase}${skill.icon}`} 
                         alt={skill.name} 
                         className="w-4 h-4 object-contain"
                       />

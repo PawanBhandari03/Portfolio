@@ -186,33 +186,6 @@ const PROJECTS: Project[] = [
     architectureImg: bharatImg1
   },
   {
-    id: "03",
-    categories: ["AI/ML", "Full Stack", "Backend", "Hackathon"],
-    displayCategory: "AI SYSTEM",
-    title: "AgriGuard",
-    shortDesc: "AI-powered plant disease detection with Explainable AI, Grad-CAM heatmaps, severity scoring and treatment recommendations.",
-    modalSubtitle: "AI-powered plant disease detection with Explainable AI, severity assessment and treatment recommendations.",
-    tags: ["Python", "PyTorch", "FastAPI", "OpenCV", "Grad-CAM", "React", "REST API"],
-    imageSrc: agriImg3,
-    problem: "Globally 20-40% of agricultural production is lost due to plant diseases. Farmers struggle to identify diseases early, lack expert consultation, and cannot understand or trust AI predictions. Delayed diagnosis leads to massive crop damage and financial loss.",
-    solution: "Built an AI-powered plant disease triage platform using EfficientNetV2-S trained on 54,000+ PlantVillage images. The system detects disease from leaf photos, generates Grad-CAM heatmaps showing exactly which leaf regions are infected, scores severity, and provides treatment recommendations — all in real time.",
-    features: [
-      "EfficientNetV2-S model trained on 54,000+ images across 38 plant disease categories with high validation accuracy",
-      "Explainable AI using Grad-CAM — visually highlights exactly which regions of the leaf influenced the prediction",
-      "Severity scoring system — calculates infection spread percentage: Low (0-20%), Moderate (20-50%), Severe (50-100%)",
-      "Treatment recommendation engine — provides disease-specific fungicide, pesticide and agricultural guidance after diagnosis"
-    ],
-    outcomes: [
-      "Achieved high validation accuracy on PlantVillage dataset across 38 disease and healthy plant categories",
-      "Implemented Explainable AI with Grad-CAM — first plant disease system to show visual evidence of prediction reasoning",
-      "Built edge-ready architecture using EfficientNetV2-S suitable for future deployment on smartphones and IoT devices"
-    ],
-    githubUrl: "https://github.com/Anicantcode/Cyberpunks-Agriguard",
-    liveUrl: "https://cyberpunks-agriguard.vercel.app/",
-    snapshots: [agriImg5, agriImg4, agriImg3, agriImg2, agriImg1],
-    architectureImg: agriImg3
-  },
-  {
     id: "04",
     categories: ["Full Stack", "Backend", "Java/Spring Boot", "Security"],
     displayCategory: "FULL STACK · EVENT TICKETING",
@@ -241,32 +214,31 @@ const PROJECTS: Project[] = [
     architectureImg: evImg1
   },
   {
-    id: "05",
-    categories: ["Full Stack", "Backend", "Java/Spring Boot", "Security"],
-    displayCategory: "FULL STACK · CONTENT PLATFORM",
-    title: "BlogNest",
-    shortDesc: "Full-stack content publishing platform with secure authentication, draft management, and content organization.",
-    modalSubtitle: "Modern full-stack blogging platform enabling secure content creation, draft workflows, and category management.",
-    tags: ["Java", "Spring Boot", "Spring Security", "React", "Hibernate", "JWT", "PostgreSQL"],
-    modalTags: ["Java", "Spring Boot", "Spring Security", "React", "Hibernate", "JWT Authentication", "Docker(PostgreSQL)", "REST APIs"],
-    imageSrc: blogImg1,
-    problem: "Many blogging platforms are either overly complex for content creators or lack essential publishing workflows such as draft management, content organization, and secure user authentication. Managing articles, categories, and content efficiently often requires multiple tools, making the publishing process difficult for writers and creators.",
-    solution: "BlogNest is a full-stack content publishing platform that enables users to create, manage, draft, and publish blogs through a secure and intuitive workflow. The platform provides a seamless writing experience while allowing users to organize content using categories and tags.\n\nUsers can securely authenticate themselves, create articles, save drafts, update existing posts, and publish content through a responsive interface powered by React and Spring Boot.",
+    id: "03",
+    categories: ["AI/ML", "Full Stack", "Backend", "Hackathon"],
+    displayCategory: "AI SYSTEM",
+    title: "AgriGuard",
+    shortDesc: "AI-powered plant disease detection with Explainable AI, Grad-CAM heatmaps, severity scoring and treatment recommendations.",
+    modalSubtitle: "AI-powered plant disease detection with Explainable AI, severity assessment and treatment recommendations.",
+    tags: ["Python", "PyTorch", "FastAPI", "OpenCV", "Grad-CAM", "React", "REST API"],
+    imageSrc: agriImg3,
+    problem: "Globally 20-40% of agricultural production is lost due to plant diseases. Farmers struggle to identify diseases early, lack expert consultation, and cannot understand or trust AI predictions. Delayed diagnosis leads to massive crop damage and financial loss.",
+    solution: "Built an AI-powered plant disease triage platform using EfficientNetV2-S trained on 54,000+ PlantVillage images. The system detects disease from leaf photos, generates Grad-CAM heatmaps showing exactly which leaf regions are infected, scores severity, and provides treatment recommendations — all in real time.",
     features: [
-      "Secure Authentication System: Implements JWT-based authentication and Spring Security to provide secure user registration, login, and role-based access control.",
-      "Draft & Publishing Workflow: Allows users to save articles as drafts, edit existing content, and publish blogs when ready.",
-      "Categories & Tags Management: Organizes content through categories and tags, making articles easier to manage and discover.",
-      "Content Management Dashboard: Provides users with a dedicated dashboard to create, update, delete, and manage their blog posts.",
-      "Responsive User Experience: Built with React to deliver a modern, responsive interface for seamless content creation and reading across devices."
+      "EfficientNetV2-S model trained on 54,000+ images across 38 plant disease categories with high validation accuracy",
+      "Explainable AI using Grad-CAM — visually highlights exactly which regions of the leaf influenced the prediction",
+      "Severity scoring system — calculates infection spread percentage: Low (0-20%), Moderate (20-50%), Severe (50-100%)",
+      "Treatment recommendation engine — provides disease-specific fungicide, pesticide and agricultural guidance after diagnosis"
     ],
     outcomes: [
-      "BlogNest simplifies the content publishing process by combining secure authentication, structured content management, and an intuitive user experience into a single platform.",
-      "The project demonstrates modern full-stack development practices, including REST API design, authentication, database management, and responsive frontend development.",
-      "Designed a scalable full-stack architecture that supports future enhancements such as comments, user profiles, content recommendations, and role-based publishing workflows."
+      "Achieved high validation accuracy on PlantVillage dataset across 38 disease and healthy plant categories",
+      "Implemented Explainable AI with Grad-CAM — first plant disease system to show visual evidence of prediction reasoning",
+      "Built edge-ready architecture using EfficientNetV2-S suitable for future deployment on smartphones and IoT devices"
     ],
-    githubUrl: "https://github.com/PawanBhandari03/Blog_Platform",
-    snapshots: [blogImg6, blogImg4, blogImg5, blogImg2, blogImg3],
-    architectureImg: blogImg1
+    githubUrl: "https://github.com/Anicantcode/Cyberpunks-Agriguard",
+    liveUrl: "https://cyberpunks-agriguard.vercel.app/",
+    snapshots: [agriImg5, agriImg4, agriImg3, agriImg2, agriImg1],
+    architectureImg: agriImg3
   },
   {
     id: "06",
@@ -324,29 +296,60 @@ const PROJECTS: Project[] = [
     architectureImg: honeyImg1
   },
   {
-    id: "08",
-    categories: ["Web App"],
-    title: "PawFlix",
-    shortDesc: "Movie discovery web app with dynamic data fetching, search and fully responsive UI.",
-    tags: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Vite"],
-    imageSrc: movieImg1,
-    problem: "Movie lovers have no simple and fast way to discover, search and explore films across genres without dealing with bloated and slow streaming platforms. A lightweight movie discovery tool was missing.",
-    solution: "Built a React-based movie discovery platform that integrates with the TMDB API to fetch real-time movie data. Users can browse trending films, search by title, and explore detailed information about any movie instantly.",
+    id: "10",
+    categories: ["Full Stack", "Backend", "Web App", "Hackathon"],
+    displayCategory: "FULL STACK · HACKATHON PLATFORM",
+    title: "Broadsheet",
+    shortDesc: "Self-hosted hackathon platform with team submissions, normalized judge scoring, community voting and a REST API, for organizers running their own events.",
+    modalSubtitle: "One Docker command runs the whole event: registration, submissions, judging, voting and published results.",
+    tags: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "Jinja2", "Docker", "Alembic"],
+    modalTags: ["Python", "FastAPI", "PostgreSQL 16", "SQLAlchemy 2", "Alembic", "Jinja2", "REST API", "Docker", "pytest", "Railway"],
+    imageSrc: bsImg1,
+    problem: "Hackathons are usually run across several disconnected tools: one for registration, one for submissions, spreadsheets for judging and another place to publish results. Judges also score on different scales, so raw averages often favour whichever judges a project happened to draw.",
+    solution: "Broadsheet puts the whole event in one self-hosted FastAPI and PostgreSQL app with server-rendered pages and per-event roles (organizer, judge, participant, visitor). Judge scores are normalized across judges with shrinkage so rankings are fairer, and every access rule is enforced in the backend.",
     features: [
-      "Real-time movie data fetching using TMDB API with dynamic search",
-      "Browse trending, popular and top-rated movies by category",
-      "Movie detail view with ratings, overview, release date and genre",
-      "Fully responsive UI built with Tailwind CSS for all screen sizes"
+      "Organizers create events with tracks, prizes and weighted rubrics, invite judges, auto-assign projects by track and load, and publish results",
+      "Teams join by invite link and submit projects with a server-enforced deadline, duplicate detection and a public searchable gallery",
+      "Judges can only read and write their own score sheets, with refused attempts audited, and scores are normalized across judges with per-project standard error",
+      "Community approval voting uses a set window and sealed tallies, and the app also provides a REST API with OpenAPI docs, signed webhooks, printable certificates and an embeddable gallery widget"
     ],
     outcomes: [
-      "Successfully integrated a third-party REST API with real-time search and filtering capabilities",
-      "Delivered a fast, lightweight alternative to bloated streaming platform UIs",
-      "Deployed and live on Vercel with zero backend infrastructure"
+      "Built by team Binary Builders for the DOGFOOD 2026 hackathon and passes the provided checker for tiers T1 and T2, with T3 and T4 built and tested but not covered by automated checks",
+      "Ships with an automated test suite covering role isolation, deadlines, normalization math, voting, webhooks and the full event lifecycle",
+      "Starts with a single docker compose up, which runs migrations and seeds demo data, and is deployed live on Railway"
     ],
-    githubUrl: "https://github.com/PawanBhandari03/PawFlix",
-    liveUrl: "https://movie-website-paw-wszk.vercel.app",
-    snapshots: [movieImg1, movieImg3, movieImg7, movieImg4, movieImg5, movieImg6],
-    architectureImg: movieImg1
+    githubUrl: "https://github.com/PawanBhandari03/DogFood-HackaThon",
+    liveUrl: "https://dogfood-hackathon-production.up.railway.app",
+    snapshots: [bsImg1, bsImg2, bsImg3, bsImg4, bsImg5, bsImg6, bsImg7, bsImg8],
+    architectureImg: bsImg1
+  },
+  {
+    id: "05",
+    categories: ["Full Stack", "Backend", "Java/Spring Boot", "Security"],
+    displayCategory: "FULL STACK · CONTENT PLATFORM",
+    title: "BlogNest",
+    shortDesc: "Full-stack content publishing platform with secure authentication, draft management, and content organization.",
+    modalSubtitle: "Modern full-stack blogging platform enabling secure content creation, draft workflows, and category management.",
+    tags: ["Java", "Spring Boot", "Spring Security", "React", "Hibernate", "JWT", "PostgreSQL"],
+    modalTags: ["Java", "Spring Boot", "Spring Security", "React", "Hibernate", "JWT Authentication", "Docker(PostgreSQL)", "REST APIs"],
+    imageSrc: blogImg1,
+    problem: "Many blogging platforms are either overly complex for content creators or lack essential publishing workflows such as draft management, content organization, and secure user authentication. Managing articles, categories, and content efficiently often requires multiple tools, making the publishing process difficult for writers and creators.",
+    solution: "BlogNest is a full-stack content publishing platform that enables users to create, manage, draft, and publish blogs through a secure and intuitive workflow. The platform provides a seamless writing experience while allowing users to organize content using categories and tags.\n\nUsers can securely authenticate themselves, create articles, save drafts, update existing posts, and publish content through a responsive interface powered by React and Spring Boot.",
+    features: [
+      "Secure Authentication System: Implements JWT-based authentication and Spring Security to provide secure user registration, login, and role-based access control.",
+      "Draft & Publishing Workflow: Allows users to save articles as drafts, edit existing content, and publish blogs when ready.",
+      "Categories & Tags Management: Organizes content through categories and tags, making articles easier to manage and discover.",
+      "Content Management Dashboard: Provides users with a dedicated dashboard to create, update, delete, and manage their blog posts.",
+      "Responsive User Experience: Built with React to deliver a modern, responsive interface for seamless content creation and reading across devices."
+    ],
+    outcomes: [
+      "BlogNest simplifies the content publishing process by combining secure authentication, structured content management, and an intuitive user experience into a single platform.",
+      "The project demonstrates modern full-stack development practices, including REST API design, authentication, database management, and responsive frontend development.",
+      "Designed a scalable full-stack architecture that supports future enhancements such as comments, user profiles, content recommendations, and role-based publishing workflows."
+    ],
+    githubUrl: "https://github.com/PawanBhandari03/Blog_Platform",
+    snapshots: [blogImg6, blogImg4, blogImg5, blogImg2, blogImg3],
+    architectureImg: blogImg1
   },
   {
     id: "09",
@@ -377,32 +380,29 @@ const PROJECTS: Project[] = [
     architectureImg: lingoImg1
   },
   {
-    id: "10",
-    categories: ["Full Stack", "Backend", "Web App", "Hackathon"],
-    displayCategory: "FULL STACK · HACKATHON PLATFORM",
-    title: "Broadsheet",
-    shortDesc: "Self-hosted hackathon platform with team submissions, normalized judge scoring, community voting and a REST API, for organizers running their own events.",
-    modalSubtitle: "One Docker command runs the whole event: registration, submissions, judging, voting and published results.",
-    tags: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "Jinja2", "Docker", "Alembic"],
-    modalTags: ["Python", "FastAPI", "PostgreSQL 16", "SQLAlchemy 2", "Alembic", "Jinja2", "REST API", "Docker", "pytest", "Railway"],
-    imageSrc: bsImg1,
-    problem: "Hackathons are usually run across several disconnected tools: one for registration, one for submissions, spreadsheets for judging and another place to publish results. Judges also score on different scales, so raw averages often favour whichever judges a project happened to draw.",
-    solution: "Broadsheet puts the whole event in one self-hosted FastAPI and PostgreSQL app with server-rendered pages and per-event roles (organizer, judge, participant, visitor). Judge scores are normalized across judges with shrinkage so rankings are fairer, and every access rule is enforced in the backend.",
+    id: "08",
+    categories: ["Web App"],
+    title: "PawFlix",
+    shortDesc: "Movie discovery web app with dynamic data fetching, search and fully responsive UI.",
+    tags: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Vite"],
+    imageSrc: movieImg1,
+    problem: "Movie lovers have no simple and fast way to discover, search and explore films across genres without dealing with bloated and slow streaming platforms. A lightweight movie discovery tool was missing.",
+    solution: "Built a React-based movie discovery platform that integrates with the TMDB API to fetch real-time movie data. Users can browse trending films, search by title, and explore detailed information about any movie instantly.",
     features: [
-      "Organizers create events with tracks, prizes and weighted rubrics, invite judges, auto-assign projects by track and load, and publish results",
-      "Teams join by invite link and submit projects with a server-enforced deadline, duplicate detection and a public searchable gallery",
-      "Judges can only read and write their own score sheets, with refused attempts audited, and scores are normalized across judges with per-project standard error",
-      "Community approval voting uses a set window and sealed tallies, and the app also provides a REST API with OpenAPI docs, signed webhooks, printable certificates and an embeddable gallery widget"
+      "Real-time movie data fetching using TMDB API with dynamic search",
+      "Browse trending, popular and top-rated movies by category",
+      "Movie detail view with ratings, overview, release date and genre",
+      "Fully responsive UI built with Tailwind CSS for all screen sizes"
     ],
     outcomes: [
-      "Built by team Binary Builders for the DOGFOOD 2026 hackathon and passes the provided checker for tiers T1 and T2, with T3 and T4 built and tested but not covered by automated checks",
-      "Ships with an automated test suite covering role isolation, deadlines, normalization math, voting, webhooks and the full event lifecycle",
-      "Starts with a single docker compose up, which runs migrations and seeds demo data, and is deployed live on Railway"
+      "Successfully integrated a third-party REST API with real-time search and filtering capabilities",
+      "Delivered a fast, lightweight alternative to bloated streaming platform UIs",
+      "Deployed and live on Vercel with zero backend infrastructure"
     ],
-    githubUrl: "https://github.com/PawanBhandari03/DogFood-HackaThon",
-    liveUrl: "https://dogfood-hackathon-production.up.railway.app",
-    snapshots: [bsImg1, bsImg2, bsImg3, bsImg4, bsImg5, bsImg6, bsImg7, bsImg8],
-    architectureImg: bsImg1
+    githubUrl: "https://github.com/PawanBhandari03/PawFlix",
+    liveUrl: "https://movie-website-paw-wszk.vercel.app",
+    snapshots: [movieImg1, movieImg3, movieImg7, movieImg4, movieImg5, movieImg6],
+    architectureImg: movieImg1
   }
 ];
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
@@ -412,6 +412,35 @@ export default function FeaturedProjects() {
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const snapRowRef = useRef<HTMLDivElement>(null);
+  const modalBodyRef = useRef<HTMLDivElement>(null);
+
+  // Projects the popup arrows move through: same order as shown on the page
+  const getNavList = () =>
+    activeFilter === 'All' && featuredProject ? [featuredProject, ...gridProjects] : filteredProjects;
+  const goProject = (dir: 1 | -1) => {
+    if (!selectedProject) return;
+    const list = getNavList();
+    const idx = list.findIndex(p => p.id === selectedProject.id);
+    if (idx < 0 || list.length < 2) return;
+    setLightboxIndex(null);
+    setSelectedProject(list[(idx + dir + list.length) % list.length]);
+  };
+  const [snapEdges, setSnapEdges] = useState({ left: false, right: false });
+
+  const updateSnapEdges = () => {
+    const el = snapRowRef.current;
+    if (!el) return;
+    setSnapEdges({
+      left: el.scrollLeft > 4,
+      right: el.scrollLeft + el.clientWidth < el.scrollWidth - 4
+    });
+  };
+  const scrollSnaps = (dir: 1 | -1) => {
+    const el = snapRowRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' });
+  };
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
@@ -427,10 +456,28 @@ export default function FeaturedProjects() {
         if (e.key === 'ArrowRight') goNext();
         if (e.key === 'ArrowLeft') goPrev();
       } else if (e.key === 'Escape') setSelectedProject(null);
+      else if (selectedProject && e.key === 'ArrowRight') goProject(1);
+      else if (selectedProject && e.key === 'ArrowLeft') goProject(-1);
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [lightboxIndex, lightboxImages.length]);
+  }, [lightboxIndex, lightboxImages.length, selectedProject, activeFilter]);
+
+  // Start every project at the top of the popup
+  useEffect(() => {
+    if (modalBodyRef.current) modalBodyRef.current.scrollTop = 0;
+  }, [selectedProject?.id]);
+
+  // Keep snapshot arrows in sync with the row's scroll position
+  useEffect(() => {
+    if (!selectedProject) return;
+    const t = setTimeout(() => {
+      if (snapRowRef.current) snapRowRef.current.scrollLeft = 0;
+      updateSnapEdges();
+    }, 50);
+    window.addEventListener('resize', updateSnapEdges);
+    return () => { clearTimeout(t); window.removeEventListener('resize', updateSnapEdges); };
+  }, [selectedProject]);
 
   // Prevent background scroll when modal open
   useEffect(() => {
@@ -710,6 +757,7 @@ export default function FeaturedProjects() {
             />
             
             <motion.div
+              key={selectedProject.id}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
@@ -754,7 +802,7 @@ export default function FeaturedProjects() {
               </div>
 
               {/* Modal Body */}
-              <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+              <div ref={modalBodyRef} className="flex-1 overflow-y-auto p-6 custom-scrollbar">
                 
                 {/* Top Tags Row */}
                 <div className="flex flex-wrap gap-2.5 mb-8">
@@ -845,7 +893,15 @@ export default function FeaturedProjects() {
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                       REAL-WORLD SNAPSHOTS
                     </h4>
-                    <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
+                    <div className="relative">
+                      <button
+                        onClick={() => scrollSnaps(-1)}
+                        aria-label="Previous screenshots"
+                        className={`absolute left-2 top-[80px] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-[#8B5CF6] backdrop-blur-md border border-white/20 text-white flex items-center justify-center shadow-lg transition-all duration-300 ${snapEdges.left ? 'opacity-100 scale-100' : 'opacity-0 scale-75 pointer-events-none'}`}
+                      >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                      </button>
+                    <div ref={snapRowRef} onScroll={updateSnapEdges} className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
                       {selectedProject.snapshots && selectedProject.snapshots.length > 0 ? (
                         selectedProject.snapshots.map((snap, i) => (
                           <div
@@ -868,6 +924,14 @@ export default function FeaturedProjects() {
                           </div>
                         ))
                       )}
+                    </div>
+                      <button
+                        onClick={() => scrollSnaps(1)}
+                        aria-label="Next screenshots"
+                        className={`absolute right-2 top-[80px] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-[#8B5CF6] backdrop-blur-md border border-white/20 text-white flex items-center justify-center shadow-lg transition-all duration-300 ${snapEdges.right ? 'opacity-100 scale-100' : 'opacity-0 scale-75 pointer-events-none'}`}
+                      >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                      </button>
                     </div>
                   </div>
 
@@ -913,6 +977,24 @@ export default function FeaturedProjects() {
 
                 </div>
             </motion.div>
+
+            {/* Previous / next project */}
+            <button
+              onClick={() => goProject(-1)}
+              aria-label="Previous project"
+              title="Previous project"
+              className="group/nav hover:-translate-x-1 absolute left-1 md:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-[110] p-2 text-white/70 hover:text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] flex items-center justify-center transition-all duration-300 cursor-pointer"
+            >
+              <svg className="w-10 h-10 md:w-12 md:h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button
+              onClick={() => goProject(1)}
+              aria-label="Next project"
+              title="Next project"
+              className="group/nav hover:translate-x-1 absolute right-1 md:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-[110] p-2 text-white/70 hover:text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] flex items-center justify-center transition-all duration-300 cursor-pointer"
+            >
+              <svg className="w-10 h-10 md:w-12 md:h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
           </div>
         )}
       </AnimatePresence>

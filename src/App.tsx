@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReplicaHero from './components/ReplicaHero';
 import AboutBento from './components/AboutBento';
@@ -15,6 +15,8 @@ function App() {
   const [isDark, setIsDark] = useState(true);
   const [currentPage, setCurrentPage] = useState<'home' | 'achievements' | 'mylinks' | 'guestbook'>('home');
   const [navScrolled, setNavScrolled] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
+  const lastScrollY = useRef(0);
   const [themeToggleRotated, setThemeToggleRotated] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -29,16 +31,22 @@ function App() {
     }
   }, [isDark]);
 
-  // Navbar scroll effect
+  // Navbar scroll effect — hide when scrolling down, reveal when scrolling up
   useEffect(() => {
     const handleScroll = () => {
-      setNavScrolled(window.scrollY > 20);
+      const y = window.scrollY;
+      const delta = y - lastScrollY.current;
+      setNavScrolled(y > 20);
+      if (isMobileMenuOpen || y < 80 || delta < -4) {
+        setNavHidden(false);
+      } else if (delta > 8) {
+        setNavHidden(true);
+      }
+      lastScrollY.current = y;
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-
+  }, [isMobileMenuOpen]);
 
   const handleThemeToggle = () => {
     setIsDark(!isDark);
@@ -57,7 +65,7 @@ function App() {
       <Cursor />
 
       {/* ═══════ STICKY NAVBAR ═══════ */}
-      <nav className={`navbar-glass fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-6 lg:px-10${navScrolled ? ' scrolled' : ''}`}>
+      <nav className={`navbar-glass fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-6 lg:px-10${navScrolled ? ' scrolled' : ''}${navHidden ? ' nav-hidden' : ''}`}>
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
 
           {/* Left: Logo/Name */}

@@ -983,17 +983,17 @@ export default function FeaturedProjects() {
               onClick={() => goProject(-1)}
               aria-label="Previous project"
               title="Previous project"
-              className="group/nav hover:-translate-x-1 absolute left-1 md:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-[110] p-2 text-white/70 hover:text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] flex items-center justify-center transition-all duration-300 cursor-pointer"
+              className="absolute left-[max(0.25rem,calc(50%-28rem-3.5rem))] top-1/2 -translate-y-1/2 z-[110] w-12 h-28 text-white opacity-0 hover:opacity-100 focus-visible:opacity-100 pointer-coarse:opacity-70 hover:-translate-x-1 drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] flex items-center justify-center transition-all duration-300 cursor-pointer"
             >
-              <svg className="w-10 h-10 md:w-12 md:h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+              <svg className="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
             </button>
             <button
               onClick={() => goProject(1)}
               aria-label="Next project"
               title="Next project"
-              className="group/nav hover:translate-x-1 absolute right-1 md:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-[110] p-2 text-white/70 hover:text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] flex items-center justify-center transition-all duration-300 cursor-pointer"
+              className="absolute right-[max(0.25rem,calc(50%-28rem-3.5rem))] top-1/2 -translate-y-1/2 z-[110] w-12 h-28 text-white opacity-0 hover:opacity-100 focus-visible:opacity-100 pointer-coarse:opacity-70 hover:translate-x-1 drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] flex items-center justify-center transition-all duration-300 cursor-pointer"
             >
-              <svg className="w-10 h-10 md:w-12 md:h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+              <svg className="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
             </button>
           </div>
         )}

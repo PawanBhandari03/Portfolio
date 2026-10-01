@@ -372,6 +372,7 @@ const PROJECTS: Project[] = [
       "Recreated a full 2006 desktop experience in the browser, including a custom window manager, sound engine and XP-style dialogs"
     ],
     githubUrl: "https://github.com/RAHUL0408-B/Lingomaster-2006",
+    liveUrl: "https://lingomaster-2006.vercel.app/",
     snapshots: [lingoImg1, lingoImg2, lingoImg3, lingoImg4, lingoImg5, lingoImg6],
     architectureImg: lingoImg1
   },
@@ -396,9 +397,10 @@ const PROJECTS: Project[] = [
     outcomes: [
       "Built by team Binary Builders for the DOGFOOD 2026 hackathon and passes the provided checker for tiers T1 and T2, with T3 and T4 built and tested but not covered by automated checks",
       "Ships with an automated test suite covering role isolation, deadlines, normalization math, voting, webhooks and the full event lifecycle",
-      "Starts with a single docker compose up, which runs migrations and seeds demo data, and is set up for deployment on Railway"
+      "Starts with a single docker compose up, which runs migrations and seeds demo data, and is deployed live on Railway"
     ],
     githubUrl: "https://github.com/PawanBhandari03/DogFood-HackaThon",
+    liveUrl: "https://dogfood-hackathon-production.up.railway.app",
     snapshots: [bsImg1, bsImg2, bsImg3, bsImg4, bsImg5, bsImg6, bsImg7, bsImg8],
     architectureImg: bsImg1
   }

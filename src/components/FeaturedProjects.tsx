@@ -612,9 +612,9 @@ export default function FeaturedProjects() {
                 style={{ backgroundColor: 'var(--card-bg)' }}
               >
               {/* Top Half: Image */}
-              <div className="w-full h-[200px] md:h-64 relative overflow-hidden" style={{ backgroundColor: 'var(--image-placeholder)' }}>
+              <div className="w-full h-[170px] md:h-44 relative overflow-hidden" style={{ backgroundColor: 'var(--image-placeholder)' }}>
                 {proj.imageSrc && !proj.imageSrc.startsWith('/project_') ? (
-                  <img src={proj.imageSrc} alt={proj.title} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" />
+                  <img src={proj.imageSrc} alt={proj.title} className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center transition-all duration-500 group-hover:scale-105">
                     <span className="text-xl md:text-2xl font-black tracking-widest uppercase px-6 text-center" style={{ color: 'var(--text-secondary)', opacity: 0.2 }}>{proj.title}</span>
@@ -624,10 +624,10 @@ export default function FeaturedProjects() {
               </div>
 
               {/* Bottom Half: Content */}
-              <div className="p-5 md:p-8 flex flex-col flex-1 relative">
+              <div className="p-5 md:p-6 flex flex-col flex-1 relative">
                 
                 {/* Categories as plain text */}
-                <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-4 mb-3">
                   <span className="text-xl font-black text-slate-300 dark:text-slate-700 group-hover:text-[#8B5CF6] transition-colors duration-300">
                     {String(filteredProjects.indexOf(proj) + 1).padStart(2, '0')}
                   </span>
@@ -646,12 +646,12 @@ export default function FeaturedProjects() {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-extrabold mb-3 group-hover:text-[#8B5CF6] transition-colors" style={{ color: 'var(--text-primary)' }}>{proj.title}</h3>
-                <p className="text-sm leading-relaxed mb-6 line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
+                <h3 className="text-2xl font-extrabold mb-2 group-hover:text-[#8B5CF6] transition-colors" style={{ color: 'var(--text-primary)' }}>{proj.title}</h3>
+                <p className="text-sm leading-relaxed mb-4 line-clamp-2" style={{ color: 'var(--text-secondary)' }}>
                   {proj.shortDesc}
                 </p>
 
-                <div className="w-full h-px mb-6 mt-auto" style={{ backgroundColor: 'var(--border-color)' }}></div>
+                <div className="w-full h-px mb-4 mt-auto" style={{ backgroundColor: 'var(--border-color)' }}></div>
 
                 <div className="flex items-center justify-between">
                   {/* Tech Stack Tags (One line, no wrap) */}
@@ -775,7 +775,10 @@ export default function FeaturedProjects() {
                     </h4>
                     <div className="w-full h-64 md:h-96 relative bg-slate-100 dark:bg-[#0a0f1e] overflow-hidden rounded-[8px] border border-slate-200 dark:border-white/10 flex items-center justify-center">
                       {selectedProject.architectureImg ? (
-                        <img src={selectedProject.architectureImg} alt={`${selectedProject.title} Architecture/Showcase`} className="w-full h-full object-contain" />
+                        <>
+                          <img src={selectedProject.architectureImg} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-40" />
+                          <img src={selectedProject.architectureImg} alt={`${selectedProject.title} Architecture/Showcase`} className="relative w-full h-full object-contain" />
+                        </>
                       ) : (
                         <>
                           <div className="absolute inset-0 bg-[#1e2330] dark:bg-[#1e2330] opacity-70" />

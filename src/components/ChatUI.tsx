@@ -70,9 +70,9 @@ const INTENTS: Intent[] = [
     reply: "TripNest is a travel booking platform I built during my ElevanceSkills internship. It uses React, Tailwind CSS, Spring Boot, Spring Security, Hibernate and MongoDB, and supports flight and hotel booking, cancellation and real-time flight tracking with status updates and delay info."
   },
   {
-    name: 'eventhub',
-    keywords: [/\b(eventhub|event hub|ticket|tickets|keycloak|qr)/],
-    reply: "EventHub is a smart event ticket management system with role-based access for event creation, ticket booking and inventory. It uses Spring Boot, Keycloak authentication, PostgreSQL and React, with QR-code ticket validation and concurrency handling to prevent ticket overselling."
+    name: 'pawevents',
+    keywords: [/(pawevents|paw events|eventhub|event hub|eventsphere|ticket|tickets|ticketing|keycloak|qr|event)/],
+    reply: "PawEvents (also listed as EventHub on my resume) is a full-stack event ticketing platform. Organizers publish events with ticket types and sales windows, attendees buy tickets that come with a unique QR code, and door staff check guests in by scanning, with each ticket admitted only once. It uses Java 21, Spring Boot, Keycloak sign-in with role-based access, PostgreSQL, React, TypeScript and Docker. Checkout is a demo with no real payments."
   },
   {
     name: 'ecobounty',
@@ -88,6 +88,21 @@ const INTENTS: Intent[] = [
     name: 'agriguard',
     keywords: [/\b(agriguard|agri guard|plant|disease|crop|grad-?cam|explainable)/],
     reply: "AgriGuard is an AI plant disease detection tool with Explainable AI (Grad-CAM), severity assessment and treatment recommendations. It's built with Python, PyTorch, OpenCV, FastAPI and a React frontend."
+  },
+  {
+    name: 'chameleon',
+    keywords: [/(chameleon|honeypot|honey pot|cyber|security|siem|deception|sql injection|sqli|xss|attack|attacker|hacker)/],
+    reply: "The Chameleon is a cyber deception project built with teammate Rahul Bramhankar. It is an adaptive honeypot that looks like a fake bank, detects SQL injection and XSS using weighted rules plus an ML classifier, misleads attackers with fake responses, and records everything in a tamper-evident SHA-256 hash chain. A live SIEM dashboard shows attacks in real time. Stack: React, TypeScript, FastAPI, Python, scikit-learn and SQLite."
+  },
+  {
+    name: 'lingomaster',
+    keywords: [/(lingomaster|lingo master|language|languages|flashcard|flashcards|windows xp|retro|cd-?rom)/],
+    reply: "LingoMaster 2006 is a hackathon project built with teammate Rahul Bramhankar, and it placed in the Top 11 at RIFT Hackathon 2026. It's an offline language-learning app styled as a Windows XP desktop and 2006 CD-ROM, with Spanish, French and German quizzes, flashcards, a progress center and a completion certificate. It's built with plain HTML, CSS and JavaScript, with progress saved in LocalStorage."
+  },
+  {
+    name: 'broadsheet',
+    keywords: [/(broadsheet|dogfood|judging|judge|judges|voting|self-hosted)/],
+    reply: "Broadsheet is a self-hosted hackathon platform I built with my team Binary Builders for the DOGFOOD 2026 hackathon. It handles team submissions, judge scoring that is normalized across judges for fairer rankings, community voting, and a REST API with signed webhooks. It is built with Python, FastAPI, PostgreSQL, SQLAlchemy and Docker, and starts with a single docker compose command."
   },
   {
     name: 'blognest',
@@ -107,7 +122,7 @@ const INTENTS: Intent[] = [
   {
     name: 'projects',
     keywords: [/\b(project|projects|built|build|made|portfolio|work|works|showcase|apps?|applications?)\b/],
-    reply: "I've built more than 10 projects. Highlights are EcoBounty (Techathon 3.0 winner), TripNest (travel booking), EventHub (event ticketing), BharatSahayak (AI scheme discovery), AgriGuard (plant disease detection), BlogNest, an E-Commerce app, PawFlix, and new ones like PawEvents, LingoMaster, Cyber Security and a hackathon website. Ask me about any of them, or scroll to the Projects section."
+    reply: "I've built more than 10 projects. Highlights are EcoBounty (Techathon 3.0 winner), TripNest (travel booking), PawEvents (event ticketing), BharatSahayak (AI scheme discovery), AgriGuard (plant disease detection), BlogNest, an E-Commerce app, PawFlix, and new ones like The Chameleon (cyber security honeypot), LingoMaster 2006 (RIFT Hackathon Top 11) and Broadsheet (hackathon platform). Ask me about any of them, or scroll to the Projects section."
   },
   {
     name: 'achievements',

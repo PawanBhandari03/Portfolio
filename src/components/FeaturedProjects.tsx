@@ -53,6 +53,45 @@ import blogImg4 from '../assets/Blog/Screenshot 2026-06-28 161342.png';
 import blogImg5 from '../assets/Blog/Screenshot 2026-06-28 161401.png';
 import blogImg6 from '../assets/Blog/Screenshot 2026-06-28 161518.png';
 
+// The Chameleon Images
+import honeyImg1 from '../assets/HoneyPot/Screenshot 2026-10-01 132504.png';
+import honeyImg2 from '../assets/HoneyPot/Screenshot 2026-10-01 132516.png';
+import honeyImg3 from '../assets/HoneyPot/Screenshot 2026-10-01 132523.png';
+import honeyImg4 from '../assets/HoneyPot/Screenshot 2026-10-01 132540.png';
+import honeyImg5 from '../assets/HoneyPot/Screenshot 2026-10-01 132544.png';
+import honeyImg6 from '../assets/HoneyPot/Screenshot 2026-10-01 132551.png';
+import honeyImg7 from '../assets/HoneyPot/Screenshot 2026-10-01 132627.png';
+import chameleonPdf from '../assets/HoneyPot/The_Chameleon.pdf';
+
+// LingoMaster Images
+import lingoImg1 from '../assets/Lingomaster/WhatsApp Image 2026-10-01 at 1.31.39 PM.jpeg';
+import lingoImg2 from '../assets/Lingomaster/WhatsApp Image 2026-10-01 at 1.31.40 PM.jpeg';
+import lingoImg3 from '../assets/Lingomaster/WhatsApp Image 2026-10-01 at 1.31.40 PM (1).jpeg';
+import lingoImg4 from '../assets/Lingomaster/WhatsApp Image 2026-10-01 at 1.31.40 PM (2).jpeg';
+import lingoImg5 from '../assets/Lingomaster/WhatsApp Image 2026-10-01 at 1.31.41 PM.jpeg';
+import lingoImg6 from '../assets/Lingomaster/WhatsApp Image 2026-10-01 at 1.35.20 PM.jpeg';
+
+// PawEvents Images
+import evImg1 from '../assets/events/home-light.png';
+import evImg2 from '../assets/events/event.png';
+import evImg3 from '../assets/events/checkout.png';
+import evImg4 from '../assets/events/ticket-dark.png';
+import evImg5 from '../assets/events/check-in-dark.png';
+import evImg6 from '../assets/events/organizer-events.png';
+import evImg7 from '../assets/events/create-event.png';
+import evImg8 from '../assets/events/mobile.png';
+import evImg9 from '../assets/events/home-dark.png';
+
+// Broadsheet Images
+import bsImg1 from '../assets/hackathon/Screenshot 2026-10-01 135252.png';
+import bsImg2 from '../assets/hackathon/Screenshot 2026-10-01 135305.png';
+import bsImg3 from '../assets/hackathon/Screenshot 2026-10-01 135526.png';
+import bsImg4 from '../assets/hackathon/Screenshot 2026-10-01 135331.png';
+import bsImg5 from '../assets/hackathon/Screenshot 2026-10-01 135416.png';
+import bsImg6 from '../assets/hackathon/Screenshot 2026-10-01 135443.png';
+import bsImg7 from '../assets/hackathon/Screenshot 2026-10-01 135455.png';
+import bsImg8 from '../assets/hackathon/Screenshot 2026-10-01 135512.png';
+
 type ProjectCategory = 'Full Stack' | 'Backend' | 'AI/ML' | 'Web App' | 'Java/Spring Boot';
 
 interface Project {
@@ -79,6 +118,9 @@ interface Project {
   pptUrl?: string;
   snapshots?: string[];
   architectureImg?: string;
+  featured?: boolean;
+  highlights?: { icon: 'trophy' | 'users' | 'clock'; text: string }[];
+  collage?: string[];
 }
 
 const PROJECTS: Project[] = [
@@ -107,7 +149,14 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/Anicantcode/EcoBountyy",
     liveUrl: "https://ecobountyapp.netlify.app/",
     snapshots: [ecoImg1, ecoImg2, ecoImg3, ecoImg4, ecoImg5, ecoImg6, ecoImg7, ecoImg8],
-    architectureImg: ecoImg7
+    architectureImg: ecoImg7,
+    featured: true,
+    collage: [ecoImg3, ecoImg1, ecoImg2],
+    highlights: [
+      { icon: 'trophy', text: 'Winner — Best Solution Award, Techathon 3.0' },
+      { icon: 'users', text: 'Chosen from 500+ teams and 1,600+ participants' },
+      { icon: 'clock', text: 'Complete product built in a 24-hour hackathon' }
+    ]
   },
   {
     id: "02",
@@ -168,16 +217,31 @@ const PROJECTS: Project[] = [
   },
   {
     id: "04",
-    categories: [],
-    displayCategory: "DETAILS COMING SOON",
+    categories: ["Full Stack", "Backend", "Java/Spring Boot"],
+    displayCategory: "FULL STACK · EVENT TICKETING",
     title: "PawEvents",
-    shortDesc: "Project details coming soon.",
-    tags: [],
-    imageSrc: "",
-    problem: "Details coming soon.",
-    solution: "Details coming soon.",
-    features: ["Details coming soon."],
-    outcomes: ["Details coming soon."]
+    shortDesc: "Full-stack event ticketing platform where organizers publish events, attendees buy tickets with QR codes, and door staff check guests in by scanning.",
+    modalSubtitle: "Discover events, buy tickets, and check guests in with a QR code, with separate experiences for attendees, organizers and door staff.",
+    tags: ["Java", "Spring Boot", "React", "TypeScript", "PostgreSQL", "Keycloak", "Docker", "Tailwind CSS"],
+    modalTags: ["Java 21", "Spring Boot 3.4", "Spring Security", "OAuth2 Resource Server", "Spring Data JPA", "MapStruct", "ZXing", "Maven", "React 19", "TypeScript", "Vite", "Tailwind CSS 4", "React Router 7", "Radix UI", "PostgreSQL 16", "Keycloak (OIDC + PKCE, JWT)", "Docker Compose", "Render", "Vercel"],
+    imageSrc: evImg1,
+    problem: "Running an event involves several separate jobs. Organizers need to set up ticket types and sales windows, attendees need a simple way to buy and hold tickets, and door staff need a reliable way to admit each guest only once. Doing this without a shared system makes duplicate entry and role confusion easy.",
+    solution: "Built a Spring Boot REST API and a React TypeScript frontend, with Keycloak handling sign-in and roles. Organizers create and publish events with ticket types, attendees buy tickets that get a unique QR code, and staff scan the code to validate it. Each role sees only the pages and actions it can use, enforced in both the API and the UI.",
+    features: [
+      "Organizers create, edit, publish and delete events, with ticket types, prices, capacity limits and sales open/close times",
+      "Attendees browse and search published events, buy tickets (demo checkout, no real payment), and view them with QR codes",
+      "Door staff check tickets in by camera QR scan or ticket ID, and a ticket is admitted once, with repeat scans flagged as already used",
+      "Keycloak sign-in and registration (OpenID Connect with PKCE), with role-based access (attendee, organizer, staff) checked in Spring Security and in the UI"
+    ],
+    outcomes: [
+      "Built and documented a working end-to-end flow: event creation, ticket purchase, QR generation and one-time check-in",
+      "Set up for hosted deployment, with a Render blueprint (API, Keycloak, PostgreSQL) and a Vercel config for the frontend",
+      "Delivered a responsive UI with light, dark and system themes, plus a documented REST API"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03/PawEvents",
+    liveUrl: "https://pawevents.vercel.app",
+    snapshots: [evImg1, evImg2, evImg3, evImg4, evImg5, evImg6, evImg7, evImg8, evImg9],
+    architectureImg: evImg1
   },
   {
     id: "05",
@@ -235,16 +299,32 @@ const PROJECTS: Project[] = [
   },
   {
     id: "07",
-    categories: [],
-    displayCategory: "DETAILS COMING SOON",
-    title: "Cyber Security",
-    shortDesc: "Project details coming soon.",
-    tags: [],
-    imageSrc: "",
-    problem: "Details coming soon.",
-    solution: "Details coming soon.",
-    features: ["Details coming soon."],
-    outcomes: ["Details coming soon."]
+    categories: ["Full Stack", "AI/ML", "Backend"],
+    displayCategory: "CYBER SECURITY · FULL STACK",
+    title: "The Chameleon",
+    shortDesc: "Adaptive honeypot that mimics a fake bank, detects SQL injection and XSS with rules plus ML, deceives attackers, and streams events to a live SIEM dashboard.",
+    modalSubtitle: "A decoy bank that detects, deceives and records web attacks in a tamper-evident evidence chain, with a real-time analyst console.",
+    tags: ["React", "TypeScript", "FastAPI", "Python", "scikit-learn", "SQLite", "WebSocket", "Tailwind CSS"],
+    modalTags: ["React 19", "TypeScript", "Vite", "Tailwind CSS v4", "Recharts", "React Router", "Axios", "Python 3.11", "FastAPI", "Uvicorn", "Pydantic", "scikit-learn", "TF-IDF + Logistic Regression", "pandas", "joblib", "SQLite (WAL)", "WebSocket", "ReportLab", "pytest", "Vercel", "Render"],
+    imageSrc: honeyImg1,
+    problem: "Web applications are constantly probed with injection attacks such as SQL injection and XSS, and a blocked request tells the attacker they were caught. Security teams also need evidence of what an attacker did that cannot be quietly altered afterwards.",
+    solution: "Built a decoy \"Meridian Bank\" web app where every form submission passes through a hybrid detector of weighted regex rules and a trained ML classifier. Malicious input gets a safe, fabricated response instead of a block, is logged in a SHA-256 hash chain, and is pushed live to a SIEM-style dashboard. Submitted payloads are never executed, and all data shown is synthetic.",
+    features: [
+      "Hybrid detection with 19 weighted regex signatures (10 SQLi, 9 XSS) plus a TF-IDF character n-gram and Logistic Regression classifier, with the rules treated as authoritative",
+      "Adaptive deception with four strategies (fake login success, fake database records, fake acceptance, controlled error), escalating for repeat offenders with progressive delays from 0.5s to 4s",
+      "Tamper-evident evidence log where each event is hash-chained (hash = SHA256(event + previous hash)), with an integrity checker and a tampering demo",
+      "SIEM console with a live WebSocket feed, alert queue, threat topology, session replay, rule catalog, attack simulator and one-click PDF incident reports"
+    ],
+    outcomes: [
+      "Deployed as a React frontend on Vercel and a FastAPI backend on Render, with a live demo and public API docs",
+      "Backend test suite built with pytest, covering the API, rule engine, deception strategies and hash chain",
+      "Classifier scores 1.00 accuracy on a held-out split of a synthetic dataset (2,160 train / 540 test), not a real-world accuracy claim"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03/The-Chameleon",
+    liveUrl: "https://the-chameleon.vercel.app",
+    pptUrl: chameleonPdf,
+    snapshots: [honeyImg6, honeyImg7, honeyImg1, honeyImg2, honeyImg3, honeyImg4, honeyImg5],
+    architectureImg: honeyImg1
   },
   {
     id: "08",
@@ -273,29 +353,57 @@ const PROJECTS: Project[] = [
   },
   {
     id: "09",
-    categories: [],
-    displayCategory: "DETAILS COMING SOON",
-    title: "LingoMaster",
-    shortDesc: "Project details coming soon.",
-    tags: [],
-    imageSrc: "",
-    problem: "Details coming soon.",
-    solution: "Details coming soon.",
-    features: ["Details coming soon."],
-    outcomes: ["Details coming soon."]
+    categories: ["Web App"],
+    displayCategory: "FRONTEND · VANILLA JS",
+    title: "LingoMaster 2006",
+    shortDesc: "Offline language-learning app styled as a Windows XP desktop and 2006 CD-ROM, with quizzes, flashcards and certificates. Hackathon entry.",
+    modalSubtitle: "A Windows XP-era recreation of what a Duolingo-style learning app could have looked like as an offline educational CD-ROM in 2006.",
+    tags: ["HTML5", "CSS3", "JavaScript", "LocalStorage", "Web Audio API", "Git"],
+    modalTags: ["HTML5", "CSS3", "Vanilla JavaScript", "LocalStorage", "SessionStorage", "Web Audio API", "Git/GitHub"],
+    imageSrc: lingoImg1,
+    problem: "Modern learning apps depend on constant internet access, cloud sync and online services. The project asks how a complete language-learning experience could work under the offline constraints of 2006 desktop software.",
+    solution: "Built a Windows XP desktop in the browser using plain HTML, CSS and JavaScript, with no frameworks or backend. The LingoMaster app runs inside a custom window manager and saves progress in LocalStorage, like a CD-ROM program writing local settings files.",
+    features: [
+      "Custom Windows XP desktop with draggable windows, taskbar, Start menu, desktop icons, right-click menu, wallpaper switching, balloon notifications and XP-style dialogs",
+      "Language module for Spanish, French and German with login, multiple-choice quizzes and flip-style flashcards with shuffle, drawn from a built-in vocabulary list",
+      "Progress Center showing lesson totals and accuracy, plus a printable completion certificate, all saved through LocalStorage",
+      "Period details: sound effects generated with the Web Audio API, a simulated dial-up connection, a bonus install CD Explorer (D: drive) and a mobile warning overlay"
+    ],
+    outcomes: [
+      "Finished in the Top 11 teams at RIFT Hackathon 2026, built as a hackathon entry by the two-person team Binary Builders (Pawan Bhandari and Rahul Bramhankar)",
+      "Delivered a fully offline, dependency-free app of about 4,000 lines of HTML, CSS and JavaScript, with no backend",
+      "Recreated a full 2006 desktop experience in the browser, including a custom window manager, sound engine and XP-style dialogs"
+    ],
+    githubUrl: "https://github.com/RAHUL0408-B/Lingomaster-2006",
+    snapshots: [lingoImg1, lingoImg2, lingoImg3, lingoImg4, lingoImg5, lingoImg6],
+    architectureImg: lingoImg1
   },
   {
     id: "10",
-    categories: [],
-    displayCategory: "DETAILS COMING SOON",
-    title: "Hackathon Website",
-    shortDesc: "Project details coming soon.",
-    tags: [],
-    imageSrc: "",
-    problem: "Details coming soon.",
-    solution: "Details coming soon.",
-    features: ["Details coming soon."],
-    outcomes: ["Details coming soon."]
+    categories: ["Full Stack", "Backend"],
+    displayCategory: "FULL STACK · HACKATHON PLATFORM",
+    title: "Broadsheet",
+    shortDesc: "Self-hosted hackathon platform with team submissions, normalized judge scoring, community voting and a REST API, for organizers running their own events.",
+    modalSubtitle: "One Docker command runs the whole event: registration, submissions, judging, voting and published results.",
+    tags: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "Jinja2", "Docker", "Alembic"],
+    modalTags: ["Python", "FastAPI", "Uvicorn", "PostgreSQL 16", "SQLAlchemy 2", "Alembic", "Jinja2", "Argon2", "Server-side Sessions", "OpenAPI / REST API", "HMAC-signed Webhooks", "Docker", "Docker Compose", "pytest", "httpx", "Railway"],
+    imageSrc: bsImg1,
+    problem: "Hackathons are usually run across several disconnected tools: one for registration, one for submissions, spreadsheets for judging and another place to publish results. Judges also score on different scales, so raw averages often favour whichever judges a project happened to draw.",
+    solution: "Broadsheet puts the whole event in one self-hosted FastAPI and PostgreSQL app with server-rendered pages and per-event roles (organizer, judge, participant, visitor). Judge scores are normalized across judges with shrinkage so rankings are fairer, and every access rule is enforced in the backend.",
+    features: [
+      "Organizers create events with tracks, prizes and weighted rubrics, invite judges, auto-assign projects by track and load, and publish results",
+      "Teams join by invite link and submit projects with a server-enforced deadline, duplicate detection and a public searchable gallery",
+      "Judges can only read and write their own score sheets, with refused attempts audited, and scores are normalized across judges with per-project standard error",
+      "Community approval voting uses a set window and sealed tallies, and the app also provides a REST API with OpenAPI docs, signed webhooks, printable certificates and an embeddable gallery widget"
+    ],
+    outcomes: [
+      "Built by team Binary Builders for the DOGFOOD 2026 hackathon and passes the provided checker for tiers T1 and T2, with T3 and T4 built and tested but not covered by automated checks",
+      "Ships with an automated test suite covering role isolation, deadlines, normalization math, voting, webhooks and the full event lifecycle",
+      "Starts with a single docker compose up, which runs migrations and seeds demo data, and is set up for deployment on Railway"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03/DogFood-HackaThon",
+    snapshots: [bsImg1, bsImg2, bsImg3, bsImg4, bsImg5, bsImg6, bsImg7, bsImg8],
+    architectureImg: bsImg1
   }
 ];
 
@@ -332,14 +440,17 @@ export default function FeaturedProjects() {
     return () => { document.body.style.overflow = 'unset'; };
   }, [selectedProject]);
 
-  const filteredProjects = PROJECTS.filter(p => {
+  const featuredProject = PROJECTS.find(p => p.featured);
+  const gridProjects = PROJECTS.filter(p => !p.featured);
+
+  const filteredProjects = gridProjects.filter(p => {
     if (activeFilter === 'All') return true;
     return p.categories.includes(activeFilter as ProjectCategory);
   });
 
   const getProjectCount = (filter: string) => {
-    if (filter === 'All') return PROJECTS.length;
-    return PROJECTS.filter(p => p.categories.includes(filter as ProjectCategory)).length;
+    if (filter === 'All') return gridProjects.length;
+    return gridProjects.filter(p => p.categories.includes(filter as ProjectCategory)).length;
   };
 
   return (
@@ -376,8 +487,86 @@ export default function FeaturedProjects() {
         </div>
       </div>
 
+      {/* FEATURED BUILD */}
+      {featuredProject && (
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+          onClick={() => setSelectedProject(featuredProject)}
+          className="group grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-5 lg:gap-8 p-3 md:p-4 rounded-[28px] cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]"
+          style={{ backgroundColor: 'var(--card-bg)', border: '1px solid rgba(139,92,246,0.4)' }}
+        >
+          {/* Photo collage */}
+          <div className="grid grid-cols-2 grid-rows-2 gap-3 h-[260px] sm:h-[340px] lg:h-[400px]">
+            {(featuredProject.collage ?? []).slice(0, 3).map((img, i) => (
+              <div
+                key={i}
+                className={`relative overflow-hidden rounded-[18px] ${i === 0 ? 'row-span-2' : ''}`}
+                style={{ backgroundColor: 'var(--image-placeholder)' }}
+              >
+                <img src={img} alt={`${featuredProject.title} screenshot ${i + 1}`} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                {i === 0 && (
+                  <span className="absolute top-3 left-3 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-white text-[11px] font-bold tracking-widest uppercase">
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    {featuredProject.snapshots?.length ?? 0} Screenshots
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Details */}
+          <div className="flex flex-col justify-center gap-5 p-2 md:p-4 lg:pr-8">
+            <span className="inline-flex items-center gap-2 w-fit px-3 py-1.5 rounded-full text-[11px] font-black tracking-widest uppercase text-[#8B5CF6] bg-[#8B5CF6]/10">
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              Featured Build
+            </span>
+            <h3 className="text-3xl md:text-4xl font-extrabold leading-tight group-hover:text-[#8B5CF6] transition-colors" style={{ color: 'var(--text-primary)' }}>
+              {featuredProject.title}
+            </h3>
+            <p className="text-base md:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              {featuredProject.shortDesc}
+            </p>
+
+            {featuredProject.highlights && (
+              <ul className="flex flex-col gap-3">
+                {featuredProject.highlights.map(h => (
+                  <li key={h.text} className="flex items-center gap-3 text-[15px] font-semibold" style={{ color: 'var(--text-primary)' }}>
+                    <svg className="w-5 h-5 shrink-0 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      {h.icon === 'trophy' && <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />}
+                      {h.icon === 'users' && <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />}
+                      {h.icon === 'clock' && <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />}
+                    </svg>
+                    {h.text}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <div className="flex flex-wrap gap-x-5 gap-y-2">
+              {featuredProject.tags.map(tag => (
+                <span key={tag} className="text-[10px] font-black tracking-widest uppercase" style={{ color: 'var(--text-primary)' }}>{tag}</span>
+              ))}
+            </div>
+
+            <span className="inline-flex items-center gap-2 text-[15px] font-bold text-[#8B5CF6]">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+              Read the full case study
+              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </span>
+          </div>
+        </motion.div>
+      )}
+
+      {/* MORE BUILDS */}
+      <h3 className="-mb-6 text-sm md:text-base font-black tracking-[0.35em] uppercase" style={{ color: 'var(--text-primary)' }}>
+        More Builds
+      </h3>
+
       {/* FILTER TABS */}
-      <div className="flex flex-wrap md:flex-nowrap md:overflow-x-auto md:whitespace-nowrap scrollbar-hide justify-center gap-2 mt-4 pb-2 md:pb-0">
+      <div className="flex flex-wrap md:flex-nowrap md:overflow-x-auto md:whitespace-nowrap scrollbar-hide justify-start gap-2 pb-2 md:pb-0">
         {FILTERS.map(f => {
           const count = getProjectCount(f);
           return (
@@ -441,7 +630,7 @@ export default function FeaturedProjects() {
                 {/* Categories as plain text */}
                 <div className="flex items-center gap-4 mb-4">
                   <span className="text-xl font-black text-slate-300 dark:text-slate-700 group-hover:text-[#8B5CF6] transition-colors duration-300">
-                    {proj.id}
+                    {String(gridProjects.indexOf(proj) + 1).padStart(2, '0')}
                   </span>
                   <div className="flex flex-wrap gap-4">
                     {proj.displayCategory ? (

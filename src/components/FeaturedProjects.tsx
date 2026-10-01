@@ -23,7 +23,6 @@ import ecoImg2 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM
 import ecoImg3 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (2).jpeg';
 import ecoImg4 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (3).jpeg';
 import ecoImg5 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (4).jpeg';
-import ecoImg6 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (5).jpeg';
 import ecoImg7 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (6).jpeg';
 import ecoImg8 from '../assets/ECObounty/WhatsApp Image 2026-06-19 at 1.31.05 PM (7).jpeg';
 
@@ -80,7 +79,6 @@ import evImg5 from '../assets/events/check-in-dark.png';
 import evImg6 from '../assets/events/organizer-events.png';
 import evImg7 from '../assets/events/create-event.png';
 import evImg8 from '../assets/events/mobile.png';
-import evImg9 from '../assets/events/home-dark.png';
 
 // Broadsheet Images
 import bsImg1 from '../assets/hackathon/Screenshot 2026-10-01 135252.png';
@@ -92,7 +90,7 @@ import bsImg6 from '../assets/hackathon/Screenshot 2026-10-01 135443.png';
 import bsImg7 from '../assets/hackathon/Screenshot 2026-10-01 135455.png';
 import bsImg8 from '../assets/hackathon/Screenshot 2026-10-01 135512.png';
 
-type ProjectCategory = 'Full Stack' | 'Backend' | 'AI/ML' | 'Web App' | 'Java/Spring Boot';
+type ProjectCategory = 'Full Stack' | 'Backend' | 'Java/Spring Boot' | 'AI/ML' | 'Security' | 'Web App' | 'Hackathon';
 
 interface Project {
   id: string;
@@ -147,11 +145,10 @@ const PROJECTS: Project[] = [
       "Designed mobile-first PWA with real-time Supabase updates, bottom navigation and native-app-like experience without Play Store"
     ],
     githubUrl: "https://github.com/Anicantcode/EcoBountyy",
-    liveUrl: "https://ecobountyapp.netlify.app/",
-    snapshots: [ecoImg1, ecoImg2, ecoImg3, ecoImg4, ecoImg5, ecoImg6, ecoImg7, ecoImg8],
+    snapshots: [ecoImg1, ecoImg2, ecoImg3, ecoImg4, ecoImg5, ecoImg8],
     architectureImg: ecoImg7,
     featured: true,
-    collage: [ecoImg3, ecoImg1, ecoImg2],
+    collage: ['/Techathon.jpeg', ecoImg1, ecoImg2],
     highlights: [
       { icon: 'trophy', text: 'Winner — Best Solution Award, Techathon 3.0' },
       { icon: 'users', text: 'Chosen from 500+ teams and 1,600+ participants' },
@@ -160,7 +157,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "02",
-    categories: ["AI/ML", "Full Stack", "Backend"],
+    categories: ["Full Stack", "Backend", "AI/ML", "Hackathon"],
     displayCategory: "AI WELFARE PLATFORM",
     title: "BharatSahayak",
     shortDesc: "AI-powered government scheme discovery platform delivering personalized welfare recommendations through WhatsApp and voice calls.",
@@ -190,7 +187,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "03",
-    categories: ["AI/ML", "Full Stack", "Backend"],
+    categories: ["AI/ML", "Full Stack", "Backend", "Hackathon"],
     displayCategory: "AI SYSTEM",
     title: "AgriGuard",
     shortDesc: "AI-powered plant disease detection with Explainable AI, Grad-CAM heatmaps, severity scoring and treatment recommendations.",
@@ -212,18 +209,18 @@ const PROJECTS: Project[] = [
     ],
     githubUrl: "https://github.com/Anicantcode/Cyberpunks-Agriguard",
     liveUrl: "https://cyberpunks-agriguard.vercel.app/",
-    snapshots: [agriImg1, agriImg2, agriImg3, agriImg4, agriImg5],
+    snapshots: [agriImg5, agriImg4, agriImg3, agriImg2, agriImg1],
     architectureImg: agriImg3
   },
   {
     id: "04",
-    categories: ["Full Stack", "Backend", "Java/Spring Boot"],
+    categories: ["Full Stack", "Backend", "Java/Spring Boot", "Security"],
     displayCategory: "FULL STACK · EVENT TICKETING",
     title: "PawEvents",
     shortDesc: "Full-stack event ticketing platform where organizers publish events, attendees buy tickets with QR codes, and door staff check guests in by scanning.",
     modalSubtitle: "Discover events, buy tickets, and check guests in with a QR code, with separate experiences for attendees, organizers and door staff.",
     tags: ["Java", "Spring Boot", "React", "TypeScript", "PostgreSQL", "Keycloak", "Docker", "Tailwind CSS"],
-    modalTags: ["Java 21", "Spring Boot 3.4", "Spring Security", "OAuth2 Resource Server", "Spring Data JPA", "MapStruct", "ZXing", "Maven", "React 19", "TypeScript", "Vite", "Tailwind CSS 4", "React Router 7", "Radix UI", "PostgreSQL 16", "Keycloak (OIDC + PKCE, JWT)", "Docker Compose", "Render", "Vercel"],
+    modalTags: ["Java 21", "Spring Boot 3.4", "Spring Security", "Spring Data JPA", "Keycloak (OIDC + PKCE, JWT)", "React 19", "TypeScript", "Tailwind CSS 4", "PostgreSQL 16", "Docker Compose", "Render", "Vercel"],
     imageSrc: evImg1,
     problem: "Running an event involves several separate jobs. Organizers need to set up ticket types and sales windows, attendees need a simple way to buy and hold tickets, and door staff need a reliable way to admit each guest only once. Doing this without a shared system makes duplicate entry and role confusion easy.",
     solution: "Built a Spring Boot REST API and a React TypeScript frontend, with Keycloak handling sign-in and roles. Organizers create and publish events with ticket types, attendees buy tickets that get a unique QR code, and staff scan the code to validate it. Each role sees only the pages and actions it can use, enforced in both the API and the UI.",
@@ -240,12 +237,12 @@ const PROJECTS: Project[] = [
     ],
     githubUrl: "https://github.com/PawanBhandari03/PawEvents",
     liveUrl: "https://pawevents.vercel.app",
-    snapshots: [evImg1, evImg2, evImg3, evImg4, evImg5, evImg6, evImg7, evImg8, evImg9],
+    snapshots: [evImg1, evImg2, evImg3, evImg4, evImg5, evImg6, evImg7, evImg8],
     architectureImg: evImg1
   },
   {
     id: "05",
-    categories: ["Backend", "Java/Spring Boot"],
+    categories: ["Full Stack", "Backend", "Java/Spring Boot", "Security"],
     displayCategory: "FULL STACK · CONTENT PLATFORM",
     title: "BlogNest",
     shortDesc: "Full-stack content publishing platform with secure authentication, draft management, and content organization.",
@@ -268,12 +265,12 @@ const PROJECTS: Project[] = [
       "Designed a scalable full-stack architecture that supports future enhancements such as comments, user profiles, content recommendations, and role-based publishing workflows."
     ],
     githubUrl: "https://github.com/PawanBhandari03/Blog_Platform",
-    snapshots: [blogImg2, blogImg3, blogImg4, blogImg5, blogImg6],
+    snapshots: [blogImg6, blogImg4, blogImg5, blogImg2, blogImg3],
     architectureImg: blogImg1
   },
   {
     id: "06",
-    categories: ["Backend", "Java/Spring Boot"],
+    categories: ["Full Stack", "Backend", "Java/Spring Boot"],
     displayCategory: "JAVA · BACKEND",
     title: "E-Commerce Application",
     shortDesc: "Full-stack e-commerce platform with Spring Boot REST API, product management, image upload, cart support and search filtering.",
@@ -299,13 +296,13 @@ const PROJECTS: Project[] = [
   },
   {
     id: "07",
-    categories: ["Full Stack", "AI/ML", "Backend"],
+    categories: ["Security", "AI/ML", "Full Stack", "Backend", "Hackathon"],
     displayCategory: "CYBER SECURITY · FULL STACK",
     title: "The Chameleon",
     shortDesc: "Adaptive honeypot that mimics a fake bank, detects SQL injection and XSS with rules plus ML, deceives attackers, and streams events to a live SIEM dashboard.",
     modalSubtitle: "A decoy bank that detects, deceives and records web attacks in a tamper-evident evidence chain, with a real-time analyst console.",
     tags: ["React", "TypeScript", "FastAPI", "Python", "scikit-learn", "SQLite", "WebSocket", "Tailwind CSS"],
-    modalTags: ["React 19", "TypeScript", "Vite", "Tailwind CSS v4", "Recharts", "React Router", "Axios", "Python 3.11", "FastAPI", "Uvicorn", "Pydantic", "scikit-learn", "TF-IDF + Logistic Regression", "pandas", "joblib", "SQLite (WAL)", "WebSocket", "ReportLab", "pytest", "Vercel", "Render"],
+    modalTags: ["React 19", "TypeScript", "Tailwind CSS v4", "Python 3.11", "FastAPI", "scikit-learn", "SQLite", "WebSocket", "pytest", "Vercel", "Render"],
     imageSrc: honeyImg1,
     problem: "Web applications are constantly probed with injection attacks such as SQL injection and XSS, and a blocked request tells the attacker they were caught. Security teams also need evidence of what an attacker did that cannot be quietly altered afterwards.",
     solution: "Built a decoy \"Meridian Bank\" web app where every form submission passes through a hybrid detector of weighted regex rules and a trained ML classifier. Malicious input gets a safe, fabricated response instead of a block, is logged in a SHA-256 hash chain, and is pushed live to a SIEM-style dashboard. Submitted payloads are never executed, and all data shown is synthetic.",
@@ -323,12 +320,12 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/PawanBhandari03/The-Chameleon",
     liveUrl: "https://the-chameleon.vercel.app",
     pptUrl: chameleonPdf,
-    snapshots: [honeyImg6, honeyImg7, honeyImg1, honeyImg2, honeyImg3, honeyImg4, honeyImg5],
+    snapshots: [honeyImg1, honeyImg2, honeyImg3, honeyImg4, honeyImg5, honeyImg6, honeyImg7],
     architectureImg: honeyImg1
   },
   {
     id: "08",
-    categories: ["Web App", "Full Stack"],
+    categories: ["Web App"],
     title: "PawFlix",
     shortDesc: "Movie discovery web app with dynamic data fetching, search and fully responsive UI.",
     tags: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Vite"],
@@ -353,7 +350,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "09",
-    categories: ["Web App"],
+    categories: ["Web App", "Hackathon"],
     displayCategory: "FRONTEND · VANILLA JS",
     title: "LingoMaster 2006",
     shortDesc: "Offline language-learning app styled as a Windows XP desktop and 2006 CD-ROM, with quizzes, flashcards and certificates. Hackathon entry.",
@@ -380,13 +377,13 @@ const PROJECTS: Project[] = [
   },
   {
     id: "10",
-    categories: ["Full Stack", "Backend"],
+    categories: ["Full Stack", "Backend", "Web App", "Hackathon"],
     displayCategory: "FULL STACK · HACKATHON PLATFORM",
     title: "Broadsheet",
     shortDesc: "Self-hosted hackathon platform with team submissions, normalized judge scoring, community voting and a REST API, for organizers running their own events.",
     modalSubtitle: "One Docker command runs the whole event: registration, submissions, judging, voting and published results.",
     tags: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "Jinja2", "Docker", "Alembic"],
-    modalTags: ["Python", "FastAPI", "Uvicorn", "PostgreSQL 16", "SQLAlchemy 2", "Alembic", "Jinja2", "Argon2", "Server-side Sessions", "OpenAPI / REST API", "HMAC-signed Webhooks", "Docker", "Docker Compose", "pytest", "httpx", "Railway"],
+    modalTags: ["Python", "FastAPI", "PostgreSQL 16", "SQLAlchemy 2", "Alembic", "Jinja2", "REST API", "Docker", "pytest", "Railway"],
     imageSrc: bsImg1,
     problem: "Hackathons are usually run across several disconnected tools: one for registration, one for submissions, spreadsheets for judging and another place to publish results. Judges also score on different scales, so raw averages often favour whichever judges a project happened to draw.",
     solution: "Broadsheet puts the whole event in one self-hosted FastAPI and PostgreSQL app with server-rendered pages and per-event roles (organizer, judge, participant, visitor). Judge scores are normalized across judges with shrinkage so rankings are fairer, and every access rule is enforced in the backend.",
@@ -407,7 +404,7 @@ const PROJECTS: Project[] = [
   }
 ];
 
-const FILTERS = ['All', 'Full Stack', 'Backend', 'AI/ML', 'Web App', 'Java/Spring Boot'];
+const FILTERS = ['All', 'Full Stack', 'Backend', 'Java/Spring Boot', 'AI/ML', 'Security', 'Web App', 'Hackathon'];
 
 export default function FeaturedProjects() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -506,7 +503,7 @@ export default function FeaturedProjects() {
                 className={`relative overflow-hidden rounded-[18px] ${i === 0 ? 'row-span-2' : ''}`}
                 style={{ backgroundColor: 'var(--image-placeholder)' }}
               >
-                <img src={img} alt={`${featuredProject.title} screenshot ${i + 1}`} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                <img src={img} alt={`${featuredProject.title} screenshot ${i + 1}`} className={`w-full h-full object-cover ${i === 0 ? 'object-center' : 'object-top'} transition-transform duration-500 group-hover:scale-105`} />
                 {i === 0 && (
                   <span className="absolute top-3 left-3 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-white text-[11px] font-bold tracking-widest uppercase">
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
@@ -630,7 +627,7 @@ export default function FeaturedProjects() {
                 {/* Categories as plain text */}
                 <div className="flex items-center gap-4 mb-4">
                   <span className="text-xl font-black text-slate-300 dark:text-slate-700 group-hover:text-[#8B5CF6] transition-colors duration-300">
-                    {String(gridProjects.indexOf(proj) + 1).padStart(2, '0')}
+                    {String(filteredProjects.indexOf(proj) + 1).padStart(2, '0')}
                   </span>
                   <div className="flex flex-wrap gap-4">
                     {proj.displayCategory ? (

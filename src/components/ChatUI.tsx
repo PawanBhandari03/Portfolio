@@ -66,8 +66,8 @@ const INTENTS: Intent[] = [
   },
   {
     name: 'tripnest',
-    keywords: [/\b(tripnest|travel|flight|booking|hotel)/],
-    reply: "TripNest is a travel booking platform I built during my ElevanceSkills internship. It uses React, Tailwind CSS, Spring Boot, Spring Security, Hibernate and MongoDB, and supports flight and hotel booking, cancellation and real-time flight tracking with status updates and delay info."
+    keywords: [/\b(voyago|tripnest|travel|flight|booking|hotel)/],
+    reply: "Voyago (called TripNest on my resume) is a full-stack travel booking platform I built during my ElevanceSkills internship. It covers flights, hotels, trains, buses, cabs and more, with live flight status, explained dynamic pricing with price freeze, cancellations with refund tracking, reviews and personalised recommendations. It uses Java 17, Spring Boot 3, MongoDB, Next.js, React, TypeScript and Tailwind CSS."
   },
   {
     name: 'pawevents',
@@ -122,7 +122,7 @@ const INTENTS: Intent[] = [
   {
     name: 'projects',
     keywords: [/\b(project|projects|built|build|made|portfolio|work|works|showcase|apps?|applications?)\b/],
-    reply: "I've built more than 10 projects. Highlights are EcoBounty (Techathon 3.0 winner), TripNest (travel booking), PawEvents (event ticketing), BharatSahayak (AI scheme discovery), AgriGuard (plant disease detection), BlogNest, an E-Commerce app, PawFlix, and new ones like The Chameleon (cyber security honeypot), LingoMaster 2006 (RIFT Hackathon Top 11) and Broadsheet (3rd place at DogFood 2026). Ask me about any of them, or scroll to the Projects section."
+    reply: "I've built more than 10 projects. Highlights are EcoBounty (Techathon 3.0 winner), Voyago (travel booking), PawEvents (event ticketing), BharatSahayak (AI scheme discovery), AgriGuard (plant disease detection), BlogNest, an E-Commerce app, PawFlix, and new ones like The Chameleon (cyber security honeypot), LingoMaster 2006 (RIFT Hackathon Top 11) and Broadsheet (3rd place at DogFood 2026). Ask me about any of them, or scroll to the Projects section."
   },
   {
     name: 'achievements',

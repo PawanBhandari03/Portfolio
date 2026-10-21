@@ -102,7 +102,7 @@ const INTENTS: Intent[] = [
   {
     name: 'broadsheet',
     keywords: [/(broadsheet|dogfood|judging|judge|judges|voting|self-hosted)/],
-    reply: "Broadsheet is a self-hosted hackathon platform I built with my team Binary Builders for the DOGFOOD 2026 hackathon. It handles team submissions, judge scoring that is normalized across judges for fairer rankings, community voting, and a REST API with signed webhooks. It is built with Python, FastAPI, PostgreSQL, SQLAlchemy and Docker, and starts with a single docker compose command."
+    reply: "Broadsheet is a self-hosted hackathon platform I built with my team Binary Builders for the DogFood 2026 hackathon, where it placed 3rd out of 194 entries and won a $350 prize. It handles team submissions, judge scoring that is normalized across judges for fairer rankings, community voting, and a REST API with signed webhooks. It is built with Python, FastAPI, PostgreSQL, SQLAlchemy and Docker, and starts with a single docker compose command."
   },
   {
     name: 'blognest',
@@ -122,12 +122,12 @@ const INTENTS: Intent[] = [
   {
     name: 'projects',
     keywords: [/\b(project|projects|built|build|made|portfolio|work|works|showcase|apps?|applications?)\b/],
-    reply: "I've built more than 10 projects. Highlights are EcoBounty (Techathon 3.0 winner), TripNest (travel booking), PawEvents (event ticketing), BharatSahayak (AI scheme discovery), AgriGuard (plant disease detection), BlogNest, an E-Commerce app, PawFlix, and new ones like The Chameleon (cyber security honeypot), LingoMaster 2006 (RIFT Hackathon Top 11) and Broadsheet (hackathon platform). Ask me about any of them, or scroll to the Projects section."
+    reply: "I've built more than 10 projects. Highlights are EcoBounty (Techathon 3.0 winner), TripNest (travel booking), PawEvents (event ticketing), BharatSahayak (AI scheme discovery), AgriGuard (plant disease detection), BlogNest, an E-Commerce app, PawFlix, and new ones like The Chameleon (cyber security honeypot), LingoMaster 2006 (RIFT Hackathon Top 11) and Broadsheet (3rd place at DogFood 2026). Ask me about any of them, or scroll to the Projects section."
   },
   {
     name: 'achievements',
     keywords: [/\b(achievement|achievements|award|awards|win|won|winner|hackathon|hackathons|techathon|pandora|rift|prize|trophy|rank)/],
-    reply: "I'm a two-time hackathon award winner. I won Best Solution at Techathon 3.0 (Feb 2026) among 500+ teams and 1,600+ participants, took Best Solution at the Pandora Hackathon (Feb 2026) at BSIOTR JSPM, and finished in the Top 11 at RIFT Hackathon 2026 (July 2026). You can see the certificates on the Achievements page."
+    reply: "I'm a multiple-time hackathon award winner. I won Best Solution at Techathon 3.0 (Feb 2026) among 500+ teams and 1,600+ participants, took Best Solution at the Pandora Hackathon (Feb 2026) at BSIOTR JSPM, finished in the Top 11 at RIFT Hackathon 2026 (July 2026), and placed 3rd out of 194 entries at DogFood 2026 (Sept 2026) with Broadsheet. You can see the certificates on the Achievements page."
   },
   {
     name: 'certifications',

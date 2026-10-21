@@ -15,6 +15,11 @@ const STAR_MAX_RADIUS = 2;
 const STAR_MIN_OPACITY = 0.05;
 const STAR_MAX_OPACITY = 0.35;
 
+// --- Performance ---
+const ACTIVE_WINDOW_MS = 600;   // keep drawing at full speed this long after mouse/scroll activity
+const IDLE_FRAME_MS = 50;       // ~20fps is plenty for the slow star twinkle when nothing else moves
+const HOVER_ALPHA_STEPS = 32;   // hover dots are drawn in batches of equal opacity
+
 interface Star {
   x: number;       // fraction 0..1
   y: number;       // fraction 0..1
@@ -53,6 +58,21 @@ export default function InteractiveDotGrid() {
     let dpr = window.devicePixelRatio || 1;
     let w = 0;
     let h = 0;
+    let lastActivity = performance.now();
+    let lastDraw = 0;
+    let lastScrollY = -1;
+
+    // The dot grid only changes when the mouse/scroll/theme changes, so it is drawn into this
+    // cached layer and simply copied each frame; only the twinkling stars are redrawn on top.
+    const layer = document.createElement('canvas');
+    const lctx = layer.getContext('2d', { alpha: true });
+    if (!lctx) return;
+    let layerDirty = true;
+    let layerWasDark: boolean | null = null;
+
+    const markActive = () => {
+      lastActivity = performance.now();
+    };
 
     const resize = () => {
       dpr = window.devicePixelRatio || 1;
@@ -63,77 +83,66 @@ export default function InteractiveDotGrid() {
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      layer.width = w * dpr;
+      layer.height = h * dpr;
+      lctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      layerDirty = true;
+      markActive();
     };
 
     const onMouseMove = (e: MouseEvent) => {
       mouseRef.current.x = e.clientX;
       mouseRef.current.y = e.clientY;
+      markActive();
     };
 
     const onMouseLeave = () => {
       mouseRef.current.x = -9999;
       mouseRef.current.y = -9999;
+      markActive();
     };
 
-    const draw = (time: number) => {
-      // Smooth-lerp mouse position
-      const sm = smoothMouse.current;
-      const tm = mouseRef.current;
-      if (tm.x < -999) {
-        sm.x += (tm.x - sm.x) * 0.05;
-        sm.y += (tm.y - sm.y) * 0.05;
-      } else {
-        sm.x += (tm.x - sm.x) * LERP_SPEED;
-        sm.y += (tm.y - sm.y) * LERP_SPEED;
-      }
+    const drawDots = (g: CanvasRenderingContext2D, mx: number, my: number, scrollY: number, isDark: boolean) => {
+      g.clearRect(0, 0, w, h);
 
-      ctx.clearRect(0, 0, w, h);
-
-      const scrollY = window.scrollY;
-      const mx = sm.x;
-      const my = sm.y;
-
-      // Full page height for grid
-      const pageHeight = document.documentElement.scrollHeight;
       const cols = Math.ceil(w / DOT_SPACING) + 1;
-      const totalRows = Math.ceil(pageHeight / DOT_SPACING) + 1;
       const offsetX = (w - (cols - 1) * DOT_SPACING) / 2;
 
-      // Only compute rows visible in viewport
+      // Only compute rows visible in viewport (no page-height read: that forced a layout every frame)
       const pad = HOVER_RADIUS + DOT_SPACING;
       const startRow = Math.max(0, Math.floor((scrollY - pad) / DOT_SPACING));
-      const endRow = Math.min(totalRows, Math.ceil((scrollY + h + pad) / DOT_SPACING));
+      const endRow = Math.ceil((scrollY + h + pad) / DOT_SPACING);
 
       const rSq = HOVER_RADIUS * HOVER_RADIUS;
 
-      // Determine color based on dark mode class
-      const isDark = document.documentElement.classList.contains('dark');
       const rgbColor = isDark ? '255, 255, 255' : '91, 33, 182'; // Darker purple in light mode
-      
+
       const currentBaseOpacity = isDark ? BASE_OPACITY + 0.03 : 0.25;
       const currentMaxOpacity = isDark ? MAX_OPACITY + 0.1 : 0.8;
 
       // --- Pass 1: base dots ---
-      ctx.fillStyle = `rgba(${rgbColor}, ${currentBaseOpacity})`;
-      ctx.beginPath();
+      g.fillStyle = `rgba(${rgbColor}, ${currentBaseOpacity})`;
+      g.beginPath();
       for (let r = startRow; r < endRow; r++) {
         const dotPageY = r * DOT_SPACING;
         const sy = dotPageY - scrollY;
         if (sy < -DOT_SPACING || sy > h + DOT_SPACING) continue;
         for (let c = 0; c < cols; c++) {
           const sx = offsetX + c * DOT_SPACING;
-          ctx.moveTo(sx + DOT_RADIUS, sy);
-          ctx.arc(sx, sy, DOT_RADIUS, 0, Math.PI * 2);
+          g.moveTo(sx + DOT_RADIUS, sy);
+          g.arc(sx, sy, DOT_RADIUS, 0, Math.PI * 2);
         }
       }
-      ctx.fill();
+      g.fill();
 
-      // --- Pass 2: hover-brightened dots ---
+      // --- Pass 2: hover-brightened dots (batched by opacity: a few fills instead of hundreds) ---
       if (mx > -999 && my > -999) {
         const minCol = Math.max(0, Math.floor((mx - HOVER_RADIUS - offsetX) / DOT_SPACING));
         const maxCol = Math.min(cols - 1, Math.ceil((mx + HOVER_RADIUS - offsetX) / DOT_SPACING));
         const minRow = Math.max(startRow, Math.floor((my + scrollY - HOVER_RADIUS) / DOT_SPACING));
         const maxRow = Math.min(endRow - 1, Math.ceil((my + scrollY + HOVER_RADIUS) / DOT_SPACING));
+
+        const buckets: (Path2D | undefined)[] = new Array(HOVER_ALPHA_STEPS + 1);
 
         for (let r = minRow; r <= maxRow; r++) {
           const dotPageY = r * DOT_SPACING;
@@ -149,17 +158,68 @@ export default function InteractiveDotGrid() {
             const dist = Math.sqrt(dSq);
             const t = 1 - dist / HOVER_RADIUS;
             const eased = t * t * (3 - 2 * t);
-            const alpha = currentMaxOpacity * eased;
+            if (currentMaxOpacity * eased < 0.01) continue;
 
-            if (alpha < 0.01) continue;
-
-            ctx.beginPath();
-            ctx.arc(sx, sy, DOT_RADIUS, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${rgbColor}, ${alpha})`;
-            ctx.fill();
+            const step = Math.max(1, Math.round(eased * HOVER_ALPHA_STEPS));
+            let path = buckets[step];
+            if (!path) {
+              path = new Path2D();
+              buckets[step] = path;
+            }
+            path.moveTo(sx + DOT_RADIUS, sy);
+            path.arc(sx, sy, DOT_RADIUS, 0, Math.PI * 2);
           }
         }
+
+        for (let step = 1; step <= HOVER_ALPHA_STEPS; step++) {
+          const path = buckets[step];
+          if (!path) continue;
+          g.fillStyle = `rgba(${rgbColor}, ${currentMaxOpacity * (step / HOVER_ALPHA_STEPS)})`;
+          g.fill(path);
+        }
       }
+    };
+
+    const draw = (time: number) => {
+      animRef.current = requestAnimationFrame(draw);
+
+      // Full speed while the mouse/scroll is moving or the glow is still settling;
+      // otherwise only redraw at a lower rate (the stars twinkle slowly).
+      const sm = smoothMouse.current;
+      const tm = mouseRef.current;
+      const scrollY = window.scrollY;
+      if (scrollY !== lastScrollY) {
+        lastScrollY = scrollY;
+        markActive();
+      }
+      const settling = tm.x > -999
+        ? Math.abs(tm.x - sm.x) > 0.3 || Math.abs(tm.y - sm.y) > 0.3
+        : sm.x > -999; // glow still fading out after the mouse left
+      const active = settling || performance.now() - lastActivity < ACTIVE_WINDOW_MS;
+      if (!active && time - lastDraw < IDLE_FRAME_MS) return;
+      lastDraw = time;
+
+      // Determine color based on dark mode class
+      const isDark = document.documentElement.classList.contains('dark');
+
+      if (active || layerDirty || isDark !== layerWasDark) {
+        // Smooth-lerp mouse position
+        if (tm.x < -999) {
+          sm.x += (tm.x - sm.x) * 0.05;
+          sm.y += (tm.y - sm.y) * 0.05;
+        } else {
+          sm.x += (tm.x - sm.x) * LERP_SPEED;
+          sm.y += (tm.y - sm.y) * LERP_SPEED;
+        }
+        drawDots(lctx, sm.x, sm.y, scrollY, isDark);
+        layerDirty = false;
+        layerWasDark = isDark;
+      }
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(layer, 0, 0, w, h);
+
+      const rgbColor = isDark ? '255, 255, 255' : '91, 33, 182'; // Darker purple in light mode
 
       // --- Pass 3: Animated starfield (twinkling stars) ---
       const timeSec = time / 1000;
@@ -178,13 +238,11 @@ export default function InteractiveDotGrid() {
         ctx.fillStyle = `rgba(${rgbColor}, ${alpha})`;
         ctx.fill();
       }
-
-      animRef.current = requestAnimationFrame(draw);
     };
 
     resize();
     smoothMouse.current = { x: -9999, y: -9999 };
-    draw(0);
+    animRef.current = requestAnimationFrame(draw);
 
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('resize', resize);

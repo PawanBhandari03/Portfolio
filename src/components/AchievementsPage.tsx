@@ -6,6 +6,7 @@ import ibmCert from '../assets/Course certificate/IBM.png';
 import azureCert from '../assets/Course certificate/AZURE.png';
 import udemyCert from '../assets/Course certificate/udemy.png';
 import riftImg from '../assets/rift_Hackathon.jpeg';
+import dogfoodImg from '../assets/DogFood2026_Certificate.png';
 
 // Icons
 const ArrowLeft = () => (
@@ -88,6 +89,36 @@ export default function AchievementsPage({ onBack }: Props) {
         </motion.div>
 
 
+        {/* Card 1b - Wide Card (DogFood 2026) */}
+        <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col md:flex-row items-stretch gap-6 md:gap-10 rounded-[32px] p-6 md:p-8 shadow-2xl backdrop-blur-md relative"
+            style={{ backgroundColor: 'var(--card-bg)', border: '1px solid rgba(255,215,0,0.3)', boxShadow: '0 0 20px rgba(255,215,0,0.3)' }}
+        >
+            <div
+              className="w-full md:w-1/2 flex items-center justify-center rounded-[24px] overflow-hidden shadow-inner trophy-float"
+              role="button"
+              style={{ backgroundColor: '#0a0e1a' }}
+              onClick={() => setSelectedCert(dogfoodImg)}
+            >
+                <img src={dogfoodImg} loading="lazy" decoding="async" alt="DogFood 2026 Certificate" className="w-full h-[300px] md:h-[450px] object-contain hover:scale-105 transition-transform duration-700 ease-in-out" />
+            </div>
+            <div className="w-full md:w-1/2 py-4 md:py-8 flex flex-col justify-center">
+                <h2 className="text-3xl md:text-4xl font-extrabold mb-5 leading-tight flex flex-wrap items-center gap-3" style={{ color: 'var(--text-primary)' }}>3rd Place — DogFood 2026 Hackathon</h2>
+                <p className="text-base md:text-lg leading-relaxed mb-8 opacity-90" style={{ color: 'var(--text-secondary)' }}>
+                    Ranked 3rd out of 194 entries at DogFood 2026, a 72-hour online hackathon organised by Hackathon Raptors CIC (26-29 September 2026). Built Broadsheet with team Binary Builders, a self-hosted hackathon platform with normalized judge scoring, finishing with a score of 4.428 / 5.00 and a $350 prize.
+                </p>
+                <div className="mt-auto flex">
+                    <span className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-sm font-bold border shadow-sm tracking-wide badge-shimmer" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
+                        DogFood 2026 · 3rd of 194 · $350 Prize
+                    </span>
+                </div>
+            </div>
+        </motion.div>
+
         {/* Grid for Vertical Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
             {/* Card 2 - Vertical Card (Pandora) */}
@@ -106,7 +137,7 @@ export default function AchievementsPage({ onBack }: Props) {
                   onClick={() => setSelectedCert(pandoraImg)}
                 >
                     <img 
-                        src={pandoraImg} 
+                        src={pandoraImg} loading="lazy" decoding="async" 
                         alt="Pandora Hackathon" 
                         className="w-full h-[250px] md:h-[350px] hover:scale-105 transition-transform duration-700 ease-in-out"
                         style={{ objectFit: 'contain' }}
@@ -141,7 +172,7 @@ export default function AchievementsPage({ onBack }: Props) {
                   onClick={() => setSelectedCert(riftImg)}
                 >
                     <img 
-                        src={riftImg} 
+                        src={riftImg} loading="lazy" decoding="async" 
                         alt="RIFT Hackathon Certificate" 
                         className="w-full h-[250px] md:h-[350px] hover:scale-105 transition-transform duration-700 ease-in-out"
                         style={{ objectFit: 'contain' }}
@@ -208,7 +239,7 @@ export default function AchievementsPage({ onBack }: Props) {
                 onClick={() => setSelectedCert(udemyCert)}
               >
                 <img 
-                  src={udemyCert} 
+                  src={udemyCert} loading="lazy" decoding="async" 
                   alt="Spring Boot & Hibernate Fundamentals" 
                   className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
                 />
@@ -243,7 +274,7 @@ export default function AchievementsPage({ onBack }: Props) {
                 onClick={() => setSelectedCert(mongoCert)}
               >
                 <img 
-                  src={mongoCert} 
+                  src={mongoCert} loading="lazy" decoding="async" 
                   alt="MongoDB for Developers" 
                   className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
                 />
@@ -278,7 +309,7 @@ export default function AchievementsPage({ onBack }: Props) {
                 onClick={() => setSelectedCert(ibmCert)}
               >
                 <img 
-                  src={ibmCert} 
+                  src={ibmCert} loading="lazy" decoding="async" 
                   alt="IBM SkillsBuild Certification" 
                   className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
                 />
@@ -313,7 +344,7 @@ export default function AchievementsPage({ onBack }: Props) {
                 onClick={() => setSelectedCert(azureCert)}
               >
                 <img 
-                  src={azureCert} 
+                  src={azureCert} loading="lazy" decoding="async" 
                   alt="Azure Fundamentals – SkillUp" 
                   className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
                 />

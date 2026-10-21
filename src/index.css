@@ -322,7 +322,9 @@ html:not(.dark) .navbar-glass.scrolled {
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.15s ease-out, background-color 0.3s ease;
+  /* position is driven by framer-motion every frame; a CSS transform transition here made the dot trail the mouse */
+  transition: background-color 0.3s ease;
+  will-change: transform;
 }
 
 .custom-cursor-ring {
@@ -336,7 +338,8 @@ html:not(.dark) .navbar-glass.scrolled {
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
-  transition: transform 0.3s ease-out, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+  will-change: transform;
 }
 
 /* Hide default cursor on desktop */

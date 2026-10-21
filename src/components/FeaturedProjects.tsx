@@ -89,6 +89,7 @@ import bsImg5 from '../assets/hackathon/Screenshot 2026-10-01 135416.png';
 import bsImg6 from '../assets/hackathon/Screenshot 2026-10-01 135443.png';
 import bsImg7 from '../assets/hackathon/Screenshot 2026-10-01 135455.png';
 import bsImg8 from '../assets/hackathon/Screenshot 2026-10-01 135512.png';
+import bsResult from '../assets/hackathon/dogfood-result.jpeg';
 
 type ProjectCategory = 'Full Stack' | 'Backend' | 'Java/Spring Boot' | 'AI/ML' | 'Security' | 'Web App' | 'Hackathon';
 
@@ -153,6 +154,41 @@ const PROJECTS: Project[] = [
       { icon: 'trophy', text: 'Winner — Best Solution Award, Techathon 3.0' },
       { icon: 'users', text: 'Chosen from 500+ teams and 1,600+ participants' },
       { icon: 'clock', text: 'Complete product built in a 24-hour hackathon' }
+    ]
+  },
+  {
+    id: "10",
+    categories: ["Full Stack", "Backend", "Web App", "Hackathon"],
+    displayCategory: "FULL STACK · HACKATHON PLATFORM",
+    title: "Broadsheet",
+    shortDesc: "Self-hosted hackathon platform with team submissions, normalized judge scoring, community voting and a REST API, for organizers running their own events.",
+    modalSubtitle: "One Docker command runs the whole event: registration, submissions, judging, voting and published results.",
+    tags: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "Jinja2", "Docker", "Alembic"],
+    modalTags: ["Python", "FastAPI", "PostgreSQL 16", "SQLAlchemy 2", "Alembic", "Jinja2", "REST API", "Docker", "pytest", "Railway"],
+    imageSrc: bsImg1,
+    problem: "Hackathons are usually run across several disconnected tools: one for registration, one for submissions, spreadsheets for judging and another place to publish results. Judges also score on different scales, so raw averages often favour whichever judges a project happened to draw.",
+    solution: "Broadsheet puts the whole event in one self-hosted FastAPI and PostgreSQL app with server-rendered pages and per-event roles (organizer, judge, participant, visitor). Judge scores are normalized across judges with shrinkage so rankings are fairer, and every access rule is enforced in the backend.",
+    features: [
+      "Organizers create events with tracks, prizes and weighted rubrics, invite judges, auto-assign projects by track and load, and publish results",
+      "Teams join by invite link and submit projects with a server-enforced deadline, duplicate detection and a public searchable gallery",
+      "Judges can only read and write their own score sheets, with refused attempts audited, and scores are normalized across judges with per-project standard error",
+      "Community approval voting uses a set window and sealed tallies, and the app also provides a REST API with OpenAPI docs, signed webhooks, printable certificates and an embeddable gallery widget"
+    ],
+    outcomes: [
+      "Placed 3rd out of 194 entries at DogFood 2026 with a score of 4.428 / 5.00 and a $350 prize, built by team Binary Builders. Passes the provided checker for tiers T1 and T2, with T3 and T4 built and tested but not covered by automated checks",
+      "Ships with an automated test suite covering role isolation, deadlines, normalization math, voting, webhooks and the full event lifecycle",
+      "Starts with a single docker compose up, which runs migrations and seeds demo data, and is deployed live on Railway"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03/DogFood-HackaThon",
+    liveUrl: "https://dogfood-hackathon-production.up.railway.app",
+    snapshots: [bsImg1, bsImg2, bsImg3, bsImg4, bsImg5, bsImg6, bsImg7, bsImg8],
+    architectureImg: bsImg1,
+    featured: true,
+    collage: [bsResult, bsImg1, bsImg2],
+    highlights: [
+      { icon: 'trophy', text: '3rd Place — DogFood 2026 Hackathon, $350 prize' },
+      { icon: 'users', text: 'Ranked 3rd out of 194 entries (score 4.428 / 5.00)' },
+      { icon: 'clock', text: 'Built by team Binary Builders in a 72-hour online hackathon' }
     ]
   },
   {
@@ -296,34 +332,6 @@ const PROJECTS: Project[] = [
     architectureImg: honeyImg1
   },
   {
-    id: "10",
-    categories: ["Full Stack", "Backend", "Web App", "Hackathon"],
-    displayCategory: "FULL STACK · HACKATHON PLATFORM",
-    title: "Broadsheet",
-    shortDesc: "Self-hosted hackathon platform with team submissions, normalized judge scoring, community voting and a REST API, for organizers running their own events.",
-    modalSubtitle: "One Docker command runs the whole event: registration, submissions, judging, voting and published results.",
-    tags: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "Jinja2", "Docker", "Alembic"],
-    modalTags: ["Python", "FastAPI", "PostgreSQL 16", "SQLAlchemy 2", "Alembic", "Jinja2", "REST API", "Docker", "pytest", "Railway"],
-    imageSrc: bsImg1,
-    problem: "Hackathons are usually run across several disconnected tools: one for registration, one for submissions, spreadsheets for judging and another place to publish results. Judges also score on different scales, so raw averages often favour whichever judges a project happened to draw.",
-    solution: "Broadsheet puts the whole event in one self-hosted FastAPI and PostgreSQL app with server-rendered pages and per-event roles (organizer, judge, participant, visitor). Judge scores are normalized across judges with shrinkage so rankings are fairer, and every access rule is enforced in the backend.",
-    features: [
-      "Organizers create events with tracks, prizes and weighted rubrics, invite judges, auto-assign projects by track and load, and publish results",
-      "Teams join by invite link and submit projects with a server-enforced deadline, duplicate detection and a public searchable gallery",
-      "Judges can only read and write their own score sheets, with refused attempts audited, and scores are normalized across judges with per-project standard error",
-      "Community approval voting uses a set window and sealed tallies, and the app also provides a REST API with OpenAPI docs, signed webhooks, printable certificates and an embeddable gallery widget"
-    ],
-    outcomes: [
-      "Built by team Binary Builders for the DOGFOOD 2026 hackathon and passes the provided checker for tiers T1 and T2, with T3 and T4 built and tested but not covered by automated checks",
-      "Ships with an automated test suite covering role isolation, deadlines, normalization math, voting, webhooks and the full event lifecycle",
-      "Starts with a single docker compose up, which runs migrations and seeds demo data, and is deployed live on Railway"
-    ],
-    githubUrl: "https://github.com/PawanBhandari03/DogFood-HackaThon",
-    liveUrl: "https://dogfood-hackathon-production.up.railway.app",
-    snapshots: [bsImg1, bsImg2, bsImg3, bsImg4, bsImg5, bsImg6, bsImg7, bsImg8],
-    architectureImg: bsImg1
-  },
-  {
     id: "05",
     categories: ["Full Stack", "Backend", "Java/Spring Boot", "Security"],
     displayCategory: "FULL STACK · CONTENT PLATFORM",
@@ -417,7 +425,7 @@ export default function FeaturedProjects() {
 
   // Projects the popup arrows move through: same order as shown on the page
   const getNavList = () =>
-    activeFilter === 'All' && featuredProject ? [featuredProject, ...gridProjects] : filteredProjects;
+    activeFilter === 'All' ? [...featuredProjects, ...gridProjects] : filteredProjects;
   const goProject = (dir: 1 | -1) => {
     if (!selectedProject) return;
     const list = getNavList();
@@ -486,7 +494,7 @@ export default function FeaturedProjects() {
     return () => { document.body.style.overflow = 'unset'; };
   }, [selectedProject]);
 
-  const featuredProject = PROJECTS.find(p => p.featured);
+  const featuredProjects = PROJECTS.filter(p => p.featured);
   const gridProjects = PROJECTS.filter(p => !p.featured);
 
   const filteredProjects = gridProjects.filter(p => {
@@ -534,8 +542,9 @@ export default function FeaturedProjects() {
       </div>
 
       {/* FEATURED BUILD */}
-      {featuredProject && (
+      {featuredProjects.map(featuredProject => (
         <motion.div
+          key={featuredProject.id}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -552,9 +561,9 @@ export default function FeaturedProjects() {
                 className={`relative overflow-hidden rounded-[18px] ${i === 0 ? 'row-span-2' : ''}`}
                 style={{ backgroundColor: 'var(--image-placeholder)' }}
               >
-                <img src={img} alt={`${featuredProject.title} screenshot ${i + 1}`} className={`w-full h-full object-cover ${i === 0 ? 'object-center' : 'object-top'} transition-transform duration-500 group-hover:scale-105`} />
-                {i === 0 && (
-                  <span className="absolute top-3 left-3 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-white text-[11px] font-bold tracking-widest uppercase">
+                <img src={img} loading="lazy" decoding="async" alt={`${featuredProject.title} screenshot ${i + 1}`} className={`w-full h-full object-cover ${i === 0 ? 'object-center' : 'object-top'} transition-transform duration-500 group-hover:scale-105`} />
+                {i === 2 && (
+                  <span className="absolute bottom-3 right-3 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-white text-[11px] font-bold tracking-widest uppercase">
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                     {featuredProject.snapshots?.length ?? 0} Screenshots
                   </span>
@@ -604,7 +613,7 @@ export default function FeaturedProjects() {
             </span>
           </div>
         </motion.div>
-      )}
+      ))}
 
       {/* MORE BUILDS */}
       <h3 className="-mb-6 text-sm md:text-base font-black tracking-[0.35em] uppercase" style={{ color: 'var(--text-primary)' }}>
@@ -661,7 +670,7 @@ export default function FeaturedProjects() {
               {/* Top Half: Image */}
               <div className="w-full h-[170px] md:h-44 relative overflow-hidden" style={{ backgroundColor: 'var(--image-placeholder)' }}>
                 {proj.imageSrc && !proj.imageSrc.startsWith('/project_') ? (
-                  <img src={proj.imageSrc} alt={proj.title} className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105" />
+                  <img src={proj.imageSrc} loading="lazy" decoding="async" alt={proj.title} className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center transition-all duration-500 group-hover:scale-105">
                     <span className="text-xl md:text-2xl font-black tracking-widest uppercase px-6 text-center" style={{ color: 'var(--text-secondary)', opacity: 0.2 }}>{proj.title}</span>
@@ -824,8 +833,8 @@ export default function FeaturedProjects() {
                     <div className="w-full h-64 md:h-96 relative bg-slate-100 dark:bg-[#0a0f1e] overflow-hidden rounded-[8px] border border-slate-200 dark:border-white/10 flex items-center justify-center">
                       {selectedProject.architectureImg ? (
                         <>
-                          <img src={selectedProject.architectureImg} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-40" />
-                          <img src={selectedProject.architectureImg} alt={`${selectedProject.title} Architecture/Showcase`} className="relative w-full h-full object-contain" />
+                          <img src={selectedProject.architectureImg} decoding="async" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-40" />
+                          <img src={selectedProject.architectureImg} decoding="async" alt={`${selectedProject.title} Architecture/Showcase`} className="relative w-full h-full object-contain" />
                         </>
                       ) : (
                         <>
@@ -909,7 +918,7 @@ export default function FeaturedProjects() {
                             onClick={() => openLightbox(i)}
                             className="group/snap w-64 md:w-80 h-[160px] shrink-0 bg-slate-100 dark:bg-[#0e121e] rounded-lg border border-slate-200 dark:border-white/5 flex items-center justify-center overflow-hidden cursor-zoom-in relative"
                           >
-                            <img src={snap} alt={`Snapshot ${i + 1}`} className="w-full h-full object-cover transition-transform duration-300 group-hover/snap:scale-105" />
+                            <img src={snap} loading="lazy" decoding="async" alt={`Snapshot ${i + 1}`} className="w-full h-full object-cover transition-transform duration-300 group-hover/snap:scale-105" />
                             <div className="absolute inset-0 bg-black/0 group-hover/snap:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                               <svg className="w-8 h-8 text-white opacity-0 group-hover/snap:opacity-100 transition-opacity duration-300 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />

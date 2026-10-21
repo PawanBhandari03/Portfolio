@@ -96,6 +96,8 @@ const DOMAINS = [
       { name: 'Tailwind CSS', icon: 'tailwindcss/tailwindcss-original.svg' },
       { name: 'Next.js', icon: 'nextjs/nextjs-original.svg' },
       { name: 'Redux', icon: 'redux/redux-original.svg' },
+      { name: 'Vue.js', icon: 'vuejs/vuejs-original.svg' },
+      { name: 'AngularJS', icon: 'angularjs/angularjs-original.svg' },
       { name: 'Bootstrap', icon: 'bootstrap/bootstrap-original.svg' },
       { name: 'Twilio', icon: 'twilio/twilio-original.svg' }
     ]

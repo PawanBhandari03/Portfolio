@@ -57,12 +57,12 @@ const INTENTS: Intent[] = [
   {
     name: 'education',
     keywords: [/\b(education|college|university|degree|cgpa|gpa|study|studying|student|school|12th|10th|engineering|bsiotr|jspm|graduat)/],
-    reply: "I'm pursuing a Bachelor of Engineering in Computer Engineering at Bhivarabai Sawant Institute of Technology and Research (BSIOTR), Pune, from 2023 to 2027, with a CGPA of 8.5. Before that I studied at Don Bosco Junior College and Don Bosco High School in Pune."
+    reply: "I'm pursuing a Bachelor of Engineering in Computer Engineering at Bhivarabai Sawant Institute of Technology and Research (BSIOTR), Pune, from 2023 to 2027, with a CGPA of 8.6. Before that I studied at Don Bosco Junior College and Don Bosco High School in Pune."
   },
   {
     name: 'experience',
     keywords: [/\b(experience|intern|internship|job|employ|company|elevance|elevanceskills|codsoft|professional|career|currently)/],
-    reply: "Since July 2026 I'm a Full Stack Developer Intern at ElevanceSkills Technology, building a travel booking platform called TripNest with React, Spring Boot and MongoDB. Earlier, in Jan to Feb 2026, I did a Java Development internship at CodSoft, completing 5 Java tasks on core Java, OOP and application logic."
+    reply: "From July to October 2026 I was a Full Stack Developer Intern at ElevanceSkills Technology, building a travel booking platform called TripNest (now Voyago) with React, Spring Boot and MongoDB. Earlier, in Jan to Feb 2026, I did a Java Development internship at CodSoft, completing 5 Java tasks on core Java, OOP and application logic."
   },
   {
     name: 'tripnest',
@@ -127,7 +127,7 @@ const INTENTS: Intent[] = [
   {
     name: 'achievements',
     keywords: [/\b(achievement|achievements|award|awards|win|won|winner|hackathon|hackathons|techathon|pandora|rift|prize|trophy|rank)/],
-    reply: "I'm a multiple-time hackathon award winner. I won Best Solution at Techathon 3.0 (Feb 2026) among 500+ teams and 1,600+ participants, took Best Solution at the Pandora Hackathon (Feb 2026) at BSIOTR JSPM, finished in the Top 11 at RIFT Hackathon 2026 (July 2026), and placed 3rd out of 194 entries at DogFood 2026 (Sept 2026) with Broadsheet. You can see the certificates on the Achievements page."
+    reply: "I'm a 3x hackathon winner. I won Best Solution at Techathon 3.0 (Feb 2026) among 500+ teams and 1,600+ participants, took Best Solution at the Pandora Hackathon (Feb 2026) at BSIOTR JSPM, finished in the Top 11 at RIFT Hackathon 2026 (July 2026), and placed 3rd out of 194 entries at DogFood 2026 (Sept 2026) with Broadsheet. You can see the certificates on the Achievements page."
   },
   {
     name: 'certifications',
@@ -142,7 +142,7 @@ const INTENTS: Intent[] = [
   {
     name: 'frontend',
     keywords: [/\b(frontend|front-end|ui|ux|react|redux|tailwind|bootstrap|html|css|figma|responsive)/],
-    reply: "On the frontend I work with React, TypeScript, Redux, Tailwind CSS, Bootstrap, HTML5 and responsive design, and I use Figma for design. React is at the core of almost every project I've built."
+    reply: "On the frontend I work with React, TypeScript, Redux, Vue.js, AngularJS, Tailwind CSS, Bootstrap and HTML5, and I use Figma for design. React is at the core of almost every project I've built."
   },
   {
     name: 'backend',
@@ -187,7 +187,7 @@ const INTENTS: Intent[] = [
   {
     name: 'about',
     keywords: [/\b(about|who|introduce|yourself|bio|background|profile|summary|pawan|bhandari)\b/],
-    reply: "I'm Pawan Singh Bhandari, a Full Stack Developer from Pune, India. I'm a Computer Engineering student (2023-2027, CGPA 8.5) and a two-time hackathon award winner, building React frontends with Java Spring Boot backends and integrating AI and third-party APIs."
+    reply: "I'm Pawan Singh Bhandari, a Full Stack Developer from Pune, India. I'm a Computer Engineering student (2023-2027, CGPA 8.6) and a 3x hackathon winner, building React frontends with Java Spring Boot backends and integrating AI and third-party APIs."
   }
 ];
 

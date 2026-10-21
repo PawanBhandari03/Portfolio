@@ -307,33 +307,31 @@ const PROJECTS: Project[] = [
     architectureImg: ecomImg1
   },
   {
-    id: "07",
-    categories: ["Security", "AI/ML", "Full Stack", "Backend", "Hackathon"],
-    displayCategory: "CYBER SECURITY · FULL STACK",
-    title: "The Chameleon",
-    shortDesc: "Adaptive honeypot that mimics a fake bank, detects SQL injection and XSS with rules plus ML, deceives attackers, and streams events to a live SIEM dashboard.",
-    modalSubtitle: "A decoy bank that detects, deceives and records web attacks in a tamper-evident evidence chain, with a real-time analyst console.",
-    tags: ["React", "TypeScript", "FastAPI", "Python", "scikit-learn", "SQLite", "WebSocket", "Tailwind CSS"],
-    modalTags: ["React 19", "TypeScript", "Tailwind CSS v4", "Python 3.11", "FastAPI", "scikit-learn", "SQLite", "WebSocket", "pytest", "Vercel", "Render"],
-    imageSrc: honeyImg1,
-    problem: "Web applications are constantly probed with injection attacks such as SQL injection and XSS, and a blocked request tells the attacker they were caught. Security teams also need evidence of what an attacker did that cannot be quietly altered afterwards.",
-    solution: "Built a decoy \"Meridian Bank\" web app where every form submission passes through a hybrid detector of weighted regex rules and a trained ML classifier. Malicious input gets a safe, fabricated response instead of a block, is logged in a SHA-256 hash chain, and is pushed live to a SIEM-style dashboard. Submitted payloads are never executed, and all data shown is synthetic.",
+    id: "11",
+    categories: ["Full Stack", "Backend", "Java/Spring Boot"],
+    displayCategory: "FULL STACK · TRAVEL PLATFORM",
+    title: "Voyago",
+    shortDesc: "Full-stack travel booking platform for flights, hotels, trains and more, with live flight status, dynamic pricing, refunds and recommendations.",
+    modalSubtitle: "Search and book flights, hotels, holidays and more, with live flight tracking, transparent dynamic pricing, cancellations with refunds, reviews and personalised recommendations.",
+    tags: ["Java", "Spring Boot", "MongoDB", "Next.js", "TypeScript", "Redux", "Tailwind CSS"],
+    modalTags: ["Java 17", "Spring Boot 3", "MongoDB Atlas", "React 19", "Next.js 15", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Docker", "Render", "Vercel"],
+    imageSrc: voyagoImg1,
+    problem: "Planning a trip means juggling separate tools for flights, hotels, trains and cabs, with prices that change without explanation, delays that are hard to follow and refunds that are unclear.",
+    solution: "Built a full-stack platform with a Spring Boot REST API and MongoDB, and a Next.js React front end. One site covers flights, hotels, homestays, holidays, trains, buses, cabs, forex and insurance, with live flight status, explained dynamic pricing, a clear cancellation and refund flow, reviews and personalised recommendations. All data is demo data and no real payment is taken.",
     features: [
-      "Hybrid detection with 19 weighted regex signatures (10 SQLi, 9 XSS) plus a TF-IDF character n-gram and Logistic Regression classifier, with the rules treated as authoritative",
-      "Adaptive deception with four strategies (fake login success, fake database records, fake acceptance, controlled error), escalating for repeat offenders with progressive delays from 0.5s to 4s",
-      "Tamper-evident evidence log where each event is hash-chained (hash = SHA256(event + previous hash)), with an integrity checker and a tampering demo",
-      "SIEM console with a live WebSocket feed, alert queue, threat topology, session replay, rule catalog, attack simulator and one-click PDF incident reports"
+      "Live flight status: flights move from scheduled to boarding, departed and landed on their own, with delay and gate-change reasons and notifications for customers who follow a flight",
+      "Dynamic pricing: prices follow season, weekend, booking window, demand and time of day, with every adjustment explained, a price history chart with forecast and a 6, 24 or 48 hour price freeze",
+      "Cancellation and refunds: cancel fully or partly with a required reason, a clear refund policy and a tracker showing the refund status and expected date",
+      "Reviews and recommendations: star ratings with text and photos, helpful votes and moderation, plus suggestions from bookings, searches and similar travellers with a Why this? explanation"
     ],
     outcomes: [
-      "Deployed as a React frontend on Vercel and a FastAPI backend on Render, with a live demo and public API docs",
-      "Backend test suite built with pytest, covering the API, rule engine, deception strategies and hash chain",
-      "Classifier scores 1.00 accuracy on a held-out split of a synthetic dataset (2,160 train / 540 test), not a real-world accuracy claim"
+      "Built all five planned features end to end: live flight status, dynamic pricing, cancellation and refunds, reviews and ratings, and personalised recommendations",
+      "Documented with an API reference, data model, architecture notes and a step-by-step testing guide, plus an admin area for flight operations and review moderation",
+      "Deployed with the Spring Boot API in Docker on Render and the Next.js front end on Vercel, backed by MongoDB Atlas"
     ],
-    githubUrl: "https://github.com/PawanBhandari03/The-Chameleon",
-    liveUrl: "https://the-chameleon.vercel.app",
-    pptUrl: chameleonPdf,
-    snapshots: [honeyImg1, honeyImg2, honeyImg3, honeyImg4, honeyImg5, honeyImg6, honeyImg7],
-    architectureImg: honeyImg1
+    githubUrl: "https://github.com/PawanBhandari03/Voyago",
+    snapshots: [voyagoImg1, voyagoImg2],
+    architectureImg: voyagoImg1
   },
   {
     id: "05",
@@ -362,6 +360,35 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/PawanBhandari03/Blog_Platform",
     snapshots: [blogImg6, blogImg4, blogImg5, blogImg2, blogImg3],
     architectureImg: blogImg1
+  },
+  {
+    id: "07",
+    categories: ["Security", "AI/ML", "Full Stack", "Backend", "Hackathon"],
+    displayCategory: "CYBER SECURITY · FULL STACK",
+    title: "The Chameleon",
+    shortDesc: "Adaptive honeypot that mimics a fake bank, detects SQL injection and XSS with rules plus ML, deceives attackers, and streams events to a live SIEM dashboard.",
+    modalSubtitle: "A decoy bank that detects, deceives and records web attacks in a tamper-evident evidence chain, with a real-time analyst console.",
+    tags: ["React", "TypeScript", "FastAPI", "Python", "scikit-learn", "SQLite", "WebSocket", "Tailwind CSS"],
+    modalTags: ["React 19", "TypeScript", "Tailwind CSS v4", "Python 3.11", "FastAPI", "scikit-learn", "SQLite", "WebSocket", "pytest", "Vercel", "Render"],
+    imageSrc: honeyImg1,
+    problem: "Web applications are constantly probed with injection attacks such as SQL injection and XSS, and a blocked request tells the attacker they were caught. Security teams also need evidence of what an attacker did that cannot be quietly altered afterwards.",
+    solution: "Built a decoy \"Meridian Bank\" web app where every form submission passes through a hybrid detector of weighted regex rules and a trained ML classifier. Malicious input gets a safe, fabricated response instead of a block, is logged in a SHA-256 hash chain, and is pushed live to a SIEM-style dashboard. Submitted payloads are never executed, and all data shown is synthetic.",
+    features: [
+      "Hybrid detection with 19 weighted regex signatures (10 SQLi, 9 XSS) plus a TF-IDF character n-gram and Logistic Regression classifier, with the rules treated as authoritative",
+      "Adaptive deception with four strategies (fake login success, fake database records, fake acceptance, controlled error), escalating for repeat offenders with progressive delays from 0.5s to 4s",
+      "Tamper-evident evidence log where each event is hash-chained (hash = SHA256(event + previous hash)), with an integrity checker and a tampering demo",
+      "SIEM console with a live WebSocket feed, alert queue, threat topology, session replay, rule catalog, attack simulator and one-click PDF incident reports"
+    ],
+    outcomes: [
+      "Deployed as a React frontend on Vercel and a FastAPI backend on Render, with a live demo and public API docs",
+      "Backend test suite built with pytest, covering the API, rule engine, deception strategies and hash chain",
+      "Classifier scores 1.00 accuracy on a held-out split of a synthetic dataset (2,160 train / 540 test), not a real-world accuracy claim"
+    ],
+    githubUrl: "https://github.com/PawanBhandari03/The-Chameleon",
+    liveUrl: "https://the-chameleon.vercel.app",
+    pptUrl: chameleonPdf,
+    snapshots: [honeyImg1, honeyImg2, honeyImg3, honeyImg4, honeyImg5, honeyImg6, honeyImg7],
+    architectureImg: honeyImg1
   },
   {
     id: "09",
@@ -415,33 +442,6 @@ const PROJECTS: Project[] = [
     liveUrl: "https://movie-website-paw-wszk.vercel.app",
     snapshots: [movieImg1, movieImg3, movieImg7, movieImg4, movieImg5, movieImg6],
     architectureImg: movieImg1
-  },
-  {
-    id: "11",
-    categories: ["Full Stack", "Backend", "Java/Spring Boot"],
-    displayCategory: "FULL STACK · TRAVEL PLATFORM",
-    title: "Voyago",
-    shortDesc: "Full-stack travel booking platform for flights, hotels, trains and more, with live flight status, dynamic pricing, refunds and recommendations.",
-    modalSubtitle: "Search and book flights, hotels, holidays and more, with live flight tracking, transparent dynamic pricing, cancellations with refunds, reviews and personalised recommendations.",
-    tags: ["Java", "Spring Boot", "MongoDB", "Next.js", "TypeScript", "Redux", "Tailwind CSS"],
-    modalTags: ["Java 17", "Spring Boot 3", "MongoDB Atlas", "React 19", "Next.js 15", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Docker", "Render", "Vercel"],
-    imageSrc: voyagoImg1,
-    problem: "Planning a trip means juggling separate tools for flights, hotels, trains and cabs, with prices that change without explanation, delays that are hard to follow and refunds that are unclear.",
-    solution: "Built a full-stack platform with a Spring Boot REST API and MongoDB, and a Next.js React front end. One site covers flights, hotels, homestays, holidays, trains, buses, cabs, forex and insurance, with live flight status, explained dynamic pricing, a clear cancellation and refund flow, reviews and personalised recommendations. All data is demo data and no real payment is taken.",
-    features: [
-      "Live flight status: flights move from scheduled to boarding, departed and landed on their own, with delay and gate-change reasons and notifications for customers who follow a flight",
-      "Dynamic pricing: prices follow season, weekend, booking window, demand and time of day, with every adjustment explained, a price history chart with forecast and a 6, 24 or 48 hour price freeze",
-      "Cancellation and refunds: cancel fully or partly with a required reason, a clear refund policy and a tracker showing the refund status and expected date",
-      "Reviews and recommendations: star ratings with text and photos, helpful votes and moderation, plus suggestions from bookings, searches and similar travellers with a Why this? explanation"
-    ],
-    outcomes: [
-      "Built all five planned features end to end: live flight status, dynamic pricing, cancellation and refunds, reviews and ratings, and personalised recommendations",
-      "Documented with an API reference, data model, architecture notes and a step-by-step testing guide, plus an admin area for flight operations and review moderation",
-      "Deployed with the Spring Boot API in Docker on Render and the Next.js front end on Vercel, backed by MongoDB Atlas"
-    ],
-    githubUrl: "https://github.com/PawanBhandari03/Voyago",
-    snapshots: [voyagoImg1, voyagoImg2],
-    architectureImg: voyagoImg1
   }
 ];
 

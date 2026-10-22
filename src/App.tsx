@@ -95,8 +95,21 @@ function App() {
                 <a href="#skills" className="nav-link text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors">
                   Skills
                 </a>
-                <a href="#other" className="nav-link text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors">
-                  Explore
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setCurrentPage('achievements'); window.scrollTo(0, 0); }}
+                  className="nav-link whitespace-nowrap inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-4 h-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3" />
+                  </svg>
+                  Achievements
+                </a>
+                <a
+                  href="#other"
+                  className="whitespace-nowrap px-4 py-2 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-semibold tracking-wide transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5"
+                >
+                  Let's talk
                 </a>
               </div>
 
@@ -160,7 +173,12 @@ function App() {
               <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Home</a>
               <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Projects</a>
               <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Skills</a>
-              <a href="#other" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Other</a>
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); setCurrentPage('achievements'); window.scrollTo(0, 0); }}
+                className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors"
+              >Achievements</a>
+              <a href="#other" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors">Let's talk</a>
             </div>
           </motion.div>
         )}

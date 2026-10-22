@@ -1,107 +1,294 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { collection, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
+import { db } from '../firebase';
+import dogfoodImg from '../assets/DogFood2026_Certificate.png';
+import pandoraImg from '../assets/Pandora.png';
+import riftImg from '../assets/rift_Hackathon.jpeg';
 
-const ICON_PROPS = {
-  xmlns: "http://www.w3.org/2000/svg",
-  className: "w-6 h-6",
-  fill: "none",
-  viewBox: "0 0 24 24",
-  stroke: "currentColor",
-  strokeWidth: 1.5,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const
-};
+type Page = 'home' | 'achievements' | 'mylinks' | 'guestbook';
 
-const CARDS = [
+interface ExploreFooterProps {
+  onNavigate?: (page: Page) => void;
+}
+
+// --- Spotlight data (one entry per award) ---
+const WINS = [
   {
-    title: "Guestbook",
-    desc: "Leave your mark and see what others have to say",
-    linkColor: "text-[#8B5CF6]",
-    iconStyle: "border-violet-500/25 bg-violet-500/10 text-violet-600 dark:text-violet-400",
-    icon: (
-      <svg {...ICON_PROPS}>
-        <path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-      </svg>
-    )
+    key: 'techathon',
+    short: 'Techathon',
+    image: '/Techathon.jpeg',
+    fit: 'cover' as const,
+    label: 'Winner · Best Solution',
+    big: '₹10,000',
+    name: 'Techathon 3.0',
+    sub: 'Best Solution for the given problem statement, chosen from 500+ teams and 1,600+ participants.'
   },
   {
-    title: "Achievements",
-    desc: "Milestones, certifications, and accomplishments",
-    linkColor: "text-[#f472b6]",
-    iconStyle: "border-pink-500/25 bg-pink-500/10 text-pink-600 dark:text-pink-400",
-    icon: (
-      <svg {...ICON_PROPS}>
-        <circle cx="12" cy="8.5" r="5.5" />
-        <path d="M8.9 13.4L7.5 21.25l4.5-2.5 4.5 2.5-1.4-7.85" />
-      </svg>
-    )
+    key: 'dogfood',
+    short: 'DogFood',
+    image: dogfoodImg,
+    fit: 'contain' as const,
+    label: '3rd place · 3 of 194',
+    big: '$350',
+    name: 'DogFood 2026',
+    sub: 'Ranked 3rd out of 194 entries with Broadsheet, a hackathon judging platform, scoring 4.428 out of 5.'
   },
   {
-    title: "Contact",
-    desc: "Get in touch, connect on social media, or drop a message",
-    linkColor: "text-[#a78bfa]",
-    iconStyle: "border-sky-500/25 bg-sky-500/10 text-sky-600 dark:text-sky-400",
-    icon: (
-      <svg {...ICON_PROPS}>
-        <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-      </svg>
-    )
+    key: 'pandora',
+    short: 'Pandora',
+    image: pandoraImg,
+    fit: 'contain' as const,
+    label: 'AI for Smart Cities',
+    big: 'BEST SOLUTION',
+    name: 'Pandora Hackathon',
+    sub: 'Certificate of Appreciation for Best Solution in the AI for Smart Cities theme at BSIOTR JSPM.'
+  },
+  {
+    key: 'rift',
+    short: 'RIFT',
+    image: riftImg,
+    fit: 'contain' as const,
+    label: '24-hour hackathon',
+    big: 'TOP 11',
+    name: 'RIFT Hackathon 2026',
+    sub: 'Ranked in the top 11 teams at a 24-hour hackathon run by Vesdiam Technologies.'
   }
 ];
 
-interface ExploreFooterProps {
-  onNavigate?: (page: 'home' | 'achievements' | 'mylinks' | 'guestbook') => void;
+// --- Guestbook helpers (same avatar colours as the guestbook page) ---
+const AVATAR_COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f97316', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#14b8a6', '#a855f7'];
+function getColor(name: string): string {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
 }
+function getInitials(name: string) {
+  return name.trim().split(/\s+/).map(p => p[0]).join('').toUpperCase().slice(0, 2);
+}
+
+interface GuestMessage { id: string; name: string; message: string; }
+
+const CARD = 'rounded-[28px] border border-slate-200/60 dark:border-white/[0.07] bg-white/70 dark:bg-[#0d111a] backdrop-blur-sm transition-colors duration-300 hover:border-[#8B5CF6]/50';
+const LINK = 'inline-flex items-center gap-1.5 text-sm font-semibold text-[#8B5CF6] hover:underline cursor-pointer';
+
+const Arrow = () => (
+  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+);
 
 export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
   const [showEmail, setShowEmail] = useState(false);
+  const [active, setActive] = useState(0);
+  const [messages, setMessages] = useState<GuestMessage[]>([]);
+  const [copied, setCopied] = useState(false);
+
+  const go = useCallback((page: Page) => {
+    if (!onNavigate) return;
+    onNavigate(page);
+    window.scrollTo(0, 0);
+  }, [onNavigate]);
+
+  // Two latest guestbook entries
+  useEffect(() => {
+    const q = query(collection(db, 'guestbook'), orderBy('created_at', 'desc'), limit(2));
+    const unsub = onSnapshot(q, snap => {
+      setMessages(snap.docs.map(d => ({ id: d.id, ...(d.data() as Omit<GuestMessage, 'id'>) })));
+    }, () => setMessages([]));
+    return () => unsub();
+  }, []);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText('pawansinghb07@gmail.com');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      window.location.href = 'mailto:pawansinghb07@gmail.com';
+    }
+  };
+
+  const win = WINS[active];
 
   return (
     <>
-      <section id="other" className="w-full max-w-5xl mx-auto pt-20 pb-24 px-6 relative z-10 flex flex-col gap-14">
+      <section id="other" className="w-full max-w-6xl mx-auto pt-20 pb-24 px-6 relative z-10 flex flex-col gap-12">
         <div className="flex flex-col gap-3">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            More to{' '}
-            <span style={{ color: '#a855f7' }}>Explore</span>
+            Let's{' '}
+            <span style={{ color: '#a855f7' }}>Talk</span>
           </h2>
-          <p className="text-slate-500 dark:text-slate-400 text-lg">Check out these additional resources and connect with me</p>
+          <p className="text-slate-500 dark:text-slate-400 text-lg">My wins, what people say, and the best ways to reach me</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {CARDS.map((card, idx) => (
-            <motion.a
-              key={card.title}
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (card.title === 'Achievements' && onNavigate) {
-                  onNavigate('achievements');
-                  window.scrollTo(0, 0);
-                }
-                if (card.title === 'Contact' && onNavigate) {
-                  onNavigate('mylinks');
-                  window.scrollTo(0, 0);
-                }
-                if (card.title === 'Guestbook' && onNavigate) {
-                  onNavigate('guestbook');
-                  window.scrollTo(0, 0);
-                }
-              }}
-              className="flex flex-col items-center text-center gap-5 p-6 md:p-8 bg-white/70 dark:bg-[#0d111a] border border-slate-200/60 dark:border-white/[0.07] rounded-[28px] hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300 group relative overflow-hidden backdrop-blur-sm card-hover reveal w-full"
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl border ${card.iconStyle} flex items-center justify-center icon-jiggle`}>
-                {card.icon}
-              </div>
-              <h3 className={`text-2xl font-bold ${card.linkColor}`}>{card.title}</h3>
-              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{card.desc}</p>
-              <span className={`text-sm font-semibold ${card.linkColor} mt-auto group-hover:underline flex items-center gap-1`}>
-                Explore
-                <motion.span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</motion.span>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+          {/* ───────── Achievements spotlight ───────── */}
+          <motion.div
+            className={`${CARD} lg:col-span-2 lg:row-span-2 p-5 md:p-7 flex flex-col gap-5`}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }} transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="flex items-center gap-2.5 text-2xl font-bold text-slate-900 dark:text-white">
+                <svg className="w-6 h-6 text-[#8B5CF6]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3" />
+                </svg>
+                Achievements
+              </h3>
+              <span className="hidden sm:inline text-[11px] font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-slate-300 dark:border-white/10 text-slate-500 dark:text-slate-400">
+                3× hackathon winner
               </span>
-            </motion.a>
-          ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-7 items-stretch">
+              <button
+                type="button"
+                onClick={() => go('achievements')}
+                aria-label={`Open achievements, ${win.name}`}
+                className="relative h-[230px] md:h-[290px] rounded-2xl overflow-hidden bg-[#0a0e1a] border border-slate-200 dark:border-white/10 cursor-pointer"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={win.key}
+                    src={win.image}
+                    alt={win.name}
+                    loading="lazy"
+                    decoding="async"
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className={`absolute inset-0 w-full h-full ${win.fit === 'cover' ? 'object-cover' : 'object-contain'}`}
+                  />
+                </AnimatePresence>
+              </button>
+
+              <div className="flex flex-col justify-center gap-2 min-w-0">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={win.key}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.25 }}
+                    className="flex flex-col gap-2"
+                  >
+                    <span className="text-[11px] font-black tracking-[0.2em] uppercase text-[#8B5CF6]">{win.label}</span>
+                    <div className={`font-black tracking-tight leading-none text-[#8B5CF6] ${win.big.length > 9 ? 'text-4xl md:text-5xl' : 'text-6xl md:text-7xl'}`}>{win.big}</div>
+                    <b className="text-xl font-bold text-slate-900 dark:text-white">{win.name}</b>
+                    <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400">{win.sub}</p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5" role="tablist" aria-label="Choose an achievement">
+              {WINS.map((w, i) => (
+                <button
+                  key={w.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === active}
+                  onClick={() => setActive(i)}
+                  className={`relative h-[64px] md:h-[72px] rounded-xl overflow-hidden bg-[#0a0e1a] border cursor-pointer transition-all duration-300 ${
+                    i === active
+                      ? 'border-[#8B5CF6] ring-2 ring-[#8B5CF6]/40 -translate-y-0.5'
+                      : 'border-slate-200 dark:border-white/10 hover:border-[#8B5CF6]/60'
+                  }`}
+                >
+                  <img src={w.image} alt="" loading="lazy" decoding="async" className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${i === active ? 'opacity-100' : 'opacity-55'}`} />
+                  <span className="absolute left-2 bottom-1.5 text-xs font-bold text-white drop-shadow">{w.short}</span>
+                </button>
+              ))}
+            </div>
+
+            <button type="button" onClick={() => go('achievements')} className={`${LINK} w-fit group`}>
+              See all achievements and certificates
+              <span className="transition-transform duration-300 group-hover:translate-x-1"><Arrow /></span>
+            </button>
+          </motion.div>
+
+          {/* ───────── Guestbook ───────── */}
+          <motion.div
+            className={`${CARD} p-5 md:p-6 flex flex-col gap-4`}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }} transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <h3 className="flex items-center gap-2.5 text-xl font-bold text-slate-900 dark:text-white">
+              <svg className="w-5 h-5 text-[#f472b6]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" />
+              </svg>
+              Guestbook
+            </h3>
+            <div className="flex flex-col gap-2.5">
+              {messages.length === 0 ? (
+                <p className="text-sm text-slate-500 dark:text-slate-400 py-3">No messages yet. Be the first to leave your mark.</p>
+              ) : (
+                messages.map(m => (
+                  <div key={m.id} className="flex items-start gap-3 p-3 rounded-xl border border-slate-200 dark:border-white/[0.07] bg-slate-50 dark:bg-white/[0.03]">
+                    <span className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ backgroundColor: getColor(m.name || '?') }}>
+                      {getInitials(m.name || '?')}
+                    </span>
+                    <div className="min-w-0">
+                      <b className="text-sm text-slate-900 dark:text-white block truncate">{m.name}</b>
+                      <p className="text-[13px] text-slate-500 dark:text-slate-400 line-clamp-2">{m.message}</p>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+            <button type="button" onClick={() => go('guestbook')} className={`${LINK} w-fit mt-auto group`}>
+              Sign the guestbook
+              <span className="transition-transform duration-300 group-hover:translate-x-1"><Arrow /></span>
+            </button>
+          </motion.div>
+
+          {/* ───────── Contact ───────── */}
+          <motion.div
+            className={`${CARD} p-5 md:p-6 flex flex-col gap-4`}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }} transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="flex items-center gap-2.5 text-xl font-bold text-slate-900 dark:text-white">
+                <svg className="w-5 h-5 text-[#8B5CF6]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
+                  <rect x="3" y="5" width="18" height="14" rx="2" /><path strokeLinecap="round" strokeLinejoin="round" d="M3 7l9 6 9-6" />
+                </svg>
+                Contact
+              </h3>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-xs font-medium text-emerald-500">
+                <span className="pulse-dot w-2 h-2 rounded-full bg-emerald-400" />
+                Open to roles
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl border border-dashed border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.03]">
+              <code className="text-[13px] text-slate-800 dark:text-slate-200 break-all">pawansinghb07@gmail.com</code>
+              <button type="button" onClick={copyEmail} className="shrink-0 px-3 py-1 rounded-lg text-xs font-semibold border border-slate-300 dark:border-white/15 text-slate-700 dark:text-slate-200 hover:border-[#8B5CF6] hover:text-[#8B5CF6] transition-colors cursor-pointer">
+                {copied ? 'Copied' : 'Copy'}
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2.5">
+              <a href="https://github.com/PawanBhandari03" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="w-10 h-10 rounded-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-[#8B5CF6] hover:border-[#8B5CF6] hover:-translate-y-0.5 transition-all">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/pawan-singh-bhandari-5817ab307" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-[#8B5CF6] hover:border-[#8B5CF6] hover:-translate-y-0.5 transition-all">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+              </a>
+              <span aria-hidden="true" className="w-10 h-10 rounded-xl border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><rect x="3" y="5" width="18" height="14" rx="2" /><path strokeLinecap="round" strokeLinejoin="round" d="M3 7l9 6 9-6" /></svg>
+              </span>
+            </div>
+
+            <button type="button" onClick={() => go('mylinks')} className={`${LINK} w-fit mt-auto group`}>
+              Send me a message
+              <span className="transition-transform duration-300 group-hover:translate-x-1"><Arrow /></span>
+            </button>
+          </motion.div>
+
         </div>
       </section>
 

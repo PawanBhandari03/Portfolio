@@ -93,7 +93,12 @@ import bsResult from '../assets/hackathon/dogfood-result.jpeg';
 
 // Voyago Images
 import voyagoImg1 from '../assets/Voyago/home.jpg';
-import voyagoImg2 from '../assets/Voyago/offers.jpg';
+import voyagoImg2 from '../assets/Voyago/search-results.jpg';
+import voyagoImg3 from '../assets/Voyago/flight-booking.jpg';
+import voyagoImg4 from '../assets/Voyago/recommendations.jpg';
+import voyagoImg5 from '../assets/Voyago/cancel-refund.jpg';
+import voyagoImg6 from '../assets/Voyago/live-tracking.jpg';
+import voyagoImg7 from '../assets/Voyago/admin-dashboard.jpg';
 
 type ProjectCategory = 'Full Stack' | 'Backend' | 'Java/Spring Boot' | 'AI/ML' | 'Security' | 'Web App' | 'Hackathon';
 
@@ -330,7 +335,7 @@ const PROJECTS: Project[] = [
       "Deployed with the Spring Boot API in Docker on Render and the Next.js front end on Vercel, backed by MongoDB Atlas"
     ],
     githubUrl: "https://github.com/PawanBhandari03/Voyago",
-    snapshots: [voyagoImg1, voyagoImg2],
+    snapshots: [voyagoImg1, voyagoImg2, voyagoImg3, voyagoImg4, voyagoImg5, voyagoImg6, voyagoImg7],
     architectureImg: voyagoImg1
   },
   {

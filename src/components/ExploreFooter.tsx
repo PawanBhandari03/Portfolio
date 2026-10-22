@@ -17,7 +17,7 @@ interface ExploreFooterProps {
 const WINS = [
   {
     key: 'techathon',
-    short: 'Techathon',
+    short: 'Techathon 3.0',
     image: '/Techathon.jpeg',
     fit: 'cover' as const,
     label: 'Winner · Best Solution',

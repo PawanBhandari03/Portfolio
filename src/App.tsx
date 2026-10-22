@@ -10,6 +10,7 @@ import MyLinksPage from './components/MyLinksPage';
 import GuestbookPage from './components/GuestbookPage';
 import InteractiveDotGrid from './components/InteractiveDotGrid';
 import Cursor from './components/Cursor';
+import logoImg from './assets/logo.png';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -77,9 +78,14 @@ function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <span className="text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tight">PB</span>
-            <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#0ea5e9] mx-1 md:mx-1.5 self-end mb-1.5 md:mb-2"></span>
-            <span className="text-xs md:text-sm font-bold tracking-widest text-slate-500 uppercase ml-0.5 md:ml-1 mt-0.5 md:mt-1">Portfolio</span>
+            <img src={logoImg} alt="Pawan Bhandari" width={44} height={44} className="w-10 h-10 md:w-11 md:h-11 rounded-full shadow-lg shadow-purple-500/20 transition-transform duration-300 hover:scale-105" />
+            <div className="flex flex-col justify-center ml-3 leading-none">
+              <span className="text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tight">PB</span>
+              <span className="flex items-center gap-1 mt-0.5 md:mt-1">
+                <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#0ea5e9]"></span>
+                <span className="text-[8px] md:text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">Portfolio</span>
+              </span>
+            </div>
           </div>
 
           {/* Center & Right: Only show on home page */}

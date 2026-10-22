@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { collection, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
 import { db } from '../firebase';
+import logoImg from '../assets/logo.png';
 import dogfoodImg from '../assets/DogFood2026_Certificate.png';
 import pandoraImg from '../assets/Pandora.png';
 import riftImg from '../assets/rift_Hackathon.jpeg';
@@ -295,6 +296,7 @@ export default function ExploreFooter({ onNavigate }: ExploreFooterProps) {
       <footer className="w-full border-t border-slate-200 dark:border-white/[0.06] bg-white/80 dark:bg-[#080c14]">
         <div className="max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-500 text-center">
           <div className="flex items-center gap-2 font-medium">
+            <img src={logoImg} alt="" width={28} height={28} className="w-7 h-7 rounded-full" />
             <span className="font-bold text-slate-900 dark:text-white text-base">PB</span>
             <span>•</span>
             <span>© 2026 PB Portfolio</span>

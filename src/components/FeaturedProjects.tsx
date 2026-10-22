@@ -335,6 +335,7 @@ const PROJECTS: Project[] = [
       "Deployed with the Spring Boot API in Docker on Render and the Next.js front end on Vercel, backed by MongoDB Atlas"
     ],
     githubUrl: "https://github.com/PawanBhandari03/Voyago",
+    liveUrl: "https://voyago-trips.vercel.app",
     snapshots: [voyagoImg1, voyagoImg2, voyagoImg3, voyagoImg4, voyagoImg5, voyagoImg6, voyagoImg7],
     architectureImg: voyagoImg1
   },

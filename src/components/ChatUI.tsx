@@ -62,17 +62,17 @@ const INTENTS: Intent[] = [
   {
     name: 'experience',
     keywords: [/\b(experience|intern|internship|job|employ|company|elevance|elevanceskills|codsoft|professional|career|currently)/],
-    reply: "From July to October 2026 I was a Full Stack Developer Intern at ElevanceSkills Technology, building a travel booking platform called TripNest (now Voyago) with React, Spring Boot and MongoDB. Earlier, in Jan to Feb 2026, I did a Java Development internship at CodSoft, completing 5 Java tasks on core Java, OOP and application logic."
+    reply: "From July to October 2026 I was a Full Stack Developer Intern at ElevanceSkills Technology, building a travel booking platform called Voyago with React, Spring Boot and MongoDB. Earlier, in Jan to Feb 2026, I did a Java Development internship at CodSoft, completing 5 Java tasks on core Java, OOP and application logic."
   },
   {
     name: 'tripnest',
     keywords: [/\b(voyago|tripnest|travel|flight|booking|hotel)/],
-    reply: "Voyago (called TripNest on my resume) is a full-stack travel booking platform I built during my ElevanceSkills internship. It covers flights, hotels, trains, buses, cabs and more, with live flight status, explained dynamic pricing with price freeze, cancellations with refund tracking, reviews and personalised recommendations. It uses Java 17, Spring Boot 3, MongoDB, Next.js, React, TypeScript and Tailwind CSS."
+    reply: "Voyago is a full-stack travel booking platform I built during my ElevanceSkills internship. It covers flights, hotels, trains, buses, cabs and more, with live flight status, explained dynamic pricing with price freeze, cancellations with refund tracking, reviews and personalised recommendations. It uses Java 17, Spring Boot 3, MongoDB, Next.js, React, TypeScript and Tailwind CSS."
   },
   {
     name: 'pawevents',
     keywords: [/(pawevents|paw events|eventhub|event hub|eventsphere|ticket|tickets|ticketing|keycloak|qr|event)/],
-    reply: "PawEvents (also listed as EventHub on my resume) is a full-stack event ticketing platform. Organizers publish events with ticket types and sales windows, attendees buy tickets that come with a unique QR code, and door staff check guests in by scanning, with each ticket admitted only once. It uses Java 21, Spring Boot, Keycloak sign-in with role-based access, PostgreSQL, React, TypeScript and Docker. Checkout is a demo with no real payments."
+    reply: "PawEvents is a full-stack event ticketing platform. Organizers publish events with ticket types and sales windows, attendees buy tickets that come with a unique QR code, and door staff check guests in by scanning, with each ticket admitted only once. It uses Java 21, Spring Boot, Keycloak sign-in with role-based access, PostgreSQL, React, TypeScript and Docker. Checkout is a demo with no real payments."
   },
   {
     name: 'ecobounty',

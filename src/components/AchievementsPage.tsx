@@ -78,11 +78,11 @@ export default function AchievementsPage({ onBack }: Props) {
             <div className="w-full md:w-1/2 py-4 md:py-8 flex flex-col justify-center">
                 <h2 className="text-3xl md:text-4xl font-extrabold mb-5 leading-tight flex flex-wrap items-center gap-3" style={{ color: 'var(--text-primary)' }}>Best Solution Award — Techathon 3.0</h2>
                 <p className="text-base md:text-lg leading-relaxed mb-8 opacity-90" style={{ color: 'var(--text-secondary)' }}>
-                    Awarded Best Solution for Given Problem Statement at Techathon 3.0 (2026), organized by Innovation Foundation. Built a scalable tech solution under competition pressure with team Parastec. Received trophy and ₹10,000 cash prize for delivering the most innovative solution.
+                    Awarded Best Solution for Given Problem Statement at Techathon 3.0 (22-23 Feb 2026), organized by Innovation Foundation. Built a scalable tech solution under competition pressure with team Cyberpunks. Received trophy and ₹10,000 cash prize for delivering the most innovative solution.
                 </p>
                 <div className="mt-auto flex">
                     <span className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-sm font-bold border shadow-sm tracking-wide badge-shimmer" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>
-                        Techathon 3.0 · 2026 · ₹10,000 Prize
+                        Techathon 3.0 · 22-23 Feb 2026 · ₹10,000 Prize
                     </span>
                 </div>
             </div>
@@ -107,9 +107,9 @@ export default function AchievementsPage({ onBack }: Props) {
                 <img src={dogfoodImg} loading="lazy" decoding="async" alt="DogFood 2026 Certificate" className="w-full h-[300px] md:h-[450px] object-contain hover:scale-105 transition-transform duration-700 ease-in-out" />
             </div>
             <div className="w-full md:w-1/2 py-4 md:py-8 flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-5 leading-tight flex flex-wrap items-center gap-3" style={{ color: 'var(--text-primary)' }}>3rd Place — DogFood 2026 Hackathon</h2>
+                <h2 className="text-3xl md:text-4xl font-extrabold mb-5 leading-tight flex flex-wrap items-center gap-3" style={{ color: 'var(--text-primary)' }}>3rd Place — DogFood 2026</h2>
                 <p className="text-base md:text-lg leading-relaxed mb-8 opacity-90" style={{ color: 'var(--text-secondary)' }}>
-                    Ranked 3rd out of 194 entries at DogFood 2026, a 72-hour online hackathon organised by Hackathon Raptors CIC (26-29 September 2026). Built Broadsheet with team Binary Builders, a self-hosted hackathon platform with normalized judge scoring, finishing with a score of 4.428 / 5.00 and a $350 prize.
+                    Ranked 3rd out of 194 entries at DogFood 2026, a 72-hour online hackathon by Hackathon Raptors CIC. Built Broadsheet, a hackathon judging platform, with team Binary Builders. Scored 4.428 / 5.00 and received a $350 prize.
                 </p>
                 <div className="mt-auto flex">
                     <span className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-sm font-bold border shadow-sm tracking-wide badge-shimmer" style={{ backgroundColor: 'var(--tag-bg)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}>

@@ -20,6 +20,7 @@ type Page = 'home' | 'achievements' | 'mylinks' | 'guestbook' | 'blogs';
 // section instead of always landing on the home page.
 function pageFromPath(pathname: string): Page {
   if (pathname.startsWith('/blog')) return 'blogs';
+  if (pathname.startsWith('/achievements')) return 'achievements';
   return 'home';
 }
 
@@ -46,6 +47,18 @@ function App() {
   const goBlogs = () => {
     setCurrentPage('blogs');
     if (window.location.pathname !== '/blog') window.history.pushState({}, '', '/blog');
+  };
+  const goAchievements = () => {
+    setCurrentPage('achievements');
+    if (window.location.pathname !== '/achievements') window.history.pushState({}, '', '/achievements');
+  };
+  // ExploreFooter's nav buttons go through here so achievements/home get a
+  // real URL too, same as the navbar links do.
+  const navigate = (page: Page) => {
+    if (page === 'home') goHome();
+    else if (page === 'achievements') goAchievements();
+    else if (page === 'blogs') goBlogs();
+    else setCurrentPage(page);
   };
 
 
@@ -130,7 +143,7 @@ function App() {
                 </a>
                 <a
                   href="#"
-                  onClick={(e) => { e.preventDefault(); setCurrentPage('achievements'); window.scrollTo(0, 0); }}
+                  onClick={(e) => { e.preventDefault(); goAchievements(); window.scrollTo(0, 0); }}
                   className="nav-link whitespace-nowrap inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-4 h-4">
@@ -220,7 +233,7 @@ function App() {
               <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Skills</a>
               <a
                 href="#"
-                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); setCurrentPage('achievements'); window.scrollTo(0, 0); }}
+                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); goAchievements(); window.scrollTo(0, 0); }}
                 className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors"
               >Achievements</a>
               <a
@@ -242,13 +255,13 @@ function App() {
             <AboutBento />
             <FeaturedProjects />
             <Skills />
-            <ExploreFooter onNavigate={setCurrentPage} />
+            <ExploreFooter onNavigate={navigate} />
           </>
         )}
         
         {currentPage === 'achievements' && (
           <AchievementsPage onBack={() => {
-              setCurrentPage('home');
+              goHome();
               setTimeout(() => {
                 document.getElementById('other')?.scrollIntoView({ behavior: 'instant' });
               }, 0);
@@ -257,7 +270,7 @@ function App() {
 
         {currentPage === 'mylinks' && (
           <MyLinksPage onBack={() => {
-              setCurrentPage('home');
+              goHome();
               setTimeout(() => {
                 document.getElementById('other')?.scrollIntoView({ behavior: 'instant' });
               }, 0);
@@ -266,7 +279,7 @@ function App() {
 
         {currentPage === 'guestbook' && (
           <GuestbookPage onBack={() => {
-              setCurrentPage('home');
+              goHome();
               setTimeout(() => {
                 document.getElementById('other')?.scrollIntoView({ behavior: 'instant' });
               }, 0);

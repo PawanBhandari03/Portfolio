@@ -53,13 +53,13 @@ export default function BlogsPage({ onBack }: Props) {
       <div className="flex flex-col items-center text-center gap-6 mt-0 mb-14">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <p className="text-[#a78bfa] font-bold tracking-[0.2em] text-xs md:text-sm uppercase mb-4 drop-shadow-[0_0_15px_rgba(167,139,250,0.4)]">
-            Writing
+            Engineering Notes
           </p>
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight" style={{ color: 'var(--text-primary)' }}>
-            From the <span style={{ color: '#a855f7' }}>Blog</span>
+            What Actually <span style={{ color: '#a855f7' }}>Happened</span>
           </h1>
           <p className="text-lg md:text-xl mt-6 max-w-2xl mx-auto font-medium" style={{ color: 'var(--text-secondary)' }}>
-            Build logs, hackathon write-ups and the occasional post-mortem.
+            Hackathon write-ups and build logs that show what I measured, what broke, and what I reverted &mdash; not just what shipped.
           </p>
         </motion.div>
       </div>

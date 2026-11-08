@@ -26,7 +26,7 @@ export default function ReadingProgressBar() {
   }, []);
 
   return (
-    <div className="fixed top-16 left-0 right-0 h-[3px] z-40 bg-transparent pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 h-[3px] z-[60] bg-transparent pointer-events-none">
       <div
         className="h-full transition-[width] duration-100 ease-out"
         style={{

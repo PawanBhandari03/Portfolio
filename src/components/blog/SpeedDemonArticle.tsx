@@ -263,29 +263,29 @@ export default function SpeedDemonArticle({ onBack }: Props) {
           Back to blogs
         </button>
 
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-3xl">
-          <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase mb-5" style={{ backgroundColor: 'rgba(183,243,107,0.12)', color: '#5fa832' }}>
-            Hackathon Raptors &middot; Speed Demon 2026
-          </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-4" style={{ color: 'var(--text-primary)' }}>
-            I Thought Faster C++ Was the Whole Game. The Scoring Board Disagreed.
-          </h1>
-          <p className="text-lg mb-5" style={{ color: 'var(--text-secondary)' }}>
-            Four workloads, 116 commits, and several optimisations that only looked good on my laptop.
-          </p>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm mb-8">
-            <span className="font-semibold" style={{ color: '#8B5CF6' }}>Pawan Bhandari</span>
-            <span style={{ color: 'var(--text-secondary)' }}>&middot; Team BobTheBuilder &middot; Solo entry</span>
-            <span style={{ color: 'var(--text-secondary)' }}>&middot; ~18 min read</span>
-          </div>
-          <div className="rounded-2xl overflow-hidden mb-10">
-            <img src={hero} alt="Abstract processor and performance dial with lime and cyan data-flow traces on a graphite background." className="w-full h-auto block" />
-          </div>
-        </motion.div>
-
-        <div className="flex gap-10 items-start max-w-6xl">
+        <div className="flex gap-10 items-start justify-center">
           <TableOfContents items={TOC_ITEMS} />
-          <div className="min-w-0 flex-1 max-w-3xl">
+          <div className="min-w-0 w-full max-w-3xl">
+
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase mb-5" style={{ backgroundColor: 'rgba(183,243,107,0.12)', color: '#5fa832' }}>
+              Hackathon Raptors &middot; Speed Demon 2026
+            </span>
+            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-4" style={{ color: 'var(--text-primary)' }}>
+              I Thought Faster C++ Was the Whole Game. The Scoring Board Disagreed.
+            </h1>
+            <p className="text-lg mb-5" style={{ color: 'var(--text-secondary)' }}>
+              Four workloads, 116 commits, and several optimisations that only looked good on my laptop.
+            </p>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm mb-8">
+              <span className="font-semibold" style={{ color: '#8B5CF6' }}>Pawan Bhandari</span>
+              <span style={{ color: 'var(--text-secondary)' }}>&middot; Team BobTheBuilder &middot; Solo entry</span>
+              <span style={{ color: 'var(--text-secondary)' }}>&middot; ~18 min read</span>
+            </div>
+            <div className="rounded-2xl overflow-hidden mb-10">
+              <img src={hero} alt="Abstract processor and performance dial with lime and cyan data-flow traces on a graphite background." className="w-full h-auto block" />
+            </div>
+          </motion.div>
 
       <P>I entered Hackathon Raptors&rsquo; Speed Demon challenge as <strong style={{ color: 'var(--text-primary)' }}>BobTheBuilder</strong>. It was a solo entry: I built and tuned the submission myself. My plan sounded straightforward&mdash;rewrite four slow workloads in C++20, remove unnecessary overhead, measure the result, and repeat.</P>
       <P>The first rewrite made that approach look convincing. Execution times fell from tens of seconds to fractions of a second. Then the scoring board began to disagree with my laptop. A SIMD rewrite regressed. Running one thread per physical core made three tracks slower. A smaller memory footprint survived even though execution became slower. In the graph track, changing the order of node IDs mattered more than replacing the search algorithm.</P>

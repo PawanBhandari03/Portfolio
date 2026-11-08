@@ -158,26 +158,44 @@ function ExperimentsTable() {
     ['Shared name table (C)', 'Lower peak memory', '66 MB → 15 MB; slower locally', 'KEPT for score trade-off'],
   ];
   return (
-    <div className="my-8 overflow-x-auto rounded-2xl border" style={{ borderColor: 'var(--border-color)' }}>
-      <table className="w-full text-sm font-mono border-collapse min-w-[640px]">
-        <thead>
-          <tr style={{ backgroundColor: '#111820' }}>
-            {['Experiment', 'Expectation / local signal', 'Board observation', 'Decision'].map((h) => (
-              <th key={h} className="text-left px-4 py-3 text-white font-semibold">{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr key={r[0]} style={{ borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
-              <td className="px-4 py-3" style={{ color: 'var(--text-primary)' }}>{r[0]}</td>
-              <td className="px-4 py-3" style={{ color: 'var(--text-secondary)' }}>{r[1]}</td>
-              <td className="px-4 py-3" style={{ color: 'var(--text-secondary)' }}>{r[2]}</td>
-              <td className="px-4 py-3 font-bold" style={{ color: r[3].startsWith('KEPT') ? '#2E6B3A' : '#C45B45' }}>{r[3]}</td>
+    <div className="my-8">
+      {/* Desktop/tablet: full table. Hidden below md so it never forces horizontal
+          scroll on a phone — a fixed-width table was spilling past the screen edge. */}
+      <div className="hidden md:block overflow-x-auto rounded-2xl border" style={{ borderColor: 'var(--border-color)' }}>
+        <table className="w-full text-sm font-mono border-collapse">
+          <thead>
+            <tr style={{ backgroundColor: '#111820' }}>
+              {['Experiment', 'Expectation / local signal', 'Board observation', 'Decision'].map((h) => (
+                <th key={h} className="text-left px-4 py-3 text-white font-semibold">{h}</th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r[0]} style={{ borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
+                <td className="px-4 py-3" style={{ color: 'var(--text-primary)' }}>{r[0]}</td>
+                <td className="px-4 py-3" style={{ color: 'var(--text-secondary)' }}>{r[1]}</td>
+                <td className="px-4 py-3" style={{ color: 'var(--text-secondary)' }}>{r[2]}</td>
+                <td className="px-4 py-3 font-bold" style={{ color: r[3].startsWith('KEPT') ? '#2E6B3A' : '#C45B45' }}>{r[3]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mobile: the same data as stacked cards, no fixed width, nothing overflows. */}
+      <div className="md:hidden flex flex-col gap-3">
+        {rows.map((r) => (
+          <div key={r[0]} className="rounded-xl border p-4 text-sm font-mono" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
+            <p className="font-sans font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{r[0]}</p>
+            <p className="text-[11px] font-sans uppercase tracking-wide mb-0.5" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>Expectation</p>
+            <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>{r[1]}</p>
+            <p className="text-[11px] font-sans uppercase tracking-wide mb-0.5" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>Board observation</p>
+            <p className="mb-2 break-words" style={{ color: 'var(--text-secondary)' }}>{r[2]}</p>
+            <p className="font-bold" style={{ color: r[3].startsWith('KEPT') ? '#2E6B3A' : '#C45B45' }}>{r[3]}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

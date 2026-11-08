@@ -8,13 +8,14 @@ import ExploreFooter from './components/ExploreFooter';
 import AchievementsPage from './components/AchievementsPage';
 import MyLinksPage from './components/MyLinksPage';
 import GuestbookPage from './components/GuestbookPage';
+import BlogsPage from './components/BlogsPage';
 import InteractiveDotGrid from './components/InteractiveDotGrid';
 import Cursor from './components/Cursor';
 import logoImg from './assets/logo.png';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
-  const [currentPage, setCurrentPage] = useState<'home' | 'achievements' | 'mylinks' | 'guestbook'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'achievements' | 'mylinks' | 'guestbook' | 'blogs'>('home');
   const [navScrolled, setNavScrolled] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
   const lastScrollY = useRef(0);
@@ -112,6 +113,16 @@ function App() {
                   Achievements
                 </a>
                 <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setCurrentPage('blogs'); window.scrollTo(0, 0); }}
+                  className="nav-link whitespace-nowrap inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-4 h-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                  </svg>
+                  Blogs
+                </a>
+                <a
                   href="#other"
                   className="whitespace-nowrap px-4 py-2 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-semibold tracking-wide transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5"
                 >
@@ -184,6 +195,11 @@ function App() {
                 onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); setCurrentPage('achievements'); window.scrollTo(0, 0); }}
                 className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors"
               >Achievements</a>
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); setCurrentPage('blogs'); window.scrollTo(0, 0); }}
+                className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors"
+              >Blogs</a>
               <a href="#other" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors">Let's talk</a>
             </div>
           </motion.div>
@@ -226,6 +242,13 @@ function App() {
               setTimeout(() => {
                 document.getElementById('other')?.scrollIntoView({ behavior: 'instant' });
               }, 0);
+          }} />
+        )}
+
+        {currentPage === 'blogs' && (
+          <BlogsPage onBack={() => {
+              setCurrentPage('home');
+              window.scrollTo(0, 0);
           }} />
         )}
       </main>

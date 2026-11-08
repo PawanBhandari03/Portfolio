@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SpeedDemonArticle from './blog/SpeedDemonArticle';
 import heroThumb from '../assets/Blog/SpeedDemon/hero.png';
@@ -21,9 +21,10 @@ interface Props {
 
 type PostId = 'speed-demon';
 
-const posts: { id: PostId; title: string; deck: string; tag: string; date: string; thumb: string }[] = [
+const posts: { id: PostId; slug: string; title: string; deck: string; tag: string; date: string; thumb: string }[] = [
   {
     id: 'speed-demon',
+    slug: 'speed-demon-2026',
     title: 'I Thought Faster C++ Was the Whole Game. The Scoring Board Disagreed.',
     deck: 'Four C++20 workloads, 116 commits, and several optimisations that only looked good on my laptop — Hackathon Raptors Speed Demon 2026.',
     tag: 'Performance Engineering',
@@ -32,11 +33,34 @@ const posts: { id: PostId; title: string; deck: string; tag: string; date: strin
   },
 ];
 
+// /blog/speed-demon-2026 -> that post's id, so a direct link opens straight into it.
+function postIdFromPath(pathname: string): PostId | null {
+  const slug = pathname.replace(/^\/blog\/?/, '').replace(/\/$/, '');
+  return posts.find((p) => p.slug === slug)?.id ?? null;
+}
+
 export default function BlogsPage({ onBack }: Props) {
-  const [openPost, setOpenPost] = useState<PostId | null>(null);
+  const [openPost, setOpenPost] = useState<PostId | null>(() => postIdFromPath(window.location.pathname));
+
+  // Keep in sync with the browser's back/forward buttons between the list and a post.
+  useEffect(() => {
+    const onPopState = () => setOpenPost(postIdFromPath(window.location.pathname));
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  const openPostById = (id: PostId) => {
+    const post = posts.find((p) => p.id === id);
+    setOpenPost(id);
+    if (post) window.history.pushState({}, '', `/blog/${post.slug}`);
+  };
+  const closePost = () => {
+    setOpenPost(null);
+    if (window.location.pathname !== '/blog') window.history.pushState({}, '', '/blog');
+  };
 
   if (openPost === 'speed-demon') {
-    return <SpeedDemonArticle onBack={() => setOpenPost(null)} />;
+    return <SpeedDemonArticle onBack={closePost} />;
   }
 
   return (
@@ -68,7 +92,7 @@ export default function BlogsPage({ onBack }: Props) {
         {posts.map((post, i) => (
           <motion.button
             key={post.id}
-            onClick={() => setOpenPost(post.id)}
+            onClick={() => openPostById(post.id)}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}

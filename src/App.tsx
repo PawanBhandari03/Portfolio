@@ -13,14 +13,40 @@ import InteractiveDotGrid from './components/InteractiveDotGrid';
 import Cursor from './components/Cursor';
 import logoImg from './assets/logo.png';
 
+type Page = 'home' | 'achievements' | 'mylinks' | 'guestbook' | 'blogs';
+
+// Reads the current page from the URL on first load, so a direct link
+// like /blog or /blog/speed-demon-2026 opens straight into the Blogs
+// section instead of always landing on the home page.
+function pageFromPath(pathname: string): Page {
+  if (pathname.startsWith('/blog')) return 'blogs';
+  return 'home';
+}
+
 function App() {
   const [isDark, setIsDark] = useState(true);
-  const [currentPage, setCurrentPage] = useState<'home' | 'achievements' | 'mylinks' | 'guestbook' | 'blogs'>('home');
+  const [currentPage, setCurrentPage] = useState<Page>(() => pageFromPath(window.location.pathname));
   const [navScrolled, setNavScrolled] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
   const lastScrollY = useRef(0);
   const [themeToggleRotated, setThemeToggleRotated] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Keep the page in sync with the browser's back/forward buttons.
+  useEffect(() => {
+    const onPopState = () => setCurrentPage(pageFromPath(window.location.pathname));
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  const goHome = () => {
+    setCurrentPage('home');
+    if (window.location.pathname !== '/') window.history.pushState({}, '', '/');
+  };
+  const goBlogs = () => {
+    setCurrentPage('blogs');
+    if (window.location.pathname !== '/blog') window.history.pushState({}, '', '/blog');
+  };
 
 
 
@@ -75,7 +101,7 @@ function App() {
             className="flex items-center select-none"
             role="button"
             onClick={() => {
-              if (currentPage !== 'home') setCurrentPage('home');
+              if (currentPage !== 'home') goHome();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
@@ -114,7 +140,7 @@ function App() {
                 </a>
                 <a
                   href="#"
-                  onClick={(e) => { e.preventDefault(); setCurrentPage('blogs'); window.scrollTo(0, 0); }}
+                  onClick={(e) => { e.preventDefault(); goBlogs(); window.scrollTo(0, 0); }}
                   className="nav-link whitespace-nowrap inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-4 h-4">
@@ -197,7 +223,7 @@ function App() {
               >Achievements</a>
               <a
                 href="#"
-                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); setCurrentPage('blogs'); window.scrollTo(0, 0); }}
+                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); goBlogs(); window.scrollTo(0, 0); }}
                 className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors"
               >Blogs</a>
               <a href="#other" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors">Let's talk</a>
@@ -247,7 +273,7 @@ function App() {
 
         {currentPage === 'blogs' && (
           <BlogsPage onBack={() => {
-              setCurrentPage('home');
+              goHome();
               window.scrollTo(0, 0);
           }} />
         )}

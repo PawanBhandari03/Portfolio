@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import TableOfContents, { type TocItem } from './TableOfContents';
 import ReadingProgressBar from './ReadingProgressBar';
@@ -250,6 +250,14 @@ const TOC_ITEMS: TocItem[] = [
 ];
 
 export default function SpeedDemonArticle({ onBack }: Props) {
+  // Give the tab/bookmark a real title instead of the generic portfolio one
+  // while this post is open, and restore it on the way out.
+  useEffect(() => {
+    const previous = document.title;
+    document.title = 'I Thought Faster C++ Was the Whole Game. The Scoring Board Disagreed. | Pawan Bhandari';
+    return () => { document.title = previous; };
+  }, []);
+
   return (
     <div className="relative z-10">
       <ReadingProgressBar />

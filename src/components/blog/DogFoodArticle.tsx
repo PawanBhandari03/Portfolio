@@ -68,8 +68,8 @@ export default function DogFoodArticle({ onBack }: Props) {
           <div className="min-w-0 w-full max-w-3xl">
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase mb-5" style={{ backgroundColor: 'rgba(139,92,246,0.12)', color: '#8B5CF6' }}>
-              DOGFOOD 2026 &middot; Full-Stack Engineering
+            <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase mb-5" style={{ backgroundColor: 'rgba(183,243,107,0.12)', color: '#5fa832' }}>
+              Hackathon Raptors &middot; DogFood 2026
             </span>
             <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-4" style={{ color: 'var(--text-primary)' }}>
               Building Broadsheet: a hackathon platform in FastAPI, Postgres and Docker

@@ -289,7 +289,7 @@ export default function SpeedDemonArticle({ onBack }: Props) {
           Back to blogs
         </button>
 
-        <div className="flex gap-10 items-start justify-center">
+        <div className="flex flex-col lg:flex-row gap-10 items-start justify-center">
           <TableOfContents items={TOC_ITEMS} />
           <div className="min-w-0 w-full max-w-3xl">
 

@@ -206,44 +206,65 @@ function App() {
         </div>
       </nav>
 
-      {/* ═══════ MOBILE MENU OVERLAY ═══════ */}
+      {/* ═══════ MOBILE MENU DRAWER ═══════ */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="fixed inset-0 z-[100] bg-white dark:bg-[#0d1117] flex flex-col items-center justify-center"
-          >
-            {/* Close Button */}
-            <button
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-6 right-6 p-2 text-slate-900 dark:text-white"
-              aria-label="Close Menu"
+              className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              className="fixed top-0 right-0 bottom-0 z-[101] w-[80%] max-w-[320px] flex flex-col bg-white dark:bg-[#0d1117] shadow-2xl"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            
-            <div className="flex flex-col items-center gap-10">
-              <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Home</a>
-              <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Projects</a>
-              <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors">Skills</a>
-              <a
-                href="#"
-                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); goAchievements(); window.scrollTo(0, 0); }}
-                className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors"
-              >Achievements</a>
-              <a
-                href="#"
-                onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); goBlogs(); window.scrollTo(0, 0); }}
-                className="text-3xl font-bold text-slate-900 dark:text-white hover:text-[#8B5CF6] transition-colors"
-              >Blogs</a>
-              <a href="#other" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#8B5CF6] hover:text-[#7C3AED] transition-colors">Let's talk</a>
-            </div>
-          </motion.div>
+              <div className="flex items-center justify-between px-5 h-16 border-b border-slate-200 dark:border-white/10">
+                <span className="text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">Menu</span>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 -mr-2 rounded-lg text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
+                  aria-label="Close Menu"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="flex flex-col py-4 px-3 gap-1">
+                <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Home</a>
+                <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Projects</a>
+                <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Skills</a>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); goAchievements(); window.scrollTo(0, 0); }}
+                  className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors"
+                >Achievements</a>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); goBlogs(); window.scrollTo(0, 0); }}
+                  className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors"
+                >Blogs</a>
+              </div>
+
+              <div className="mt-auto p-4 border-t border-slate-200 dark:border-white/10">
+                <a
+                  href="#other"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-center px-4 py-3 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-base font-semibold transition-colors"
+                >
+                  Let's talk
+                </a>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 

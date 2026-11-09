@@ -308,6 +308,20 @@ export default function SpeedDemonArticle({ onBack }: Props) {
               <span style={{ color: 'var(--text-secondary)' }}>&middot; Team BobTheBuilder &middot; Solo entry</span>
               <span style={{ color: 'var(--text-secondary)' }}>&middot; ~18 min read</span>
             </div>
+
+            <div className="mb-10 rounded-2xl px-6 py-5 border" style={{ backgroundColor: 'rgba(183,243,107,0.06)', borderColor: 'rgba(183,243,107,0.3)' }}>
+              <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: '#5fa832' }}>TL;DR</p>
+              <ul className="space-y-2 text-base" style={{ color: 'var(--text-primary)' }}>
+                <li>&bull; <strong>The misread:</strong> I blamed common words for slow phrase queries and tried skipping them. The result did not change &mdash; the real cost was elsewhere.</li>
+                <li>&bull; <strong>The rewrite that got slower:</strong> an AVX2/PCLMUL SIMD rewrite looked obviously faster and regressed on the scoring board (75 ms vs 64 ms). Reverted.</li>
+                <li>&bull; <strong>The two-line change that nearly halved it:</strong> comparing two overlapping eight-byte words instead of parsing dates moved Track A&rsquo;s parse phase from 98 ms to 46 ms.</li>
+              </ul>
+              <p className="mt-4 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                Hackathon Raptors &middot; Speed Demon 2026 &middot; Repository:{' '}
+                <a href="https://github.com/PawanBhandari03/SpeedDemon_Entry" target="_blank" rel="noopener" className="underline" style={{ color: '#8B5CF6' }}>github.com/PawanBhandari03/SpeedDemon_Entry</a>
+              </p>
+            </div>
+
             <div className="rounded-2xl overflow-hidden mb-10">
               <img src={hero} alt="Abstract processor and performance dial with lime and cyan data-flow traces on a graphite background." className="w-full h-auto block" />
             </div>
@@ -376,7 +390,7 @@ export default function SpeedDemonArticle({ onBack }: Props) {
 
       <H2 id="track-a-change">I thought one small Track A change explained the whole timing drop. It did not.</H2>
       <P>Track A&rsquo;s timestamp parser originally performed calendar arithmetic for every log line. Neighbouring records commonly shared an hour, so I cached the calculation while the <code>YYYY-MM-DDTHH</code> prefix stayed unchanged, comparing two overlapping eight-byte words.</P>
-      <P>The local parse phase moved from 98 ms to 46 ms. However, the commit also added SWAR endpoint scanning, parallel bucketing and output changes. Later, once I used the fixed 72-hour span in the specification, commit <code>67fc287</code> removed the calendar arithmetic altogether. The prefix cache was an intermediate optimisation, not a feature that remained in the final implementation.</P>
+      <P><strong style={{ color: 'var(--text-primary)' }}>The two-line change:</strong> comparing two overlapping eight-byte words instead of parsing dates moved the local parse phase from 98 ms to 46 ms &mdash; nearly half. However, the commit also added SWAR endpoint scanning, parallel bucketing and output changes. Later, once I used the fixed 72-hour span in the specification, commit <code>67fc287</code> removed the calendar arithmetic altogether. The prefix cache was an intermediate optimisation, not a feature that remained in the final implementation.</P>
       <Figure src={v03} alt="Track A board execution time across eight recorded optimisation steps, decreasing from 104 to 40 milliseconds with run variability noted." caption="Track A board timing progression: 104, 75, 72.6, 65.4, 56, 54.4, 52 and 40 ms. Identical code runs varied by about ±15%; the final code also recorded 52 ms in another run." />
       <P>Track C had two other optimisations with clearer local explanations. Replacing sorting-based distinct-name counting with an open-addressing hash set reduced that phase from roughly 65&ndash;90 ms to 10 ms. Directly indexing three-letter region codes in a <code>26&sup3;</code> table reduced region loading from 19 ms to 5 ms. Together, the changes moved a recorded board run from 0.145 seconds to 0.069 seconds. Because the changes landed together, I report the board result as a combined improvement rather than attributing it to either edit individually.</P>
 

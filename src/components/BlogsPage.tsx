@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SpeedDemonArticle from './blog/SpeedDemonArticle';
+import DogFoodArticle from './blog/DogFoodArticle';
 import heroThumb from '../assets/Blog/SpeedDemon/hero.png';
+import dogfoodThumb from '../assets/Blog/DogFood/gallery.png';
 
 const ArrowLeft = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
@@ -19,7 +21,7 @@ interface Props {
   onBack: () => void;
 }
 
-type PostId = 'speed-demon';
+type PostId = 'speed-demon' | 'dogfood';
 
 const posts: { id: PostId; slug: string; title: string; deck: string; tag: string; date: string; thumb: string }[] = [
   {
@@ -30,6 +32,15 @@ const posts: { id: PostId; slug: string; title: string; deck: string; tag: strin
     tag: 'Performance Engineering',
     date: 'November 2026',
     thumb: heroThumb,
+  },
+  {
+    id: 'dogfood',
+    slug: 'building-broadsheet',
+    title: 'Building Broadsheet: a hackathon platform in FastAPI, Postgres and Docker',
+    deck: 'A self-hosted hackathon platform built with Claude Code as a pair programmer — judging fairness, a deployment bug that cost hours, and what I’d change.',
+    tag: 'Full-Stack Engineering',
+    date: 'October 2026',
+    thumb: dogfoodThumb,
   },
 ];
 
@@ -61,6 +72,9 @@ export default function BlogsPage({ onBack }: Props) {
 
   if (openPost === 'speed-demon') {
     return <SpeedDemonArticle onBack={closePost} />;
+  }
+  if (openPost === 'dogfood') {
+    return <DogFoodArticle onBack={closePost} />;
   }
 
   return (

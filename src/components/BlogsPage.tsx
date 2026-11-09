@@ -55,7 +55,10 @@ export default function BlogsPage({ onBack }: Props) {
 
   // Keep in sync with the browser's back/forward buttons between the list and a post.
   useEffect(() => {
-    const onPopState = () => setOpenPost(postIdFromPath(window.location.pathname));
+    const onPopState = () => {
+      setOpenPost(postIdFromPath(window.location.pathname));
+      window.scrollTo(0, 0);
+    };
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
@@ -64,10 +67,12 @@ export default function BlogsPage({ onBack }: Props) {
     const post = posts.find((p) => p.id === id);
     setOpenPost(id);
     if (post) window.history.pushState({}, '', `/blog/${post.slug}`);
+    window.scrollTo(0, 0);
   };
   const closePost = () => {
     setOpenPost(null);
     if (window.location.pathname !== '/blog') window.history.pushState({}, '', '/blog');
+    window.scrollTo(0, 0);
   };
 
   if (openPost === 'speed-demon') {

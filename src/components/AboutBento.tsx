@@ -48,7 +48,7 @@ const HOVER_CARDS = [
   {
     title: 'COMPETITIONS',
     align: 'text-center',
-    desc: '2x Hackathon Winner — Techathon 3.0 & Smart India Hackathon. Known for rapid prototyping, innovative problem-solving, and building scalable solutions under pressure. Competitive coder with a team-first mindset.'
+    desc: '3x Hackathon Winner: Best Solution at Techathon 3.0 and Pandora, and 3rd place at DogFood 2026. Also Top 11 at RIFT 2026. I build full projects under time pressure and work well in a team.'
   },
   {
     title: 'VISION',

@@ -24,14 +24,19 @@ function pageFromPath(pathname: string): Page {
   return 'home';
 }
 
+const LINK_ON = 'text-slate-900 dark:text-white hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6]';
+const LINK_OFF = 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
+
 function App() {
-  const [isDark, setIsDark] = useState(true);
+  // Light is the default look; visitors can switch to dark with the toggle.
+  const [isDark, setIsDark] = useState(false);
   const [currentPage, setCurrentPage] = useState<Page>(() => pageFromPath(window.location.pathname));
   const [navScrolled, setNavScrolled] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
   const lastScrollY = useRef(0);
   const [themeToggleRotated, setThemeToggleRotated] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   // Keep the page in sync with the browser's back/forward buttons.
   useEffect(() => {
@@ -63,6 +68,36 @@ function App() {
 
 
 
+  // Section links (Projects, Skills, Let's talk) live on the home page. From any other
+  // page they take you home first, then scroll to the section once it has rendered.
+  const pendingScroll = useRef<string | null>(null);
+  useEffect(() => {
+    if (currentPage !== 'home' || !pendingScroll.current) return;
+    const id = pendingScroll.current;
+    pendingScroll.current = null;
+    setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'instant' }), 0);
+  }, [currentPage]);
+
+  const sectionLink = (id: string, afterClick?: () => void) => (e: React.MouseEvent) => {
+    afterClick?.();
+    if (currentPage === 'home') return; // normal anchor jump on the home page
+    e.preventDefault();
+    pendingScroll.current = id;
+    goHome();
+  };
+  const homeLink = (afterClick?: () => void) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    afterClick?.();
+    if (currentPage !== 'home') goHome();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  const pageLink = (go: () => void, afterClick?: () => void) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    afterClick?.();
+    go();
+    window.scrollTo(0, 0);
+  };
+
   // Toggle .dark class on <html> — this is what Tailwind's dark: variant responds to
   useEffect(() => {
     if (isDark) {
@@ -70,6 +105,8 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
+    // Keep the phone browser bar colour in step with the theme.
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#0d0d1a' : '#f8f7ff');
   }, [isDark]);
 
   // Navbar scroll effect — hide when scrolling down, reveal when scrolling up
@@ -128,60 +165,44 @@ function App() {
             </div>
           </div>
 
-          {/* Center nav links + hamburger: only on the home page (they're anchors into home-page sections) */}
-          {currentPage === 'home' && (
-            <>
-              <div className="hidden md:flex items-center gap-8">
-                <a href="#" className="nav-link text-sm font-semibold text-slate-900 dark:text-white tracking-wide hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6] transition-colors">
-                  Home
-                </a>
-                <a href="#projects" className="nav-link text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors">
-                  Projects
-                </a>
-                <a href="#skills" className="nav-link text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors">
-                  Skills
-                </a>
-                <a
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); goAchievements(); window.scrollTo(0, 0); }}
-                  className="nav-link whitespace-nowrap inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-4 h-4">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3" />
-                  </svg>
-                  Achievements
-                </a>
-                <a
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); goBlogs(); window.scrollTo(0, 0); }}
-                  className="nav-link whitespace-nowrap inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide hover:text-slate-900 dark:hover:text-white transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-4 h-4">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                  </svg>
-                  Blogs
-                </a>
-                <a
-                  href="#other"
-                  className="whitespace-nowrap px-4 py-2 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-semibold tracking-wide transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5"
-                >
-                  Let's talk
-                </a>
-              </div>
-
-              {/* Hamburger Icon (Mobile) */}
-              <button
-                className="md:hidden flex items-center justify-center p-2 text-slate-900 dark:text-white"
-                onClick={() => setIsMobileMenuOpen(true)}
-                aria-label="Open Mobile Menu"
+          {/* Nav links + hamburger: on every page */}
+          <>
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#" onClick={homeLink()} className={`nav-link whitespace-nowrap text-sm font-semibold tracking-wide transition-colors ${currentPage === 'home' ? LINK_ON : LINK_OFF}`}>
+                Home
+              </a>
+              <a href="#projects" onClick={sectionLink('projects')} className={`nav-link whitespace-nowrap text-sm font-semibold tracking-wide transition-colors ${LINK_OFF}`}>
+                Projects
+              </a>
+              <a href="#skills" onClick={sectionLink('skills')} className={`nav-link whitespace-nowrap text-sm font-semibold tracking-wide transition-colors ${LINK_OFF}`}>
+                Skills
+              </a>
+              <a href="/achievements" onClick={pageLink(goAchievements)} className={`nav-link whitespace-nowrap text-sm font-semibold tracking-wide transition-colors ${currentPage === 'achievements' ? LINK_ON : LINK_OFF}`}>
+                Achievements
+              </a>
+              <a href="/blog" onClick={pageLink(goBlogs)} className={`nav-link whitespace-nowrap text-sm font-semibold tracking-wide transition-colors ${currentPage === 'blogs' ? LINK_ON : LINK_OFF}`}>
+                Blogs
+              </a>
+              <a
+                href="#other"
+                onClick={sectionLink('other')}
+                className="whitespace-nowrap px-4 py-2 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-semibold tracking-wide transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-7 h-7">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-              </button>
+                Let's talk
+              </a>
+            </div>
 
-            </>
-          )}
+            {/* Hamburger Icon (Mobile) */}
+            <button
+              className="md:hidden flex items-center justify-center p-2 text-slate-900 dark:text-white"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open Mobile Menu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-7 h-7">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+          </>
 
           {/* Theme toggle: always available, on every page, not just home */}
           <div className="flex items-center gap-3">
@@ -239,25 +260,17 @@ function App() {
               </div>
 
               <div className="flex flex-col py-4 px-3 gap-1">
-                <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Home</a>
-                <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Projects</a>
-                <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Skills</a>
-                <a
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); goAchievements(); window.scrollTo(0, 0); }}
-                  className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors"
-                >Achievements</a>
-                <a
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); goBlogs(); window.scrollTo(0, 0); }}
-                  className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors"
-                >Blogs</a>
+                <a href="#" onClick={homeLink(closeMenu)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Home</a>
+                <a href="#projects" onClick={sectionLink('projects', closeMenu)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Projects</a>
+                <a href="#skills" onClick={sectionLink('skills', closeMenu)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Skills</a>
+                <a href="/achievements" onClick={pageLink(goAchievements, closeMenu)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Achievements</a>
+                <a href="/blog" onClick={pageLink(goBlogs, closeMenu)} className="px-3 py-3 rounded-xl text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#8B5CF6] transition-colors">Blogs</a>
               </div>
 
               <div className="mt-auto p-4 border-t border-slate-200 dark:border-white/10">
                 <a
                   href="#other"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={sectionLink('other', closeMenu)}
                   className="block text-center px-4 py-3 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-base font-semibold transition-colors"
                 >
                   Let's talk

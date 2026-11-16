@@ -24,7 +24,16 @@ function pageFromPath(pathname: string): Page {
   return 'home';
 }
 
-const LINK_ON = 'text-slate-900 dark:text-white hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6]';
+const HOME_DESCRIPTION = 'Pawan Bhandari (Pawan Singh Bhandari), Full Stack Developer from Pune. Java, Spring Boot and React projects, 3x hackathon winner, blog and ways to get in touch.';
+const PAGE_META: Partial<Record<Page, { title: string; description: string }>> = {
+  home: { title: 'Pawan Bhandari | Full Stack Developer, Pune', description: HOME_DESCRIPTION },
+  achievements: { title: 'Achievements | Pawan Bhandari', description: 'Hackathon wins and certifications of Pawan Bhandari: Best Solution at Techathon 3.0 and Pandora, 3rd place at DogFood 2026 and Top 11 at RIFT 2026.' },
+  blogs: { title: 'Blog | Pawan Bhandari', description: 'Build logs and hackathon write-ups by Pawan Bhandari, a full stack developer from Pune.' },
+  guestbook: { title: 'Guestbook | Pawan Bhandari', description: HOME_DESCRIPTION },
+  mylinks: { title: 'Contact | Pawan Bhandari', description: HOME_DESCRIPTION }
+};
+
+const LINK_ON ='text-slate-900 dark:text-white hover:text-[#8B5CF6] dark:hover:text-[#8B5CF6]';
 const LINK_OFF = 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
 
 function App() {
@@ -97,6 +106,18 @@ function App() {
     go();
     window.scrollTo(0, 0);
   };
+
+  // Per-page title, description and canonical link, so search engines see each page separately.
+  // Blog posts set their own title, so only the /blog list page is handled here.
+  useEffect(() => {
+    const path = window.location.pathname;
+    const meta = PAGE_META[currentPage];
+    if (meta && !(currentPage === 'blogs' && path !== '/blog')) {
+      document.title = meta.title;
+      document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description);
+    }
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://www.pawanbhandari.cv${path === '/' ? '/' : path.replace(/\/$/, '')}`);
+  }, [currentPage]);
 
   // Toggle .dark class on <html> — this is what Tailwind's dark: variant responds to
   useEffect(() => {
